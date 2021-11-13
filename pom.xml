@@ -39,7 +39,7 @@
                     <relocations>
                         <relocation>
                             <pattern>io.papermc.lib</pattern>
-                            <shadedPattern>asia.breeze.surf.paperlib</shadedPattern>
+                            <shadedPattern>org.surf.paperlib</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
