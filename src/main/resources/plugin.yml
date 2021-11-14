@@ -1,6 +1,6 @@
 name: SurfPatch
 version: 3.1.0
-main: asia.breeze.surf.Main
+main: org.surf.Main
 authors: [ 254n_m, Leeewith3Es, Dreeam ]
 description:  ${project.description}
 softdepend:
