@@ -75,6 +75,11 @@ public class BlockPlace implements Listener {
 									illegalsFound = true;
 									event.setCancelled(true);
 								}
+								if (plugin.getItemUtils().isOverstacked(item)) {
+									item.setAmount(item.getMaxStackSize());
+									illegalsFound = true;
+									event.setCancelled(true);
+								}
 								if (plugin.getItemUtils().hasIllegalEnchants(item)) {
 									for (Entry<Enchantment, Integer> enchantmentIntegerEntry : item.getEnchantments().entrySet()) {
 										item.removeEnchantment(enchantmentIntegerEntry.getKey());

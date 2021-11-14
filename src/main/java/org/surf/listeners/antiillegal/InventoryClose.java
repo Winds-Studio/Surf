@@ -27,6 +27,19 @@ public class InventoryClose implements Listener {
                 plugin.getItemUtils().deleteIllegals(inv);
                 Inventory playerInv = event.getPlayer().getInventory();
                 plugin.getItemUtils().deleteIllegals(playerInv);
+                if (event.getInventory().getType() == InventoryType.SHULKER_BOX) {
+                    Inventory shulkerInv = event.getInventory();
+                    for (ItemStack item : shulkerInv.getContents()) {
+                        if (item != null) {
+                            if (item.getItemMeta() instanceof BlockStateMeta) {
+                                BlockStateMeta blockStateMeta = (BlockStateMeta) item.getItemMeta();
+                                if (blockStateMeta.getBlockState() instanceof ShulkerBox) {
+                                    shulkerInv.remove(item);
+                                }
+                            }
+                        }
+                    }
+                }
             }
         } catch (Error | Exception throwable) {
 

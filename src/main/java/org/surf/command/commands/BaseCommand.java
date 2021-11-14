@@ -8,9 +8,9 @@ public class BaseCommand extends org.surf.command.BaseCommand {
 
     public BaseCommand() {
         super(
-                "surf",
-                "/surf reload | version | help",
-                "l2x9core.command.surf",
+                "lef",
+                "/lef reload | version | help",
+                "l2x9core.command.aef",
                 "Base command of the plugin",
                 new String[]{
                         "reload::Reload the config file",

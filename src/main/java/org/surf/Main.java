@@ -13,6 +13,7 @@ import org.surf.command.NotInPluginYMLException;
 import org.surf.listeners.BlockPlace;
 import org.surf.listeners.*;
 import org.surf.listeners.antiillegal.*;
+import org.surf.listeners.antilag.*;
 import org.surf.listeners.patches.*;
 import org.surf.util.SecondPassEvent;
 import org.surf.util.TenSecondPassEvent;
@@ -34,6 +35,7 @@ public class Main extends JavaPlugin {
 	SecondPassEvent secondPassEvent = new SecondPassEvent(getLogger(), this);
 	private final HashMap<String, Integer> entityIntegerHashMap = new HashMap<>();
 	ScheduledExecutorService service = Executors.newScheduledThreadPool(4);
+	ConnectionMessages connectionMessages = new ConnectionMessages(this);
 	TenSecondPassEvent tenSecondPassEvent = new TenSecondPassEvent(getLogger(), this);
 	public CommandHandler commandHandler;
 	public final Queue<String> discordAlertQueue = new LinkedList<>();
@@ -58,11 +60,24 @@ public class Main extends JavaPlugin {
 			e.printStackTrace();
 		}
 		pluginManager.registerEvents(new BookBan(), this);
-		pluginManager.registerEvents(new ChunkBan(this), this);
+		pluginManager.registerEvents(new EntityPerChunkLimit(), this);
+		pluginManager.registerEvents(new ChinkBan(this), this);
+		pluginManager.registerEvents(new MoveEvent(this), this);
+		pluginManager.registerEvents(new CommandEvent(this), this);
 		pluginManager.registerEvents(new JoinEvent(this), this);
+		pluginManager.registerEvents(new Elytra(this), this);
 		pluginManager.registerEvents(new EntityDamageEvent(this), this);
+		pluginManager.registerEvents(new BlockRedstone(this), this);
+		pluginManager.registerEvents(new WitherSpawn(), this);
+		pluginManager.registerEvents(new BlockPhysics(this), this);
 		pluginManager.registerEvents(new BucketEvent(this), this);
+		pluginManager.registerEvents(new MinecartLag(this), this);
+		pluginManager.registerEvents(new PlayerChat(this), this);
+		pluginManager.registerEvents(new ChestLagFix(this), this);
 		pluginManager.registerEvents(new dispensor(this), this);
+		pluginManager.registerEvents(new PacketElytraFly(this), this);
+		pluginManager.registerEvents(connectionMessages, this);
+		pluginManager.registerEvents(new DeopOnLeave(this), this);
 		// AntiIllegal events
 		pluginManager.registerEvents(new org.surf.listeners.antiillegal.BlockPlace(this), this);
 		pluginManager.registerEvents(new HopperTansfer(this), this);
@@ -77,9 +92,39 @@ public class Main extends JavaPlugin {
 		PaperLib.suggestPaper(this);
 		// other stuff
 		getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+		getCommand("toggleconnectionmessages").setExecutor(connectionMessages);
 		//Server specific events
+		if (pluginManager.getPlugin("SalC1Dupe") != null) {
+			if (getSalDupeVersion().equals("1.0-SNAPSHOT")) {
+				pluginManager.registerEvents(new DupeEvt(), this);
+			} else {
+				Utils.println(Utils.getPrefix() + "&cThis version of SalC1Dupe is outdated Current version of SalC1Dupe on the server " + getSalDupeVersion() + " Most recent version 1.0-SNAPSHOT");
+			}
+		} else {
+			Utils.println(Utils.getPrefix() + "&eCould not find SalC1Dupe installed on the server");
+		}
 		service.scheduleAtFixedRate(() -> pluginManager.callEvent(secondPassEvent), 1, 1, TimeUnit.SECONDS);
 		service.scheduleAtFixedRate(() -> pluginManager.callEvent(tenSecondPassEvent), 1, 10, TimeUnit.SECONDS);
+	}
+
+	public void onDisable() {
+		getLogger().info("by Nate Legault disabled");
+		if (getConfigBoolean("DeleteFortressDat")) {
+			Utils.deleteFortressDat(getConfig().getString("World-name"));
+		}
+	}
+
+	private String getSalDupeVersion() {
+		InputStream inputStream = pluginManager.getPlugin("SalC1Dupe").getResource("plugin.yml");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+		FileConfiguration pluginYml = new YamlConfiguration();
+		try {
+			pluginYml.load(reader);
+			reader.close();
+			inputStream.close();
+		} catch (IOException | InvalidConfigurationException ignored) {
+		}
+		return pluginYml.getString("version");
 	}
 
 	public boolean getConfigBoolean(String path) {

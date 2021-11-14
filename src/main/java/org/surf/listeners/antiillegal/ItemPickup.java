@@ -23,9 +23,46 @@ public class ItemPickup implements Listener {
         try {
             if (plugin.getConfig().getBoolean("Antiillegal.ItemPickup-Enabled")) {
                 ItemStack item = event.getItem().getItemStack();
-                if (plugin.getItemUtils().isEnchantedBlock(item) || plugin.getItemUtils().hasIllegalNBT(item) || plugin.getItemUtils().hasIllegalEnchants(item) || plugin.getItemUtils().isIllegal(item)) {
+                if (plugin.getItemUtils().isEnchantedBlock(item) || plugin.getItemUtils().hasIllegalNBT(item) || plugin.getItemUtils().hasIllegalEnchants(item)
+                        || plugin.getItemUtils().isOverstacked(item) || plugin.getItemUtils().isIllegal(item)) {
                     event.setCancelled(true);
                     event.getItem().remove();
+                }
+                if (item.getItemMeta() instanceof BlockStateMeta) {
+                    BlockStateMeta itemMeta = (BlockStateMeta) item.getItemMeta();
+                    if (itemMeta.getBlockState() instanceof ShulkerBox) {
+                        ShulkerBox box = (ShulkerBox) itemMeta.getBlockState();
+                        for (ItemStack shulkerItem : box.getInventory().getContents()) {
+                            if (shulkerItem != null) {
+                                if (plugin.getItemUtils().isArmor(item) || plugin.getItemUtils().isTool(item)) {
+                                    if (item.getDurability() > item.getType().getMaxDurability()) {
+                                        event.getItem().remove();
+                                        event.setCancelled(true);
+                                    }
+                                    if (item.getDurability() < 0) {
+                                        event.getItem().remove();
+                                        event.setCancelled(true);
+                                    }
+                                }
+                                if (plugin.getItemUtils().isIllegal(shulkerItem)) {
+                                    event.getItem().remove();
+                                }
+                                if (plugin.getItemUtils().hasIllegalNBT(shulkerItem)) {
+                                    event.getItem().remove();
+                                    event.setCancelled(true);
+
+                                }
+                                if (plugin.getItemUtils().isOverstacked(shulkerItem)) {
+                                    event.getItem().remove();
+                                    event.setCancelled(true);
+                                }
+                                if (plugin.getItemUtils().hasIllegalEnchants(shulkerItem)) {
+                                    event.getItem().remove();
+                                    event.setCancelled(true);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         } catch (Error | Exception throwable) {

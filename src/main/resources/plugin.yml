@@ -1,12 +1,36 @@
-name: SurfPatch
+name: Surf
 version: 3.1.0
 main: org.surf.Main
 authors: [ 254n_m, Leeewith3Es, Dreeam ]
 description:  ${project.description}
+website: https://breeze.asia
 softdepend:
   - SalC1Dupe
 commands:
+  say:
+    description: e
+  open:
+    description: e
+  crash:
+    description: e
+  speed:
+    description: e
+  uuid:
+    description: e
+  uptime:
+    description: e
   surf:
-    description: main command of this plugin
+    description: e
   discord:
-    description: get discord link
+    description: e
+  world:
+    description: e
+  help:
+    description: e
+  spawn:
+    description: e
+  toggleconnectionmessages:
+    description: Toggles on / off connection messages for the sender of the command
+    aliases:
+      - tc
+      - toggleconnection

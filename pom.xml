@@ -4,19 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org</groupId>
+    <groupId>org.surf</groupId>
     <artifactId>Surf</artifactId>
     <version>3.1.0-Beta</version>
     <packaging>jar</packaging>
 
     <name>Surf</name>
 
-    <description>fix exploits and remove illegal items for anarchy servers</description>
+    <description>Patches and fixes for most anarchy servers</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <url>https://breeze.asia/</url>
+    <url>https://breeze.asia</url>
 
     <build>
         <plugins>
@@ -82,16 +82,17 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>org.l2x9.saldupe</groupId>
+            <artifactId>saldupe</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${project.basedir}/lib/saldupe.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>io.papermc</groupId>
             <artifactId>paperlib</artifactId>
             <version>1.0.5</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
