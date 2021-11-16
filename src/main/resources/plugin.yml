@@ -7,30 +7,7 @@ website: https://breeze.asia
 softdepend:
   - SalC1Dupe
 commands:
-  say:
-    description: e
-  open:
-    description: e
-  crash:
-    description: e
-  speed:
-    description: e
-  uuid:
-    description: e
-  uptime:
-    description: e
   surf:
-    description: e
+    description: The main command of Surf.
   discord:
-    description: e
-  world:
-    description: e
-  help:
-    description: e
-  spawn:
-    description: e
-  toggleconnectionmessages:
-    description: Toggles on / off connection messages for the sender of the command
-    aliases:
-      - tc
-      - toggleconnection
+    description: Get the Discord link of the server.
