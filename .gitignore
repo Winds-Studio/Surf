@@ -18,7 +18,6 @@ out/
 *.ctxt
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
@@ -108,4 +107,3 @@ buildNumber.properties
 
 # Common working directory
 run/
-target/
