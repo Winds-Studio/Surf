@@ -11,7 +11,7 @@
 
     <name>Surf</name>
 
-    <description>Patches and fixes for most anarchy servers</description>
+    <description>fix exploits and remove illegal/NBT items for anarchy servers</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
