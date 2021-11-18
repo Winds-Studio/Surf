@@ -14,8 +14,6 @@ ___
 * Prevent EndPortal greifing
 * Patch players using the OffHand crash module in certan hacked clients to crash the server with books
 * Prevent players from using illegal items with a very good anti illegal that can check shulkers in chests
-* Discord alerts
-* Nether roof and bottom fix
 * Remove illegal potion effects from players
 * Active devlopment
 * Remove falling block server crashers
