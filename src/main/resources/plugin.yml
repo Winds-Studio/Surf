@@ -9,5 +9,3 @@ softdepend:
 commands:
   surf:
     description: The main command of Surf.
-  discord:
-    description: Get the Discord link of the server.
