@@ -24,11 +24,6 @@ public class CommandHandler implements TabExecutor {
     public void registerCommands() throws NotInPluginYMLException {
         try {
             addCommand(new org.surf.command.commands.BaseCommand());
-            addCommand(new DiscordCommand());
-            if (plugin.getConfigBoolean("Help.Enabled")) {
-                addCommand(new HelpCommand());
-            }
-            addCommand(new OpenInv());
         } catch (Exception e) {
             throw new NotInPluginYMLException("Command not in plugin.yml");
         }
