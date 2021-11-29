@@ -120,26 +120,6 @@ Antiillegal:
     - "PORTAL"
     - "STRUCTURE_BLOCK"
     - "STRUCTURE_VOID"
-#Help menu use & for colors
-Help:
-  #Enable the help menu from l2x9core
-  Enabled: false
-  List:
-    - "&6-----------------------------------------------------"
-    - "&3/ignore <name> to ignore a player."
-    - "&3/ignorelist to list ignored players."
-    - "&3/r <message> to reply to the last person that messaged you."
-    - "&3/l <message> to message the last person that you messaged."
-    - "&3/w <name> <message> OR /msg <name> <message> to pm a player."
-    - "&3/toggleconnectionmsgs to toggle join and leave messages."
-    - "&3/togglechat to toggle the default chat."
-    - "&3/toggledeathmsg to toggle all death messages."
-    - "&3/kill to kill yourself."
-    - "&3/stats to get world size and how many players have joined."
-    - "&3/playtime to see a player's total playtime."
-    - "&3/mostplaytime to show top playtimes."
-    - "&3/discord to join the L2X9 discord."
-    - "&6-----------------------------------------------------"
 #Formatting for the say command use {message} as a place holder for the message use & for colours
 #Colour codes also work in the message
 SayCommandFormat: "&6&l[&b&lLEF&6&l]&6 {message}"
