@@ -138,9 +138,6 @@ public class    ItemUtils {
                         }
                         if (item.hasItemMeta()) {
                             ItemMeta meta = item.getItemMeta();
-                            if (meta.getDisplayName() != null) {
-                                BlockPlace.removeColours(item, meta);
-                            }
                             if (utils.isEnchantedBlock(item)) {
                                 Iterator<Entry<Enchantment, Integer>> enchants = item.getEnchantments().entrySet()
                                         .iterator();

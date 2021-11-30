@@ -23,16 +23,6 @@ public class BlockPlace implements Listener {
 		this.plugin = plugin;
 	}
 
-	public static void removeColours(ItemStack item, ItemMeta meta) {
-		String name = ChatColor.stripColor(meta.getDisplayName());
-		meta.setDisplayName(ChatColor.stripColor(meta.getDisplayName()));
-		if (name.toCharArray().length > 35) {
-			String newName = name.substring(0, 35);
-			meta.setDisplayName(newName);
-		}
-		item.setItemMeta(meta);
-	}
-
 	@EventHandler
 	@AntiIllegal(EventName = "BlockPlaceEvent")
 	public void onPlace(BlockPlaceEvent event) {
@@ -89,11 +79,6 @@ public class BlockPlace implements Listener {
 								}
 								if (item.hasItemMeta()) {
 									ItemMeta meta = item.getItemMeta();
-									if (meta.getDisplayName() != null) {
-										removeColours(item, meta);
-										blockStateMeta.setBlockState(shulkerBox);
-										itemStack.setItemMeta(blockStateMeta);
-									}
 									if (plugin.getItemUtils().isEnchantedBlock(item)) {
 										for (Entry<Enchantment, Integer> enchantmentIntegerEntry : item.getEnchantments().entrySet()) {
 											item.removeEnchantment(enchantmentIntegerEntry.getKey());
