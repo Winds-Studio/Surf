@@ -26,7 +26,7 @@ Nether:
 #Message to send to the server when a player first joins
 #Use {Player} as a place holder for the players name
 FirstJoin:
-  Enabled: true
+  Enabled: false
   Message: '&6[&bSurf&6] &c{Player}&6 has joined the &b7b&37t &6for the first time'
 #Elytra/redstone disable TPS values keep in mind this is a double so it can be like 13.2255
 #Set 0 to disable 
@@ -69,13 +69,10 @@ UnbookBan:
   Message: "&6&l[&b&lSurf&6&l]&6&6 You have been unbookbanned"
 #Message for /discord use & for colors
 #make sure to add the permission l2x9core.command.discord
-Discord: "&6[&bSurf&6] Join us on discord at &chttp://discord.7b7t.me"
+Discord: "&6[&bSurf&6] Join us on discord at &chttp://discord.com"
 #Ammount of vehicles allowed in a chunk
 Minecart-per-chunk:
-  limit: 20
-#TP on an entity exploit prevent message
-tp.prevent:
-  message: "&6&l[&b&lSurf&6&l]&6 &6Patched"
+  limit: 100
 #AntiIllegal check toggles
 #Only enable ChunkLoad of you have a massive problem with illegals on your server
 Antiillegal:
