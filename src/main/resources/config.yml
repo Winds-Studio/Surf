@@ -5,34 +5,34 @@
 #Messages to send the player when they try to place illegal blocks
 IllegalBlock-Place:
   Enabled: true
-  Bedrock: '&6&l[&b&lLEF&6&l]&6 &6That block is not allowed'
-  Barrier: '&6&l[&b&lLEF&6&l]&6 &6That block is not allowed'
-  End_Portal_Frame: '&6&l[&b&lLEF&6&l]&6 &6That block is not allowed'
-  Mob_Spawner: '&6&l[&b&lLEF&6&l]&6 &6That block is not allowed'
+  Bedrock: '&6&l[&b&lSurf&6&l]&6 &6That block is not allowed'
+  Barrier: '&6&l[&b&lSurf&6&l]&6 &6That block is not allowed'
+  End_Portal_Frame: '&6&l[&b&lSurf&6&l]&6 &6That block is not allowed'
+  Mob_Spawner: '&6&l[&b&lSurf&6&l]&6 &6That block is not allowed'
 #ChunkBan skull limit tile entity limit and prevent message
 ChunkBan:
   Enabled: true
-  Prevent-Message: '&6&l[&b&lLEF&6&l]&6 &6ChunkBan has been disabled due to an exploit (^:'
+  Prevent-Message: '&6&l[&b&lSurf&6&l]&6 &6ChunkBan has been disabled due to an exploit (^:'
   TileEntity-Max: 500
   Skull-Max: 100
 #Nether top and bottom layers
 Nether:
   Enabled: true
   Top-Layer: 127
-  Top-message: '&6&l[&b&lLEF&6&l]&6 &6The nether top has been disabled due to lag'
+  Top-message: '&6&l[&b&lSurf&6&l]&6 &6The nether top has been disabled due to lag'
   Bottom-Layer: 0
-  Bottom-message: '&6&l[&b&lLEF&6&l]&6 &6The nether bottom has been disabled due to lag'
+  Bottom-message: '&6&l[&b&lSurf&6&l]&6 &6The nether bottom has been disabled due to lag'
   top-bottom-do-damage: true
 #Raidus around spawn to disable /home in
 #Set 0 to disable
 Spawn:
   Raidus: 500
-  Message: "&6[&b7b&37t&6] You must be&r&c %r% &r&6 blocks from spawn to use /home "
+  Message: "&6[&bSurf&6] You must be&r&c %r% &r&6 blocks from spawn to use /home "
 #Message to send to the server when a player first joins
 #Use {Player} as a place holder for the players name
 FirstJoin:
   Enabled: true
-  Message: '&6[&b7b&37t&6] &c{Player}&6 has joined the &b7b&37t &6for the first time'
+  Message: '&6[&bSurf&6] &c{Player}&6 has joined the &b7b&37t &6for the first time'
 #Elytra/redstone disable TPS values keep in mind this is a double so it can be like 13.2255
 #Set 0 to disable 
 Elytra:
@@ -50,52 +50,37 @@ Elytra:
   #enable taking off elytras when people go over the speed limit set to false to disable
   EnableTakingOffElytra: false
   #the message it sends to a player when they reach the elytra speed limit
-  SpeedLimitReached-message: "&6&l[&b&lLEF&6&l]&6 You are going to fast slow down"
+  SpeedLimitReached-message: "&6&l[&b&lSurf&6&l]&6 You are going to fast slow down"
   #the message it sends to opped players when a player reaches the elytra speed limit
   #you can turn this on or off by setting it to true or false
   EnableOpMessages: true
-  SpeeedLimitReached-ops: "&6&l[&b&lLEF&6&l]&6 Player {name} is going to fast with an elytra"
+  SpeeedLimitReached-ops: "&6&l[&b&lSurf&6&l]&6 Player {name} is going to fast with an elytra"
   #This will patch future clients packet elytra fly witch can be used to bypass most elytra speed limit plugins and make the elytra not lose any durability
   PacketElytraFly-Enabled: true
   #Sends a message to the player when they try to use PacketElytraFly
   SendMessage: true
-  Message: "&6&l[&b&lLEF&6&l]&6&6 PacketElytraFly is currently disabled due to it causing tons of lag"
-Redstone:
-  Disable-TPS: 15
+  Message: "&6&l[&b&lSurf&6&l]&6&6 PacketElytraFly is currently disabled due to it causing tons of lag"
 #Misc config shit
 #Message to send when a player tries to use a 32k or strength 255
 IllegalDamage:
-  Message: "&6&l[&b&lLEF&6&l]&6&6 How did you even get a 32k out to begin with"
+  Message: "&6&l[&b&lSurf&6&l]&6&6 How did you even get a 32k out to begin with"
 #Player attempts to use or drink an illegal potion or use an illegal tipped arrow
 IllegalPotion:
-  Message: "&6&l[&b&lLEF&6&l]&6&6 Sorry those are patched"
+  Message: "&6&l[&b&lSurf&6&l]&6&6 Sorry those are patched"
 #Message to send the player when they use an elytra in low tps use {tps} to get the elytra disable tps
 ElytraLowTPS:
-  Message: "&6&l[&b&lLEF&6&l]&6 &6Elytras are disabled if the tps is below&r&c {tps}"
+  Message: "&6&l[&b&lSurf&6&l]&6 &6Elytras are disabled if the tps is below&r&c {tps}"
 UnbookBan:
-  Message: "&6&l[&b&lLEF&6&l]&6&6 You have been unbookbanned"
+  Message: "&6&l[&b&lSurf&6&l]&6&6 You have been unbookbanned"
 #Message for /discord use & for colors
 #make sure to add the permission l2x9core.command.discord
-Discord: "&6[&b7b&37t&6] Join us on discord at &chttp://discord.7b7t.me"
+Discord: "&6[&bSurf&6] Join us on discord at &chttp://discord.7b7t.me"
 #Ammount of vehicles allowed in a chunk
 Minecart-per-chunk:
   limit: 20
-#This is like discord slowmode but for the minecraft chat the cool down is in seconds
-Chat:
-  Enabled: true
-  Cooldown: 3
-  #Adding a word to this list will stop the message from being broadcasted to chat but it will be seen by the player who send the message so the player wont know that their message wasnt sent
-  Blocked-words:
-    - "discord"
-    - "."
-    - "dot"
 #TP on an entity exploit prevent message
 tp.prevent:
-  message: "&6&l[&b&lLEF&6&l]&6 &6Patched"
-#World name for the /world command and the fortress dat deleter
-World-name: "0b0t"
-#This will delete .dat files that cause memory issues every time the server shuts down
-DeleteFortressDat: true
+  message: "&6&l[&b&lSurf&6&l]&6 &6Patched"
 #AntiIllegal check toggles
 #Only enable ChunkLoad of you have a massive problem with illegals on your server
 Antiillegal:
@@ -120,33 +105,18 @@ Antiillegal:
     - "PORTAL"
     - "STRUCTURE_BLOCK"
     - "STRUCTURE_VOID"
-#Formatting for the say command use {message} as a place holder for the message use & for colours
-#Colour codes also work in the message
-SayCommandFormat: "&6&l[&b&lLEF&6&l]&6 {message}"
 #water / lava flowing disable tps this is useful on new servers with lots of block physics updates that cause lag
 #Set -1 to disable
 BlockPhysics-disable-tps: 15
 #This is to prevent people from crashing / lagging the server by spam opening chest and other containers
 ChestLagFix:
   MaxOpensPerSecond: 16
-  KickMessage: "&6&l[&b&lLEF&6&l]&6&c [AntiChestLag]&r&6 You have lost connection to the server"
+  KickMessage: "&6&l[&b&lSurf&6&l]&6&c [AntiChestLag]&r&6 You have lost connection to the server"
   RemoveUnicodeBooks: false
 #These are the connection messages for when a player joins / leaves
 #Use & for colours and %player% as a placeholder for the players name
 Connection:
   Player-Join-Message: "&7%player% &7joined"
   Player-Leave-Message: "&7%player% &7left"
-#Max amount of any entity listed here per chunk
-#The formatting for this is <entity>:<amount> (i.e pig:20)
-#A list of all valid entities can be found here https://helpch.at/docs/1.12.2/org/bukkit/entity/EntityType.html
-EntityAmounts:
-  EntityAmounts-Enabled: true
-  TypePairs:
-    - "ender_crystal:20"
-    - "armor_stand:15"
-    - "wither:30"
-    - "falling_block:50"
-    - "primed_tnt:5"
-    - "dropped_item:50"
 #Deop opped players when they leave
 DeopOnLeave: false
