@@ -17,17 +17,12 @@ ChunkBan:
   Skull-Max: 100
 #Nether top and bottom layers
 Nether:
-  Enabled: true
+  Enabled: false
   Top-Layer: 127
   Top-message: '&6&l[&b&lSurf&6&l]&6 &6The nether top has been disabled due to lag'
   Bottom-Layer: 0
   Bottom-message: '&6&l[&b&lSurf&6&l]&6 &6The nether bottom has been disabled due to lag'
   top-bottom-do-damage: true
-#Raidus around spawn to disable /home in
-#Set 0 to disable
-Spawn:
-  Raidus: 500
-  Message: "&6[&bSurf&6] You must be&r&c %r% &r&6 blocks from spawn to use /home "
 #Message to send to the server when a player first joins
 #Use {Player} as a place holder for the players name
 FirstJoin:
