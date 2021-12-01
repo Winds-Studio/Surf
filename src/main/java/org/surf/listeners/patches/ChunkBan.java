@@ -17,7 +17,7 @@ import org.surf.util.Utils;
 public class ChinkBan implements Listener {
 	Main plugin;
 
-	public ChinkBan(Main plugin) {
+	public ChunkBan(Main plugin) {
 		this.plugin = plugin;
 	}
 
