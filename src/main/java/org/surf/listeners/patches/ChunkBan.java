@@ -14,7 +14,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.surf.Main;
 import org.surf.util.Utils;
 
-public class ChinkBan implements Listener {
+public class ChunkBan implements Listener {
 	Main plugin;
 
 	public ChunkBan(Main plugin) {
