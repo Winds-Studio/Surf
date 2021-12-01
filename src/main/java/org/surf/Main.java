@@ -60,14 +60,12 @@ public class Main extends JavaPlugin {
 			e.printStackTrace();
 		}
 		pluginManager.registerEvents(new BookBan(), this);
-		pluginManager.registerEvents(new EntityPerChunkLimit(), this);
 		pluginManager.registerEvents(new ChunkBan(this), this);
 		pluginManager.registerEvents(new MoveEvent(this), this);
 		pluginManager.registerEvents(new CommandEvent(this), this);
 		pluginManager.registerEvents(new JoinEvent(this), this);
 		pluginManager.registerEvents(new Elytra(this), this);
 		pluginManager.registerEvents(new EntityDamageEvent(this), this);
-		pluginManager.registerEvents(new BlockRedstone(this), this);
 		pluginManager.registerEvents(new WitherSpawn(), this);
 		pluginManager.registerEvents(new BlockPhysics(this), this);
 		pluginManager.registerEvents(new BucketEvent(this), this);
