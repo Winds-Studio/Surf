@@ -116,8 +116,6 @@ public class EntityDamageEvent implements Listener {
 					shooter.damage(70);
 					shooter.getInventory().remove(Material.TIPPED_ARROW);
 					vic.getInventory().addItem(milk);
-					Utils.crashPlayer(shooter);
-					shooter.chat("Im a faggot who uses illegal arrows in pvp");
 					Utils.sendMessage(shooter, plugin.getConfig().getString("IllegalPotion.Message"));
 				}
 			}
