@@ -79,7 +79,7 @@ tp.prevent:
 #AntiIllegal check toggles
 #Only enable ChunkLoad of you have a massive problem with illegals on your server
 Antiillegal:
-  Block-Place-Enabled: true
+  Block-Place-Enabled: false
   ChunkLoad-Enabled: false
   HopperTransfer-Enabled: true
   InventoryClose-Enabled: true
