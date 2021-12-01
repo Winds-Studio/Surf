@@ -62,10 +62,9 @@ public class    ItemUtils {
     public boolean hasIllegalNBT(ItemStack item) {
         if (item.hasItemMeta()) {
             ItemMeta meta = item.getItemMeta();
-            return meta.hasItemFlag(ItemFlag.HIDE_ATTRIBUTES) || meta.hasItemFlag(ItemFlag.HIDE_DESTROYS)
-                    || meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_PLACED_ON)
+            return meta.hasItemFlag(ItemFlag.HIDE_ATTRIBUTES)  || meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS)
                     || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS) || meta.hasItemFlag(ItemFlag.HIDE_UNBREAKABLE)
-                    || meta.isUnbreakable() || meta.hasLore();
+                    || meta.isUnbreakable();
         }
         return false;
     }
