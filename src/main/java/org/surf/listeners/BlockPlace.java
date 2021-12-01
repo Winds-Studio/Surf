@@ -53,15 +53,4 @@ public class BlockPlace implements Listener {
 
 		}
 	}
-
-	@EventHandler
-	public void onBreak(BlockBreakEvent event) {
-		try {
-			if (event.getBlock().getType() == Material.BEDROCK) {
-				event.setCancelled(true);
-			}
-		} catch (Error | Exception throwable) {
-
-		}
-	}
 }
