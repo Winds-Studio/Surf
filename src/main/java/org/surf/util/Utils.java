@@ -47,12 +47,6 @@ public class Utils {
 		}
 	}
 
-	public static void crashPlayer(Player player) {
-		for (int i = 0; i < 100; i++) {
-			player.spawnParticle(Particle.EXPLOSION_HUGE, player.getLocation(), Integer.MAX_VALUE, 1, 1, 1);
-		}
-	}
-
 	public static void sendMessage(Player player, String string) {
 		player.sendMessage(ChatColor.translateAlternateColorCodes('&', string));
 	}
@@ -126,50 +120,7 @@ public class Utils {
 	}
 
 	public static String getPrefix() {
-		return "&6&l[&b&lLEF&6&l]&6 ";
-	}
-
-	public static void deleteFortressDat(String worldName) {
-		Utils.println(Utils.getPrefix() + "&aStarting to delete files that cause memory issues...");
-		String nether = worldName.concat("_nether");
-		String end = worldName.concat("_the_end");
-		File fortress = new File(nether + "/data/Fortress.dat");
-		File villagesNether = new File(nether + "/data/villages_nether.dat");
-		if (fortress.delete()) {
-			Utils.println(Utils.getPrefix() + "&eDeleted file " + fortress.getName());
-		} else {
-			Utils.println(Utils.getPrefix() + "&cCould not find file " + fortress.getPath());
-		}
-		if (villagesNether.delete()) {
-			Utils.println(Utils.getPrefix() + "&eDeleted file " + villagesNether.getName());
-		} else {
-			Utils.println(Utils.getPrefix() + "&cCould not find file " + villagesNether.getPath());
-		}
-		File endCity = new File(end + "/data/EndCity.dat");
-		File villagesEnd = new File(end + "/data/villages_end.dat");
-		if (endCity.delete()) {
-			Utils.println(Utils.getPrefix() + "&eDeleted file " + endCity.getName());
-		} else {
-			Utils.println(Utils.getPrefix() + "&cCould not find file " + endCity.getPath());
-		}
-		if (villagesEnd.delete()) {
-			Utils.println(Utils.getPrefix() + "&eDeleted file " + villagesEnd.getName());
-		} else {
-			Utils.println(Utils.getPrefix() + "&cCould not find file " + villagesEnd.getPath());
-		}
-		File village = new File(worldName + "/data/Village.dat");
-		File villages = new File(worldName + "/data/villages.dat");
-		if (village.delete()) {
-			Utils.println(Utils.getPrefix() + "&eDeleted file " + village.getName());
-		} else {
-			Utils.println(Utils.getPrefix() + "&cCould not find file " + village.getPath());
-		}
-		if (villages.delete()) {
-			Utils.println(Utils.getPrefix() + "&eDeleted file " + villages.getName());
-		} else {
-			Utils.println(Utils.getPrefix() + "&cCould not find file " + villages.getPath());
-		}
-		Utils.println(Utils.getPrefix() + "&aDeletion process complete!");
+		return "&6&l[&b&lSurf&6&l]&6 ";
 	}
 
 	public static void cockRunMcCommand(String cmd) {
@@ -180,20 +131,6 @@ public class Utils {
 	public static void println(String message) {
 		System.out.println(ChatColor.translateAlternateColorCodes('&', message));
 
-	}
-
-	public static void sendPlayerToServer(Player player, String server) {
-		try {
-			ByteArrayOutputStream b = new ByteArrayOutputStream();
-			DataOutputStream out = new DataOutputStream(b);
-			out.writeUTF("Connect");
-			out.writeUTF(server);
-			player.sendPluginMessage(plugin, "BungeeCord", b.toByteArray());
-			b.close();
-			out.close();
-		} catch (Exception | Error e) {
-			player.sendMessage(ChatColor.RED + "Error when trying to connect to " + server);
-		}
 	}
 
 	public static int countBlockPerChunk(Chunk chunk, Material lookingFor) {
