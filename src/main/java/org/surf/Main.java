@@ -105,9 +105,6 @@ public class Main extends JavaPlugin {
 
 	public void onDisable() {
 		getLogger().info("by Nate Legault disabled");
-		if (getConfigBoolean("DeleteFortressDat")) {
-			Utils.deleteFortressDat(getConfig().getString("World-name"));
-		}
 	}
 
 	private String getSalDupeVersion() {
