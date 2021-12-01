@@ -62,7 +62,6 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new BookBan(), this);
 		pluginManager.registerEvents(new ChunkBan(this), this);
 		pluginManager.registerEvents(new MoveEvent(this), this);
-		pluginManager.registerEvents(new CommandEvent(this), this);
 		pluginManager.registerEvents(new JoinEvent(this), this);
 		pluginManager.registerEvents(new Elytra(this), this);
 		pluginManager.registerEvents(new EntityDamageEvent(this), this);
@@ -75,7 +74,6 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new dispensor(this), this);
 		pluginManager.registerEvents(new PacketElytraFly(this), this);
 		pluginManager.registerEvents(connectionMessages, this);
-		pluginManager.registerEvents(new DeopOnLeave(this), this);
 		// AntiIllegal events
 		pluginManager.registerEvents(new org.surf.listeners.antiillegal.BlockPlace(this), this);
 		pluginManager.registerEvents(new HopperTansfer(this), this);
