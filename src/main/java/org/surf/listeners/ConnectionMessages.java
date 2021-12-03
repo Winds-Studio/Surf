@@ -42,4 +42,7 @@ public class ConnectionMessages implements Listener, CommandExecutor {
 			}
 		}
 	}
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
 }
