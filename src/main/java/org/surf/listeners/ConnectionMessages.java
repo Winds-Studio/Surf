@@ -44,5 +44,19 @@ public class ConnectionMessages implements Listener, CommandExecutor {
 	}
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args);
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		if (sender instanceof Player) {
+			Player player = (Player) sender;
+			if (toggled.get(player.getUniqueId().toString())) {
+				Utils.sendMessage(player, "&6Turned off connection messages");
+				toggled.replace(player.getUniqueId().toString(), false);
+			} else {
+				Utils.sendMessage(player, "&6Turned connection messages on");
+				toggled.replace(player.getUniqueId().toString(), true);
+			}
+		} else {
+			Utils.sendMessage(sender, "&cYou must be a player");
+		}
+		return true;
+	}
 }
