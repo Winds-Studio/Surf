@@ -108,7 +108,7 @@ ChestLagFix:
 #These are the connection messages for when a player joins / leaves
 #Use & for colours and %player% as a placeholder for the players name
 Connection:
-  Player-Join-Message: "&7%player% &7joined"
-  Player-Leave-Message: "&7%player% &7left"
+  Player-Join-Message: "&7[&a+&7] &8%player%"
+  Player-Leave-Message: "&7[&c-&7] &8%player%"
 #Deop opped players when they leave
 DeopOnLeave: false
