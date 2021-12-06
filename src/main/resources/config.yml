@@ -5,10 +5,10 @@
 #Messages to send the player when they try to place illegal blocks
 IllegalBlock-Place:
   Enabled: true
-  Bedrock: '&6&l[&b&lSurf&6&l]&6 &6That block is not allowed'
-  Barrier: '&6&l[&b&lSurf&6&l]&6 &6That block is not allowed'
-  End_Portal_Frame: '&6&l[&b&lSurf&6&l]&6 &6That block is not allowed'
-  Mob_Spawner: '&6&l[&b&lSurf&6&l]&6 &6That block is not allowed'
+  Bedrock: '&6&l[&b&lSurf&6&l]&6 &6This block is not allowed'
+  Barrier: '&6&l[&b&lSurf&6&l]&6 &6This block is not allowed'
+  End_Portal_Frame: '&6&l[&b&lSurf&6&l]&6 &6This block is not allowed'
+  Mob_Spawner: '&6&l[&b&lSurf&6&l]&6 &6This block is not allowed'
 #ChunkBan skull limit tile entity limit and prevent message
 ChunkBan:
   Enabled: true
@@ -22,12 +22,12 @@ Nether:
   Top-message: '&6&l[&b&lSurf&6&l]&6 &6The nether top has been disabled due to lag'
   Bottom-Layer: 0
   Bottom-message: '&6&l[&b&lSurf&6&l]&6 &6The nether bottom has been disabled due to lag'
-  top-bottom-do-damage: true
+  top-bottom-do-damage: false
 #Message to send to the server when a player first joins
 #Use {Player} as a place holder for the players name
 FirstJoin:
   Enabled: false
-  Message: '&6[&bSurf&6] &c{Player}&6 has joined the &b7b&37t &6for the first time'
+  Message: '&6[&bSurf&6] &c{Player}&6 has joined the &bYour&3Server &6for the first time'
 #Elytra/redstone disable TPS values keep in mind this is a double so it can be like 13.2255
 #Set 0 to disable 
 Elytra:
@@ -72,7 +72,7 @@ UnbookBan:
 Discord: "&6[&bSurf&6] Join us on discord at &chttp://discord.com"
 #Ammount of vehicles allowed in a chunk
 Minecart-per-chunk:
-  limit: 100
+  limit: 500
 #AntiIllegal check toggles
 #Only enable ChunkLoad of you have a massive problem with illegals on your server
 Antiillegal:
@@ -110,5 +110,3 @@ ChestLagFix:
 Connection:
   Player-Join-Message: "&7[&a+&7] &8%player%"
   Player-Leave-Message: "&7[&c-&7] &8%player%"
-#Deop opped players when they leave
-DeopOnLeave: false
