@@ -63,7 +63,7 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new ChunkBan(this), this);
 		pluginManager.registerEvents(new MoveEvent(this), this);
 		pluginManager.registerEvents(new JoinEvent(this), this);
-		pluginManager.registerEvents(new Elytra(this), this);
+//		pluginManager.registerEvents(new Elytra(this), this);
 		pluginManager.registerEvents(new EntityDamageEvent(this), this);
 		pluginManager.registerEvents(new WitherSpawn(), this);
 		pluginManager.registerEvents(new BlockPhysics(this), this);
