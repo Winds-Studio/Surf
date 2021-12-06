@@ -102,7 +102,7 @@ Antiillegal:
 BlockPhysics-disable-tps: 15
 #This is to prevent people from crashing / lagging the server by spam opening chest and other containers
 ChestLagFix:
-  MaxOpensPerSecond: 16
+  MaxOpensPerSecond: 64
   KickMessage: "&6&l[&b&lSurf&6&l]&6&c [AntiChestLag]&r&6 You have lost connection to the server"
   RemoveUnicodeBooks: false
 #These are the connection messages for when a player joins / leaves
