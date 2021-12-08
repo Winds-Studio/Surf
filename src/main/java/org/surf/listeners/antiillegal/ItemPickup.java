@@ -7,7 +7,6 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.surf.Main;
-import org.surf.util.Utils;
 
 @SuppressWarnings("deprecation")
 public class ItemPickup implements Listener {

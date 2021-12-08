@@ -8,7 +8,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.surf.Main;
-import org.surf.util.Utils;
 
 public class MoveEvent implements Listener {
 	Main plugin;

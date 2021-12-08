@@ -2,12 +2,11 @@ package org.surf.command;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.surf.Main;
-import org.surf.command.commands.*;
+
 
 import java.util.ArrayList;
 import java.util.Collections;

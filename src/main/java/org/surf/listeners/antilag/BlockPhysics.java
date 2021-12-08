@@ -32,9 +32,7 @@ public class BlockPhysics implements Listener {
     private boolean isChecked(Material material) {
         switch (material) {
             case LAVA:
-            case STATIONARY_LAVA:
             case WATER:
-            case STATIONARY_WATER:
                 return true;
         }
         return false;

@@ -12,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.surf.Main;
-import org.surf.util.Utils;
 
 import java.util.Map.Entry;
 

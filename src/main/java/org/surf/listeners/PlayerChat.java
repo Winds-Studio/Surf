@@ -3,8 +3,8 @@ package org.surf.listeners;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import io.papermc.paper.event.player.AsyncChatEvent;
 import org.surf.Main;
 import org.surf.util.Cooldown;
 import org.surf.util.Utils;
@@ -20,7 +20,7 @@ public class PlayerChat implements Listener {
 	}
 
 	@EventHandler
-	public void onChat(AsyncPlayerChatEvent event) {
+	public void onChat(AsyncChatEvent event) {
 		try {
 			if (plugin.getConfigBoolean("Chat.Enabled")) {
 				Player player = event.getPlayer();

@@ -9,7 +9,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.surf.Main;
-import org.surf.util.Utils;
 
 public class InventoryClose implements Listener {
     Main plugin;

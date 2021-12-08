@@ -6,7 +6,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.surf.Main;
-import org.surf.util.Utils;
 
 public class ChunkLoad implements Listener {
     Main plugin;

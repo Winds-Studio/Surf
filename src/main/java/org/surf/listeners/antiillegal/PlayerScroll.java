@@ -5,7 +5,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.surf.Main;
-import org.surf.util.Utils;
 
 public class PlayerScroll implements Listener {
     Main plugin;

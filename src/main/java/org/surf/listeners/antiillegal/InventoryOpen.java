@@ -5,7 +5,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
 import org.surf.Main;
-import org.surf.util.Utils;
 
 public class InventoryOpen implements Listener {
     Main plugin;
