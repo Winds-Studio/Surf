@@ -25,21 +25,21 @@ public class    ItemUtils {
 
     public boolean isArmor(ItemStack item) {
         List<Material> armor = Arrays.asList(Material.LEATHER_BOOTS, Material.CHAINMAIL_BOOTS, Material.IRON_BOOTS,
-                Material.DIAMOND_BOOTS, Material.GOLD_BOOTS, Material.LEATHER_LEGGINGS, Material.CHAINMAIL_LEGGINGS,
-                Material.IRON_LEGGINGS, Material.GOLD_LEGGINGS, Material.DIAMOND_LEGGINGS,
-                Material.CHAINMAIL_CHESTPLATE, Material.LEATHER_CHESTPLATE, Material.GOLD_CHESTPLATE,
+                Material.DIAMOND_BOOTS, Material.GOLDEN_BOOTS, Material.LEATHER_LEGGINGS, Material.CHAINMAIL_LEGGINGS,
+                Material.IRON_LEGGINGS, Material.GOLDEN_LEGGINGS, Material.DIAMOND_LEGGINGS,
+                Material.CHAINMAIL_CHESTPLATE, Material.LEATHER_CHESTPLATE, Material.GOLDEN_CHESTPLATE,
                 Material.DIAMOND_CHESTPLATE, Material.IRON_CHESTPLATE, Material.LEATHER_HELMET,
-                Material.CHAINMAIL_HELMET, Material.DIAMOND_HELMET, Material.IRON_HELMET, Material.GOLD_HELMET,
+                Material.CHAINMAIL_HELMET, Material.DIAMOND_HELMET, Material.IRON_HELMET, Material.GOLDEN_HELMET,
                 Material.ELYTRA);
         return armor.contains(item.getType());
     }
 
     public boolean isTool(ItemStack item) {
         List<Material> tools = Arrays.asList(Material.DIAMOND_AXE, Material.DIAMOND_PICKAXE, Material.DIAMOND_SWORD,
-                Material.DIAMOND_HOE, Material.DIAMOND_SPADE, Material.IRON_AXE, Material.IRON_HOE,
-                Material.IRON_PICKAXE, Material.IRON_SPADE, Material.IRON_SWORD, Material.GOLD_AXE, Material.GOLD_HOE,
-                Material.GOLD_PICKAXE, Material.GOLD_SWORD, Material.WOOD_AXE, Material.WOOD_HOE, Material.WOOD_PICKAXE,
-                Material.WOOD_SWORD, Material.CARROT_STICK, Material.SHEARS, Material.FISHING_ROD, Material.BOW,
+                Material.DIAMOND_HOE, Material.DIAMOND_SHOVEL, Material.IRON_AXE, Material.IRON_HOE,
+                Material.IRON_PICKAXE, Material.IRON_SHOVEL, Material.IRON_SWORD, Material.GOLDEN_AXE, Material.GOLDEN_HOE,
+                Material.GOLDEN_PICKAXE, Material.GOLDEN_SWORD, Material.WOODEN_AXE, Material.WOODEN_HOE, Material.WOODEN_PICKAXE,
+                Material.WOODEN_SWORD, Material.CARROT_ON_A_STICK, Material.SHEARS, Material.FISHING_ROD, Material.BOW,
                 Material.FLINT_AND_STEEL);
         return tools.contains(item.getType());
     }
