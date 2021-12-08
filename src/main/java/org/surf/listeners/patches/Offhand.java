@@ -52,7 +52,7 @@ public class Offhand implements Listener {
 			if (material.equals(Material.BOOK)) {
 				materialArrayList.add(material);
 			}
-			if (material.equals(Material.BOOK_AND_QUILL)) {
+			if (material.equals(Material.WRITABLE_BOOK)) {
 				materialArrayList.add(material);
 			}
 			if (material.toString().contains("SHULKER_BOX")) {

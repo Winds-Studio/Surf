@@ -39,7 +39,7 @@ public class ChunkBan implements Listener {
 						}
 					}
 				}
-				if (block.getType() == Material.SKULL || block.getType() == Material.SKULL_ITEM) {
+				if (block.getType() == Material.PLAYER_HEAD || block.getType() == Material.PLAYER_WALL_HEAD {
 					if (block.getChunk().getTileEntities().length > plugin.getConfig().getInt("ChunkBan.Skull-Max")) {
 						event.setCancelled(true);
 						player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("ChunkBan.Prevent-Message")));
