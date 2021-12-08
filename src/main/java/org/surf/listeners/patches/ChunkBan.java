@@ -39,7 +39,7 @@ public class ChunkBan implements Listener {
 						}
 					}
 				}
-				if (block.getType() == Material.PLAYER_HEAD || block.getType() == Material.PLAYER_WALL_HEAD {
+				if (block.getType() == Material.PLAYER_HEAD || block.getType() == Material.PLAYER_WALL_HEAD) {
 					if (block.getChunk().getTileEntities().length > plugin.getConfig().getInt("ChunkBan.Skull-Max")) {
 						event.setCancelled(true);
 						player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("ChunkBan.Prevent-Message")));
@@ -79,12 +79,16 @@ public class ChunkBan implements Listener {
 	}
 
 	private boolean isChecked(Block block) {
-		switch (block.getType()) {
+		switch (material.getMaterial()) {
 			case FURNACE:
 			case TRAPPED_CHEST:
 			case ENCHANTMENT_TABLE:
 			case WALL_BANNER:
-			case WALL_SIGN:
+			case ACACIA_SIGN:
+			case ACACIA_WALL_SIGN:
+				case
+					case
+
 			case HOPPER:
 			case DROPPER:
 			case DISPENSER:
@@ -93,7 +97,7 @@ public class ChunkBan implements Listener {
 			case SIGN_POST:
 			case ENDER_CHEST:
 			case FLOWER_POT:
-			case BANNER:
+			case BLACK_BANNER:
 				return true;
 		}
 		return false;
