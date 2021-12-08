@@ -17,12 +17,12 @@ public class ConnectionMessages implements Listener {
 
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
-		event.joinMessage(plugin.getConfig().getString("Connection.Player-Join-Message").replace("%player%", event.getPlayer().getPlayer());
+		event.joinMessage(plugin.getConfig().getString("Connection.Player-Join-Message").replace("%player%", event.getPlayer().getName()));
 	}
 
 	@EventHandler
 	public void onLeave(PlayerQuitEvent event) {
-		event.QuitMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Connection.Player-Leave-Message").replace("%player%", event.getPlayer().getDisplayName())));
+		event.quitMessage(plugin.getConfig().getString("Connection.Player-Leave-Message").replace("%player%", event.getPlayer().getName()));
 	}
 
 }
