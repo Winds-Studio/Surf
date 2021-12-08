@@ -36,7 +36,7 @@ public class PlayerChat implements Listener {
 						List<String> list = plugin.getConfig().getStringList("Chat.Blocked-words");
 						boolean hasBlackListedWord = false;
 						for (String word : list) {
-							if (event.message().contains(word) {
+							if (event.message().contains(word)) {
 								hasBlackListedWord = true;
 								break;
 							}
@@ -44,7 +44,7 @@ public class PlayerChat implements Listener {
 						if (hasBlackListedWord) {
 							Utils.println(Utils.getPrefix() + "&6Prevented &r&c" + player.getName() + " &r&6from advertising");
 							event.setCancelled(true);
-							if (!event.message().startsWith(">")) {
+							if (!event.getMessage().startsWith(">")) {
 								if (!event.getMessage().startsWith("#")) {
 									Utils.sendMessage(event.getPlayer(), "<" + player.getName() + "> " + event.getMessage());
 								} else {
