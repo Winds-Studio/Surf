@@ -43,7 +43,7 @@ public class BlockPlace implements Listener {
 						for (ItemStack item : boxInventory.getContents()) {
 							if (item != null) {
 								if (plugin.getItemUtils().isArmor(item) || plugin.getItemUtils().isTool(item)) {
-									if (item.getDurability() > item.getType().getMaxDurability()) {
+									if (item.getItemMeta() > item.getMaxDurability()) {
 										item.setDurability(item.getType().getMaxDurability());
 										illegalsFound = true;
 										event.setCancelled(true);
