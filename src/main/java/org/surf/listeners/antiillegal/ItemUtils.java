@@ -208,7 +208,7 @@ public class    ItemUtils {
                 }
             }
             if (illegalsFound) {
-                Utils.println(Utils.getPrefix() + "&6Deleted illegals " + itemStack.getType() + " " + itemStack.getI18NDisplayName() + " " + itemStack.getEnchantments());
+                Utils.println(Utils.getPrefix() + "&6Deleted illegals " + itemStack.getType() + " " + itemStack.getI18NDisplayName() + " " + itemStack.getEnchantmentLevel());
             }
         } catch (Error | Exception throwable) {
 
