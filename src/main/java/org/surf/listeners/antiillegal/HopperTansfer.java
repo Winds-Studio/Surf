@@ -55,17 +55,6 @@ public class HopperTansfer implements Listener {
                             }
                             if (item.hasItemMeta()) {
                                 ItemMeta meta = item.getItemMeta();
-                                if (meta.hasDisplayName()) {
-                                    String name = ChatColor.stripColor(meta.getDisplayName());
-                                    meta.setDisplayName(ChatColor.stripColor(meta.getDisplayName()));
-                                    event.setCancelled(true);
-                                    if (name.toCharArray().length > 35) {
-                                        String newName = name.substring(0, 35);
-                                        meta.setDisplayName(newName);
-                                        event.setCancelled(true);
-                                    }
-                                    item.setItemMeta(meta);
-                                }
                                 if (plugin.getItemUtils().isEnchantedBlock(item)) {
                                     event.setCancelled(true);
                                 }
