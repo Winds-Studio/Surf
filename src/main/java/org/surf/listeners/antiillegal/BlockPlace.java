@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.surf.Main;
+import org.surf.util.Utils;
 
 import java.util.Map.Entry;
 
@@ -43,7 +44,7 @@ public class BlockPlace implements Listener {
 						for (ItemStack item : boxInventory.getContents()) {
 							if (item != null) {
 								if (plugin.getItemUtils().isArmor(item) || plugin.getItemUtils().isTool(item)) {
-									if (item.getItemMeta() > item.getMaxDurability()) {
+									if (item.getDurability() > item.getType().getMaxDurability()) {
 										item.setDurability(item.getType().getMaxDurability());
 										illegalsFound = true;
 										event.setCancelled(true);
