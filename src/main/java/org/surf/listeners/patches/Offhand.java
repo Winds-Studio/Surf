@@ -32,7 +32,7 @@ public class Offhand implements Listener {
 					offhandMap.put(player, 1);
 				}
 				if (offhandMap.get(player) > 10) {
-					player.kick("&cPacket Exploit Detected");
+					player.kickPlayer("&cPacket Exploit Detected");
 				}
 			}
 		} catch (Error | Exception throwable) {

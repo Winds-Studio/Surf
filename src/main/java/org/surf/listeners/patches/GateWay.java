@@ -56,7 +56,7 @@ public class GateWay implements Listener {
 			Player player = event.getPlayer();
 			for (Player nearby : player.getLocation().getNearbyPlayers(50)) {
 				if (!nearby.getUniqueId().toString().contains(player.getUniqueId().toString())) {
-					if (nearby.getEyeLocation().getBlock().getType() == Material.PORTAL) {
+					if (nearby.getEyeLocation().getBlock().getType() == Material.END_PORTAL) {
 						event.setCancelled(true);
 
 					}
