@@ -28,9 +28,9 @@ public class BlockPlace implements Listener {
 						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlock-Place.Bedrock"));
 						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
 						break;
-					case ENDER_PORTAL_FRAME:
-						if (!(player.getInventory().getItemInMainHand().getType() == Material.EYE_OF_ENDER)) {
-							if (!(player.getInventory().getItemInOffHand().getType() == Material.EYE_OF_ENDER)) {
+					case END_PORTAL_FRAME:
+						if (!(player.getInventory().getItemInMainHand().getType() == Material.ENDER_EYE)) {
+							if (!(player.getInventory().getItemInOffHand().getType() == Material.ENDER_EYE)) {
 								event.setCancelled(true);
 								Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlock-Place.End_Portal_Frame"));
 								event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
@@ -42,7 +42,7 @@ public class BlockPlace implements Listener {
 						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlock-Place.Barrier"));
 						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
 						break;
-					case MOB_SPAWNER:
+					case SPAWNER:
 						event.setCancelled(true);
 						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlock-Place.Mob_Spawner"));
 						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
