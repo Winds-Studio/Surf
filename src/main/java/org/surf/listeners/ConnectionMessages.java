@@ -1,6 +1,5 @@
 package org.surf.listeners;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,12 +16,12 @@ public class ConnectionMessages implements Listener {
 
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
-		event.joinMessage(plugin.getConfig().getString("Connection.Player-Join-Message").replace("%player%", event.getPlayer().getName()));
+		event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Connection.Player-Join-Message").replace("%player%", event.getPlayer().getDisplayName())));
 	}
 
 	@EventHandler
 	public void onLeave(PlayerQuitEvent event) {
-		event.quitMessage(plugin.getConfig().getString("Connection.Player-Leave-Message").replace("%player%", event.getPlayer().getName()));
+		event.setQuitMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Connection.Player-Leave-Message").replace("%player%", event.getPlayer().getDisplayName())));
 	}
 
 }
