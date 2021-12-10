@@ -87,14 +87,16 @@ Antiillegal:
   Check-Illegal-Damage: true
   Illegal-Items-List:
     - "BEDROCK"
-    - "COMMAND_REPEATING"
-    - "COMMAND_MINECART"
-    - "COMMAND_CHAIN"
-    - "COMMAND"
-    - "ENDER_PORTAL_FRAME"
+    - "REPEATING_COMMAND_BLOCK"
+    - "COMMAND_BLOCK_MINECART"
+    - "CHAIN_COMMAND_BLOCK"
+    - "COMMAND_BLOCK"
+    - "END_PORTAL_FRAME"
     - "KNOWLEDGE_BOOK"
-    - "MOB_SPAWNER"
-    - "PORTAL"
+    - "SPAWNER"
+    - "END_PORTAL"
+    - "NETHER_PORTAL"
+    - "END_PORTAL_FRAME"
     - "STRUCTURE_BLOCK"
     - "STRUCTURE_VOID"
 #water / lava flowing disable tps this is useful on new servers with lots of block physics updates that cause lag
