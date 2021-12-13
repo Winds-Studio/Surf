@@ -1,5 +1,5 @@
 name: Surf
-version: 3.1.1
+version: 3.2.0
 main: org.surf.Main
 authors: [ 254n_m, Leeewith3Es, Dreeam ]
 description:  ${project.description}

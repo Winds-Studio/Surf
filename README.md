@@ -1,14 +1,14 @@
 # Surf
 Surf is a fork of LeeesExploitFixer of a fork of 254nm's L2X9Core
 
-A cute plugin to remove illegal and NBT items.
+A plugin to remove illegal and NBT items. 1.8-1.18.1
 
 Join Winds Anarchy>>*IP Breeze.asia*
 ___
 
 ## Features
 
-* Prevent all crash exploits that i know of
+* Prevent all crash exploits that I know of
 * Prevent ChunkBan
 * Patch BookBan without disabling shulker peek
 * Prevent EndPortal greifing
