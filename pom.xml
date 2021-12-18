@@ -13,7 +13,7 @@
 
     <description>fix exploits and remove illegal/NBT items for anarchy servers</description>
     <properties>
-        <java.version>17</java.version>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <url>https://breeze.asia</url>
