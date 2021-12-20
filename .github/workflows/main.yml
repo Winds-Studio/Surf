@@ -20,4 +20,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Surf
-          path: target/Surf-3.2.0.jar
+          path: target/*.jar
