@@ -24,7 +24,7 @@ public class MoveEvent implements Listener {
 			int z = player.getLocation().getBlockZ();
 			Location bottom = new Location(player.getWorld(), z, 5, x);
 			Location top = new Location(player.getWorld(), z, 125, x);
-			if (plugin.getConfig().getString("Nether.Enabled").equalsIgnoreCase("false")
+			if (plugin.getConfig().getString("Nether.Enabled").equalsIgnoreCase("true")
 					&& !(player.hasPermission("surf.netherroof.bypass"))) {
 
 				if (player.getWorld().getEnvironment() == Environment.NETHER
