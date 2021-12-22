@@ -71,7 +71,7 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new MinecartLag(this), this);
 		pluginManager.registerEvents(new PlayerChat(this), this);
 //		pluginManager.registerEvents(new ChestLagFix(this), this);
-		pluginManager.registerEvents(new dispensor(this), this);
+		pluginManager.registerEvents(new Dispensor(this), this);
 		pluginManager.registerEvents(new PacketElytraFly(this), this);
 		pluginManager.registerEvents(connectionMessages, this);
 		// AntiIllegal events
