@@ -99,7 +99,6 @@ public class GateWay implements Listener {
 							String worldString = event.getVehicle().getWorld().getName();
 							event.getVehicle().eject();
 							event.getVehicle().remove();
-							player.chat(">>IM A FAG WHO JUST TRIED TO CRASH THE SERVER");
 							Utils.kickPlayer(player, "[&b&lSurf&r]&6 Sorry that exploit got patched ):");
 							System.out.println(ChatColor.translateAlternateColorCodes('&', "&1Prevented&r&e " + player.getName() + "&r&1 at &r&e" + x + " " + y + " " + z + " &r&1in world&e " + worldString + " &r&1from crashing the server"));
 						}

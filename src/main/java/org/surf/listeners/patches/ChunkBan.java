@@ -82,20 +82,20 @@ public class ChunkBan implements Listener {
 		switch (block.getType()) {
 			case FURNACE:
 				//TODO
-//			case TRAPPED_CHEST:
+			case TRAPPED_CHEST:
 //			case ENCHANTMENT_TABLE:
 //			case WALL_BANNER:
-//			case ACACIA_SIGN:
-//			case ACACIA_WALL_SIGN:
-//			case HOPPER:
-//			case DROPPER:
-//			case DISPENSER:
-//			case BREWING_STAND:
-//			case BEACON:
+			case ACACIA_SIGN:
+			case ACACIA_WALL_SIGN:
+			case HOPPER:
+			case DROPPER:
+			case DISPENSER:
+			case BREWING_STAND:
+			case BEACON:
 //			case SIGN_POST:
-//			case ENDER_CHEST:
-//			case FLOWER_POT:
-//			case BLACK_BANNER:
+			case ENDER_CHEST:
+			case FLOWER_POT:
+			case BLACK_BANNER:
 				return true;
 		}
 		return false;
