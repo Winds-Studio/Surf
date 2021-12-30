@@ -42,8 +42,8 @@ public class Main extends JavaPlugin {
 
 	public void onEnable() {
 		new Utils(this);
-		int pluginId = 9128;
-		new Metrics(this, pluginId);
+//		int pluginId = 9128;
+//		new Metrics(this, pluginId);
 		saveDefaultConfig();
 		setupChunkEntityLimit();
 		commandHandler = new CommandHandler(this);
@@ -72,7 +72,7 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new PlayerChat(this), this);
 //		pluginManager.registerEvents(new ChestLagFix(this), this);
 		pluginManager.registerEvents(new Dispensor(this), this);
-		pluginManager.registerEvents(new PacketElytraFly(this), this);
+//		pluginManager.registerEvents(new PacketElytraFly(this), this);
 		pluginManager.registerEvents(connectionMessages, this);
 		// AntiIllegal events
 		pluginManager.registerEvents(new org.surf.listeners.antiillegal.BlockPlace(this), this);
