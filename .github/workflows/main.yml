@@ -6,6 +6,7 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    if: "!contains(github.event.commits[0].message, '[ci-skip]')"
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 17
