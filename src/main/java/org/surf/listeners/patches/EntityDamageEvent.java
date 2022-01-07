@@ -31,7 +31,6 @@ public class EntityDamageEvent implements Listener {
 			if (event.getEntity() instanceof Player && event.getDamager() instanceof Player) {
 				Player damager = (Player) event.getDamager();
 				if (event.getDamage() > 30) {
-					damager.damage(event.getDamage());
 					event.setCancelled(true);
 					Utils.sendMessage(damager, plugin.getConfig().getString("IllegalDamage.Message"));
 
@@ -46,7 +45,6 @@ public class EntityDamageEvent implements Listener {
 			if (event.getDamager() instanceof Arrow) {
 				if (((Arrow) event.getDamager()).getShooter() instanceof Player && event.getDamage() > 40) {
 					Player damager = (Player) ((Arrow) event.getDamager()).getShooter();
-					damager.damage(event.getDamage());
 					event.setCancelled(true);
 
 				}
@@ -62,7 +60,7 @@ public class EntityDamageEvent implements Listener {
 			for (PotionEffect effects : event.getPotion().getEffects()) {
 				if (effects.getAmplifier() > 5) {
 					event.setCancelled(true);
-					player.getInventory().remove(pot);
+//					player.getInventory().remove(pot);
 					Utils.sendMessage(player, plugin.getConfig().getString("IllegalPotion.Message"));
 				}
 
