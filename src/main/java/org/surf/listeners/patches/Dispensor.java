@@ -9,6 +9,7 @@ public class Dispensor implements Listener {
     Main plugin;
     public Dispensor(Main plugin) { this.plugin = plugin; }
 
+    //TODO high version bypass this.
     @EventHandler
     public void dispense (BlockDispenseEvent event) {
         if (event.getBlock().getY() > 254) {
