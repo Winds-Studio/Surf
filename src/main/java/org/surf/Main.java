@@ -48,7 +48,7 @@ public class Main extends JavaPlugin {
 		setupChunkEntityLimit();
 		commandHandler = new CommandHandler(this);
 		startTime = System.currentTimeMillis();
-		getLogger().info("by Nate Legault enabled");
+		getLogger().info("by Dreeam enabled");
 		pluginManager.registerEvents(new BlockPlace(this), this);
 		pluginManager.registerEvents(new Offhand(this), this);
 		if (PaperLib.isPaper()) {
@@ -101,7 +101,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public void onDisable() {
-		getLogger().info("by Nate Legault disabled");
+		getLogger().info("by Dreeam disabled");
 	}
 
 	private String getSalDupeVersion() {
