@@ -13,7 +13,7 @@ ___
 * Patch BookBan without disabling shulker peek
 * Prevent EndPortal greifing
 * Patch players using the OffHand crash module in certan hacked clients to crash the server with books
-* Prevent players from using illegal items with a very good anti illegal that can check shulkers in chests
+* Prevent players from using illegal items with a very good anti illegal
 * Remove illegal potion effects from players
 * Active devlopment
 * Remove falling block server crashers
