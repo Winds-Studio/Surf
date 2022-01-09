@@ -69,7 +69,6 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new BlockPhysics(this), this);
 		pluginManager.registerEvents(new BucketEvent(this), this);
 		pluginManager.registerEvents(new MinecartLag(this), this);
-		pluginManager.registerEvents(new PlayerChat(this), this);
 //		pluginManager.registerEvents(new ChestLagFix(this), this);
 		pluginManager.registerEvents(new Dispensor(this), this);
 //		pluginManager.registerEvents(new PacketElytraFly(this), this);
