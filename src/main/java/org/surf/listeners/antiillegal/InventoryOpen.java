@@ -14,8 +14,8 @@ public class InventoryOpen implements Listener {
     }
 
     @EventHandler
-    @AntiIllegal(EventName = "InventoryCloseEvent")
-    public void onInventoryClose(InventoryOpenEvent event) {
+    @AntiIllegal(EventName = "InventoryOpenEvent")
+    public void onInventoryOpen(InventoryOpenEvent event) {
         try {
             if (plugin.getConfig().getBoolean("Antiillegal.InventoryOpen-Enabled")) {
                 Inventory inv = event.getInventory();
