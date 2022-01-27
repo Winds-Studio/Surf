@@ -69,14 +69,6 @@ public class    ItemUtils {
         return false;
     }
 
-    public boolean isOverstacked(ItemStack item) {
-        if (plugin.getConfigBoolean("Antiillegal.Delete-Stacked-Totem")) {
-            return item.getAmount() > item.getMaxStackSize();
-        } else {
-            return false;
-        }
-    }
-
     public boolean hasIllegalEnchants(ItemStack item) {
         Map<Enchantment, Integer> enchants = item.getEnchantments();
         for (int level : enchants.values()) {
@@ -123,10 +115,6 @@ public class    ItemUtils {
                             illegalsFound = true;
                             itemStack = item;
 
-                        }
-                        if (utils.isOverstacked(item)) {
-                            item.setAmount(item.getMaxStackSize());
-                            itemStack = item;
                         }
                         if (utils.hasIllegalEnchants(item)) {
                             for (Entry<Enchantment, Integer> enchantmentIntegerEntry : item.getEnchantments().entrySet()) {
