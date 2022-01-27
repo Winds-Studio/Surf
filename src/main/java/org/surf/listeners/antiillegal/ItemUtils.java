@@ -69,9 +69,9 @@ public class    ItemUtils {
         return false;
     }
 
-    public boolean isOverstacked(ItemStack item) {
-        if (plugin.getConfigBoolean("Antiillegal.Delete-Stacked-Items")) {
-            return item.getAmount() > item.getMaxStackSize();
+    public boolean isOverstacked(ItemStack TOTEM_OF_UNDYING) {
+        if (plugin.getConfigBoolean("Antiillegal.Delete-Stacked-Totem")) {
+            return TOTEM_OF_UNDYING.getAmount() > TOTEM_OF_UNDYING.getMaxStackSize();
         } else {
             return false;
         }
