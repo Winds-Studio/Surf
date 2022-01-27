@@ -58,41 +58,41 @@ public class HopperTansfer implements Listener {
                                 if (plugin.getItemUtils().isEnchantedBlock(item)) {
                                     event.setCancelled(true);
                                 }
-                                if (item.getItemMeta() instanceof BlockStateMeta) {
-                                    BlockStateMeta itemMeta = (BlockStateMeta) item.getItemMeta();
-                                    if (itemMeta.getBlockState() instanceof ShulkerBox) {
-                                        ShulkerBox shulker = (ShulkerBox) itemMeta.getBlockState();
-                                        for (ItemStack shulkerItem : shulker.getInventory().getContents()) {
-                                            if (shulkerItem != null) {
-                                                if (plugin.getItemUtils().isArmor(item) || plugin.getItemUtils().isTool(item)) {
-                                                    if (item.getDurability() > item.getType().getMaxDurability()) {
-                                                        inv.remove(item);
-                                                        event.setCancelled(true);
-                                                    }
-                                                    if (item.getDurability() < 0) {
-                                                        inv.remove(item);
-                                                        event.setCancelled(true);
-                                                    }
-                                                }
-                                                if (plugin.getItemUtils().isIllegal(shulkerItem)) {
-                                                    inv.remove(item);
-                                                }
-                                                if (plugin.getItemUtils().hasIllegalNBT(shulkerItem)) {
-                                                    inv.remove(item);
-                                                    event.setCancelled(true);
-                                                }
-                                                if (plugin.getItemUtils().isOverstacked(shulkerItem)) {
-                                                    inv.remove(item);
-                                                    event.setCancelled(true);
-                                                }
-                                                if (plugin.getItemUtils().hasIllegalEnchants(shulkerItem)) {
-                                                    inv.remove(item);
-                                                    event.setCancelled(true);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+//                                if (item.getItemMeta() instanceof BlockStateMeta) {
+//                                    BlockStateMeta itemMeta = (BlockStateMeta) item.getItemMeta();
+//                                    if (itemMeta.getBlockState() instanceof ShulkerBox) {
+//                                        ShulkerBox shulker = (ShulkerBox) itemMeta.getBlockState();
+//                                        for (ItemStack shulkerItem : shulker.getInventory().getContents()) {
+//                                            if (shulkerItem != null) {
+//                                                if (plugin.getItemUtils().isArmor(item) || plugin.getItemUtils().isTool(item)) {
+//                                                    if (item.getDurability() > item.getType().getMaxDurability()) {
+//                                                        inv.remove(item);
+//                                                        event.setCancelled(true);
+//                                                    }
+//                                                    if (item.getDurability() < 0) {
+//                                                        inv.remove(item);
+//                                                        event.setCancelled(true);
+//                                                    }
+//                                                }
+//                                                if (plugin.getItemUtils().isIllegal(shulkerItem)) {
+//                                                    inv.remove(item);
+//                                                }
+//                                                if (plugin.getItemUtils().hasIllegalNBT(shulkerItem)) {
+//                                                    inv.remove(item);
+//                                                    event.setCancelled(true);
+//                                                }
+//                                                if (plugin.getItemUtils().isOverstacked(shulkerItem)) {
+//                                                    inv.remove(item);
+//                                                    event.setCancelled(true);
+//                                                }
+//                                                if (plugin.getItemUtils().hasIllegalEnchants(shulkerItem)) {
+//                                                    inv.remove(item);
+//                                                    event.setCancelled(true);
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//                                }
                             }
                         }
                     }
