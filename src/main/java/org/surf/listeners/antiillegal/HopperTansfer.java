@@ -43,7 +43,10 @@ public class HopperTansfer implements Listener {
                             if (plugin.getItemUtils().hasIllegalNBT(item)) {
                                 inv.remove(item);
                                 event.setCancelled(true);
-
+                            }
+                            if (plugin.getItemUtils().hasIllegalAttributes(item)) {
+                                inv.remove(item);
+                                event.setCancelled(true);
                             }
                             if (plugin.getItemUtils().hasIllegalEnchants(item)) {
                                 inv.remove(item);
