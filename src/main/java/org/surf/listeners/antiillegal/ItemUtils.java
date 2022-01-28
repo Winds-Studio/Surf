@@ -14,6 +14,7 @@ import org.surf.util.Utils;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.jar.Attributes;
 import java.util.logging.Level;
 
 public class    ItemUtils {
@@ -69,6 +70,15 @@ public class    ItemUtils {
         return false;
     }
 
+    public boolean hasIllegalAttributes(ItemStack item) {
+        if (item.hasItemMeta()) {
+            ItemMeta meta = item.getItemMeta();
+            Map<Attributes, Integer> attributes = meta.getAttributeModifiers();
+                return attributes.values() > 999;
+        }
+        return false;
+    }
+
     public boolean hasIllegalEnchants(ItemStack item) {
         Map<Enchantment, Integer> enchants = item.getEnchantments();
         for (int level : enchants.values()) {
@@ -111,6 +121,12 @@ public class    ItemUtils {
                             itemStack = item;
                         }
                         if (utils.hasIllegalNBT(item)) {
+                            inventory.remove(item);
+                            illegalsFound = true;
+                            itemStack = item;
+
+                        }
+                        if (utils.hasIllegalAttributes(item)) {
                             inventory.remove(item);
                             illegalsFound = true;
                             itemStack = item;
