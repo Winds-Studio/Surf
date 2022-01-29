@@ -105,6 +105,7 @@ public class    ItemUtils {
         try {
             ItemUtils utils = plugin.getItemUtils();
             ItemStack itemStack = null;
+            ItemMeta itemMeta = null;
             boolean illegalsFound = false;
             if (inventory.getContents() != null) {
                 for (ItemStack item : inventory.getStorageContents()) {
@@ -218,7 +219,7 @@ public class    ItemUtils {
                 }
             }
             if (illegalsFound) {
-                Utils.println(Utils.getPrefix() + "&6Deleted illegals " + itemStack.getType() + " " + itemStack.getI18NDisplayName() + " " + itemStack.getEnchantments() + " " + itemStack.getItemMeta());
+                Utils.println(Utils.getPrefix() + "&6Deleted illegals " + itemStack.getType() + " " + itemStack.getI18NDisplayName() + " " + itemStack.getEnchantments() + " " + itemMeta.getAttributeModifiers());
             }
         } catch (Error | Exception throwable) {
 
