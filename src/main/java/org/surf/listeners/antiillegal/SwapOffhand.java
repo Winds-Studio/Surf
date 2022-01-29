@@ -22,23 +22,19 @@ public class SwapOffhand implements Listener {
                 Player player = event.getPlayer();
                 plugin.getItemUtils().deleteIllegals(player.getInventory());
             }
-        } catch (Error | Exception throwable) {
-
-        }
-    }
-
-    @EventHandler
-    public void onScroll(PlayerSwapHandItemsEvent event) {
-        for (ItemStack itemStack : event.getPlayer().getInventory().getContents()) {
-            if (plugin.getConfigBoolean("Antiillegal.Delete-Stacked-Totem")) {
-                if (itemStack != null) {
-                    if (itemStack.getType() == Material.TOTEM_OF_UNDYING) {
-                        if (itemStack.getAmount() > itemStack.getMaxStackSize()) {
-                            itemStack.setAmount(itemStack.getMaxStackSize());
+            for (ItemStack itemStack : event.getPlayer().getInventory().getContents()) {
+                if (plugin.getConfigBoolean("Antiillegal.Delete-Stacked-Totem")) {
+                    if (itemStack != null) {
+                        if (itemStack.getType() == Material.TOTEM_OF_UNDYING) {
+                            if (itemStack.getAmount() > itemStack.getMaxStackSize()) {
+                                itemStack.setAmount(itemStack.getMaxStackSize());
+                            }
                         }
                     }
                 }
             }
+        } catch (Error | Exception throwable) {
+
         }
     }
 }
