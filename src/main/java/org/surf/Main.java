@@ -80,6 +80,7 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new InventoryOpen(this), this);
 		pluginManager.registerEvents(new ItemPickup(this), this);
 		pluginManager.registerEvents(new PlayerScroll(this), this);
+		pluginManager.registerEvents(new SwapOffhand(this), this);
 		if (getConfig().getBoolean("Antiillegal.ChunkLoad-Enabled")) {
 			pluginManager.registerEvents(new ChunkLoad(this), this);
 		}
