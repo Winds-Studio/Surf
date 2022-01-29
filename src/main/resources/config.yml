@@ -79,8 +79,7 @@ Antiillegal:
   Block-Place-Enabled: false
   ChunkLoad-Enabled: false
   HopperTransfer-Enabled: true
-  InventoryClose-Enabled: true
-  InventoryOpen-Enabled: true
+  InventoryClick-Enabled: true
   PlayerHotbarMove-Enabled: true
   ItemPickup: true
   Delete-Stacked-Totem: true

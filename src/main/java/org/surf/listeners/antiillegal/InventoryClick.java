@@ -3,23 +3,23 @@ package org.surf.listeners.antiillegal;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.surf.Main;
 
-public class InventoryOpen implements Listener {
+public class InventoryClick implements Listener {
     Main plugin;
 
-    public InventoryOpen(Main plugin) {
+    public InventoryClick(Main plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    @AntiIllegal(EventName = "InventoryOpenEvent")
-    public void onInventoryOpen(InventoryOpenEvent event) {
+    @AntiIllegal(EventName = "InventoryClickEvent")
+    public void onInventoryClick(InventoryClickEvent event) {
         try {
-            if (plugin.getConfig().getBoolean("Antiillegal.InventoryOpen-Enabled")) {
+            if (plugin.getConfig().getBoolean("Antiillegal.InventoryClick-Enabled")) {
                 Inventory inv = event.getInventory();
                 plugin.getItemUtils().deleteIllegals(inv);
             }
@@ -29,7 +29,7 @@ public class InventoryOpen implements Listener {
     }
 
     @EventHandler
-    public void onOpen(InventoryOpenEvent event) {
+    public void onClick(InventoryClickEvent event) {
         for (ItemStack stack : event.getInventory().getContents()) {
             if (plugin.getConfigBoolean("Antiillegal.Delete-Stacked-Totem")) {
                 if (stack != null) {

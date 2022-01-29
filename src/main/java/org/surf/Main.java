@@ -76,8 +76,7 @@ public class Main extends JavaPlugin {
 		// AntiIllegal events
 		pluginManager.registerEvents(new org.surf.listeners.antiillegal.BlockPlace(this), this);
 		pluginManager.registerEvents(new HopperTansfer(this), this);
-		pluginManager.registerEvents(new InventoryClose(this), this);
-		pluginManager.registerEvents(new InventoryOpen(this), this);
+		pluginManager.registerEvents(new InventoryClick(this), this);
 		pluginManager.registerEvents(new ItemPickup(this), this);
 		pluginManager.registerEvents(new PlayerScroll(this), this);
 		pluginManager.registerEvents(new SwapOffhand(this), this);
