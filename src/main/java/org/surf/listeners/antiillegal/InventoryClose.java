@@ -1,13 +1,13 @@
 package org.surf.listeners.antiillegal;
 
-import org.bukkit.block.ShulkerBox;
+//import org.bukkit.block.ShulkerBox;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryType;
+//import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.BlockStateMeta;
+//import org.bukkit.inventory.ItemStack;
+//import org.bukkit.inventory.meta.BlockStateMeta;
 import org.surf.Main;
 
 public class InventoryClose implements Listener {

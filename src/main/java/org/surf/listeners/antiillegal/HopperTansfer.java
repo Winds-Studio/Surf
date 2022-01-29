@@ -1,13 +1,13 @@
 package org.surf.listeners.antiillegal;
 
-import org.bukkit.ChatColor;
-import org.bukkit.block.ShulkerBox;
+//import org.bukkit.ChatColor;
+//import org.bukkit.block.ShulkerBox;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.BlockStateMeta;
+//import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.surf.Main;
 
@@ -44,10 +44,11 @@ public class HopperTansfer implements Listener {
                                 inv.remove(item);
                                 event.setCancelled(true);
                             }
-                            if (plugin.getItemUtils().hasIllegalAttributes(item)) {
-                                inv.remove(item);
-                                event.setCancelled(true);
-                            }
+                            //TODO
+//                            if (plugin.getItemUtils().hasIllegalAttributes(item)) {
+//                                inv.remove(item);
+//                                event.setCancelled(true);
+//                            }
                             if (plugin.getItemUtils().hasIllegalEnchants(item)) {
                                 inv.remove(item);
                                 event.setCancelled(true);

@@ -32,10 +32,10 @@ public class BlockPlace implements Listener {
 					event.setCancelled(true);
 					event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
 				}
-				ItemStack itemStack = event.getItemInHand();
-				BlockStateMeta blockStateMeta = null;
-				ShulkerBox shulkerBox = null;
-				boolean illegalsFound = false;
+//				ItemStack itemStack = event.getItemInHand();
+//				BlockStateMeta blockStateMeta = null;
+//				ShulkerBox shulkerBox = null;
+//				boolean illegalsFound = false;
 //				if (itemStack.getItemMeta() instanceof BlockStateMeta) {
 //					blockStateMeta = (BlockStateMeta) itemStack.getItemMeta();
 //					if (blockStateMeta.getBlockState() instanceof ShulkerBox) {
