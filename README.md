@@ -15,8 +15,8 @@ ___
 * Patch players using the OffHand crash module in certan hacked clients to crash the server with books
 * Prevent players from using illegal items with a very good anti illegal
 * Remove illegal potion effects from players
-* Active devlopment
 * Remove falling block server crashers
+* Active development
 ## Alternatives for deleted features
 * LagAssist or React
 * TrChat
