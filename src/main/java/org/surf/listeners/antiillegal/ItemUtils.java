@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 //import org.bukkit.block.ShulkerBox;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
@@ -140,15 +141,12 @@ public class    ItemUtils {
 
                         }
                         if (utils.hasIllegalAttributes(item)) {
-                            itemMeta.removeAttributeModifier(EquipmentSlot.CHEST);
-                            itemMeta.removeAttributeModifier(EquipmentSlot.OFF_HAND);
-                            itemMeta.removeAttributeModifier(EquipmentSlot.HAND);
-                            itemMeta.removeAttributeModifier(EquipmentSlot.HEAD);
-                            itemMeta.removeAttributeModifier(EquipmentSlot.FEET);
-                            itemMeta.removeAttributeModifier(EquipmentSlot.LEGS);
+                            itemMeta.removeAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE);
+                            itemMeta.removeAttributeModifier(Attribute.GENERIC_ATTACK_SPEED);
+                            itemMeta.removeAttributeModifier(Attribute.GENERIC_FLYING_SPEED);
+                            itemMeta.removeAttributeModifier(Attribute.GENERIC_MAX_HEALTH);
                             illegalsFound = true;
                             itemStack = item;
-
                         }
                         if (utils.hasIllegalEnchants(item)) {
                             for (Entry<Enchantment, Integer> enchantmentIntegerEntry : item.getEnchantments().entrySet()) {
