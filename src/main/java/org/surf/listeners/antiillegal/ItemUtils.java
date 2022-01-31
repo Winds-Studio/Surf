@@ -1,12 +1,11 @@
 package org.surf.listeners.antiillegal;
 
-import com.google.common.collect.Multimap;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 //import org.bukkit.block.ShulkerBox;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -72,6 +71,14 @@ public class    ItemUtils {
         return false;
     }
 
+    public boolean hasIllegalAttributes(ItemStack item) {
+        if (item.hasItemMeta()) {
+            ItemMeta meta = item.getItemMeta();
+            return meta.hasAttributeModifiers();
+        }
+        return false;
+    }
+
     //TODO
 //    public boolean hasIllegalAttributes(ItemStack item) {
 //        if (item.hasItemMeta()) {
@@ -132,13 +139,17 @@ public class    ItemUtils {
                             itemStack = item;
 
                         }
-                        //TODO
-//                        if (utils.hasIllegalAttributes(item)) {
-//                            inventory.remove(item);
-//                            illegalsFound = true;
-//                            itemStack = item;
-//
-//                        }
+                        if (utils.hasIllegalAttributes(item)) {
+                            itemMeta.removeAttributeModifier(EquipmentSlot.CHEST);
+                            itemMeta.removeAttributeModifier(EquipmentSlot.OFF_HAND);
+                            itemMeta.removeAttributeModifier(EquipmentSlot.HAND);
+                            itemMeta.removeAttributeModifier(EquipmentSlot.HEAD);
+                            itemMeta.removeAttributeModifier(EquipmentSlot.FEET);
+                            itemMeta.removeAttributeModifier(EquipmentSlot.LEGS);
+                            illegalsFound = true;
+                            itemStack = item;
+
+                        }
                         if (utils.hasIllegalEnchants(item)) {
                             for (Entry<Enchantment, Integer> enchantmentIntegerEntry : item.getEnchantments().entrySet()) {
                                 item.removeEnchantment(enchantmentIntegerEntry.getKey());
