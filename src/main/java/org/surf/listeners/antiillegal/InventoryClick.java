@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.surf.Main;
 
 public class InventoryClick implements Listener {
@@ -21,7 +22,7 @@ public class InventoryClick implements Listener {
         try {
             if (plugin.getConfig().getBoolean("Antiillegal.InventoryClick-Enabled")) {
                 Inventory inv = event.getInventory();
-                plugin.getItemUtils().deleteIllegals(inv);
+                plugin.getItemUtils().deleteIllegals((PlayerInventory) inv);
             }
         } catch (Error | Exception throwable) {
 

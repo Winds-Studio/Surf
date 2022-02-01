@@ -8,6 +8,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 //import org.bukkit.inventory.meta.BlockStateMeta;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.surf.Main;
 import org.surf.util.Utils;
@@ -15,8 +16,6 @@ import org.surf.util.Utils;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.logging.Level;
-
-import static org.bukkit.Bukkit.getPlayer;
 
 public class    ItemUtils {
     Main plugin;
@@ -108,7 +107,7 @@ public class    ItemUtils {
         return false;
     }
 
-    public void deleteIllegals(Inventory inventory) {
+    public void deleteIllegals(PlayerInventory inventory) {
         try {
             ItemUtils utils = plugin.getItemUtils();
             ItemStack itemStack = null;

@@ -8,7 +8,6 @@ import org.bukkit.inventory.ItemStack;
 //import org.bukkit.inventory.meta.BlockStateMeta;
 import org.surf.Main;
 
-@SuppressWarnings("deprecation")
 public class ItemPickup implements Listener {
     Main plugin;
 
