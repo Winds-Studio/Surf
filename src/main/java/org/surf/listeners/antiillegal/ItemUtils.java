@@ -3,10 +3,7 @@ package org.surf.listeners.antiillegal;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 //import org.bukkit.block.ShulkerBox;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -18,6 +15,8 @@ import org.surf.util.Utils;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.logging.Level;
+
+import static org.bukkit.Bukkit.getPlayer;
 
 public class    ItemUtils {
     Main plugin;
@@ -116,7 +115,7 @@ public class    ItemUtils {
             ItemMeta itemMeta = null;
             boolean illegalsFound = false;
             if (inventory.getContents() != null) {
-                for (ItemStack item : inventory.getStorageContents()) {
+                for (ItemStack item : inventory.getContents()) {
                     if (item != null) {
                         if (utils.isArmor(item) || utils.isTool(item)) {
                             if (item.getDurability() > item.getType().getMaxDurability()) {
@@ -142,6 +141,7 @@ public class    ItemUtils {
                         }
                         if (utils.hasIllegalAttributes(item)) {
                             inventory.remove(item);
+
                             //TODO
 //                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS);
 //                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE);
@@ -155,7 +155,6 @@ public class    ItemUtils {
 //                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED);
 //                            item.getItemMeta().removeAttributeModifier(Attribute.HORSE_JUMP_STRENGTH);
 //                            item.getItemMeta().removeAttributeModifier(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS);
-
                             illegalsFound = true;
                             itemStack = item;
                         }

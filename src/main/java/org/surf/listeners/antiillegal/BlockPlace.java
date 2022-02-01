@@ -2,14 +2,14 @@ package org.surf.listeners.antiillegal;
 
 //import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.block.ShulkerBox;
+//import org.bukkit.block.ShulkerBox;
 //import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 //import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.BlockStateMeta;
+//import org.bukkit.inventory.ItemStack;
+//import org.bukkit.inventory.meta.BlockStateMeta;
 //import org.bukkit.inventory.meta.ItemMeta;
 import org.surf.Main;
 //import org.surf.util.Utils;

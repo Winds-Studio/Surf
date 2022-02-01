@@ -28,33 +28,7 @@ Nether:
 FirstJoin:
   Enabled: false
   Message: '&6[&bSurf&6] &c{Player}&6 has joined the &bYour&3Server &6for the first time'
-#Elytra/redstone disable TPS values keep in mind this is a double so it can be like 13.2255
-#Set 0 to disable 
-#Elytra:
-#  #the speed limit is 3 by default u can change it to what you want
-#  SpeedLimit: 3
-#  #enable / disable damage when going over the speed limit
-#  EnableDamage: true
-#  #change the amount of damage taken when going over the speed limit
-#  DamageAmount: 15
-#  #the tps that elytras gets completely disabled at
-#  #you can turn this off by setting it to 1 basically
-#  Disable-TPS: 17
-#  #disable elytra fall damage ? set to false to enable fall damage when landing
-#  EnableNoFallDamage: true
-#  #enable taking off elytras when people go over the speed limit set to false to disable
-#  EnableTakingOffElytra: false
-#  #the message it sends to a player when they reach the elytra speed limit
-#  SpeedLimitReached-message: "&6&l[&b&lSurf&6&l]&6 You are going to fast slow down"
-#  #the message it sends to opped players when a player reaches the elytra speed limit
-#  #you can turn this on or off by setting it to true or false
-#  EnableOpMessages: true
-#  SpeeedLimitReached-ops: "&6&l[&b&lSurf&6&l]&6 Player {name} is going to fast with an elytra"
-#  #This will patch future clients packet elytra fly witch can be used to bypass most elytra speed limit plugins and make the elytra not lose any durability
-#  PacketElytraFly-Enabled: true
-#  #Sends a message to the player when they try to use PacketElytraFly
-#  SendMessage: true
-#  Message: "&6&l[&b&lSurf&6&l]&6&6 PacketElytraFly is currently disabled due to it causing tons of lag"
+
 #Misc config shit
 #Message to send when a player tries to use a 32k or strength 255
 IllegalDamage:
@@ -76,6 +50,7 @@ Minecart-per-chunk:
 #AntiIllegal check toggles
 #Only enable ChunkLoad of you have a massive problem with illegals on your server
 Antiillegal:
+  #Disable Block-Place if you have IllegalStack
   Block-Place-Enabled: false
   ChunkLoad-Enabled: false
   HopperTransfer-Enabled: true
