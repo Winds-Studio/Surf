@@ -4,7 +4,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 //import org.bukkit.block.ShulkerBox;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 //import org.bukkit.inventory.meta.BlockStateMeta;
@@ -113,8 +112,8 @@ public class    ItemUtils {
             ItemStack itemStack = null;
             ItemMeta itemMeta = null;
             boolean illegalsFound = false;
-            if (inventory.getContents() != null) {
-                for (ItemStack item : inventory.getContents()) {
+            if (inventory.getExtraContents() != null) {
+                for (ItemStack item : inventory.getExtraContents()) {
                     if (item != null) {
                         if (utils.isArmor(item) || utils.isTool(item)) {
                             if (item.getDurability() > item.getType().getMaxDurability()) {
@@ -140,7 +139,6 @@ public class    ItemUtils {
                         }
                         if (utils.hasIllegalAttributes(item)) {
                             inventory.remove(item);
-
                             //TODO
 //                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS);
 //                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE);
@@ -232,57 +230,6 @@ public class    ItemUtils {
 //                                    item.setItemMeta(blockStateMeta);
 //                                }
 //                            }
-                        }
-                    }
-                }
-
-                for (ItemStack item : inventory.getExtraContents()) {
-                    if (item != null) {
-                        if (utils.isArmor(item) || utils.isTool(item)) {
-                            if (item.getDurability() > item.getType().getMaxDurability()) {
-                                item.setDurability(item.getType().getMaxDurability());
-                                itemStack = item;
-                            }
-                            if (item.getDurability() < 0) {
-                                item.setDurability((short) 1);
-                                itemStack = item;
-                            }
-
-                        }
-                        if (utils.isIllegal(item)) {
-                            inventory.remove(item);
-                            illegalsFound = true;
-                            itemStack = item;
-                        }
-                        if (utils.hasIllegalNBT(item)) {
-                            inventory.remove(item);
-                            illegalsFound = true;
-                            itemStack = item;
-
-                        }
-                        if (utils.hasIllegalAttributes(item)) {
-                            inventory.remove(item);
-                            illegalsFound = true;
-                            itemStack = item;
-                        }
-                        if (utils.hasIllegalEnchants(item)) {
-                            for (Entry<Enchantment, Integer> enchantmentIntegerEntry : item.getEnchantments().entrySet()) {
-                                item.removeEnchantment(enchantmentIntegerEntry.getKey());
-                                illegalsFound = true;
-                                itemStack = item;
-                            }
-                        }
-                        if (item.hasItemMeta()) {
-                            ItemMeta meta = item.getItemMeta();
-                            if (utils.isEnchantedBlock(item)) {
-                                Iterator<Entry<Enchantment, Integer>> enchants = item.getEnchantments().entrySet()
-                                        .iterator();
-                                illegalsFound = true;
-                                itemStack = item;
-                                while (enchants.hasNext()) {
-                                    item.removeEnchantment(enchants.next().getKey());
-                                }
-                            }
                         }
                     }
                 }
