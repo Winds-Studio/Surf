@@ -141,10 +141,20 @@ public class    ItemUtils {
 
                         }
                         if (utils.hasIllegalAttributes(item)) {
-                            itemMeta.removeAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE);
-                            itemMeta.removeAttributeModifier(Attribute.GENERIC_ATTACK_SPEED);
-                            itemMeta.removeAttributeModifier(Attribute.GENERIC_FLYING_SPEED);
-                            itemMeta.removeAttributeModifier(Attribute.GENERIC_MAX_HEALTH);
+                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ARMOR);
+                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS);
+                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE);
+                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ATTACK_KNOCKBACK);
+                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ATTACK_SPEED);
+                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_FLYING_SPEED);
+                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_FOLLOW_RANGE);
+                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE);
+                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_LUCK);
+                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_MAX_HEALTH);
+                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED);
+                            item.getItemMeta().removeAttributeModifier(Attribute.HORSE_JUMP_STRENGTH);
+                            item.getItemMeta().removeAttributeModifier(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS);
+
                             illegalsFound = true;
                             itemStack = item;
                         }
