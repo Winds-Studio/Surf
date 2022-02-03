@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 //import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.surf.Main;
 import org.surf.util.Utils;
@@ -92,7 +93,7 @@ public class    ItemUtils {
     public boolean hasIllegalEnchants(ItemStack item) {
         Map<Enchantment, Integer> enchants = item.getEnchantments();
         for (int level : enchants.values()) {
-            return level > 5;
+            return level > plugin.getConfig().getInt("IllegalEnchants-Maximum");
         }
         return false;
     }
@@ -241,4 +242,5 @@ public class    ItemUtils {
 
         }
     }
+
 }

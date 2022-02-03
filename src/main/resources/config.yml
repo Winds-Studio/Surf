@@ -86,3 +86,5 @@ BlockPhysics-disable-tps: 15
 Connection:
   Player-Join-Message: "&7[&a+&7] &8%player%"
   Player-Leave-Message: "&7[&c-&7] &8%player%"
+#The maximum value of allowing enchants
+IllegalEnchants-Threshold: 5
