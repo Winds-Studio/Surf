@@ -5,7 +5,6 @@ import org.bukkit.block.Container;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.ChunkLoadEvent;
-import org.bukkit.inventory.PlayerInventory;
 import org.surf.Main;
 
 public class ChunkLoad implements Listener {
@@ -23,7 +22,7 @@ public class ChunkLoad implements Listener {
                 for (BlockState state : event.getChunk().getTileEntities()) {
                     if (state instanceof Container) {
                         Container container = (Container) state;
-                        plugin.getItemUtils().deleteIllegals((PlayerInventory) container.getInventory());
+                        plugin.getItemUtils().deleteIllegals(container.getInventory());
 
                     }
                 }

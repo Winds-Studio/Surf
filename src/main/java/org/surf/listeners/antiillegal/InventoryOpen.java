@@ -4,7 +4,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.PlayerInventory;
 import org.surf.Main;
 
 public class InventoryOpen implements Listener {
@@ -20,7 +19,7 @@ public class InventoryOpen implements Listener {
         try {
             if (plugin.getConfig().getBoolean("Antiillegal.InventoryOpen-Enabled")) {
                 Inventory inv = event.getInventory();
-                plugin.getItemUtils().deleteIllegals((PlayerInventory) inv);
+                plugin.getItemUtils().deleteIllegals(inv);
             }
         } catch (Error | Exception throwable) {
 

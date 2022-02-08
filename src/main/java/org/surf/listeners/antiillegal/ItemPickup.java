@@ -22,7 +22,7 @@ public class ItemPickup implements Listener {
             if (plugin.getConfig().getBoolean("Antiillegal.ItemPickup-Enabled")) {
                 ItemStack item = event.getItem().getItemStack();
                 if (plugin.getItemUtils().isEnchantedBlock(item) || plugin.getItemUtils().hasIllegalNBT(item) || plugin.getItemUtils().hasIllegalEnchants(item)
-                        || plugin.getItemUtils().isIllegal(item)) {
+                        || plugin.getItemUtils().isIllegal(item) || plugin.getItemUtils().hasIllegalAttributes(item)) {
                     event.setCancelled(true);
                     event.getItem().remove();
                 }
