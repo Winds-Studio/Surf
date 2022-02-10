@@ -8,6 +8,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 //import org.bukkit.inventory.ItemStack;
 //import org.bukkit.inventory.meta.BlockStateMeta;
+import org.bukkit.inventory.PlayerInventory;
 import org.surf.Main;
 
 public class InventoryClose implements Listener {
@@ -23,9 +24,9 @@ public class InventoryClose implements Listener {
         try {
             if (plugin.getConfig().getBoolean("Antiillegal.InventoryClose-Enabled")) {
                 Inventory inv = event.getInventory();
-                plugin.getItemUtils().deleteIllegals(inv);
+                plugin.getItemUtils().deleteIllegals((PlayerInventory) inv);
                 Inventory playerInv = event.getPlayer().getInventory();
-                plugin.getItemUtils().deleteIllegals(playerInv);
+                plugin.getItemUtils().deleteIllegals((PlayerInventory) playerInv);
 //                if (event.getInventory().getType() == InventoryType.SHULKER_BOX) {
 //                    Inventory shulkerInv = event.getInventory();
 //                    for (ItemStack item : shulkerInv.getContents()) {

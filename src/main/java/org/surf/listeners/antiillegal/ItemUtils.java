@@ -7,7 +7,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 //import org.bukkit.inventory.meta.BlockStateMeta;
-//import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.surf.Main;
@@ -107,14 +107,14 @@ public class    ItemUtils {
         return false;
     }
 
-    public void deleteIllegals(Inventory inventory) {
+    public void deleteIllegals(PlayerInventory inventory) {
         try {
             ItemUtils utils = plugin.getItemUtils();
             ItemStack itemStack = null;
             ItemMeta itemMeta = null;
             boolean illegalsFound = false;
             if (inventory.getContents() != null) {
-                for (ItemStack item : inventory.getStorageContents()) {
+                for (ItemStack item : inventory.getContents()) {
                     if (item != null) {
                         if (utils.isArmor(item) || utils.isTool(item)) {
                             if (item.getDurability() > item.getType().getMaxDurability()) {
