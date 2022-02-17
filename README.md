@@ -17,9 +17,15 @@ ___
 * Remove illegal potion effects from players
 * Remove falling block server crashers
 * Active development
+
 ## Alternatives for deleted features
 * LagAssist or React
 * TrChat
 * Openinv
 * Essentials (if you want)
 * NoChunkLag
+
+## TODO list
+* Detect items in OffHand
+* Detect items in Equipment slot
+* Delete illegal enchantments or NBT tags rather than removing items.
