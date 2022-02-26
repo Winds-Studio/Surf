@@ -23,11 +23,6 @@ Nether:
   Bottom-Layer: 0
   Bottom-message: '&6&l[&b&lSurf&6&l]&6 &6The nether bottom has been disabled due to lag'
   top-bottom-do-damage: false
-#Message to send to the server when a player first joins
-#Use {Player} as a place holder for the players name
-FirstJoin:
-  Enabled: false
-  Message: '&6[&bSurf&6] &c{Player}&6 has joined the &bYour&3Server &6for the first time'
 
 #Misc config shit
 #Message to send when a player tries to use a 32k or strength 255
@@ -86,5 +81,8 @@ BlockPhysics-disable-tps: 15
 Connection:
   Player-Join-Message: "&7[&a+&7] &8%player%"
   Player-Leave-Message: "&7[&c-&7] &8%player%"
+FirstJoin:
+  Enabled: false
+  Message: '&6[&bSurf&6] &c%Player%&6 has joined the &bYour&3Server &6for the first time'
 #The maximum value of allowing enchants
 IllegalEnchants-Threshold: 5

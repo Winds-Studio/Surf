@@ -9,7 +9,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.potion.PotionEffect;
 import org.surf.Main;
-import org.surf.util.Utils;
 
 public class JoinEvent implements Listener {
 	Main plugin;
@@ -33,7 +32,7 @@ public class JoinEvent implements Listener {
 			if (plugin.getConfigBoolean("FirstJoin.Enabled")) {
 				if (!player.hasPlayedBefore()) {
 					Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-							plugin.getConfig().getString("FirstJoin.Message").replace("{Player}", player.getName())));
+							plugin.getConfig().getString("FirstJoin.Message").replace("%Player%", player.getName())));
 				}
 			}
 		} catch (Error | Exception throwable) {
@@ -43,6 +42,9 @@ public class JoinEvent implements Listener {
 	@EventHandler
 	public void onKick(PlayerKickEvent event) {
 		if (event.getReason().equalsIgnoreCase("Kicked for spamming")) {
+			event.setCancelled(true);
+		}
+		if (event.getReason().equalsIgnoreCase("Invalid hotbar selection (Hacking?)")) {
 			event.setCancelled(true);
 		}
 	}
