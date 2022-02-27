@@ -54,6 +54,7 @@ Antiillegal:
   ItemPickup: true
   Delete-Stacked-Totem: true
   Check-Illegal-Damage: true
+  PlayerSwapOffhand-Enabled: true
   Illegal-Items-List:
     - "BEDROCK"
     - "REPEATING_COMMAND_BLOCK"
