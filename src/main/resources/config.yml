@@ -1,4 +1,4 @@
-# Surf 3.2.3
+# Surf 3.2.5
 # contact QQ:2682173972
 # for help with this plugin
 
@@ -56,6 +56,7 @@ Antiillegal:
   Check-Illegal-Damage: true
   PlayerSwapOffhand-Enabled: true
   Illegal-Items-List:
+    - "BARRIER"
     - "BEDROCK"
     - "REPEATING_COMMAND_BLOCK"
     - "COMMAND_BLOCK_MINECART"
@@ -66,7 +67,6 @@ Antiillegal:
     - "SPAWNER"
     - "END_PORTAL"
     - "NETHER_PORTAL"
-    - "END_PORTAL_FRAME"
     - "STRUCTURE_BLOCK"
     - "STRUCTURE_VOID"
 #water / lava flowing disable tps this is useful on new servers with lots of block physics updates that cause lag

@@ -1,11 +1,11 @@
 package org.surf.listeners;
 
 import org.bukkit.Material;
-import org.bukkit.block.Block;
+//import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
+//import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.surf.Main;
 import org.surf.util.Utils;
@@ -21,7 +21,7 @@ public class BlockPlace implements Listener {
 	public void onBlockPlace(BlockPlaceEvent event) {
 		try {
 			Player player = event.getPlayer();
-			if (plugin.getConfigBoolean("Illegal.Block-Place-Enabled")) {
+			if (plugin.getConfigBoolean("Illegal-Block-Place.Enabled")) {
 				switch (event.getBlock().getType()) {
 					case BEDROCK:
 						event.setCancelled(true);
