@@ -21,7 +21,7 @@ public class BlockPlace implements Listener {
 	public void onBlockPlace(BlockPlaceEvent event) {
 		try {
 			Player player = event.getPlayer();
-			if (plugin.getConfigBoolean("Illegal-Block-Place.Enabled")) {
+			if (plugin.getConfigBoolean("IllegalBlock-Place.Enabled")) {
 				switch (event.getBlock().getType()) {
 					case BEDROCK:
 						event.setCancelled(true);
