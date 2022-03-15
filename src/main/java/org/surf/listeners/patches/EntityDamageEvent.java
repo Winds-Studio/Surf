@@ -60,7 +60,7 @@ public class EntityDamageEvent implements Listener {
 			for (PotionEffect effects : event.getPotion().getEffects()) {
 				if (effects.getAmplifier() > 5) {
 					event.setCancelled(true);
-//					player.getInventory().remove(pot);
+					player.getInventory().remove(pot);
 					Utils.sendMessage(player, plugin.getConfig().getString("IllegalPotion.Message"));
 				}
 
@@ -75,8 +75,8 @@ public class EntityDamageEvent implements Listener {
 				PotionMeta potion = (PotionMeta) e.getItem().getItemMeta();
 				for (PotionEffect pe : potion.getCustomEffects()) {
 					if (pe.getAmplifier() > 5) {
-						e.getPlayer().getInventory().remove(e.getItem());
 						e.setCancelled(true);
+						e.getPlayer().getInventory().remove(e.getItem());
 						Utils.sendMessage(e.getPlayer(),
 								plugin.getConfig().getString("IllegalPotion.Message"));
 

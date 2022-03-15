@@ -12,7 +12,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.surf.Main;
-import org.surf.util.Utils;
 
 public class ChunkBan implements Listener {
 	Main plugin;

@@ -2,13 +2,10 @@ package org.surf.listeners.antiillegal;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-//import org.bukkit.block.ShulkerBox;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-//import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.surf.Main;
 import org.surf.util.Utils;
@@ -17,7 +14,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 
-public class    ItemUtils {
+public class ItemUtils {
     Main plugin;
 
     public ItemUtils(Main plugin) {
@@ -174,63 +171,6 @@ public class    ItemUtils {
                                     item.removeEnchantment(enchants.next().getKey());
                                 }
                             }
-//                            if (item.getItemMeta() instanceof BlockStateMeta) {
-//                                BlockStateMeta blockStateMeta = (BlockStateMeta) item.getItemMeta();
-//                                if (blockStateMeta.getBlockState() instanceof ShulkerBox) {
-//                                    ShulkerBox shulker = (ShulkerBox) blockStateMeta.getBlockState();
-//                                    for (ItemStack shulkerItem : shulker.getInventory().getContents()) {
-//                                        if (shulkerItem != null) {
-//                                            if (utils.isArmor(shulkerItem) || utils.isTool(shulkerItem)) {
-//                                                if (shulkerItem.getDurability() > shulkerItem.getType().getMaxDurability()) {
-//                                                    shulkerItem.setDurability(shulkerItem.getType().getMaxDurability());
-//                                                    illegalsFound = true;
-//                                                    itemStack = item;
-//                                                }
-//                                                if (shulkerItem.getDurability() < 0) {
-//                                                    shulkerItem.setDurability((short) 1);
-//                                                    illegalsFound = true;
-//                                                    itemStack = item;
-//                                                }
-//                                            }
-//                                            if (utils.isIllegal(shulkerItem)) {
-//                                                shulker.getInventory().remove(shulkerItem);
-//                                                illegalsFound = true;
-//                                                itemStack = item;
-//                                            }
-//                                            if (utils.hasIllegalNBT(shulkerItem)) {
-//                                                shulker.getInventory().remove(shulkerItem);
-//                                                illegalsFound = true;
-//                                                itemStack = item;
-//                                            }
-//                                            if (utils.isOverstacked(shulkerItem)) {
-//                                                shulkerItem.setAmount(shulkerItem.getType().getMaxStackSize());
-//                                                illegalsFound = true;
-//                                                itemStack = item;
-//                                            }
-//                                            if (utils.hasIllegalEnchants(shulkerItem)) {
-//                                                for (Entry<Enchantment, Integer> enchantmentIntEntry : shulkerItem.getEnchantments().entrySet()) {
-//                                                    if (enchantmentIntEntry.getValue() > enchantmentIntEntry.getKey().getMaxLevel()) {
-//                                                        if (enchantmentIntEntry.getKey().canEnchantItem(shulkerItem)) {
-//                                                            shulkerItem.addEnchantment(enchantmentIntEntry.getKey(), enchantmentIntEntry.getKey().getMaxLevel());
-//                                                        } else {
-//                                                            shulkerItem.removeEnchantment(enchantmentIntEntry.getKey());
-//                                                        }
-//                                                    }
-//                                                }
-//                                                illegalsFound = true;
-//                                                itemStack = item;
-//                                            }
-//                                            if (utils.isEnchantedBlock(shulkerItem)) {
-//                                                shulkerItem.removeEnchantment(shulkerItem.getEnchantments().entrySet().iterator().next().getKey());
-//                                                illegalsFound = true;
-//                                                itemStack = item;
-//                                            }
-//                                        }
-//                                    }
-//                                    blockStateMeta.setBlockState(shulker);
-//                                    item.setItemMeta(blockStateMeta);
-//                                }
-//                            }
                         }
                     }
                 }

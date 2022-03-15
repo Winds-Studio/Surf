@@ -10,7 +10,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.BookMeta;
-import org.surf.util.Utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

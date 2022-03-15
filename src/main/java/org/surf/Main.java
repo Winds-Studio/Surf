@@ -63,7 +63,6 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new ChunkBan(this), this);
 		pluginManager.registerEvents(new MoveEvent(this), this);
 		pluginManager.registerEvents(new JoinEvent(this), this);
-//		pluginManager.registerEvents(new Elytra(this), this);
 		pluginManager.registerEvents(new EntityDamageEvent(this), this);
 		pluginManager.registerEvents(new WitherSpawn(), this);
 		pluginManager.registerEvents(new BlockPhysics(this), this);
@@ -71,7 +70,6 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new MinecartLag(this), this);
 //		pluginManager.registerEvents(new ChestLagFix(this), this);
 		pluginManager.registerEvents(new Dispensor(this), this);
-//		pluginManager.registerEvents(new PacketElytraFly(this), this);
 		pluginManager.registerEvents(connectionMessages, this);
 		// AntiIllegal events
 		pluginManager.registerEvents(new org.surf.listeners.antiillegal.BlockPlace(this), this);
