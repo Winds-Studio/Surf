@@ -41,7 +41,7 @@ public class EntityDamageEvent implements Listener {
 
 	@EventHandler
 	public void onBow(EntityDamageByEntityEvent event) {
-		if (plugin.getConfig().getBoolean("AntiIllegal-Enabled")) {
+		if (plugin.getConfig().getBoolean("Antiillegal.Check-Illegal-Damage")) {
 			if (event.getDamager() instanceof Arrow) {
 				if (((Arrow) event.getDamager()).getShooter() instanceof Player && event.getDamage() > 40) {
 					Player damager = (Player) ((Arrow) event.getDamager()).getShooter();
