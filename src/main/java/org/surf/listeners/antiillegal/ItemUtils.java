@@ -5,7 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.surf.Main;
 import org.surf.util.Utils;
@@ -104,7 +104,7 @@ public class ItemUtils {
         return false;
     }
 
-    public void deleteIllegals(PlayerInventory inventory) {
+    public void deleteIllegals(Inventory inventory) {
         try {
             ItemUtils utils = plugin.getItemUtils();
             ItemStack itemStack = null;

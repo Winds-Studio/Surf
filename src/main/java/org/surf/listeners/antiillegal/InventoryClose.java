@@ -4,7 +4,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.PlayerInventory;
 import org.surf.Main;
 
 public class InventoryClose implements Listener {
@@ -20,9 +19,9 @@ public class InventoryClose implements Listener {
         try {
             if (plugin.getConfig().getBoolean("Antiillegal.InventoryClose-Enabled")) {
                 Inventory inv = event.getInventory();
-                plugin.getItemUtils().deleteIllegals((PlayerInventory) inv);
+                plugin.getItemUtils().deleteIllegals(inv);
                 Inventory playerInv = event.getPlayer().getInventory();
-                plugin.getItemUtils().deleteIllegals((PlayerInventory) playerInv);
+                plugin.getItemUtils().deleteIllegals(playerInv);
             }
         } catch (Error | Exception throwable) {
 
