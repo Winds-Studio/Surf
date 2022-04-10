@@ -27,7 +27,7 @@ public class SwapOffhand implements Listener {
                     if (itemStack != null) {
                         if (itemStack.getType() == Material.TOTEM_OF_UNDYING) {
                             if (itemStack.getAmount() > itemStack.getMaxStackSize()) {
-                                itemStack.setAmount(itemStack.getMaxStackSize());
+                                event.setCancelled(true);
                             }
                         }
                     }
