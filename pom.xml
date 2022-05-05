@@ -6,7 +6,7 @@
 
     <groupId>org.surf</groupId>
     <artifactId>Surf</artifactId>
-    <version>3.2.6</version>
+    <version>3.2.7</version>
     <packaging>jar</packaging>
 
     <name>Surf</name>
