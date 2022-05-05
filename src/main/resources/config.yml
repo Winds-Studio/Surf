@@ -1,11 +1,11 @@
-# Surf 3.2.7
+# Surf 3.2.8
 # Contact me on QQ:2682173972 or Discord Dreeam#0851
 # For help with this plugin
 
 #Anti-illegal >>
 
 #Messages to send the player when they try to place illegal blocks
-IllegalBlock-Place:
+IllegalBlockPlace:
   Enabled: true
   Bedrock: '&6&l[&b&lSurf&6&l]&6 &6This block is not allowed'
   Barrier: '&6&l[&b&lSurf&6&l]&6 &6This block is not allowed'
@@ -17,11 +17,11 @@ IllegalEnchants-Threshold: 5
 #Only enable ChunkLoad of you have a massive problem with illegals on your server
 Antiillegal:
   #Disable Block-Place if you have IllegalStack
-  Block-Place-Enabled: false
+  BlockPlace-Enabled: false
   ChunkLoad-Enabled: false
   HopperTransfer-Enabled: true
   InventoryClick-Enabled: true
-  PlayerHotbarMove-Enabled: true
+  HotbarMove-Enabled: true
   ItemPickup-Enabled: true
   PlayerSwapOffhand-Enabled: true
   Delete-Stacked-Totem: true

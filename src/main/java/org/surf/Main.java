@@ -38,10 +38,9 @@ public class Main extends JavaPlugin {
 //		int pluginId = 9128;
 //		new Metrics(this, pluginId);
 		saveDefaultConfig();
-		setupChunkEntityLimit();
 		commandHandler = new CommandHandler(this);
 		startTime = System.currentTimeMillis();
-		getLogger().info("by Dreeam enabled");
+		getLogger().info("Surf enabled. By Dreeam.");
 		pluginManager.registerEvents(new BlockPlace(this), this);
 		pluginManager.registerEvents(new Offhand(this), this);
 		if (PaperLib.isPaper()) {
@@ -83,47 +82,19 @@ public class Main extends JavaPlugin {
 	}
 
 	public void onDisable() {
-		getLogger().info("by Dreeam disabled");
+		getLogger().info("Surf disabled. By Dreeam");
 	}
 
 	public boolean getConfigBoolean(String path) {
 		return getConfig().getBoolean(path);
-	}
-
-	public String getPingRole() {
-		return getConfig().getString("AlertSystem.PingRole");
 	}
 	
 	public ItemUtils getItemUtils() {
 		return itemUtils;
 	}
 
-	public HashMap<String, Integer> getEntityAmounts() {
-		return entityIntegerHashMap;
-	}
-
 	public CommandHandler getCommandHandler() {
 		return commandHandler;
 	}
 
-	public void setupChunkEntityLimit() {
-		try {
-			List<String> entityPairs = getConfig().getStringList("EntityAmounts.TypePairs");
-			List<String> validEntitys = new ArrayList<>();
-			for (EntityType type : EntityType.values()) {
-				validEntitys.add(type.toString());
-			}
-			for (String pair : entityPairs) {
-				String entityType = pair.split(":")[0].toUpperCase();
-				int amount = Integer.parseInt(pair.split(":")[1]);
-				if (validEntitys.contains(entityType)) {
-					entityIntegerHashMap.put(entityType, amount);
-				} else {
-					getLogger().info(ChatColor.RED + "Unknown EntityType " + entityType + " in the EntityAmounts section of the config");
-				}
-			}
-		} catch (Error | Exception throwable) {
-			getLogger().info(ChatColor.RED + "Error in the EntityAmounts section of the config missing \":\"");
-		}
-	}
 }

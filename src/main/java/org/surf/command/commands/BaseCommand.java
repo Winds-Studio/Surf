@@ -26,7 +26,6 @@ public class BaseCommand extends org.surf.command.BaseCommand {
             switch (args[0]) {
                 case "reload":
                     plugin.reloadConfig();
-                    plugin.setupChunkEntityLimit();
                     Utils.sendMessage(sender, Utils.getPrefix() + "&aReloaded configuration file");
                     break;
                 case "version":

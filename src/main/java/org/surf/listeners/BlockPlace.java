@@ -19,30 +19,30 @@ public class BlockPlace implements Listener {
 	public void onBlockPlace(BlockPlaceEvent event) {
 		try {
 			Player player = event.getPlayer();
-			if (plugin.getConfigBoolean("IllegalBlock-Place.Enabled")) {
+			if (plugin.getConfigBoolean("IllegalBlockPlace.Enabled")) {
 				switch (event.getBlock().getType()) {
 					case BEDROCK:
 						event.setCancelled(true);
-						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlock-Place.Bedrock"));
+						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Bedrock"));
 						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
 						break;
 					case END_PORTAL_FRAME:
 						if (!(player.getInventory().getItemInMainHand().getType() == Material.ENDER_EYE)) {
 							if (!(player.getInventory().getItemInOffHand().getType() == Material.ENDER_EYE)) {
 								event.setCancelled(true);
-								Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlock-Place.End_Portal_Frame"));
+								Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.End_Portal_Frame"));
 								event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
 							}
 						}
 						break;
 					case BARRIER:
 						event.setCancelled(true);
-						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlock-Place.Barrier"));
+						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Barrier"));
 						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
 						break;
 					case SPAWNER:
 						event.setCancelled(true);
-						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlock-Place.Mob_Spawner"));
+						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Mob_Spawner"));
 						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
 						break;
 				}
