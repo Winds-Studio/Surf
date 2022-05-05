@@ -31,9 +31,6 @@ IllegalDamage:
 #Player attempts to use or drink an illegal potion or use an illegal tipped arrow
 IllegalPotion:
   Message: "&6&l[&b&lSurf&6&l]&6&6 You can not use this illegal potion"
-#Message to send the player when they use an elytra in low tps use {tps} to get the elytra disable tps
-ElytraLowTPS:
-  Message: "&6&l[&b&lSurf&6&l]&6 &6Elytras are disabled if the tps is below&r&c {tps}"
 UnbookBan:
   Message: "&6&l[&b&lSurf&6&l]&6&6 You have been unbookbanned"
 #Message for /discord use & for colors
@@ -51,7 +48,7 @@ Antiillegal:
   HopperTransfer-Enabled: true
   InventoryClick-Enabled: true
   PlayerHotbarMove-Enabled: true
-  ItemPickup: true
+  ItemPickup-Enabled: true
   Delete-Stacked-Totem: true
   Check-Illegal-Damage: true
   PlayerSwapOffhand-Enabled: true
