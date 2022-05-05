@@ -6,12 +6,12 @@
 
     <groupId>org.surf</groupId>
     <artifactId>Surf</artifactId>
-    <version>3.2.5</version>
+    <version>3.2.6</version>
     <packaging>jar</packaging>
 
     <name>Surf</name>
 
-    <description>fix exploits and remove illegal/NBT items for anarchy servers</description>
+    <description>Fix exploits and remove illegal/NBT items for anarchy servers</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -80,13 +80,6 @@
             <artifactId>paper-api</artifactId>
             <version>1.18.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.l2x9.saldupe</groupId>
-            <artifactId>saldupe</artifactId>
-            <scope>system</scope>
-            <version>1.0</version>
-            <systemPath>${project.basedir}/lib/saldupe.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>io.papermc</groupId>

@@ -85,34 +85,12 @@ public class Main extends JavaPlugin {
 		//Alert system events
 		PaperLib.suggestPaper(this);
 		//Server specific events
-		if (pluginManager.getPlugin("SalC1Dupe") != null) {
-			if (getSalDupeVersion().equals("1.0-SNAPSHOT")) {
-				pluginManager.registerEvents(new DupeEvt(), this);
-			} else {
-				Utils.println(Utils.getPrefix() + "&cThis version of SalC1Dupe is outdated Current version of SalC1Dupe on the server " + getSalDupeVersion() + " Most recent version 1.0-SNAPSHOT");
-			}
-		} else {
-			Utils.println(Utils.getPrefix() + "&eCould not find SalC1Dupe installed on the server");
-		}
 		service.scheduleAtFixedRate(() -> pluginManager.callEvent(secondPassEvent), 1, 1, TimeUnit.SECONDS);
 		service.scheduleAtFixedRate(() -> pluginManager.callEvent(tenSecondPassEvent), 1, 10, TimeUnit.SECONDS);
 	}
 
 	public void onDisable() {
 		getLogger().info("by Dreeam disabled");
-	}
-
-	private String getSalDupeVersion() {
-		InputStream inputStream = pluginManager.getPlugin("SalC1Dupe").getResource("plugin.yml");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-		FileConfiguration pluginYml = new YamlConfiguration();
-		try {
-			pluginYml.load(reader);
-			reader.close();
-			inputStream.close();
-		} catch (IOException | InvalidConfigurationException ignored) {
-		}
-		return pluginYml.getString("version");
 	}
 
 	public boolean getConfigBoolean(String path) {
