@@ -1,4 +1,4 @@
-# Surf 3.2.10
+# Surf 3.2.11
 # Contact me on QQ:2682173972 or Discord Dreeam#0851
 # For help with this plugin
 
@@ -12,7 +12,12 @@ IllegalBlockPlace:
   End_Portal_Frame: '&6&l[&b&lSurf&6&l]&6 &6This block is not allowed'
   Mob_Spawner: '&6&l[&b&lSurf&6&l]&6 &6This block is not allowed'
 #The maximum value of allowing enchants
-IllegalEnchants-Threshold: 5
+IllegalEnchants:
+  #Enabled: true
+  Threshold: 5
+
+RemoveSpawnEggs:
+    Enabled: true
 #AntiIllegal check toggles
 #Only enable ChunkLoad of you have a massive problem with illegals on your server
 Antiillegal:

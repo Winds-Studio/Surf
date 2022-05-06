@@ -90,7 +90,7 @@ public class ItemUtils {
     public boolean hasIllegalEnchants(ItemStack item) {
         Map<Enchantment, Integer> enchants = item.getEnchantments();
         for (int level : enchants.values()) {
-            return level > plugin.getConfig().getInt("IllegalEnchants-Threshold");
+            return level > plugin.getConfig().getInt("IllegalEnchants.Threshold");
         }
         return false;
     }
