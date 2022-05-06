@@ -16,6 +16,14 @@ public class SecondPassEvent extends Event {
 		plugin = main;
 	}
 
+	public static HandlerList getHandlerList() {
+		return handlers;
+	}
+
+	public Logger getLogger() {
+		return logger;
+	}
+
 	public Main getPlugin() {
 		return plugin;
 	}
