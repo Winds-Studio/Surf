@@ -16,8 +16,6 @@ IllegalEnchants:
   #Enabled: true
   Threshold: 5
 
-RemoveSpawnEggs:
-    Enabled: true
 #AntiIllegal check toggles
 #Only enable ChunkLoad of you have a massive problem with illegals on your server
 Antiillegal:

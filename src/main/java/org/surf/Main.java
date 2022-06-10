@@ -3,8 +3,8 @@ package org.surf;
 import io.papermc.lib.PaperLib;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SpawnEggMeta;
+//import org.bukkit.inventory.ItemStack;
+//import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.surf.command.CommandHandler;
 import org.surf.command.NotInPluginYMLException;
 import org.surf.listeners.BlockPlace;
@@ -95,14 +95,6 @@ public class Main extends JavaPlugin {
 
 	public CommandHandler getCommandHandler() {
 		return commandHandler;
-	}
-	public void revert(ItemStack item) {
-		if (item != null) {
-
-			if (getConfig().getBoolean("RemoveSpawnEggs.Enabled") && item.getItemMeta() instanceof SpawnEggMeta)
-				item.subtract(item.getAmount());
-
-		}
 	}
 
 }
