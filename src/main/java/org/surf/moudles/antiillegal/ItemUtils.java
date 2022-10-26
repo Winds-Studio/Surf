@@ -1,4 +1,4 @@
-package org.surf.listeners.antiillegal;
+package org.surf.moudles.antiillegal;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

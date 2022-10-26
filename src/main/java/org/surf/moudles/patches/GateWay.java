@@ -1,4 +1,4 @@
-package org.surf.listeners.patches;
+package org.surf.moudles.patches;
 
 import com.destroystokyo.paper.event.entity.EntityTeleportEndGatewayEvent;
 import org.bukkit.ChatColor;
@@ -99,7 +99,7 @@ public class GateWay implements Listener {
 							String worldString = event.getVehicle().getWorld().getName();
 							event.getVehicle().eject();
 							event.getVehicle().remove();
-							Utils.kickPlayer(player, "[&b&lSurf&r]&6 Sorry that exploit got patched ):");
+							Utils.kickPlayer(player, "[&b&lSurf&r]&6 Sorry that exploit got patched :(");
 							System.out.println(ChatColor.translateAlternateColorCodes('&', "&1Prevented&r&e " + player.getName() + "&r&1 at &r&e" + x + " " + y + " " + z + " &r&1in world&e " + worldString + " &r&1from crashing the server"));
 						}
 					}

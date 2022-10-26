@@ -1,4 +1,4 @@
-package org.surf.listeners;
+package org.surf.moudles;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

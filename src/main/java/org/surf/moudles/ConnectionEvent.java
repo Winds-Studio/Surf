@@ -1,4 +1,4 @@
-package org.surf.listeners;
+package org.surf.moudles;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -7,20 +7,26 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.surf.Main;
 
-public class JoinEvent implements Listener {
+public class ConnectionEvent implements Listener {
 	Main plugin;
 
-	public JoinEvent(Main plugin) {
+	public ConnectionEvent(Main plugin) {
 		this.plugin = plugin;
 	}
 
 	@EventHandler
-	public void onJoin(PlayerJoinEvent e) {
+	public void onJoin(PlayerJoinEvent event) {
+		event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Connection.Player-Join-Message").replace("%player%", event.getPlayer().getDisplayName())));
+	}
+
+	@EventHandler
+	public void onLeave(PlayerQuitEvent event) {
 		try {
-			Player player = e.getPlayer();
+			Player player = event.getPlayer();
 			if (player.getActivePotionEffects() != null) {
 				for (PotionEffect effects : player.getActivePotionEffects()) {
 					if (effects.getAmplifier() > 5) {
@@ -35,6 +41,7 @@ public class JoinEvent implements Listener {
 							plugin.getConfig().getString("FirstJoin.Message").replace("%Player%", player.getName())));
 				}
 			}
+			event.setQuitMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Connection.Player-Leave-Message").replace("%player%", event.getPlayer().getDisplayName())));
 		} catch (Error | Exception throwable) {
 		}
 	}

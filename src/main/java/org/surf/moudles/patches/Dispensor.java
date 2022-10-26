@@ -1,4 +1,4 @@
-package org.surf.listeners.patches;
+package org.surf.moudles.patches;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;

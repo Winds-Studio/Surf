@@ -1,4 +1,4 @@
-# Surf 3.2.12
+# Surf 3.3.0
 # Contact me on QQ:2682173972 or Discord Dreeam#0851
 # For help with this plugin
 
@@ -7,10 +7,7 @@
 #Messages to send the player when they try to place illegal blocks
 IllegalBlockPlace:
   Enabled: true
-  Bedrock: '&6&l[&b&lSurf&6&l]&6 &6This block is not allowed'
-  Barrier: '&6&l[&b&lSurf&6&l]&6 &6This block is not allowed'
-  End_Portal_Frame: '&6&l[&b&lSurf&6&l]&6 &6This block is not allowed'
-  Mob_Spawner: '&6&l[&b&lSurf&6&l]&6 &6This block is not allowed'
+  Message: '&6&l[&b&lSurf&6&l]&6 &6This block is not allowed'
 #The maximum value of allowing enchants
 IllegalEnchants:
   #Enabled: true
@@ -36,13 +33,17 @@ Antiillegal:
     - "COMMAND_BLOCK_MINECART"
     - "CHAIN_COMMAND_BLOCK"
     - "COMMAND_BLOCK"
-    - "END_PORTAL_FRAME"
     - "KNOWLEDGE_BOOK"
     - "SPAWNER"
     - "END_PORTAL"
+    - "END_PORTAL_FRAME"
+    - "END_GATEWAY"
     - "NETHER_PORTAL"
     - "STRUCTURE_BLOCK"
     - "STRUCTURE_VOID"
+    - "JIGSAW"
+    - "LIGHT"
+    -
 IllegalDamage:
   Message: "&6&l[&b&lSurf&6&l]&6&6 You can not use this illegal item"
 IllegalPotion:

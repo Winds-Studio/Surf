@@ -1,10 +1,11 @@
 name: Surf
-version: 3.2.12
+version: 3.3.0
 main: org.surf.Main
 authors: [ 254n_m, Leeewith3Es, Dreeam ]
 description:  ${project.description}
 website: https://breeze.asia
 api-version: 1.19
+depend: [ NBTAPI ]
 commands:
   surf:
     description: The main command of Surf.

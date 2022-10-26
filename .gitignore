@@ -11,3 +11,4 @@ out/
 
 # Common working directory
 run/
+/target/

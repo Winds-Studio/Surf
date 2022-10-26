@@ -1,4 +1,4 @@
-package org.surf.listeners.antilag;
+package org.surf.moudles.antilag;
 
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
