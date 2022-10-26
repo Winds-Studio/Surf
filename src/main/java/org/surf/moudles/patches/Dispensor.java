@@ -18,10 +18,7 @@ public class Dispensor implements Listener {
         String bVersion = Bukkit.getVersion();
 
         if (bVersion.contains("1.12")) {
-            if (event.getBlock().getY() > 254) {
-                event.setCancelled(true);
-            }
-            if (event.getBlock().getY() < 2) {
+            if (event.getBlock().getY() > 254 || event.getBlock().getY() < 2) {
                 event.setCancelled(true);
             }
         }
