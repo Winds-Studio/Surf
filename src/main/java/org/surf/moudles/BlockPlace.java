@@ -22,6 +22,19 @@ public class BlockPlace implements Listener {
 			if (plugin.getConfigBoolean("IllegalBlockPlace.Enabled")) {
 				switch (event.getBlock().getType()) {
 					case BEDROCK:
+					case BARRIER:
+					case SPAWNER:
+					case REPEATING_COMMAND_BLOCK:
+					case COMMAND_BLOCK_MINECART:
+					case CHAIN_COMMAND_BLOCK:
+					case COMMAND_BLOCK:
+					case END_PORTAL:
+					case END_GATEWAY:
+					case NETHER_PORTAL:
+					case STRUCTURE_BLOCK:
+					case STRUCTURE_VOID:
+					case JIGSAW:
+					case LIGHT:
 						event.setCancelled(true);
 						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Message"));
 						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
@@ -34,71 +47,6 @@ public class BlockPlace implements Listener {
 								event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
 							}
 						}
-						break;
-					case BARRIER:
-						event.setCancelled(true);
-						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Message"));
-						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
-						break;
-					case SPAWNER:
-						event.setCancelled(true);
-						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Message"));
-						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
-						break;
-					case REPEATING_COMMAND_BLOCK:
-						event.setCancelled(true);
-						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Message"));
-						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
-						break;
-					case COMMAND_BLOCK_MINECART:
-						event.setCancelled(true);
-						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Message"));
-						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
-						break;
-					case CHAIN_COMMAND_BLOCK:
-						event.setCancelled(true);
-						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Message"));
-						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
-						break;
-					case COMMAND_BLOCK:
-						event.setCancelled(true);
-						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Message"));
-						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
-						break;
-					case END_PORTAL:
-						event.setCancelled(true);
-						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Message"));
-						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
-						break;
-					case END_GATEWAY:
-						event.setCancelled(true);
-						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Message"));
-						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
-						break;
-					case NETHER_PORTAL:
-						event.setCancelled(true);
-						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Message"));
-						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
-						break;
-					case STRUCTURE_BLOCK:
-						event.setCancelled(true);
-						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Message"));
-						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
-						break;
-					case STRUCTURE_VOID:
-						event.setCancelled(true);
-						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Message"));
-						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
-						break;
-					case JIGSAW:
-						event.setCancelled(true);
-						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Message"));
-						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
-						break;
-					case LIGHT:
-						event.setCancelled(true);
-						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Message"));
-						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
 						break;
 				}
 			}
