@@ -80,27 +80,9 @@ public class CleanIllegal implements Listener {
 								}
 
 							}
-							if (plugin.getItemUtils().isIllegal(item)) {
+							if (plugin.getItemUtils().isIllegal(item) || plugin.getItemUtils().hasIllegalNBT(item) || plugin.getItemUtils().hasIllegalAttributes(item) || plugin.getItemUtils().hasIllegalEnchants(item) || item.hasItemMeta()) {
 								inv.remove(item);
 								event.setCancelled(true);
-							}
-							if (plugin.getItemUtils().hasIllegalNBT(item)) {
-								inv.remove(item);
-								event.setCancelled(true);
-							}
-							if (plugin.getItemUtils().hasIllegalAttributes(item)) {
-								inv.remove(item);
-								event.setCancelled(true);
-							}
-							if (plugin.getItemUtils().hasIllegalEnchants(item)) {
-								inv.remove(item);
-								event.setCancelled(true);
-							}
-							if (item.hasItemMeta()) {
-								ItemMeta meta = item.getItemMeta();
-								if (plugin.getItemUtils().isEnchantedBlock(item)) {
-									event.setCancelled(true);
-								}
 							}
 						}
 					}
