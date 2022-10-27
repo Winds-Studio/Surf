@@ -6,7 +6,7 @@
 
     <groupId>org.surf</groupId>
     <artifactId>Surf</artifactId>
-    <version>3.3.0</version>
+    <version>3.3.2</version>
     <packaging>jar</packaging>
 
     <name>Surf</name>
@@ -82,9 +82,9 @@
     </repositories>
     <dependencies>
         <dependency>
-            <groupId>io.papermc.paper</groupId>
+            <groupId>com.destroystokyo.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.19-R0.1-SNAPSHOT</version>
+            <version>1.12.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

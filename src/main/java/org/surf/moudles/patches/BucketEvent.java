@@ -28,19 +28,19 @@ public class BucketEvent implements Listener {
 			int x = event.getBlockClicked().getLocation().getBlockX();
 			int z = event.getBlockClicked().getLocation().getBlockZ();
 			int y = event.getBlockClicked().getLocation().getBlockY();
-			if (event.getBlockClicked().getType() == Material.END_PORTAL_FRAME
+			if (event.getBlockClicked().getType() == Material.ENDER_PORTAL_FRAME
 					|| event.getBlockClicked().getLocation().getWorld().getBlockAt(x, yNeg, z)
-					.getType() == Material.END_PORTAL
+					.getType() == Material.ENDER_PORTAL
 					|| event.getBlockClicked().getLocation().getWorld().getBlockAt(x, yPos, z)
-					.getType() == Material.END_PORTAL
+					.getType() == Material.ENDER_PORTAL
 					|| event.getBlockClicked().getLocation().getWorld().getBlockAt(x, y, zNeg)
-					.getType() == Material.END_PORTAL
+					.getType() == Material.ENDER_PORTAL
 					|| event.getBlockClicked().getLocation().getWorld().getBlockAt(xNeg, y, z)
-					.getType() == Material.END_PORTAL
+					.getType() == Material.ENDER_PORTAL
 					|| event.getBlockClicked().getLocation().getWorld().getBlockAt(x, y, zPos)
-					.getType() == Material.END_PORTAL
+					.getType() == Material.ENDER_PORTAL
 					|| event.getBlockClicked().getLocation().getWorld().getBlockAt(xPos, y, z)
-					.getType() == Material.END_PORTAL) {
+					.getType() == Material.ENDER_PORTAL) {
 				event.setCancelled(true);
 			}
 		} catch (Error | Exception throwable) {
@@ -59,14 +59,14 @@ public class BucketEvent implements Listener {
 			int x = event.getBlock().getLocation().getBlockX();
 			int z = event.getBlock().getLocation().getBlockZ();
 			int y = event.getBlock().getLocation().getBlockY();
-			if (event.getBlock().getType() == Material.END_PORTAL_FRAME
-					|| event.getBlock().getLocation().getWorld().getBlockAt(x, yNeg, z).getType() == Material.END_PORTAL
-					|| event.getBlock().getLocation().getWorld().getBlockAt(x, yPos, z).getType() == Material.END_PORTAL
-					|| event.getBlock().getLocation().getWorld().getBlockAt(x, y, zNeg).getType() == Material.END_PORTAL
-					|| event.getBlock().getLocation().getWorld().getBlockAt(xNeg, y, z).getType() == Material.END_PORTAL
-					|| event.getBlock().getLocation().getWorld().getBlockAt(x, y, zPos).getType() == Material.END_PORTAL
+			if (event.getBlock().getType() == Material.ENDER_PORTAL_FRAME
+					|| event.getBlock().getLocation().getWorld().getBlockAt(x, yNeg, z).getType() == Material.ENDER_PORTAL
+					|| event.getBlock().getLocation().getWorld().getBlockAt(x, yPos, z).getType() == Material.ENDER_PORTAL
+					|| event.getBlock().getLocation().getWorld().getBlockAt(x, y, zNeg).getType() == Material.ENDER_PORTAL
+					|| event.getBlock().getLocation().getWorld().getBlockAt(xNeg, y, z).getType() == Material.ENDER_PORTAL
+					|| event.getBlock().getLocation().getWorld().getBlockAt(x, y, zPos).getType() == Material.ENDER_PORTAL
 					|| event.getBlock().getLocation().getWorld().getBlockAt(xPos, y, z)
-					.getType() == Material.END_PORTAL) {
+					.getType() == Material.ENDER_PORTAL) {
 				event.setCancelled(true);
 			}
 		} catch (Error | Exception throwable) {

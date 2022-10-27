@@ -23,21 +23,21 @@ public class ItemUtils {
 
     public boolean isArmor(ItemStack item) {
         List<Material> armor = Arrays.asList(Material.LEATHER_BOOTS, Material.CHAINMAIL_BOOTS, Material.IRON_BOOTS,
-                Material.DIAMOND_BOOTS, Material.GOLDEN_BOOTS, Material.LEATHER_LEGGINGS, Material.CHAINMAIL_LEGGINGS,
-                Material.IRON_LEGGINGS, Material.GOLDEN_LEGGINGS, Material.DIAMOND_LEGGINGS,
-                Material.CHAINMAIL_CHESTPLATE, Material.LEATHER_CHESTPLATE, Material.GOLDEN_CHESTPLATE,
+                Material.DIAMOND_BOOTS, Material.GOLD_BOOTS, Material.LEATHER_LEGGINGS, Material.CHAINMAIL_LEGGINGS,
+                Material.IRON_LEGGINGS, Material.GOLD_LEGGINGS, Material.DIAMOND_LEGGINGS,
+                Material.CHAINMAIL_CHESTPLATE, Material.LEATHER_CHESTPLATE, Material.GOLD_CHESTPLATE,
                 Material.DIAMOND_CHESTPLATE, Material.IRON_CHESTPLATE, Material.LEATHER_HELMET,
-                Material.CHAINMAIL_HELMET, Material.DIAMOND_HELMET, Material.IRON_HELMET, Material.GOLDEN_HELMET,
+                Material.CHAINMAIL_HELMET, Material.DIAMOND_HELMET, Material.IRON_HELMET, Material.GOLD_HELMET,
                 Material.ELYTRA);
         return armor.contains(item.getType());
     }
 
     public boolean isTool(ItemStack item) {
         List<Material> tools = Arrays.asList(Material.DIAMOND_AXE, Material.DIAMOND_PICKAXE, Material.DIAMOND_SWORD,
-                Material.DIAMOND_HOE, Material.DIAMOND_SHOVEL, Material.IRON_AXE, Material.IRON_HOE,
-                Material.IRON_PICKAXE, Material.IRON_SHOVEL, Material.IRON_SWORD, Material.GOLDEN_AXE, Material.GOLDEN_HOE,
-                Material.GOLDEN_PICKAXE, Material.GOLDEN_SWORD, Material.WOODEN_AXE, Material.WOODEN_HOE, Material.WOODEN_PICKAXE,
-                Material.WOODEN_SWORD, Material.CARROT_ON_A_STICK, Material.SHEARS, Material.FISHING_ROD, Material.BOW,
+                Material.DIAMOND_HOE, Material.DIAMOND_SPADE, Material.IRON_AXE, Material.IRON_HOE,
+                Material.IRON_PICKAXE, Material.IRON_SPADE, Material.IRON_SWORD, Material.GOLD_AXE, Material.GOLD_HOE,
+                Material.GOLD_PICKAXE, Material.GOLD_SWORD, Material.WOOD_AXE, Material.WOOD_HOE, Material.WOOD_PICKAXE,
+                Material.WOOD_SWORD, Material.CARROT_STICK, Material.SHEARS, Material.FISHING_ROD, Material.BOW,
                 Material.FLINT_AND_STEEL);
         return tools.contains(item.getType());
     }
@@ -67,13 +67,13 @@ public class ItemUtils {
         return false;
     }
 
-    public boolean hasIllegalAttributes(ItemStack item) {
-        if (item.hasItemMeta()) {
-            ItemMeta meta = item.getItemMeta();
-            return meta.hasAttributeModifiers();
-        }
-        return false;
-    }
+//    public boolean hasIllegalAttributes(ItemStack item) {
+//        if (item.hasItemMeta()) {
+//            ItemMeta meta = item.getItemMeta();
+//            return meta.hasAttributeModifiers();
+//        }
+//        return false;
+//    }
 
     //TODO
 //    public boolean hasIllegalAttributes(ItemStack item) {
@@ -135,24 +135,24 @@ public class ItemUtils {
                             itemStack = item;
 
                         }
-                        if (utils.hasIllegalAttributes(item)) {
-                            inventory.remove(item);
-                            //TODO
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ATTACK_KNOCKBACK);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ATTACK_SPEED);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_FLYING_SPEED);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_FOLLOW_RANGE);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_LUCK);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_MAX_HEALTH);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.HORSE_JUMP_STRENGTH);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS);
-                            illegalsFound = true;
-                            itemStack = item;
-                        }
+//                        if (utils.hasIllegalAttributes(item)) {
+//                            inventory.remove(item);
+//                            //TODO
+////                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS);
+////                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE);
+////                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ATTACK_KNOCKBACK);
+////                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ATTACK_SPEED);
+////                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_FLYING_SPEED);
+////                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_FOLLOW_RANGE);
+////                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE);
+////                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_LUCK);
+////                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_MAX_HEALTH);
+////                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED);
+////                            item.getItemMeta().removeAttributeModifier(Attribute.HORSE_JUMP_STRENGTH);
+////                            item.getItemMeta().removeAttributeModifier(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS);
+//                            illegalsFound = true;
+//                            itemStack = item;
+//                        }
                         if (utils.hasIllegalEnchants(item)) {
                             for (Entry<Enchantment, Integer> enchantmentIntegerEntry : item.getEnchantments().entrySet()) {
                                 item.removeEnchantment(enchantmentIntegerEntry.getKey());
@@ -176,7 +176,7 @@ public class ItemUtils {
                 }
             }
             if (illegalsFound) {
-                Utils.println(Utils.getPrefix() + "&6Deleted illegals " + itemStack.getType() + " " + itemStack.getI18NDisplayName() + " " + itemStack.getEnchantments() + " " + itemMeta.getAttributeModifiers());
+                Utils.println(Utils.getPrefix() + "&6Deleted illegals " + itemStack.getType() + " " + itemStack.getI18NDisplayName() + " " + itemStack.getEnchantments());
             }
         } catch (Error | Exception throwable) {
 

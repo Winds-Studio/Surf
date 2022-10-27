@@ -88,10 +88,10 @@ public class CleanIllegal implements Listener {
 								inv.remove(item);
 								event.setCancelled(true);
 							}
-							if (plugin.getItemUtils().hasIllegalAttributes(item)) {
-								inv.remove(item);
-								event.setCancelled(true);
-							}
+//							if (plugin.getItemUtils().hasIllegalAttributes(item)) {
+//								inv.remove(item);
+//								event.setCancelled(true);
+//							}
 							if (plugin.getItemUtils().hasIllegalEnchants(item)) {
 								inv.remove(item);
 								event.setCancelled(true);
@@ -146,7 +146,7 @@ public class CleanIllegal implements Listener {
 			if (plugin.getConfig().getBoolean("Antiillegal.ItemPickup-Enabled")) {
 				ItemStack item = event.getItem().getItemStack();
 				if (plugin.getItemUtils().isEnchantedBlock(item) || plugin.getItemUtils().hasIllegalNBT(item) || plugin.getItemUtils().hasIllegalEnchants(item)
-						|| plugin.getItemUtils().isIllegal(item) || plugin.getItemUtils().hasIllegalAttributes(item)) {
+						|| plugin.getItemUtils().isIllegal(item)) {
 					event.setCancelled(true);
 					event.getItem().remove();
 				}
@@ -175,7 +175,7 @@ public class CleanIllegal implements Listener {
 		for (ItemStack itemStack : event.getPlayer().getInventory().getContents()) {
 			if (plugin.getConfigBoolean("Antiillegal.Delete-Stacked-Totem")) {
 				if (itemStack != null) {
-					if (itemStack.getType() == Material.TOTEM_OF_UNDYING) {
+					if (itemStack.getType() == Material.TOTEM) {
 						if (itemStack.getAmount() > itemStack.getMaxStackSize()) {
 							itemStack.setAmount(itemStack.getMaxStackSize());
 						}
@@ -196,7 +196,7 @@ public class CleanIllegal implements Listener {
 			for (ItemStack itemStack : event.getPlayer().getInventory().getContents()) {
 				if (plugin.getConfigBoolean("Antiillegal.Delete-Stacked-Totem")) {
 					if (itemStack != null) {
-						if (itemStack.getType() == Material.TOTEM_OF_UNDYING) {
+						if (itemStack.getType() == Material.TOTEM) {
 							if (itemStack.getAmount() > itemStack.getMaxStackSize()) {
 								event.setCancelled(true);
 							}
