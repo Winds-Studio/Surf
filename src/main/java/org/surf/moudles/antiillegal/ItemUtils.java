@@ -21,27 +21,6 @@ public class ItemUtils {
         this.plugin = plugin;
     }
 
-    public boolean isArmor(ItemStack item) {
-        List<Material> armor = Arrays.asList(Material.LEATHER_BOOTS, Material.CHAINMAIL_BOOTS, Material.IRON_BOOTS,
-                Material.DIAMOND_BOOTS, Material.GOLDEN_BOOTS, Material.LEATHER_LEGGINGS, Material.CHAINMAIL_LEGGINGS,
-                Material.IRON_LEGGINGS, Material.GOLDEN_LEGGINGS, Material.DIAMOND_LEGGINGS,
-                Material.CHAINMAIL_CHESTPLATE, Material.LEATHER_CHESTPLATE, Material.GOLDEN_CHESTPLATE,
-                Material.DIAMOND_CHESTPLATE, Material.IRON_CHESTPLATE, Material.LEATHER_HELMET,
-                Material.CHAINMAIL_HELMET, Material.DIAMOND_HELMET, Material.IRON_HELMET, Material.GOLDEN_HELMET,
-                Material.ELYTRA);
-        return armor.contains(item.getType());
-    }
-
-    public boolean isTool(ItemStack item) {
-        List<Material> tools = Arrays.asList(Material.DIAMOND_AXE, Material.DIAMOND_PICKAXE, Material.DIAMOND_SWORD,
-                Material.DIAMOND_HOE, Material.DIAMOND_SHOVEL, Material.IRON_AXE, Material.IRON_HOE,
-                Material.IRON_PICKAXE, Material.IRON_SHOVEL, Material.IRON_SWORD, Material.GOLDEN_AXE, Material.GOLDEN_HOE,
-                Material.GOLDEN_PICKAXE, Material.GOLDEN_SWORD, Material.WOODEN_AXE, Material.WOODEN_HOE, Material.WOODEN_PICKAXE,
-                Material.WOODEN_SWORD, Material.CARROT_ON_A_STICK, Material.SHEARS, Material.FISHING_ROD, Material.BOW,
-                Material.FLINT_AND_STEEL);
-        return tools.contains(item.getType());
-    }
-
     public boolean isIllegal(ItemStack item) {
         List<String> items = plugin.getConfig().getStringList("Antiillegal.Illegal-Items-List");
         List<Material> materials = new ArrayList<>();
@@ -57,12 +36,10 @@ public class ItemUtils {
         return materials.contains(item.getType());
     }
 
-    public boolean hasIllegalNBT(ItemStack item) {
+    public boolean hasIllegalItemFlag(ItemStack item) {
         if (item.hasItemMeta()) {
             ItemMeta meta = item.getItemMeta();
-            return meta.hasItemFlag(ItemFlag.HIDE_ATTRIBUTES)  || meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS)
-                    || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS) || meta.hasItemFlag(ItemFlag.HIDE_UNBREAKABLE)
-                    || meta.isUnbreakable();
+            return meta.hasItemFlag(ItemFlag.HIDE_ATTRIBUTES) || meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_DYE) || meta.hasItemFlag(ItemFlag.HIDE_PLACED_ON) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS) || meta.hasItemFlag(ItemFlag.HIDE_UNBREAKABLE) || meta.hasItemFlag(ItemFlag.HIDE_DESTROYS) || meta.isUnbreakable();
         }
         return false;
     }
@@ -113,7 +90,6 @@ public class ItemUtils {
             if (inventory.getContents() != null) {
                 for (ItemStack item : inventory.getContents()) {
                     if (item != null) {
-                        if (utils.isArmor(item) || utils.isTool(item)) {
                             if (item.getDurability() > item.getType().getMaxDurability()) {
                                 item.setDurability(item.getType().getMaxDurability());
                                 itemStack = item;
@@ -123,13 +99,12 @@ public class ItemUtils {
                                 itemStack = item;
                             }
 
-                        }
                         if (utils.isIllegal(item)) {
                             inventory.remove(item);
                             illegalsFound = true;
                             itemStack = item;
                         }
-                        if (utils.hasIllegalNBT(item)) {
+                        if (utils.hasIllegalItemFlag(item)) {
                             inventory.remove(item);
                             illegalsFound = true;
                             itemStack = item;
@@ -161,7 +136,6 @@ public class ItemUtils {
                             }
                         }
                         if (item.hasItemMeta()) {
-                            ItemMeta meta = item.getItemMeta();
                             if (utils.isEnchantedBlock(item)) {
                                 Iterator<Entry<Enchantment, Integer>> enchants = item.getEnchantments().entrySet()
                                         .iterator();

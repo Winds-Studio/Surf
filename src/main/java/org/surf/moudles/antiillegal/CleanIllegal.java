@@ -71,7 +71,6 @@ public class CleanIllegal implements Listener {
 				if (inv.getContents() != null) {
 					for (ItemStack item : inv.getStorageContents()) {
 						if (item != null) {
-							if (plugin.getItemUtils().isArmor(item) || plugin.getItemUtils().isTool(item)) {
 								if (item.getDurability() > item.getType().getMaxDurability()) {
 									item.setDurability(item.getType().getMaxDurability());
 								}
@@ -79,8 +78,7 @@ public class CleanIllegal implements Listener {
 									item.setDurability((short) 1);
 								}
 
-							}
-							if (plugin.getItemUtils().isIllegal(item) || plugin.getItemUtils().hasIllegalNBT(item) || plugin.getItemUtils().hasIllegalAttributes(item) || plugin.getItemUtils().hasIllegalEnchants(item) || item.hasItemMeta()) {
+							if (plugin.getItemUtils().isIllegal(item) || plugin.getItemUtils().hasIllegalItemFlag(item) || plugin.getItemUtils().hasIllegalAttributes(item) || plugin.getItemUtils().hasIllegalEnchants(item) || item.hasItemMeta()) {
 								inv.remove(item);
 								event.setCancelled(true);
 							}
@@ -127,7 +125,7 @@ public class CleanIllegal implements Listener {
 		try {
 			if (plugin.getConfig().getBoolean("Antiillegal.ItemPickup-Enabled")) {
 				ItemStack item = event.getItem().getItemStack();
-				if (plugin.getItemUtils().isEnchantedBlock(item) || plugin.getItemUtils().hasIllegalNBT(item) || plugin.getItemUtils().hasIllegalEnchants(item)
+				if (plugin.getItemUtils().isEnchantedBlock(item) || plugin.getItemUtils().hasIllegalItemFlag(item) || plugin.getItemUtils().hasIllegalEnchants(item)
 						|| plugin.getItemUtils().isIllegal(item) || plugin.getItemUtils().hasIllegalAttributes(item)) {
 					event.setCancelled(true);
 					event.getItem().remove();
