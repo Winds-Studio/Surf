@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.surf.Main;
+import org.surf.util.Utils;
 
 public class MoveEvent implements Listener {
 	Main plugin;
@@ -24,30 +25,23 @@ public class MoveEvent implements Listener {
 			int z = player.getLocation().getBlockZ();
 			Location bottom = new Location(player.getWorld(), z, 5, x);
 			Location top = new Location(player.getWorld(), z, 125, x);
-			if (plugin.getConfig().getString("Nether.Enabled").equalsIgnoreCase("true")
-					&& !(player.hasPermission("surf.bypass.netherroof"))) {
-
+			if (plugin.getConfig().getBoolean("Nether.Enabled") && !(player.hasPermission("surf.bypass.netherroof"))) {
 				if (player.getWorld().getEnvironment() == Environment.NETHER
-						&& player.getLocation().getBlockY() > plugin.getConfig().getInt("Nether.Top-Layer")
-						&& !player.isOp()) {
+						&& player.getLocation().getBlockY() > plugin.getConfig().getInt("Nether.Top-Layer")) {
 
 					player.teleport(top);
-					player.sendMessage(ChatColor.translateAlternateColorCodes('&',
-							plugin.getConfig().getString("Nether.Top-message")));
-					if (plugin.getConfig().getString("Nether.top-bottom-do-damage").equalsIgnoreCase("true")) {
+					Utils.sendMessage(player, plugin.getConfig().getString("Nether.Top-message"));
+					if (plugin.getConfig().getBoolean("Nether.top-bottom-do-damage")) {
 						player.setHealth(0);
 					}
 				}
 				if (player.getWorld().getEnvironment() == Environment.NETHER
-						&& player.getLocation().getBlockY() < plugin.getConfig().getInt("Nether.Bottom-Layer")
-						&& !player.isOp()) {
+						&& player.getLocation().getBlockY() < plugin.getConfig().getInt("Nether.Bottom-Layer")) {
 
 					player.teleport(bottom);
-					player.sendMessage(ChatColor.translateAlternateColorCodes('&',
-							plugin.getConfig().getString("Nether.Bottom-message")));
-					if (plugin.getConfig().getString("Nether.top-bottom-do-damage").equalsIgnoreCase("true")) {
-						player.damage(40);
-
+					Utils.sendMessage(player, plugin.getConfig().getString("Nether.Bottom-message"));
+					if (plugin.getConfig().getBoolean("Nether.top-bottom-do-damage")) {
+						player.setHealth(0);
 					}
 				}
 			}

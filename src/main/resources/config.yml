@@ -57,7 +57,7 @@ ChunkBan:
   Prevent-Message: '&6&l[&b&lSurf&6&l]&6 &6ChunkBan has been disabled'
   TileEntity-Max: 500
   Skull-Max: 100
-#Nether top and bottom layers
+#Prevent player go to Nether top or bottom layer
 Nether:
   Enabled: false
   Top-Layer: 127
