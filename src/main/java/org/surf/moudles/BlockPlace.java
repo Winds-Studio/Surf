@@ -35,14 +35,9 @@ public class BlockPlace implements Listener {
 					case STRUCTURE_VOID:
 					case JIGSAW:
 					case LIGHT:
+					case END_PORTAL_FRAME:
 						event.setCancelled(true);
 						Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Message"));
-						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
-						break;
-					case END_PORTAL_FRAME:
-								event.setCancelled(true);
-								Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Message"));
-								event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
 						break;
 				}
 			}
