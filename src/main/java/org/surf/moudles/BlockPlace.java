@@ -40,13 +40,9 @@ public class BlockPlace implements Listener {
 						event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
 						break;
 					case END_PORTAL_FRAME:
-						if (!(player.getInventory().getItemInMainHand().getType() == Material.ENDER_EYE)) {
-							if (!(player.getInventory().getItemInOffHand().getType() == Material.ENDER_EYE)) {
 								event.setCancelled(true);
 								Utils.sendMessage(player, plugin.getConfig().getString("IllegalBlockPlace.Message"));
 								event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
-							}
-						}
 						break;
 				}
 			}
