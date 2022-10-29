@@ -29,7 +29,7 @@ public class ConnectionEvent implements Listener {
 			Player player = event.getPlayer();
 			if (player.getActivePotionEffects() != null) {
 				for (PotionEffect effects : player.getActivePotionEffects()) {
-					if (effects.getAmplifier() > 5) {
+					if (effects.getAmplifier() > 5 && effects.getDuration() > 12000) {
 						player.removePotionEffect(effects.getType());
 					}
 				}
