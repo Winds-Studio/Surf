@@ -2,6 +2,7 @@
 # Contact me on QQ:2682173972 or Discord Dreeam#0851
 # For help with this plugin
 
+
 #Anti-illegal >>
 
 #Messages to send the player when they try to place illegal blocks
@@ -49,6 +50,7 @@ IllegalDamage:
 IllegalPotion:
   Message: "&6&l[&b&lSurf&6&l]&6&6 You can not use this illegal potion"
 
+
 #Patch >>
 
 #ChunkBan skull limit tile entity limit and prevent message
@@ -73,6 +75,10 @@ Minecart-per-chunk:
 #water / lava flowing disable tps this is useful on new servers with lots of block physics updates that cause lag
 #Set -1 to disable
 BlockPhysics-disable-tps: 15
+GateWay:
+  PreventCrashExploit: false
+  PreventEntityEnterPortal: false
+
 
 #Misc >>
 

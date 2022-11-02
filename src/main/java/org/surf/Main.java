@@ -42,7 +42,7 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new BlockPlace(this), this);
 		pluginManager.registerEvents(new Offhand(this), this);
 		if (PaperLib.isPaper()) {
-			pluginManager.registerEvents(new GateWay(), this);
+			pluginManager.registerEvents(new GateWay(this), this);
 		}
 		try {
 			commandHandler.registerCommands();
