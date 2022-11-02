@@ -35,7 +35,7 @@ public class ConnectionEvent implements Listener {
 				}
 
 			}
-			if (plugin.getConfigBoolean("FirstJoin.Enabled")) {
+			if (plugin.getConfig().getBoolean("FirstJoin.Enabled")) {
 				if (!player.hasPlayedBefore()) {
 					Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&',
 							plugin.getConfig().getString("FirstJoin.Message").replace("%Player%", player.getName())));

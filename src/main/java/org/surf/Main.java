@@ -72,10 +72,6 @@ public class Main extends JavaPlugin {
 	public void onDisable() {
 		getLogger().info("Surf disabled. By Dreeam");
 	}
-
-	public boolean getConfigBoolean(String path) {
-		return getConfig().getBoolean(path);
-	}
 	
 	public ItemUtils getItemUtils() {
 		return itemUtils;

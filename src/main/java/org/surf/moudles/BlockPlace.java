@@ -19,7 +19,7 @@ public class BlockPlace implements Listener {
 	public void onBlockPlace(BlockPlaceEvent event) {
 		try {
 			Player player = event.getPlayer();
-			if (plugin.getConfigBoolean("IllegalBlockPlace.Enabled")) {
+			if (plugin.getConfig().getBoolean("IllegalBlockPlace.Enabled")) {
 				switch (event.getBlock().getType()) {
 					case BEDROCK:
 					case BARRIER:

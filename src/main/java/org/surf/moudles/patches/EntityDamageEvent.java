@@ -27,7 +27,7 @@ public class EntityDamageEvent implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
-        if (plugin.getConfigBoolean("Antiillegal.Check-Illegal-Damage")) {
+        if (plugin.getConfig().getBoolean("Antiillegal.Check-Illegal-Damage")) {
             if (event.getDamager() instanceof Player) {
                 Player damager = (Player) event.getDamager();
                 if (event.getDamage() > 30) {

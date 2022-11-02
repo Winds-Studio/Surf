@@ -23,7 +23,7 @@ public class ChunkBan implements Listener {
 	@EventHandler
 	public void onPlace(BlockPlaceEvent event) {
 		try {
-			if (plugin.getConfigBoolean("ChunkBan.Enabled")) {
+			if (plugin.getConfig().getBoolean("ChunkBan.Enabled")) {
 				Block block = event.getBlock();
 				Player player = event.getPlayer();
 				int x = block.getLocation().getBlockX();
@@ -52,7 +52,7 @@ public class ChunkBan implements Listener {
 	@EventHandler
 	public void onSpawn(PlayerInteractEvent event) {
 		try {
-			if (plugin.getConfigBoolean("ChunkBan.Enabled")) {
+			if (plugin.getConfig().getBoolean("ChunkBan.Enabled")) {
 				if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getItem() != null) {
 					if (event.getItem().getType() == Material.ITEM_FRAME) {
 						int x = event.getPlayer().getLocation().getBlockX();

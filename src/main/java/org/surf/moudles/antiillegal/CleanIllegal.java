@@ -17,7 +17,6 @@ import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import org.surf.Main;
 
@@ -153,7 +152,7 @@ public class CleanIllegal implements Listener {
 	@AntiIllegal(EventName = "PlayerItemHeldEvent")
 	public void onScroll(PlayerItemHeldEvent event) {
 		for (ItemStack itemStack : event.getPlayer().getInventory().getContents()) {
-			if (plugin.getConfigBoolean("Antiillegal.Delete-Stacked-Totem")) {
+			if (plugin.getConfig().getBoolean("Antiillegal.Delete-Stacked-Totem")) {
 				if (itemStack != null) {
 					if (itemStack.getType() == Material.TOTEM_OF_UNDYING) {
 						if (itemStack.getAmount() > itemStack.getMaxStackSize()) {
@@ -174,7 +173,7 @@ public class CleanIllegal implements Listener {
 				plugin.getItemUtils().deleteIllegals(player.getInventory());
 			}
 			for (ItemStack itemStack : event.getPlayer().getInventory().getContents()) {
-				if (plugin.getConfigBoolean("Antiillegal.Delete-Stacked-Totem")) {
+				if (plugin.getConfig().getBoolean("Antiillegal.Delete-Stacked-Totem")) {
 					if (itemStack != null) {
 						if (itemStack.getType() == Material.TOTEM_OF_UNDYING) {
 							if (itemStack.getAmount() > itemStack.getMaxStackSize()) {
