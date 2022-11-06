@@ -3,8 +3,6 @@ package org.surf;
 import io.papermc.lib.PaperLib;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-//import org.bukkit.inventory.ItemStack;
-//import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.surf.command.CommandHandler;
 import org.surf.command.NotInPluginYMLException;
 import org.surf.moudles.BlockPlace;
@@ -12,6 +10,7 @@ import org.surf.moudles.*;
 import org.surf.moudles.antiillegal.*;
 import org.surf.moudles.antilag.*;
 import org.surf.moudles.patches.*;
+import org.surf.util.Metrics;
 import org.surf.util.SecondPassEvent;
 import org.surf.util.TenSecondPassEvent;
 import org.surf.util.Utils;
@@ -37,8 +36,9 @@ public class Main extends JavaPlugin {
 		new Utils(this);
 		saveDefaultConfig();
 		commandHandler = new CommandHandler(this);
+		int pluginId = 16810;
+		new Metrics(this, pluginId);
 		startTime = System.currentTimeMillis();
-		getLogger().info("Surf enabled. By Dreeam.");
 		pluginManager.registerEvents(new BlockPlace(this), this);
 		pluginManager.registerEvents(new Offhand(this), this);
 		if (PaperLib.isPaper()) {
@@ -67,6 +67,7 @@ public class Main extends JavaPlugin {
 		//Server specific events
 		service.scheduleAtFixedRate(() -> pluginManager.callEvent(secondPassEvent), 1, 1, TimeUnit.SECONDS);
 		service.scheduleAtFixedRate(() -> pluginManager.callEvent(tenSecondPassEvent), 1, 10, TimeUnit.SECONDS);
+		getLogger().info("Surf enabled. By Dreeam.");
 	}
 
 	public void onDisable() {
