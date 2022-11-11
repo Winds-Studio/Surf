@@ -31,11 +31,10 @@ public class Main extends JavaPlugin {
 
 	private final PluginManager pluginManager = getServer().getPluginManager();
 
-	SecondPassEvent secondPassEvent = new SecondPassEvent(getLogger(), this);
 	private final HashMap<String, Integer> entityIntegerHashMap = new HashMap<>();
 	ScheduledExecutorService service = Executors.newScheduledThreadPool(4);
 	ConnectionEvent ConnectionEvent = new ConnectionEvent(this);
-	TenSecondPassEvent tenSecondPassEvent = new TenSecondPassEvent(getLogger(), this);
+
 	public CommandHandler commandHandler;
 	public final Queue<String> discordAlertQueue = new LinkedList<>();
 
@@ -73,8 +72,8 @@ public class Main extends JavaPlugin {
 		//Alert system events
 		PaperLib.suggestPaper(this);
 		//Server specific events
-		service.scheduleAtFixedRate(() -> pluginManager.callEvent(secondPassEvent), 1, 1, TimeUnit.SECONDS);
-		service.scheduleAtFixedRate(() -> pluginManager.callEvent(tenSecondPassEvent), 1, 10, TimeUnit.SECONDS);
+		service.scheduleAtFixedRate(() -> pluginManager.callEvent(new SecondPassEvent()), 1, 1, TimeUnit.SECONDS);
+		service.scheduleAtFixedRate(() -> pluginManager.callEvent(new TenSecondPassEvent()), 1, 10, TimeUnit.SECONDS);
 		getLogger().info("Surf enabled. By Dreeam.");
 	}
 
