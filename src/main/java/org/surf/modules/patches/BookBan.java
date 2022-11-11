@@ -16,6 +16,8 @@ import java.util.regex.Pattern;
 
 public class BookBan implements Listener {
 
+	private final Pattern PATTERN = Pattern.compile("[^a-zA-Z0-9]");
+
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
 		try {
@@ -49,9 +51,9 @@ public class BookBan implements Listener {
 
 	private boolean isBanBook(BookMeta book) {
 		for (String bookPages : book.getPages()) {
-			Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
-			Matcher matcher = pattern.matcher(bookPages);
-			return matcher.find();
+			if (PATTERN.matcher(bookPages).find()) {
+				return true;
+			}
 		}
 		return false;
 	}
