@@ -18,7 +18,7 @@ import org.surf.Main;
 import org.surf.util.Utils;
 
 public class GateWay implements Listener {
-    Main plugin;
+    private final Main plugin;
 
     public GateWay(Main plugin) {
         this.plugin = plugin;

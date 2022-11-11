@@ -9,7 +9,7 @@ import org.surf.Main;
 import org.surf.util.Utils;
 
 public class BlockPlace implements Listener {
-	Main plugin;
+	private final Main plugin;
 
 	public BlockPlace(Main plugin) {
 		this.plugin = plugin;

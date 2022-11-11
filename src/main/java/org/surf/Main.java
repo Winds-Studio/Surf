@@ -21,24 +21,29 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class Main extends JavaPlugin {
-	public static long startTime;
+
+	public static Main instance;
+
+	public static Main getInstance() {
+		return instance;
+	}
+
 	private final PluginManager pluginManager = getServer().getPluginManager();
-	private final ItemUtils itemUtils = new ItemUtils(this);
-	SecondPassEvent secondPassEvent = new SecondPassEvent(getLogger(), this);
+
 	private final HashMap<String, Integer> entityIntegerHashMap = new HashMap<>();
 	ScheduledExecutorService service = Executors.newScheduledThreadPool(4);
-	ConnectionEvent ConnectionEvent = new ConnectionEvent(this);
-	TenSecondPassEvent tenSecondPassEvent = new TenSecondPassEvent(getLogger(), this);
+
 	public CommandHandler commandHandler;
 	public final Queue<String> discordAlertQueue = new LinkedList<>();
 
 	public void onEnable() {
-		new Utils(this);
+		instance = this;
+
 		saveDefaultConfig();
 		commandHandler = new CommandHandler(this);
 		int pluginId = 16810;
 		new Metrics(this, pluginId);
-		startTime = System.currentTimeMillis();
+
 		pluginManager.registerEvents(new BlockPlace(this), this);
 		pluginManager.registerEvents(new Offhand(this), this);
 		if (PaperLib.isPaper()) {
@@ -59,23 +64,19 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new MinecartLag(this), this);
 //		pluginManager.registerEvents(new ChestLagFix(this), this);
 		pluginManager.registerEvents(new Dispensor(this), this);
-		pluginManager.registerEvents(ConnectionEvent, this);
+		pluginManager.registerEvents(new ConnectionEvent(this), this);
 		// AntiIllegal events
 		pluginManager.registerEvents(new CleanIllegal(this), this);
 		//Alert system events
 		PaperLib.suggestPaper(this);
 		//Server specific events
-		service.scheduleAtFixedRate(() -> pluginManager.callEvent(secondPassEvent), 1, 1, TimeUnit.SECONDS);
-		service.scheduleAtFixedRate(() -> pluginManager.callEvent(tenSecondPassEvent), 1, 10, TimeUnit.SECONDS);
+		service.scheduleAtFixedRate(() -> pluginManager.callEvent(new SecondPassEvent()), 1, 1, TimeUnit.SECONDS);
+		service.scheduleAtFixedRate(() -> pluginManager.callEvent(new TenSecondPassEvent()), 1, 10, TimeUnit.SECONDS);
 		getLogger().info("Surf enabled. By Dreeam.");
 	}
 
 	public void onDisable() {
 		getLogger().info("Surf disabled. By Dreeam");
-	}
-	
-	public ItemUtils getItemUtils() {
-		return itemUtils;
 	}
 
 	public CommandHandler getCommandHandler() {
