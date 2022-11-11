@@ -32,7 +32,7 @@ public class MoveEvent implements Listener {
 					player.teleport(top);
 					Utils.sendMessage(player, plugin.getConfig().getString("Nether.Top-message"));
 					if (plugin.getConfig().getBoolean("Nether.top-bottom-do-damage")) {
-						player.setHealth(0);
+						player.damage(20);
 					}
 				}
 				if (player.getWorld().getEnvironment() == Environment.NETHER
@@ -41,7 +41,7 @@ public class MoveEvent implements Listener {
 					player.teleport(bottom);
 					Utils.sendMessage(player, plugin.getConfig().getString("Nether.Bottom-message"));
 					if (plugin.getConfig().getBoolean("Nether.top-bottom-do-damage")) {
-						player.setHealth(0);
+						player.damage(20);
 					}
 				}
 			}
