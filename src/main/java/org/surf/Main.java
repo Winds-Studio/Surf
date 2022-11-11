@@ -30,7 +30,7 @@ public class Main extends JavaPlugin {
 	}
 
 	private final PluginManager pluginManager = getServer().getPluginManager();
-	private final ItemUtils itemUtils = new ItemUtils(this);
+
 	SecondPassEvent secondPassEvent = new SecondPassEvent(getLogger(), this);
 	private final HashMap<String, Integer> entityIntegerHashMap = new HashMap<>();
 	ScheduledExecutorService service = Executors.newScheduledThreadPool(4);
@@ -80,10 +80,6 @@ public class Main extends JavaPlugin {
 
 	public void onDisable() {
 		getLogger().info("Surf disabled. By Dreeam");
-	}
-	
-	public ItemUtils getItemUtils() {
-		return itemUtils;
 	}
 
 	public CommandHandler getCommandHandler() {

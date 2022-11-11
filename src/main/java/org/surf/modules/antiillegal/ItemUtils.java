@@ -15,13 +15,9 @@ import java.util.Map.Entry;
 import java.util.logging.Level;
 
 public class ItemUtils {
-    Main plugin;
+    private final static Main plugin = Main.getInstance();
 
-    public ItemUtils(Main plugin) {
-        this.plugin = plugin;
-    }
-
-    public boolean isIllegal(ItemStack item) {
+    public static boolean isIllegal(ItemStack item) {
         List<String> items = plugin.getConfig().getStringList("Antiillegal.Illegal-Items-List");
         List<Material> materials = new ArrayList<>();
         List<Material> knownMaterials = Arrays.asList(Material.values());
@@ -36,7 +32,7 @@ public class ItemUtils {
         return materials.contains(item.getType());
     }
 
-    public boolean hasIllegalItemFlag(ItemStack item) {
+    public static boolean hasIllegalItemFlag(ItemStack item) {
         if (item.hasItemMeta()) {
             ItemMeta meta = item.getItemMeta();
             return meta.hasItemFlag(ItemFlag.HIDE_ATTRIBUTES) || meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_DYE) || meta.hasItemFlag(ItemFlag.HIDE_PLACED_ON) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS) || meta.hasItemFlag(ItemFlag.HIDE_UNBREAKABLE) || meta.hasItemFlag(ItemFlag.HIDE_DESTROYS) || meta.isUnbreakable();
@@ -44,7 +40,7 @@ public class ItemUtils {
         return false;
     }
 
-    public boolean hasIllegalAttributes(ItemStack item) {
+    public static boolean hasIllegalAttributes(ItemStack item) {
         if (item.hasItemMeta()) {
             ItemMeta meta = item.getItemMeta();
             return meta.hasAttributeModifiers();
@@ -64,7 +60,7 @@ public class ItemUtils {
 //        return false;
 //    }
 
-    public boolean hasIllegalEnchants(ItemStack item) {
+    public static boolean hasIllegalEnchants(ItemStack item) {
         Map<Enchantment, Integer> enchants = item.getEnchantments();
         for (int level : enchants.values()) {
             return level > plugin.getConfig().getInt("IllegalEnchants.Threshold");
@@ -72,7 +68,7 @@ public class ItemUtils {
         return false;
     }
 
-    public boolean isEnchantedBlock(ItemStack item) {
+    public static boolean isEnchantedBlock(ItemStack item) {
         if (item.getType().isBlock()) {
             if (item.hasItemMeta()) {
                 return item.getItemMeta().hasEnchants();
@@ -81,9 +77,8 @@ public class ItemUtils {
         return false;
     }
 
-    public void deleteIllegals(Inventory inventory) {
+    public static void deleteIllegals(Inventory inventory) {
         try {
-            ItemUtils utils = plugin.getItemUtils();
             ItemStack itemStack = null;
             ItemMeta itemMeta = null;
             boolean illegalsFound = false;
@@ -99,18 +94,18 @@ public class ItemUtils {
                                 itemStack = item;
                             }
 
-                        if (utils.isIllegal(item)) {
+                        if (isIllegal(item)) {
                             inventory.remove(item);
                             illegalsFound = true;
                             itemStack = item;
                         }
-                        if (utils.hasIllegalItemFlag(item)) {
+                        if (hasIllegalItemFlag(item)) {
                             inventory.remove(item);
                             illegalsFound = true;
                             itemStack = item;
 
                         }
-                        if (utils.hasIllegalAttributes(item)) {
+                        if (hasIllegalAttributes(item)) {
                             inventory.remove(item);
                             //TODO
 //                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS);
@@ -128,7 +123,7 @@ public class ItemUtils {
                             illegalsFound = true;
                             itemStack = item;
                         }
-                        if (utils.hasIllegalEnchants(item)) {
+                        if (hasIllegalEnchants(item)) {
                             for (Entry<Enchantment, Integer> enchantmentIntegerEntry : item.getEnchantments().entrySet()) {
                                 item.removeEnchantment(enchantmentIntegerEntry.getKey());
                                 illegalsFound = true;
@@ -136,7 +131,7 @@ public class ItemUtils {
                             }
                         }
                         if (item.hasItemMeta()) {
-                            if (utils.isEnchantedBlock(item)) {
+                            if (isEnchantedBlock(item)) {
                                 Iterator<Entry<Enchantment, Integer>> enchants = item.getEnchantments().entrySet()
                                         .iterator();
                                 illegalsFound = true;
