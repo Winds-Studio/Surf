@@ -21,7 +21,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class Main extends JavaPlugin {
-	public static long startTime;
 
 	public static Main instance;
 
@@ -45,7 +44,7 @@ public class Main extends JavaPlugin {
 		commandHandler = new CommandHandler(this);
 		int pluginId = 16810;
 		new Metrics(this, pluginId);
-		startTime = System.currentTimeMillis();
+
 		pluginManager.registerEvents(new BlockPlace(this), this);
 		pluginManager.registerEvents(new Offhand(this), this);
 		if (PaperLib.isPaper()) {
