@@ -32,7 +32,6 @@ public class Main extends JavaPlugin {
 
 	private final HashMap<String, Integer> entityIntegerHashMap = new HashMap<>();
 	ScheduledExecutorService service = Executors.newScheduledThreadPool(4);
-	ConnectionEvent ConnectionEvent = new ConnectionEvent(this);
 
 	public CommandHandler commandHandler;
 	public final Queue<String> discordAlertQueue = new LinkedList<>();
@@ -65,7 +64,7 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new MinecartLag(this), this);
 //		pluginManager.registerEvents(new ChestLagFix(this), this);
 		pluginManager.registerEvents(new Dispensor(this), this);
-		pluginManager.registerEvents(ConnectionEvent, this);
+		pluginManager.registerEvents(new ConnectionEvent(this), this);
 		// AntiIllegal events
 		pluginManager.registerEvents(new CleanIllegal(this), this);
 		//Alert system events
