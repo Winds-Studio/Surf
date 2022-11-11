@@ -22,6 +22,13 @@ import java.util.concurrent.TimeUnit;
 
 public class Main extends JavaPlugin {
 	public static long startTime;
+
+	public static Main instance;
+
+	public static Main getInstance() {
+		return instance;
+	}
+
 	private final PluginManager pluginManager = getServer().getPluginManager();
 	private final ItemUtils itemUtils = new ItemUtils(this);
 	SecondPassEvent secondPassEvent = new SecondPassEvent(getLogger(), this);
@@ -33,7 +40,8 @@ public class Main extends JavaPlugin {
 	public final Queue<String> discordAlertQueue = new LinkedList<>();
 
 	public void onEnable() {
-		new Utils(this);
+		instance = this;
+
 		saveDefaultConfig();
 		commandHandler = new CommandHandler(this);
 		int pluginId = 16810;

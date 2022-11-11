@@ -11,11 +11,7 @@ import java.util.Map;
 import java.util.logging.Level;
 
 public class Utils {
-	private static Main plugin;
-
-	public Utils(Main plugin) {
-		Utils.plugin = plugin;
-	}
+	private static final Main plugin = Main.getInstance();
 
 	public static double getTps() {
 		if (PaperLib.isPaper()) {
