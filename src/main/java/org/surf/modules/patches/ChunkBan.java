@@ -1,4 +1,4 @@
-package org.surf.moudles.patches;
+package org.surf.modules.patches;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

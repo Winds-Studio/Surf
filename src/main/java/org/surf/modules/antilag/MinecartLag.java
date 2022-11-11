@@ -1,4 +1,4 @@
-package org.surf.moudles.antilag;
+package org.surf.modules.antilag;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;

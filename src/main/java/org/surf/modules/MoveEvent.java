@@ -1,6 +1,5 @@
-package org.surf.moudles;
+package org.surf.modules;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World.Environment;
 import org.bukkit.entity.Player;

@@ -1,4 +1,4 @@
-package org.surf.moudles.patches;
+package org.surf.modules.patches;
 
 import org.bukkit.Material;
 import org.bukkit.block.Dispenser;

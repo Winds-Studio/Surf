@@ -1,4 +1,4 @@
-package org.surf.moudles.antiillegal;
+package org.surf.modules.antiillegal;
 
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;

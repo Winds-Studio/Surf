@@ -1,4 +1,4 @@
-package org.surf.moudles.patches;
+package org.surf.modules.patches;
 
 import com.destroystokyo.paper.event.entity.EntityTeleportEndGatewayEvent;
 import org.bukkit.ChatColor;

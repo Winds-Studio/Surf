@@ -1,4 +1,4 @@
-package org.surf.moudles;
+package org.surf.modules;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
