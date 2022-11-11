@@ -7,7 +7,7 @@ import org.bukkit.event.block.BlockDispenseEvent;
 import org.surf.Main;
 
 public class Dispensor implements Listener {
-    Main plugin;
+    private final Main plugin;
 
     public Dispensor(Main plugin) {
         this.plugin = plugin;

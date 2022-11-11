@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffect;
 import org.surf.Main;
 
 public class ConnectionEvent implements Listener {
-	Main plugin;
+	private final Main plugin;
 
 	public ConnectionEvent(Main plugin) {
 		this.plugin = plugin;

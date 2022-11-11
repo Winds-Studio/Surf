@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.surf.Main;
 
 public class BucketEvent implements Listener {
-	Main plugin;
+	private final Main plugin;
 
 	public BucketEvent(Main plugin) {
 		this.plugin = plugin;

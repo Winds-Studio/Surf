@@ -10,7 +10,7 @@ import org.surf.Main;
 import org.surf.util.Utils;
 
 public class MoveEvent implements Listener {
-	Main plugin;
+	private final Main plugin;
 
 	public MoveEvent(Main plugin) {
 		this.plugin = plugin;

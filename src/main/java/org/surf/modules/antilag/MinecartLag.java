@@ -13,7 +13,7 @@ import org.surf.Main;
 import org.surf.util.Utils;
 
 public class MinecartLag implements Listener {
-    Main plugin;
+    private final Main plugin;
 
     public MinecartLag(Main plugin) {
         this.plugin = plugin;

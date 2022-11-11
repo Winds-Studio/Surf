@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Offhand implements Listener {
-	HashMap<Player, Integer> offhandMap = new HashMap<>();
-	Main plugin;
+	private final HashMap<Player, Integer> offhandMap = new HashMap<>();
+	private final Main plugin;
 
 	public Offhand(Main plugin) {
 		this.plugin = plugin;

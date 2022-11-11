@@ -21,7 +21,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.surf.Main;
 
 public class CleanIllegal implements Listener {
-	Main plugin;
+	private final Main plugin;
 
 	public CleanIllegal(Main plugin) {
 		this.plugin = plugin;

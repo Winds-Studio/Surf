@@ -20,8 +20,8 @@
 //import java.util.regex.Pattern;
 //
 //public class ChestLagFix implements Listener {
-//    HashMap<Player, Integer> chestHashMap = new HashMap<>();
-//    Main plugin;
+//    private final HashMap<Player, Integer> chestHashMap = new HashMap<>();
+//    private final Main plugin;
 //
 //    public ChestLagFix(Main plugin) {
 //        this.plugin = plugin;
