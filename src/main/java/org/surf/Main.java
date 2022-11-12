@@ -60,7 +60,7 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new BlockPlace(), this);
 		pluginManager.registerEvents(new Offhand(), this);
 		if (PaperLib.isPaper()) {
-			pluginManager.registerEvents(new GateWay(this), this);
+			pluginManager.registerEvents(new GateWay(), this);
 		}
 		pluginManager.registerEvents(new BookBan(), this);
 		pluginManager.registerEvents(new ChunkBan(this), this);
