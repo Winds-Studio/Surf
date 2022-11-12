@@ -31,28 +31,39 @@ public class Main extends JavaPlugin {
 	private final PluginManager pluginManager = getServer().getPluginManager();
 
 	private final HashMap<String, Integer> entityIntegerHashMap = new HashMap<>();
-	ScheduledExecutorService service = Executors.newScheduledThreadPool(4);
+	private final ScheduledExecutorService service = Executors.newScheduledThreadPool(4);
 
-	public CommandHandler commandHandler;
+	private final CommandHandler commandHandler = new CommandHandler(this);
 	public final Queue<String> discordAlertQueue = new LinkedList<>();
 
 	public void onEnable() {
 		instance = this;
-
+		// TODO: config system
 		saveDefaultConfig();
-		commandHandler = new CommandHandler(this);
 		int pluginId = 16810;
 		new Metrics(this, pluginId);
 
-		pluginManager.registerEvents(new BlockPlace(this), this);
-		pluginManager.registerEvents(new Offhand(this), this);
-		if (PaperLib.isPaper()) {
-			pluginManager.registerEvents(new GateWay(this), this);
-		}
+		// register commands
 		try {
 			commandHandler.registerCommands();
 		} catch (NotInPluginYMLException e) {
 			e.printStackTrace();
+		}
+		// register event
+		this.registerEvents();
+		//Alert system events
+		PaperLib.suggestPaper(this);
+		//Server specific events
+		service.scheduleAtFixedRate(() -> pluginManager.callEvent(new SecondPassEvent()), 1, 1, TimeUnit.SECONDS);
+		service.scheduleAtFixedRate(() -> pluginManager.callEvent(new TenSecondPassEvent()), 1, 10, TimeUnit.SECONDS);
+		getLogger().info("Surf enabled. By Dreeam.");
+	}
+
+	public void registerEvents() {
+		pluginManager.registerEvents(new BlockPlace(this), this);
+		pluginManager.registerEvents(new Offhand(this), this);
+		if (PaperLib.isPaper()) {
+			pluginManager.registerEvents(new GateWay(this), this);
 		}
 		pluginManager.registerEvents(new BookBan(), this);
 		pluginManager.registerEvents(new ChunkBan(this), this);
@@ -67,12 +78,6 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new ConnectionEvent(this), this);
 		// AntiIllegal events
 		pluginManager.registerEvents(new CleanIllegal(this), this);
-		//Alert system events
-		PaperLib.suggestPaper(this);
-		//Server specific events
-		service.scheduleAtFixedRate(() -> pluginManager.callEvent(new SecondPassEvent()), 1, 1, TimeUnit.SECONDS);
-		service.scheduleAtFixedRate(() -> pluginManager.callEvent(new TenSecondPassEvent()), 1, 10, TimeUnit.SECONDS);
-		getLogger().info("Surf enabled. By Dreeam.");
 	}
 
 	public void onDisable() {
