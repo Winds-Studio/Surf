@@ -13,35 +13,36 @@ public class BlockPlace implements Listener {
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
-        if (ConfigCache.IllegalBlockPlaceEnabled) {
-            Player player = event.getPlayer();
-            switch (event.getBlock().getType()) {
-                case BEDROCK:
-                case BARRIER:
-                case SPAWNER:
-                case REPEATING_COMMAND_BLOCK:
-                case COMMAND_BLOCK_MINECART:
-                case CHAIN_COMMAND_BLOCK:
-                case COMMAND_BLOCK:
-                case END_PORTAL:
-                case END_GATEWAY:
-                case NETHER_PORTAL:
-                case STRUCTURE_BLOCK:
-                case STRUCTURE_VOID:
-                case JIGSAW:
-                case LIGHT:
+        if (!ConfigCache.IllegalBlockPlaceEnabled) {
+            return;
+        }
+        Player player = event.getPlayer();
+        switch (event.getBlock().getType()) {
+            case BEDROCK:
+            case BARRIER:
+            case SPAWNER:
+            case REPEATING_COMMAND_BLOCK:
+            case COMMAND_BLOCK_MINECART:
+            case CHAIN_COMMAND_BLOCK:
+            case COMMAND_BLOCK:
+            case END_PORTAL:
+            case END_GATEWAY:
+            case NETHER_PORTAL:
+            case STRUCTURE_BLOCK:
+            case STRUCTURE_VOID:
+            case JIGSAW:
+            case LIGHT:
+                event.setCancelled(true);
+                Utils.sendMessage(player, ConfigCache.IllegalBlockPlaceMessage);
+                event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
+                break;
+            case END_PORTAL_FRAME:
+                if (player.getInventory().getItemInMainHand().getType() == Material.END_PORTAL_FRAME || player.getInventory().getItemInOffHand().getType() == Material.END_PORTAL_FRAME) {
                     event.setCancelled(true);
                     Utils.sendMessage(player, ConfigCache.IllegalBlockPlaceMessage);
                     event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
-                    break;
-                case END_PORTAL_FRAME:
-                    if (player.getInventory().getItemInMainHand().getType() == Material.END_PORTAL_FRAME || player.getInventory().getItemInOffHand().getType() == Material.END_PORTAL_FRAME) {
-                        event.setCancelled(true);
-                        Utils.sendMessage(player, ConfigCache.IllegalBlockPlaceMessage);
-                        event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
-                    }
-                    break;
-            }
+                }
+                break;
         }
     }
 }
