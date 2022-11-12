@@ -63,7 +63,7 @@ public class Main extends JavaPlugin {
 			pluginManager.registerEvents(new GateWay(), this);
 		}
 		pluginManager.registerEvents(new BookBan(), this);
-		pluginManager.registerEvents(new ChunkBan(this), this);
+		pluginManager.registerEvents(new ChunkBan(), this);
 		pluginManager.registerEvents(new MoveEvent(this), this);
 		pluginManager.registerEvents(new EntityDamageEvent(this), this);
 		pluginManager.registerEvents(new WitherSpawn(), this);
