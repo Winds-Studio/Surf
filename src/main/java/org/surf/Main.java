@@ -10,10 +10,7 @@ import org.surf.modules.*;
 import org.surf.modules.antiillegal.*;
 import org.surf.modules.antilag.*;
 import org.surf.modules.patches.*;
-import org.surf.util.Metrics;
-import org.surf.util.SecondPassEvent;
-import org.surf.util.TenSecondPassEvent;
-import org.surf.util.Utils;
+import org.surf.util.*;
 
 import java.util.*;
 import java.util.concurrent.Executors;
@@ -39,7 +36,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		instance = this;
 		// TODO: config system
-		saveDefaultConfig();
+		this.loadConfig();
 		int pluginId = 16810;
 		new Metrics(this, pluginId);
 
@@ -60,8 +57,8 @@ public class Main extends JavaPlugin {
 	}
 
 	public void registerEvents() {
-		pluginManager.registerEvents(new BlockPlace(this), this);
-		pluginManager.registerEvents(new Offhand(this), this);
+		pluginManager.registerEvents(new BlockPlace(), this);
+		pluginManager.registerEvents(new Offhand(), this);
 		if (PaperLib.isPaper()) {
 			pluginManager.registerEvents(new GateWay(this), this);
 		}
@@ -78,6 +75,11 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new ConnectionEvent(this), this);
 		// AntiIllegal events
 		pluginManager.registerEvents(new CleanIllegal(this), this);
+	}
+
+	public void loadConfig() {
+		saveDefaultConfig();
+		ConfigCache.loadConfig();
 	}
 
 	public void onDisable() {

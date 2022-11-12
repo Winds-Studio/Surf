@@ -15,28 +15,19 @@ import java.util.HashMap;
 
 public class Offhand implements Listener {
 	private final HashMap<Player, Integer> offhandMap = new HashMap<>();
-	private final Main plugin;
-
-	public Offhand(Main plugin) {
-		this.plugin = plugin;
-	}
 
 	@EventHandler
 	public void PlayerSwapHandItemsEvent(PlayerSwapHandItemsEvent event) {
-		try {
-			Player player = event.getPlayer();
-			if (isRetardTryingToCrashTheFuckingServerLikeAFuckingFaggot(player)) {
-				if (offhandMap.containsKey(player)) {
-					offhandMap.replace(player, offhandMap.get(player) + 1);
-				} else {
-					offhandMap.put(player, 1);
-				}
-				if (offhandMap.get(player) > 10) {
-					player.kickPlayer("&cPacket Exploit Detected");
-				}
+		Player player = event.getPlayer();
+		if (isRetardTryingToCrashTheFuckingServerLikeAFuckingFaggot(player)) {
+			if (offhandMap.containsKey(player)) {
+				offhandMap.replace(player, offhandMap.get(player) + 1);
+			} else {
+				offhandMap.put(player, 1);
 			}
-		} catch (Error | Exception throwable) {
-
+			if (offhandMap.get(player) > 10) {
+				player.kickPlayer("&cPacket Exploit Detected");
+			}
 		}
 	}
 
