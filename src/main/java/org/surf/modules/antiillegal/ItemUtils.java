@@ -35,16 +35,7 @@ public class ItemUtils {
     public static boolean hasIllegalItemFlag(ItemStack item) {
         if (item.hasItemMeta()) {
             ItemMeta meta = item.getItemMeta();
-            return meta.hasItemFlag(ItemFlag.HIDE_ATTRIBUTES) || meta.hasItemFlag(ItemFlag.HIDE_DESTROYS) || meta.hasItemFlag(ItemFlag.HIDE_DYE) || meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_PLACED_ON) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS) || meta.hasItemFlag(ItemFlag.HIDE_UNBREAKABLE) || meta.isUnbreakable();
-        }
-        return false;
-    }
-
-    // TODO - Add ability to filter for custom NBT attributes[configurable]
-    public static boolean hasIllegalAttributes(ItemStack item) {
-        if (item.hasItemMeta()) {
-            ItemMeta meta = item.getItemMeta();
-            return meta.hasAttributeModifiers();
+            return meta.hasItemFlag(ItemFlag.HIDE_ATTRIBUTES) || meta.hasItemFlag(ItemFlag.HIDE_DESTROYS) || meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_PLACED_ON) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS) || meta.hasItemFlag(ItemFlag.HIDE_UNBREAKABLE) || meta.isUnbreakable();
         }
         return false;
     }
@@ -100,25 +91,6 @@ public class ItemUtils {
                 itemStack = item;
                 continue;
             }
-            if (hasIllegalAttributes(item)) {
-                inventory.remove(item);
-                //TODO
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ATTACK_KNOCKBACK);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_ATTACK_SPEED);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_FLYING_SPEED);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_FOLLOW_RANGE);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_LUCK);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_MAX_HEALTH);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.HORSE_JUMP_STRENGTH);
-//                            item.getItemMeta().removeAttributeModifier(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS);
-                illegalsFound = true;
-                itemStack = item;
-                continue;
-            }
             if (hasIllegalEnchants(item)) {
                 for (Entry<Enchantment, Integer> enchantmentIntegerEntry : item.getEnchantments().entrySet()) {
                     item.removeEnchantment(enchantmentIntegerEntry.getKey());
@@ -139,7 +111,7 @@ public class ItemUtils {
             }
         }
         if (illegalsFound) {
-            Utils.println(Utils.getPrefix() + "&6Deleted illegals " + itemStack.getType() + " " + itemStack.getI18NDisplayName() + " " + itemStack.getEnchantments() + (itemStack.hasItemMeta() ? " " + itemStack.getItemMeta().getAttributeModifiers() : ""));
+            Utils.println(Utils.getPrefix() + "&6Deleted illegals " + itemStack.getType() + " " + itemStack.getI18NDisplayName() + " " + itemStack.getEnchantments());
         }
     }
 

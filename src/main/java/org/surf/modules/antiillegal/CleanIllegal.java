@@ -18,6 +18,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import org.bukkit.inventory.meta.ItemMeta;
 import org.surf.Main;
 
 public class CleanIllegal implements Listener {
@@ -77,25 +78,17 @@ public class CleanIllegal implements Listener {
 									item.setDurability((short) 1);
 								}
 
-							if (ItemUtils.isIllegal(item) || ItemUtils.hasIllegalItemFlag(item) || ItemUtils.hasIllegalAttributes(item) || ItemUtils.hasIllegalEnchants(item) || item.hasItemMeta()) {
+							if (ItemUtils.isIllegal(item) || ItemUtils.hasIllegalItemFlag(item) || ItemUtils.hasIllegalEnchants(item) || item.hasItemMeta()) {
 								inv.remove(item);
 								event.setCancelled(true);
 							}
-							if (plugin.getItemUtils().hasIllegalNBT(item)) {
-								inv.remove(item);
-								event.setCancelled(true);
-							}
-							if (plugin.getItemUtils().hasIllegalAttributes(item)) {
-								inv.remove(item);
-								event.setCancelled(true);
-							}
-							if (plugin.getItemUtils().hasIllegalEnchants(item)) {
+							if (ItemUtils.hasIllegalEnchants(item)) {
 								inv.remove(item);
 								event.setCancelled(true);
 							}
 							if (item.hasItemMeta()) {
 								ItemMeta meta = item.getItemMeta();
-								if (plugin.getItemUtils().isEnchantedBlock(item)) {
+								if (ItemUtils.isEnchantedBlock(item)) {
 									event.setCancelled(true);
 								}
 							}
@@ -143,7 +136,7 @@ public class CleanIllegal implements Listener {
 			if (plugin.getConfig().getBoolean("Antiillegal.ItemPickup-Enabled")) {
 				ItemStack item = event.getItem().getItemStack();
 				if (ItemUtils.isEnchantedBlock(item) || ItemUtils.hasIllegalItemFlag(item) || ItemUtils.hasIllegalEnchants(item)
-						|| ItemUtils.isIllegal(item) || ItemUtils.hasIllegalAttributes(item)) {
+						|| ItemUtils.isIllegal(item)) {
 					event.setCancelled(true);
 					event.getItem().remove();
 				}
