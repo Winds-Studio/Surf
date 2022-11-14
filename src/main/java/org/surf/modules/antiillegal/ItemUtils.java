@@ -35,11 +35,12 @@ public class ItemUtils {
     public static boolean hasIllegalItemFlag(ItemStack item) {
         if (item.hasItemMeta()) {
             ItemMeta meta = item.getItemMeta();
-            return meta.hasItemFlag(ItemFlag.HIDE_ATTRIBUTES) || meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_DYE) || meta.hasItemFlag(ItemFlag.HIDE_PLACED_ON) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS) || meta.hasItemFlag(ItemFlag.HIDE_UNBREAKABLE) || meta.hasItemFlag(ItemFlag.HIDE_DESTROYS) || meta.isUnbreakable();
+            return meta.hasItemFlag(ItemFlag.HIDE_ATTRIBUTES) || meta.hasItemFlag(ItemFlag.HIDE_DESTROYS) || meta.hasItemFlag(ItemFlag.HIDE_DYE) || meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_PLACED_ON) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS) || meta.hasItemFlag(ItemFlag.HIDE_UNBREAKABLE) || meta.isUnbreakable();
         }
         return false;
     }
 
+    // TODO - Add ability to filter for custom NBT attributes[configurable]
     public static boolean hasIllegalAttributes(ItemStack item) {
         if (item.hasItemMeta()) {
             ItemMeta meta = item.getItemMeta();
@@ -47,18 +48,6 @@ public class ItemUtils {
         }
         return false;
     }
-
-    //TODO
-//    public boolean hasIllegalAttributes(ItemStack item) {
-//        if (item.hasItemMeta()) {
-//            ItemMeta meta = item.getItemMeta();
-//            Multimap<Attribute, AttributeModifier> attribute = meta.getAttributeModifiers();
-//            for (AttributeModifier level : attribute.values()) {
-//                return level > 5;
-//            }
-//        }
-//        return false;
-//    }
 
     public static boolean hasIllegalEnchants(ItemStack item) {
         Map<Enchantment, Integer> enchants = item.getEnchantments();
