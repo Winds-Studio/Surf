@@ -33,10 +33,10 @@ public class ChunkBan implements Listener {
                 }
             }
         }
-        if (block.getType() == Material.PLAYER_HEAD || block.getType() == Material.PLAYER_WALL_HEAD) {
+        if (block.getType() == Material.SKULL || block.getType() == Material.SKULL_ITEM) {
             // get chunk skull count
             long skullCount = Arrays.stream(chunk.getTileEntities())
-                    .filter(tileEntity -> tileEntity.getType() == Material.PLAYER_HEAD || tileEntity.getType() == Material.PLAYER_WALL_HEAD)
+                    .filter(tileEntity -> tileEntity.getType() == Material.SKULL || block.getType() == Material.SKULL_ITEM)
                     .count();
             if (skullCount > ConfigCache.ChunkBanSkullMax) {
                 event.setCancelled(true);
@@ -69,21 +69,21 @@ public class ChunkBan implements Listener {
     private boolean isChecked(Block block) {
         switch (block.getType()) {
             case FURNACE:
-                //TODO
             case TRAPPED_CHEST:
-//			case ENCHANTMENT_TABLE:
-//			case WALL_BANNER:
-            case ACACIA_SIGN:
-            case ACACIA_WALL_SIGN:
+            case ENCHANTMENT_TABLE:
+            case WALL_BANNER:
+            case WALL_SIGN:
+            case SIGN:
             case HOPPER:
             case DROPPER:
             case DISPENSER:
             case BREWING_STAND:
             case BEACON:
-//			case SIGN_POST:
+            case SIGN_POST:
             case ENDER_CHEST:
             case FLOWER_POT:
-            case BLACK_BANNER:
+            case BANNER:
+            case STANDING_BANNER:
                 return true;
             default:
                 return false;
