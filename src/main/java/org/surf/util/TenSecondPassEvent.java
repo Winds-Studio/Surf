@@ -8,24 +8,9 @@ import java.util.logging.Logger;
 
 public class TenSecondPassEvent extends Event {
 	private static final HandlerList handlers = new HandlerList();
-	private final Logger logger;
-	private final Main plugin;
-
-	public TenSecondPassEvent(Logger logger, Main main) {
-		this.logger = logger;
-		plugin = main;
-	}
 
 	public static HandlerList getHandlerList() {
 		return handlers;
-	}
-
-	public Logger getLogger() {
-		return logger;
-	}
-
-	public Main getPlugin() {
-		return plugin;
 	}
 
 	@Override

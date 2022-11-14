@@ -1,4 +1,4 @@
-package org.surf.moudles.antiillegal;
+package org.surf.modules.antiillegal;
 
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
@@ -17,12 +17,11 @@ import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import org.surf.Main;
 
 public class CleanIllegal implements Listener {
-	Main plugin;
+	private final Main plugin;
 
 	public CleanIllegal(Main plugin) {
 		this.plugin = plugin;
@@ -33,7 +32,7 @@ public class CleanIllegal implements Listener {
 	public void onPlace(BlockPlaceEvent event) {
 		try {
 			if (plugin.getConfig().getBoolean("Antiillegal.BlockPlace-Enabled")) {
-				if (plugin.getItemUtils().isIllegal(event.getItemInHand())) {
+				if (ItemUtils.isIllegal(event.getItemInHand())) {
 					event.setCancelled(true);
 					event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
 				}
@@ -52,7 +51,7 @@ public class CleanIllegal implements Listener {
 				for (BlockState state : event.getChunk().getTileEntities()) {
 					if (state instanceof Container) {
 						Container container = (Container) state;
-						plugin.getItemUtils().deleteIllegals((PlayerInventory) container.getInventory());
+						ItemUtils.deleteIllegals((PlayerInventory) container.getInventory());
 
 					}
 				}
@@ -71,7 +70,6 @@ public class CleanIllegal implements Listener {
 				if (inv.getContents() != null) {
 					for (ItemStack item : inv.getStorageContents()) {
 						if (item != null) {
-							if (plugin.getItemUtils().isArmor(item) || plugin.getItemUtils().isTool(item)) {
 								if (item.getDurability() > item.getType().getMaxDurability()) {
 									item.setDurability(item.getType().getMaxDurability());
 								}
@@ -79,8 +77,7 @@ public class CleanIllegal implements Listener {
 									item.setDurability((short) 1);
 								}
 
-							}
-							if (plugin.getItemUtils().isIllegal(item)) {
+							if (ItemUtils.isIllegal(item) || ItemUtils.hasIllegalItemFlag(item) || ItemUtils.hasIllegalAttributes(item) || ItemUtils.hasIllegalEnchants(item) || item.hasItemMeta()) {
 								inv.remove(item);
 								event.setCancelled(true);
 							}
@@ -88,10 +85,10 @@ public class CleanIllegal implements Listener {
 								inv.remove(item);
 								event.setCancelled(true);
 							}
-//							if (plugin.getItemUtils().hasIllegalAttributes(item)) {
-//								inv.remove(item);
-//								event.setCancelled(true);
-//							}
+							if (plugin.getItemUtils().hasIllegalAttributes(item)) {
+								inv.remove(item);
+								event.setCancelled(true);
+							}
 							if (plugin.getItemUtils().hasIllegalEnchants(item)) {
 								inv.remove(item);
 								event.setCancelled(true);
@@ -117,9 +114,9 @@ public class CleanIllegal implements Listener {
 		try {
 			if (plugin.getConfig().getBoolean("Antiillegal.InventoryClose-Enabled")) {
 				Inventory inv = event.getInventory();
-				plugin.getItemUtils().deleteIllegals(inv);
+				ItemUtils.deleteIllegals(inv);
 				Inventory playerInv = event.getPlayer().getInventory();
-				plugin.getItemUtils().deleteIllegals(playerInv);
+				ItemUtils.deleteIllegals(playerInv);
 			}
 		} catch (Error | Exception throwable) {
 
@@ -132,7 +129,7 @@ public class CleanIllegal implements Listener {
 		try {
 			Inventory inv = event.getInventory();
 			if (plugin.getConfig().getBoolean("Antiillegal.InventoryOpen-Enabled")) {
-				plugin.getItemUtils().deleteIllegals(inv);
+				ItemUtils.deleteIllegals(inv);
 			}
 		} catch (Error | Exception throwable) {
 
@@ -145,8 +142,8 @@ public class CleanIllegal implements Listener {
 		try {
 			if (plugin.getConfig().getBoolean("Antiillegal.ItemPickup-Enabled")) {
 				ItemStack item = event.getItem().getItemStack();
-				if (plugin.getItemUtils().isEnchantedBlock(item) || plugin.getItemUtils().hasIllegalNBT(item) || plugin.getItemUtils().hasIllegalEnchants(item)
-						|| plugin.getItemUtils().isIllegal(item)) {
+				if (ItemUtils.isEnchantedBlock(item) || ItemUtils.hasIllegalItemFlag(item) || ItemUtils.hasIllegalEnchants(item)
+						|| ItemUtils.isIllegal(item) || ItemUtils.hasIllegalAttributes(item)) {
 					event.setCancelled(true);
 					event.getItem().remove();
 				}
@@ -162,7 +159,7 @@ public class CleanIllegal implements Listener {
 		try {
 			if (plugin.getConfig().getBoolean("Antiillegal.HotbarMove-Enabled")) {
 				Player player = event.getPlayer();
-				plugin.getItemUtils().deleteIllegals(player.getInventory());
+				ItemUtils.deleteIllegals(player.getInventory());
 			}
 		} catch (Error | Exception throwable) {
 
@@ -173,7 +170,7 @@ public class CleanIllegal implements Listener {
 	@AntiIllegal(EventName = "PlayerItemHeldEvent")
 	public void onScroll(PlayerItemHeldEvent event) {
 		for (ItemStack itemStack : event.getPlayer().getInventory().getContents()) {
-			if (plugin.getConfigBoolean("Antiillegal.Delete-Stacked-Totem")) {
+			if (plugin.getConfig().getBoolean("Antiillegal.Delete-Stacked-Totem")) {
 				if (itemStack != null) {
 					if (itemStack.getType() == Material.TOTEM) {
 						if (itemStack.getAmount() > itemStack.getMaxStackSize()) {
@@ -191,10 +188,10 @@ public class CleanIllegal implements Listener {
 		try {
 			if (plugin.getConfig().getBoolean("Antiillegal.PlayerSwapOffhand-Enabled")) {
 				Player player = event.getPlayer();
-				plugin.getItemUtils().deleteIllegals(player.getInventory());
+				ItemUtils.deleteIllegals(player.getInventory());
 			}
 			for (ItemStack itemStack : event.getPlayer().getInventory().getContents()) {
-				if (plugin.getConfigBoolean("Antiillegal.Delete-Stacked-Totem")) {
+				if (plugin.getConfig().getBoolean("Antiillegal.Delete-Stacked-Totem")) {
 					if (itemStack != null) {
 						if (itemStack.getType() == Material.TOTEM) {
 							if (itemStack.getAmount() > itemStack.getMaxStackSize()) {

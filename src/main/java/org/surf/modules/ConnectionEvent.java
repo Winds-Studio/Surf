@@ -1,4 +1,4 @@
-package org.surf.moudles;
+package org.surf.modules;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffect;
 import org.surf.Main;
 
 public class ConnectionEvent implements Listener {
-	Main plugin;
+	private final Main plugin;
 
 	public ConnectionEvent(Main plugin) {
 		this.plugin = plugin;
@@ -29,13 +29,13 @@ public class ConnectionEvent implements Listener {
 			Player player = event.getPlayer();
 			if (player.getActivePotionEffects() != null) {
 				for (PotionEffect effects : player.getActivePotionEffects()) {
-					if (effects.getAmplifier() > 5) {
+					if (effects.getAmplifier() > 5 || effects.getDuration() > 12000) {
 						player.removePotionEffect(effects.getType());
 					}
 				}
 
 			}
-			if (plugin.getConfigBoolean("FirstJoin.Enabled")) {
+			if (plugin.getConfig().getBoolean("FirstJoin.Enabled")) {
 				if (!player.hasPlayedBefore()) {
 					Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&',
 							plugin.getConfig().getString("FirstJoin.Message").replace("%Player%", player.getName())));

@@ -1,4 +1,4 @@
-package org.surf.moudles.patches;
+package org.surf.modules.patches;
 
 import org.bukkit.Material;
 import org.bukkit.block.Dispenser;
@@ -19,7 +19,7 @@ import org.surf.Main;
 import org.surf.util.Utils;
 
 public class EntityDamageEvent implements Listener {
-    Main plugin;
+    private final Main plugin;
 
     public EntityDamageEvent(Main plugin) {
         this.plugin = plugin;
@@ -27,7 +27,7 @@ public class EntityDamageEvent implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
-        if (plugin.getConfigBoolean("Antiillegal.Check-Illegal-Damage")) {
+        if (plugin.getConfig().getBoolean("Antiillegal.Check-Illegal-Damage")) {
             if (event.getDamager() instanceof Player) {
                 Player damager = (Player) event.getDamager();
                 if (event.getDamage() > 30) {
@@ -57,7 +57,7 @@ public class EntityDamageEvent implements Listener {
             Player player = (Player) event.getPotion().getShooter();
             ItemStack pot = event.getPotion().getItem();
             for (PotionEffect effects : event.getPotion().getEffects()) {
-                if (effects.getAmplifier() > 5) {
+                if (effects.getAmplifier() > 5 || effects.getDuration() > 12000) {
                     event.setCancelled(true);
                     player.getInventory().remove(pot);
                     Utils.sendMessage(player, plugin.getConfig().getString("IllegalPotion.Message"));
@@ -73,7 +73,7 @@ public class EntityDamageEvent implements Listener {
             if (e.getItem().hasItemMeta()) {
                 PotionMeta potion = (PotionMeta) e.getItem().getItemMeta();
                 for (PotionEffect pe : potion.getCustomEffects()) {
-                    if (pe.getAmplifier() > 5) {
+                    if (pe.getAmplifier() > 5 || pe.getDuration() > 12000) {
                         e.setCancelled(true);
                         e.getPlayer().getInventory().remove(e.getItem());
                         Utils.sendMessage(e.getPlayer(), plugin.getConfig().getString("IllegalPotion.Message"));
@@ -90,9 +90,8 @@ public class EntityDamageEvent implements Listener {
             Dispenser disp = (Dispenser) event.getBlock().getState();
             PotionMeta pot = (PotionMeta) event.getItem().getItemMeta();
             for (PotionEffect effects : pot.getCustomEffects()) {
-                if (effects.getAmplifier() > 5) {
+                if (effects.getAmplifier() > 5 || effects.getDuration() > 12000) {
                     event.setCancelled(true);
-                    disp.getInventory().clear();
                 }
             }
         }
@@ -104,13 +103,9 @@ public class EntityDamageEvent implements Listener {
                 && event.getHitEntity() instanceof Player) {
             TippedArrow arrow = (TippedArrow) event.getEntity();
             Player shooter = (Player) arrow.getShooter();
-            Player vic = (Player) event.getHitEntity();
-            ItemStack milk = new ItemStack(Material.MILK_BUCKET);
             for (PotionEffect effects : arrow.getCustomEffects()) {
-                if (effects.getAmplifier() > 4) {
-                    shooter.damage(70);
-                    shooter.getInventory().remove(Material.TIPPED_ARROW);
-                    vic.getInventory().addItem(milk);
+                if (effects.getAmplifier() > 4 || effects.getDuration() > 12000) {
+                    event.setCancelled(true);
                     Utils.sendMessage(shooter, plugin.getConfig().getString("IllegalPotion.Message"));
                 }
             }

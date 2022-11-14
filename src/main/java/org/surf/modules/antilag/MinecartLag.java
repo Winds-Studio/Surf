@@ -1,4 +1,4 @@
-package org.surf.moudles.antilag;
+package org.surf.modules.antilag;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
@@ -13,7 +13,7 @@ import org.surf.Main;
 import org.surf.util.Utils;
 
 public class MinecartLag implements Listener {
-    Main plugin;
+    private final Main plugin;
 
     public MinecartLag(Main plugin) {
         this.plugin = plugin;

@@ -1,4 +1,4 @@
-package org.surf.moudles.antilag;
+package org.surf.modules.antilag;
 
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -8,7 +8,7 @@ import org.surf.Main;
 import org.surf.util.Utils;
 
 public class BlockPhysics implements Listener {
-    Main plugin;
+    private final Main plugin;
 
     public BlockPhysics(Main plugin) {
         this.plugin = plugin;

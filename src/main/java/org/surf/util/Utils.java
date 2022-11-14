@@ -8,14 +8,11 @@ import org.surf.Main;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Level;
 
 public class Utils {
-	private static Main plugin;
-
-	public Utils(Main plugin) {
-		Utils.plugin = plugin;
-	}
+	private static final Main plugin = Main.getInstance();
 
 	public static double getTps() {
 		if (PaperLib.isPaper()) {
@@ -67,12 +64,6 @@ public class Utils {
 
 	}
 
-	public static void secondPass(HashMap<Player, Integer> hashMap) {
-		for (Map.Entry<Player, Integer> violationEntry : hashMap.entrySet()) {
-			if (violationEntry.getValue() > 0)
-				violationEntry.setValue(violationEntry.getValue() - 1);
-		}
-	}
 	public static String getServerBrand() {
 		if (!PaperLib.isSpigot() && !PaperLib.isPaper()) {
 			return "CraftBukkit";
