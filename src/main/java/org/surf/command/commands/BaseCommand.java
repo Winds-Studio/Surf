@@ -2,6 +2,7 @@ package org.surf.command.commands;
 
 import org.bukkit.command.CommandSender;
 import org.surf.Main;
+import org.surf.util.ConfigCache;
 import org.surf.util.Utils;
 
 public class BaseCommand extends org.surf.command.BaseCommand {
@@ -26,6 +27,7 @@ public class BaseCommand extends org.surf.command.BaseCommand {
             switch (args[0]) {
                 case "reload":
                     plugin.reloadConfig();
+                    ConfigCache.loadConfig();
                     Utils.sendMessage(sender, Utils.getPrefix() + "&aReloaded configuration file");
                     break;
                 case "version":
