@@ -14,13 +14,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPortalEvent;
 import org.bukkit.event.vehicle.VehicleMoveEvent;
 import org.bukkit.util.Vector;
-import org.surf.Main;
 import org.surf.util.ConfigCache;
 import org.surf.util.Utils;
 
 public class GateWay implements Listener {
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST,ignoreCancelled = true)
     public void onCrashAttempt(EntityTeleportEndGatewayEvent event) {
         if (!ConfigCache.GateWayPreventCrashExploit) {
             return;
@@ -51,7 +50,7 @@ public class GateWay implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onEntityPortal(EntityPortalEvent event) {
         if (!ConfigCache.GateWayPreventEntityEnterPortal) {
             return;

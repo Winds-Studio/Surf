@@ -28,7 +28,7 @@ public class Offhand implements Listener {
 		}
 	}
 
-	@EventHandler
+	@EventHandler(ignoreCancelled = true)
 	public void PlayerSwapHandItemsEvent(PlayerSwapHandItemsEvent event) {
 		Player player = event.getPlayer();
 		ItemStack mainHand = event.getMainHandItem();
