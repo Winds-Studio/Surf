@@ -43,7 +43,7 @@ public class ChunkBan implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onSpawn(PlayerInteractEvent event) {
         if (!ConfigCache.ChunkBanEnabled) {
             return;
