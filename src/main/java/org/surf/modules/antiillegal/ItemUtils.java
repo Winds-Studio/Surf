@@ -1,6 +1,5 @@
 package org.surf.modules.antiillegal;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -8,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.surf.Main;
+import org.surf.util.ConfigCache;
 import org.surf.util.Utils;
 
 import java.util.*;
@@ -17,19 +17,24 @@ import java.util.logging.Level;
 public class ItemUtils {
     private final static Main plugin = Main.getInstance();
 
-    public static boolean isIllegal(ItemStack item) {
-        List<String> items = plugin.getConfig().getStringList("Antiillegal.Illegal-Items-List");
-        List<Material> materials = new ArrayList<>();
-        List<Material> knownMaterials = Arrays.asList(Material.values());
-        for (String material : items) {
-            String upperCaseMat = material.toUpperCase();
-            if (knownMaterials.contains(Material.getMaterial(upperCaseMat))) {
-                materials.add(Material.getMaterial(upperCaseMat));
-            } else {
-                plugin.getLogger().log(Level.SEVERE, ChatColor.translateAlternateColorCodes('&', "&cInvalid configuration option Antiillegal.Illegal-Items-List " + material));
+    public final static Set<Material> ILLEGALMATERIALS = new HashSet<>();
+
+    public static void loadIllegalMaterials() {
+        ILLEGALMATERIALS.clear();
+        List<String> items = ConfigCache.AntiillegalIllegalItemsList;
+        for (String item : items) {
+            Material material = Material.getMaterial(item);
+            if (material == null) {
+                plugin.getLogger().log(Level.WARNING, "Invalid material: " + item);
+                continue;
             }
+            ILLEGALMATERIALS.add(material);
         }
-        return materials.contains(item.getType());
+
+    }
+
+    public static boolean isIllegal(ItemStack item) {
+        return ILLEGALMATERIALS.contains(item.getType());
     }
 
     public static boolean hasIllegalItemFlag(ItemStack item) {
@@ -52,7 +57,7 @@ public class ItemUtils {
     public static boolean hasIllegalEnchants(ItemStack item) {
         Map<Enchantment, Integer> enchants = item.getEnchantments();
         for (int level : enchants.values()) {
-            return level > plugin.getConfig().getInt("IllegalEnchants.Threshold");
+            return level > ConfigCache.IllegalEnchantsThreshold;
         }
         return false;
     }

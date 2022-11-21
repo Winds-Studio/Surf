@@ -1,6 +1,9 @@
 package org.surf.util;
 
 import org.surf.Main;
+import org.surf.modules.antiillegal.ItemUtils;
+
+import java.util.List;
 
 public class ConfigCache {
 
@@ -47,6 +50,9 @@ public class ConfigCache {
     public static boolean AntiillegalHotbarMoveEnabled;
     public static boolean AntiillegalDeleteStackedTotem;
     public static boolean AntiillegalPlayerSwapOffhandEnabled;
+    public static List<String> AntiillegalIllegalItemsList;
+
+    public static int IllegalEnchantsThreshold;
 
     public static void loadConfig() {
         IllegalBlockPlaceEnabled = plugin.getConfig().getBoolean("IllegalBlockPlace.Enabled");
@@ -81,5 +87,8 @@ public class ConfigCache {
         AntiillegalHotbarMoveEnabled = plugin.getConfig().getBoolean("Antiillegal.HotbarMove-Enabled");
         AntiillegalDeleteStackedTotem = plugin.getConfig().getBoolean("Antiillegal.Delete-Stacked-Totem");
         AntiillegalPlayerSwapOffhandEnabled = plugin.getConfig().getBoolean("Antiillegal.PlayerSwapOffhand-Enabled");
+        AntiillegalIllegalItemsList = plugin.getConfig().getStringList("Antiillegal.Illegal-Items-List");
+        ItemUtils.loadIllegalMaterials();
+        IllegalEnchantsThreshold = plugin.getConfig().getInt("IllegalEnchants.Threshold");
     }
 }
