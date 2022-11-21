@@ -71,7 +71,7 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new DispenserCrash(), this);
 		pluginManager.registerEvents(new ConnectionEvent(), this);
 		// AntiIllegal events
-		pluginManager.registerEvents(new CleanIllegal(this), this);
+		pluginManager.registerEvents(new CleanIllegal(), this);
 	}
 
 	public void loadConfig() {

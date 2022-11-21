@@ -38,6 +38,16 @@ public class ConfigCache {
     public static String ConnectionPlayerJoinMessage;
     public static String ConnectionPlayerLeaveMessage;
 
+    public static boolean AntiillegalBlockPlaceEnabled;
+    public static boolean AntiillegalChunkLoadEnabled;
+    public static boolean AntiillegalHopperTransferEnabled;
+    public static boolean AntiillegalInventoryCloseEnabled;
+    public static boolean AntiillegalInventoryOpenEnabled;
+    public static boolean AntiillegalItemPickupEnabled;
+    public static boolean AntiillegalHotbarMoveEnabled;
+    public static boolean AntiillegalDeleteStackedTotem;
+    public static boolean AntiillegalPlayerSwapOffhandEnabled;
+
     public static void loadConfig() {
         IllegalBlockPlaceEnabled = plugin.getConfig().getBoolean("IllegalBlockPlace.Enabled");
         IllegalBlockPlaceMessage = plugin.getConfig().getString("IllegalBlockPlace.Message");
@@ -62,7 +72,14 @@ public class ConfigCache {
         FirstJoinMessage = plugin.getConfig().getString("FirstJoin.Message");
         ConnectionPlayerJoinMessage = plugin.getConfig().getString("Connection.Player-Join-Message");
         ConnectionPlayerLeaveMessage = plugin.getConfig().getString("Connection.Player-Leave-Message");
-
-
+        AntiillegalBlockPlaceEnabled = plugin.getConfig().getBoolean("Antiillegal.BlockPlace-Enabled");
+        AntiillegalChunkLoadEnabled = plugin.getConfig().getBoolean("Antiillegal.ChunkLoad-Enabled");
+        AntiillegalHopperTransferEnabled = plugin.getConfig().getBoolean("Antiillegal.HopperTransfer-Enabled");
+        AntiillegalInventoryCloseEnabled = plugin.getConfig().getBoolean("Antiillegal.InventoryClose-Enabled");
+        AntiillegalInventoryOpenEnabled = plugin.getConfig().getBoolean("Antiillegal.InventoryOpen-Enabled");
+        AntiillegalItemPickupEnabled = plugin.getConfig().getBoolean("Antiillegal.ItemPickup-Enabled");
+        AntiillegalHotbarMoveEnabled = plugin.getConfig().getBoolean("Antiillegal.HotbarMove-Enabled");
+        AntiillegalDeleteStackedTotem = plugin.getConfig().getBoolean("Antiillegal.Delete-Stacked-Totem");
+        AntiillegalPlayerSwapOffhandEnabled = plugin.getConfig().getBoolean("Antiillegal.PlayerSwapOffhand-Enabled");
     }
 }
