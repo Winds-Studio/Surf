@@ -30,6 +30,8 @@ public class ConfigCache {
 
     public static int BlockPhysicsDisableTPS;
 
+    public static int MinecartPerChunkLimit;
+
     public static void loadConfig() {
         IllegalBlockPlaceEnabled = plugin.getConfig().getBoolean("IllegalBlockPlace.Enabled");
         IllegalBlockPlaceMessage = plugin.getConfig().getString("IllegalBlockPlace.Message");
@@ -49,6 +51,7 @@ public class ConfigCache {
         IllegalDamageMessage = plugin.getConfig().getString("IllegalDamage.Message");
         IllegalPotionMessage = plugin.getConfig().getString("IllegalPotion.Message");
         BlockPhysicsDisableTPS = plugin.getConfig().getInt("BlockPhysics-disable-tps");
+        MinecartPerChunkLimit = plugin.getConfig().getInt("Minecart-per-chunk.limit");
 
     }
 }
