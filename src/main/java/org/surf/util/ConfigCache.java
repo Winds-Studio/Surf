@@ -17,6 +17,13 @@ public class ConfigCache {
     public static String ChunkBanPreventMessage;
     public static int ChunkBanSkullMax;
 
+    public static boolean NetherEnabled;
+    public static int NetherTopLayer;
+    public static int NetherBottomLayer;
+    public static String NetherTopMessage;
+    public static String NetherBottomMessage;
+    public static boolean NetherTopBottomDoDamage;
+
     public static void loadConfig() {
         IllegalBlockPlaceEnabled = plugin.getConfig().getBoolean("IllegalBlockPlace.Enabled");
         IllegalBlockPlaceMessage = plugin.getConfig().getString("IllegalBlockPlace.Message");
@@ -26,5 +33,11 @@ public class ConfigCache {
         ChunkBanTileEntityMax = plugin.getConfig().getInt("ChunkBan.TileEntity-Max");
         ChunkBanPreventMessage = plugin.getConfig().getString("ChunkBan.Prevent-Message");
         ChunkBanSkullMax = plugin.getConfig().getInt("ChunkBan.Skull-Max");
+        NetherEnabled = plugin.getConfig().getBoolean("Nether.Enabled");
+        NetherTopLayer = plugin.getConfig().getInt("Nether.Top-Layer");
+        NetherBottomLayer = plugin.getConfig().getInt("Nether.Bottom-Layer");
+        NetherTopMessage = plugin.getConfig().getString("Nether.Top-message");
+        NetherBottomMessage = plugin.getConfig().getString("Nether.Bottom-message");
+        NetherTopBottomDoDamage = plugin.getConfig().getBoolean("Nether.top-bottom-do-damage");
     }
 }

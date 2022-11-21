@@ -12,7 +12,6 @@ import org.surf.modules.antilag.*;
 import org.surf.modules.patches.*;
 import org.surf.util.*;
 
-import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -27,11 +26,9 @@ public class Main extends JavaPlugin {
 
 	private final PluginManager pluginManager = getServer().getPluginManager();
 
-	private final HashMap<String, Integer> entityIntegerHashMap = new HashMap<>();
 	private final ScheduledExecutorService service = Executors.newScheduledThreadPool(4);
 
 	private final CommandHandler commandHandler = new CommandHandler(this);
-	public final Queue<String> discordAlertQueue = new LinkedList<>();
 
 	public void onEnable() {
 		instance = this;
@@ -64,7 +61,7 @@ public class Main extends JavaPlugin {
 		}
 		pluginManager.registerEvents(new BookBan(), this);
 		pluginManager.registerEvents(new ChunkBan(), this);
-		pluginManager.registerEvents(new MoveEvent(this), this);
+		pluginManager.registerEvents(new NetherCheck(), this);
 		pluginManager.registerEvents(new EntityDamageEvent(this), this);
 		pluginManager.registerEvents(new WitherSpawn(), this);
 		pluginManager.registerEvents(new BlockPhysics(this), this);
