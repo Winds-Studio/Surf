@@ -17,7 +17,7 @@ import java.util.Arrays;
 
 public class ChunkBan implements Listener {
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPlace(BlockPlaceEvent event) {
         if (!ConfigCache.ChunkBanEnabled) {
             return;
@@ -25,19 +25,17 @@ public class ChunkBan implements Listener {
         Block block = event.getBlock();
         Player player = event.getPlayer();
         Chunk chunk = block.getChunk();
-        if (!player.hasPermission("chunkban.bypass")) {
-            if (isChecked(block)) {
-                if (chunk.getTileEntities().length > ConfigCache.ChunkBanTileEntityMax) {
-                    event.setCancelled(true);
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigCache.ChunkBanPreventMessage));
-                }
-            }
+        if (player.hasPermission("chunkban.bypass")) {
+            return;
         }
-        if (block.getType() == Material.PLAYER_HEAD || block.getType() == Material.PLAYER_WALL_HEAD) {
+        if (isChecked(block) && chunk.getTileEntities().length > ConfigCache.ChunkBanTileEntityMax) {
+            event.setCancelled(true);
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigCache.ChunkBanPreventMessage));
+            return;
+        }
+        if (isSkull(block.getType())) {
             // get chunk skull count
-            long skullCount = Arrays.stream(chunk.getTileEntities())
-                    .filter(tileEntity -> tileEntity.getType() == Material.PLAYER_HEAD || tileEntity.getType() == Material.PLAYER_WALL_HEAD)
-                    .count();
+            long skullCount = Arrays.stream(chunk.getTileEntities()).filter(tileEntity -> isSkull(tileEntity.getType())).count();
             if (skullCount > ConfigCache.ChunkBanSkullMax) {
                 event.setCancelled(true);
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigCache.ChunkBanPreventMessage));
@@ -84,6 +82,18 @@ public class ChunkBan implements Listener {
             case ENDER_CHEST:
             case FLOWER_POT:
             case BLACK_BANNER:
+            case PLAYER_HEAD:
+            case PLAYER_WALL_HEAD:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private boolean isSkull(Material material) {
+        switch (material) {
+            case PLAYER_HEAD:
+            case PLAYER_WALL_HEAD:
                 return true;
             default:
                 return false;
