@@ -24,6 +24,10 @@ public class ConfigCache {
     public static String NetherBottomMessage;
     public static boolean NetherTopBottomDoDamage;
 
+    public static boolean AntiIllegalCheckIllegalDamage;
+    public static String IllegalDamageMessage;
+    public static String IllegalPotionMessage;
+
     public static void loadConfig() {
         IllegalBlockPlaceEnabled = plugin.getConfig().getBoolean("IllegalBlockPlace.Enabled");
         IllegalBlockPlaceMessage = plugin.getConfig().getString("IllegalBlockPlace.Message");
@@ -39,5 +43,9 @@ public class ConfigCache {
         NetherTopMessage = plugin.getConfig().getString("Nether.Top-message");
         NetherBottomMessage = plugin.getConfig().getString("Nether.Bottom-message");
         NetherTopBottomDoDamage = plugin.getConfig().getBoolean("Nether.top-bottom-do-damage");
+        AntiIllegalCheckIllegalDamage = plugin.getConfig().getBoolean("Antiillegal.Check-Illegal-Damage");
+        IllegalDamageMessage = plugin.getConfig().getString("IllegalDamage.Message");
+        IllegalPotionMessage = plugin.getConfig().getString("IllegalPotion.Message");
+
     }
 }

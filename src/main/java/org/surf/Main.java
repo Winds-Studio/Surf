@@ -62,7 +62,7 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new BookBan(), this);
 		pluginManager.registerEvents(new ChunkBan(), this);
 		pluginManager.registerEvents(new NetherCheck(), this);
-		pluginManager.registerEvents(new EntityDamageEvent(this), this);
+		pluginManager.registerEvents(new IllegalDamageAndPotionCheck(), this);
 		pluginManager.registerEvents(new WitherSpawn(), this);
 		pluginManager.registerEvents(new BlockPhysics(this), this);
 		pluginManager.registerEvents(new BucketEvent(this), this);
