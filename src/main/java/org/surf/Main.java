@@ -64,7 +64,7 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new NetherCheck(), this);
 		pluginManager.registerEvents(new IllegalDamageAndPotionCheck(), this);
 		pluginManager.registerEvents(new WitherSpawn(), this);
-		pluginManager.registerEvents(new BlockPhysics(this), this);
+		pluginManager.registerEvents(new BlockPhysics(), this);
 		pluginManager.registerEvents(new BucketEvent(this), this);
 		pluginManager.registerEvents(new MinecartLag(this), this);
 //		pluginManager.registerEvents(new ChestLagFix(this), this);
