@@ -5,7 +5,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.surf.command.CommandHandler;
 import org.surf.command.NotInPluginYMLException;
-import org.surf.modules.BlockPlace;
+import org.surf.modules.IllegalBlockCheck;
 import org.surf.modules.*;
 import org.surf.modules.antiillegal.*;
 import org.surf.modules.antilag.*;
@@ -54,7 +54,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public void registerEvents() {
-		pluginManager.registerEvents(new BlockPlace(), this);
+		pluginManager.registerEvents(new IllegalBlockCheck(), this);
 		pluginManager.registerEvents(new Offhand(), this);
 		if (PaperLib.isPaper()) {
 			pluginManager.registerEvents(new GateWay(), this);

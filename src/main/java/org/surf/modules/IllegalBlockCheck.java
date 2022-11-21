@@ -1,22 +1,22 @@
 package org.surf.modules;
 
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.surf.Main;
+import org.bukkit.inventory.EquipmentSlot;
 import org.surf.util.ConfigCache;
 import org.surf.util.Utils;
 
-public class BlockPlace implements Listener {
+public class IllegalBlockCheck implements Listener {
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onBlockPlace(BlockPlaceEvent event) {
         if (!ConfigCache.IllegalBlockPlaceEnabled) {
             return;
         }
         Player player = event.getPlayer();
+        // GET HAND
         switch (event.getBlock().getType()) {
             case BEDROCK:
             case BARRIER:
@@ -32,17 +32,17 @@ public class BlockPlace implements Listener {
             case STRUCTURE_VOID:
             case JIGSAW:
             case LIGHT:
+            case END_PORTAL_FRAME:
                 event.setCancelled(true);
                 Utils.sendMessage(player, ConfigCache.IllegalBlockPlaceMessage);
-                event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
-                break;
-            case END_PORTAL_FRAME:
-                if (player.getInventory().getItemInMainHand().getType() == Material.END_PORTAL_FRAME || player.getInventory().getItemInOffHand().getType() == Material.END_PORTAL_FRAME) {
-                    event.setCancelled(true);
-                    Utils.sendMessage(player, ConfigCache.IllegalBlockPlaceMessage);
-                    event.getPlayer().getInventory().getItemInMainHand().setType(Material.AIR);
+                // clear item by hand
+                if (event.getHand() == EquipmentSlot.HAND) {
+                    player.getInventory().setItemInMainHand(null);
+                } else {
+                    player.getInventory().setItemInOffHand(null);
                 }
                 break;
+            // clear item by hand
         }
     }
 }
