@@ -32,6 +32,12 @@ public class ConfigCache {
 
     public static int MinecartPerChunkLimit;
 
+    public static boolean FirstJoinEnabled;
+    public static String FirstJoinMessage;
+
+    public static String ConnectionPlayerJoinMessage;
+    public static String ConnectionPlayerLeaveMessage;
+
     public static void loadConfig() {
         IllegalBlockPlaceEnabled = plugin.getConfig().getBoolean("IllegalBlockPlace.Enabled");
         IllegalBlockPlaceMessage = plugin.getConfig().getString("IllegalBlockPlace.Message");
@@ -52,6 +58,11 @@ public class ConfigCache {
         IllegalPotionMessage = plugin.getConfig().getString("IllegalPotion.Message");
         BlockPhysicsDisableTPS = plugin.getConfig().getInt("BlockPhysics-disable-tps");
         MinecartPerChunkLimit = plugin.getConfig().getInt("Minecart-per-chunk.limit");
+        FirstJoinEnabled = plugin.getConfig().getBoolean("FirstJoin.Enabled");
+        FirstJoinMessage = plugin.getConfig().getString("FirstJoin.Message");
+        ConnectionPlayerJoinMessage = plugin.getConfig().getString("Connection.Player-Join-Message");
+        ConnectionPlayerLeaveMessage = plugin.getConfig().getString("Connection.Player-Leave-Message");
+
 
     }
 }

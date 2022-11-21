@@ -69,7 +69,7 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new MinecartLag(this), this);
 //		pluginManager.registerEvents(new ChestLagFix(this), this);
 		pluginManager.registerEvents(new DispenserCrash(), this);
-		pluginManager.registerEvents(new ConnectionEvent(this), this);
+		pluginManager.registerEvents(new ConnectionEvent(), this);
 		// AntiIllegal events
 		pluginManager.registerEvents(new CleanIllegal(this), this);
 	}
