@@ -22,7 +22,7 @@ public class MinecartLag implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onSpawn(VehicleCreateEvent event) {
         Chunk chunk = event.getVehicle().getChunk();
         Vehicle vehicle = event.getVehicle();
