@@ -1,7 +1,7 @@
 name: Surf
 version: '${version}'
 main: org.surf.Main
-authors: [ 254n_m, Leeewith3Es, Dreeam ]
+authors: [ 254n_m, Leeewith3Es, Dreeam, Loyisa ]
 description:  ${project.description}
 website: https://breeze.asia
 api-version: 1.19

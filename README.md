@@ -1,7 +1,7 @@
 # Surf
 Surf is a fork of [LeeesExploitFixer](https://github.com/XeraPlugins/LeeesExploitFixer-3.0) of a fork of 254nm's [L2X9Core](https://github.com/254nm/L2X9Core)
 
-A plugin to remove illegal and NBT items. 1.8 - 1.19.2
+A plugin to remove illegal and NBT items. 1.7.2 - 1.19.2
 
 Join Winds Anarchy>>*IP Breeze.asia*
 ___

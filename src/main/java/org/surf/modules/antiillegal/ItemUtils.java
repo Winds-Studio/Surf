@@ -1,6 +1,5 @@
 package org.surf.modules.antiillegal;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -8,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.surf.Main;
+import org.surf.util.ConfigCache;
 import org.surf.util.Utils;
 
 import java.util.*;
@@ -17,29 +17,35 @@ import java.util.logging.Level;
 public class ItemUtils {
     private final static Main plugin = Main.getInstance();
 
-    public static boolean isIllegal(ItemStack item) {
-        List<String> items = plugin.getConfig().getStringList("Antiillegal.Illegal-Items-List");
-        List<Material> materials = new ArrayList<>();
-        List<Material> knownMaterials = Arrays.asList(Material.values());
-        for (String material : items) {
-            String upperCaseMat = material.toUpperCase();
-            if (knownMaterials.contains(Material.getMaterial(upperCaseMat))) {
-                materials.add(Material.getMaterial(upperCaseMat));
-            } else {
-                plugin.getLogger().log(Level.SEVERE, ChatColor.translateAlternateColorCodes('&', "&cInvalid configuration option Antiillegal.Illegal-Items-List " + material));
+    public final static Set<Material> ILLEGALMATERIALS = new HashSet<>();
+
+    public static void loadIllegalMaterials() {
+        ILLEGALMATERIALS.clear();
+        List<String> items = ConfigCache.AntiillegalIllegalItemsList;
+        for (String item : items) {
+            Material material = Material.getMaterial(item);
+            if (material == null) {
+                plugin.getLogger().log(Level.WARNING, "Invalid material: " + item);
+                continue;
             }
+            ILLEGALMATERIALS.add(material);
         }
-        return materials.contains(item.getType());
+
+    }
+
+    public static boolean isIllegal(ItemStack item) {
+        return ILLEGALMATERIALS.contains(item.getType());
     }
 
     public static boolean hasIllegalItemFlag(ItemStack item) {
         if (item.hasItemMeta()) {
             ItemMeta meta = item.getItemMeta();
-            return meta.hasItemFlag(ItemFlag.HIDE_ATTRIBUTES) || meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_DYE) || meta.hasItemFlag(ItemFlag.HIDE_PLACED_ON) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS) || meta.hasItemFlag(ItemFlag.HIDE_UNBREAKABLE) || meta.hasItemFlag(ItemFlag.HIDE_DESTROYS) || meta.isUnbreakable();
+            return meta.hasItemFlag(ItemFlag.HIDE_ATTRIBUTES) || meta.hasItemFlag(ItemFlag.HIDE_DESTROYS) || meta.hasItemFlag(ItemFlag.HIDE_DYE) || meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_PLACED_ON) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS) || meta.hasItemFlag(ItemFlag.HIDE_UNBREAKABLE) || meta.isUnbreakable();
         }
         return false;
     }
 
+    // TODO - Add ability to filter for custom NBT attributes[configurable]
     public static boolean hasIllegalAttributes(ItemStack item) {
         if (item.hasItemMeta()) {
             ItemMeta meta = item.getItemMeta();
@@ -48,22 +54,10 @@ public class ItemUtils {
         return false;
     }
 
-    //TODO
-//    public boolean hasIllegalAttributes(ItemStack item) {
-//        if (item.hasItemMeta()) {
-//            ItemMeta meta = item.getItemMeta();
-//            Multimap<Attribute, AttributeModifier> attribute = meta.getAttributeModifiers();
-//            for (AttributeModifier level : attribute.values()) {
-//                return level > 5;
-//            }
-//        }
-//        return false;
-//    }
-
     public static boolean hasIllegalEnchants(ItemStack item) {
         Map<Enchantment, Integer> enchants = item.getEnchantments();
         for (int level : enchants.values()) {
-            return level > plugin.getConfig().getInt("IllegalEnchants.Threshold");
+            return level > ConfigCache.IllegalEnchantsThreshold;
         }
         return false;
     }

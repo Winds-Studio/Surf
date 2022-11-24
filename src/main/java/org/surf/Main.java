@@ -5,17 +5,13 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.surf.command.CommandHandler;
 import org.surf.command.NotInPluginYMLException;
-import org.surf.modules.BlockPlace;
+import org.surf.modules.IllegalBlockCheck;
 import org.surf.modules.*;
 import org.surf.modules.antiillegal.*;
 import org.surf.modules.antilag.*;
 import org.surf.modules.patches.*;
-import org.surf.util.Metrics;
-import org.surf.util.SecondPassEvent;
-import org.surf.util.TenSecondPassEvent;
-import org.surf.util.Utils;
+import org.surf.util.*;
 
-import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -30,16 +26,14 @@ public class Main extends JavaPlugin {
 
 	private final PluginManager pluginManager = getServer().getPluginManager();
 
-	private final HashMap<String, Integer> entityIntegerHashMap = new HashMap<>();
 	private final ScheduledExecutorService service = Executors.newScheduledThreadPool(4);
 
 	private final CommandHandler commandHandler = new CommandHandler(this);
-	public final Queue<String> discordAlertQueue = new LinkedList<>();
 
 	public void onEnable() {
 		instance = this;
 		// TODO: config system
-		saveDefaultConfig();
+		this.loadConfig();
 		int pluginId = 16810;
 		new Metrics(this, pluginId);
 
@@ -60,24 +54,29 @@ public class Main extends JavaPlugin {
 	}
 
 	public void registerEvents() {
-		pluginManager.registerEvents(new BlockPlace(this), this);
-		pluginManager.registerEvents(new Offhand(this), this);
+		pluginManager.registerEvents(new IllegalBlockCheck(), this);
+		pluginManager.registerEvents(new Offhand(), this);
 		if (PaperLib.isPaper()) {
-			pluginManager.registerEvents(new GateWay(this), this);
+			pluginManager.registerEvents(new GateWay(), this);
 		}
 		pluginManager.registerEvents(new BookBan(), this);
-		pluginManager.registerEvents(new ChunkBan(this), this);
-		pluginManager.registerEvents(new MoveEvent(this), this);
-		pluginManager.registerEvents(new EntityDamageEvent(this), this);
+		pluginManager.registerEvents(new ChunkBan(), this);
+		pluginManager.registerEvents(new NetherCheck(), this);
+		pluginManager.registerEvents(new IllegalDamageAndPotionCheck(), this);
 		pluginManager.registerEvents(new WitherSpawn(), this);
-		pluginManager.registerEvents(new BlockPhysics(this), this);
-		pluginManager.registerEvents(new BucketEvent(this), this);
+		pluginManager.registerEvents(new BlockPhysics(), this);
+		pluginManager.registerEvents(new BucketEvent(), this);
 		pluginManager.registerEvents(new MinecartLag(this), this);
 //		pluginManager.registerEvents(new ChestLagFix(this), this);
-		pluginManager.registerEvents(new Dispensor(this), this);
-		pluginManager.registerEvents(new ConnectionEvent(this), this);
+		pluginManager.registerEvents(new DispenserCrash(), this);
+		pluginManager.registerEvents(new ConnectionEvent(), this);
 		// AntiIllegal events
-		pluginManager.registerEvents(new CleanIllegal(this), this);
+		pluginManager.registerEvents(new CleanIllegal(), this);
+	}
+
+	public void loadConfig() {
+		saveDefaultConfig();
+		ConfigCache.loadConfig();
 	}
 
 	public void onDisable() {
