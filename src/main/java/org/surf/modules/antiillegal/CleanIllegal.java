@@ -18,8 +18,6 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import org.bukkit.inventory.meta.ItemMeta;
-import org.surf.Main;
 import org.surf.util.ConfigCache;
 
 public class CleanIllegal implements Listener {
@@ -63,6 +61,12 @@ public class CleanIllegal implements Listener {
         }
         for (ItemStack item : inv.getStorageContents()) {
             if (item != null) {
+                // code from https://github.com/moom0o/AnarchyExploitFixes/blob/b82a47bc23462900ece0ec3c30cfce0b25ff36f9/src/main/java/me/moomoo/anarchyexploitfixes/Main.java#L299
+                if (item.getType().name().equals("GOLDEN_APPLE")) {
+                    if (item.getData().toString().equals("GOLDEN_APPLE(0)") || item.getData().toString().equals("GOLDEN_APPLE(1)") || item.getData().toString().equals("GOLDEN_APPLE0")) {
+                        return;
+                    }
+                }
                 if (item.getDurability() > item.getType().getMaxDurability()) {
                     item.setDurability(item.getType().getMaxDurability());
                 }
@@ -146,11 +150,9 @@ public class CleanIllegal implements Listener {
             if (!ConfigCache.AntiillegalDeleteStackedTotem) {
                 return;
             }
-            if (itemStack != null) {
-                if (itemStack.getType() == Material.TOTEM) {
-                    if (itemStack.getAmount() > itemStack.getMaxStackSize()) {
-                        event.setCancelled(true);
-                    }
+            if (itemStack != null && itemStack.getType() == Material.TOTEM) {
+                if (itemStack.getAmount() > itemStack.getMaxStackSize()) {
+                    event.setCancelled(true);
                 }
             }
         }

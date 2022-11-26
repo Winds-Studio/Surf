@@ -71,6 +71,12 @@ public class ItemUtils {
             return;
         }
         for (ItemStack item : inventory.getContents()) {
+            // code from https://github.com/moom0o/AnarchyExploitFixes/blob/b82a47bc23462900ece0ec3c30cfce0b25ff36f9/src/main/java/me/moomoo/anarchyexploitfixes/Main.java#L299
+            if (!(item == null) && item.getType().name().equals("GOLDEN_APPLE")) {
+                if (item.getData().toString().equals("GOLDEN_APPLE(0)") || item.getData().toString().equals("GOLDEN_APPLE(1)") || item.getData().toString().equals("GOLDEN_APPLE0")) {
+                    return;
+                }
+            }
             // if item is null, skip
             if (item == null) {
                 continue;
