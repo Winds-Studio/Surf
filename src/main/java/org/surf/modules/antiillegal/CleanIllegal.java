@@ -18,7 +18,6 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import org.surf.Main;
 import org.surf.util.ConfigCache;
 
 public class CleanIllegal implements Listener {
@@ -145,11 +144,9 @@ public class CleanIllegal implements Listener {
             if (!ConfigCache.AntiillegalDeleteStackedTotem) {
                 return;
             }
-            if (itemStack != null) {
-                if (itemStack.getType() == Material.TOTEM_OF_UNDYING) {
-                    if (itemStack.getAmount() > itemStack.getMaxStackSize()) {
-                        event.setCancelled(true);
-                    }
+            if (itemStack != null && itemStack.getType() == Material.TOTEM_OF_UNDYING) {
+                if (itemStack.getAmount() > itemStack.getMaxStackSize()) {
+                    event.setCancelled(true);
                 }
             }
         }
