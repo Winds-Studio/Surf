@@ -1,4 +1,4 @@
-# Surf 3.3.5
+# Surf 3.3.5-1122
 # Contact me on QQ:2682173972 or Discord Dreeam#0851
 # For help with this plugin
 
@@ -30,21 +30,19 @@ Antiillegal:
   Illegal-Items-List:
     - "BARRIER"
     - "BEDROCK"
-    - "REPEATING_COMMAND_BLOCK"
-    - "COMMAND_BLOCK_MINECART"
-    - "CHAIN_COMMAND_BLOCK"
-    - "COMMAND_BLOCK"
+    - "COMMAND_REPEATING"
+    - "COMMAND_MINECART"
+    - "COMMAND_CHAIN"
+    - "COMMAND"
     - "KNOWLEDGE_BOOK"
-    - "SPAWNER"
-    - "END_PORTAL"
-    - "END_PORTAL_FRAME"
+    - "MOB_SPAWNER"
+    - "ENDER_PORTAL"
+    - "ENDER_PORTAL_FRAME"
     - "END_GATEWAY"
-    - "NETHER_PORTAL"
+    - "PORTAL"
     - "STRUCTURE_BLOCK"
     - "STRUCTURE_VOID"
-    - "JIGSAW"
-    - "LIGHT"
-    -
+
 IllegalDamage:
   Message: "&6&l[&b&lSurf&6&l]&6&6 You can not use this illegal item"
 IllegalPotion:

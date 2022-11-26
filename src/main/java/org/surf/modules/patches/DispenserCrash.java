@@ -3,10 +3,10 @@ package org.surf.modules.patches;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.data.Directional;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDispenseEvent;
+import org.bukkit.material.Directional;
 
 public class DispenserCrash implements Listener {
 
@@ -18,7 +18,7 @@ public class DispenserCrash implements Listener {
     public void dispense(BlockDispenseEvent event) {
         Block block = event.getBlock();
         if (block.getType() == Material.DISPENSER) {
-            BlockFace face = ((Directional) block.getBlockData()).getFacing();
+            BlockFace face = ((Directional) block.getState()).getFacing();
             boolean isY0FacingDown = block.getY() == 0 && face == BlockFace.DOWN;
             boolean isYMaxFacingUp = block.getY() == block.getWorld().getMaxHeight() - 1 && face == BlockFace.UP;
             if (isY0FacingDown || isYMaxFacingUp) {

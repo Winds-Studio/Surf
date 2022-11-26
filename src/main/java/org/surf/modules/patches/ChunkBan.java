@@ -67,23 +67,21 @@ public class ChunkBan implements Listener {
     private boolean isChecked(Block block) {
         switch (block.getType()) {
             case FURNACE:
-                //TODO
             case TRAPPED_CHEST:
-//			case ENCHANTMENT_TABLE:
-//			case WALL_BANNER:
-            case ACACIA_SIGN:
-            case ACACIA_WALL_SIGN:
+            case ENCHANTMENT_TABLE:
+            case WALL_BANNER:
+            case WALL_SIGN:
+            case SIGN:
             case HOPPER:
             case DROPPER:
             case DISPENSER:
             case BREWING_STAND:
             case BEACON:
-//			case SIGN_POST:
+            case SIGN_POST:
             case ENDER_CHEST:
             case FLOWER_POT:
-            case BLACK_BANNER:
-            case PLAYER_HEAD:
-            case PLAYER_WALL_HEAD:
+            case BANNER:
+            case STANDING_BANNER:
                 return true;
             default:
                 return false;
@@ -92,8 +90,8 @@ public class ChunkBan implements Listener {
 
     private boolean isSkull(Material material) {
         switch (material) {
-            case PLAYER_HEAD:
-            case PLAYER_WALL_HEAD:
+            case SKULL:
+            case SKULL_ITEM:
                 return true;
             default:
                 return false;

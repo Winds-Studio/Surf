@@ -112,7 +112,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
         Player shooter = (Player) arrow.getShooter();
         for (PotionEffect effects : arrow.getCustomEffects()) {
             if (effects.getAmplifier() > 4 || effects.getDuration() > 12000) {
-                event.setCancelled(true);
+                shooter.getInventory().remove(Material.TIPPED_ARROW);
                 Utils.sendMessage(shooter, ConfigCache.IllegalPotionMessage);
                 break;
             }

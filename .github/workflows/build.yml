@@ -1,7 +1,7 @@
 name: Build Surf
 on:
   push:
-    branches: [ main ]
+    branches: [ feature/1.12.2 ]
 jobs:
   build:
     name: Build

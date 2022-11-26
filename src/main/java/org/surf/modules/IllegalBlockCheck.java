@@ -20,19 +20,17 @@ public class IllegalBlockCheck implements Listener {
         switch (event.getBlock().getType()) {
             case BEDROCK:
             case BARRIER:
-            case SPAWNER:
-            case REPEATING_COMMAND_BLOCK:
-            case COMMAND_BLOCK_MINECART:
-            case CHAIN_COMMAND_BLOCK:
-            case COMMAND_BLOCK:
-            case END_PORTAL:
+            case MOB_SPAWNER:
+            case COMMAND_REPEATING:
+            case COMMAND_MINECART:
+            case COMMAND_CHAIN:
+            case COMMAND:
+            case ENDER_PORTAL:
             case END_GATEWAY:
-            case NETHER_PORTAL:
+            case PORTAL:
             case STRUCTURE_BLOCK:
             case STRUCTURE_VOID:
-            case JIGSAW:
-            case LIGHT:
-            case END_PORTAL_FRAME:
+            case ENDER_PORTAL_FRAME:
                 event.setCancelled(true);
                 Utils.sendMessage(player, ConfigCache.IllegalBlockPlaceMessage);
                 // clear item by hand

@@ -18,6 +18,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import org.bukkit.inventory.meta.ItemMeta;
 import org.surf.Main;
 import org.surf.util.ConfigCache;
 
@@ -69,7 +70,7 @@ public class CleanIllegal implements Listener {
                     item.setDurability((short) 1);
                 }
 
-                if (ItemUtils.isIllegal(item) || ItemUtils.hasIllegalItemFlag(item) || ItemUtils.hasIllegalAttributes(item) || ItemUtils.hasIllegalEnchants(item) || item.hasItemMeta()) {
+                if (ItemUtils.isIllegal(item) || ItemUtils.hasIllegalItemFlag(item) || ItemUtils.hasIllegalEnchants(item) || item.hasItemMeta()) {
                     inv.remove(item);
                     event.setCancelled(true);
                 }
@@ -103,7 +104,7 @@ public class CleanIllegal implements Listener {
         if (ConfigCache.AntiillegalItemPickupEnabled) {
             ItemStack item = event.getItem().getItemStack();
             if (ItemUtils.isEnchantedBlock(item) || ItemUtils.hasIllegalItemFlag(item) || ItemUtils.hasIllegalEnchants(item)
-                    || ItemUtils.isIllegal(item) || ItemUtils.hasIllegalAttributes(item)) {
+                    || ItemUtils.isIllegal(item)) {
                 event.setCancelled(true);
                 event.getItem().remove();
             }
@@ -126,7 +127,7 @@ public class CleanIllegal implements Listener {
             if (!ConfigCache.AntiillegalDeleteStackedTotem) {
                 return;
             }
-            if (itemStack != null && itemStack.getType() == Material.TOTEM_OF_UNDYING) {
+            if (itemStack != null && itemStack.getType() == Material.TOTEM) {
                 if (itemStack.getAmount() > itemStack.getMaxStackSize()) {
                     itemStack.setAmount(itemStack.getMaxStackSize());
                 }
@@ -146,7 +147,7 @@ public class CleanIllegal implements Listener {
                 return;
             }
             if (itemStack != null) {
-                if (itemStack.getType() == Material.TOTEM_OF_UNDYING) {
+                if (itemStack.getType() == Material.TOTEM) {
                     if (itemStack.getAmount() > itemStack.getMaxStackSize()) {
                         event.setCancelled(true);
                     }
