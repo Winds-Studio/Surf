@@ -1,6 +1,9 @@
 package org.surf;
 
 import io.papermc.lib.PaperLib;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.surf.command.CommandHandler;
@@ -45,6 +48,9 @@ public class Main extends JavaPlugin {
 		}
 		// register event
 		this.registerEvents();
+		if (ConfigCache.AntiillegalDeleteStackedTotem) {
+			Bukkit.getServer().getScheduler().runTaskTimer(this, () -> Bukkit.getWorlds().forEach(b -> b.getPlayers().forEach(e -> e.getInventory().forEach(this::revert))), 0L, 20L);
+		}
 		//Alert system events
 		PaperLib.suggestPaper(this);
 		//Server specific events
@@ -87,4 +93,12 @@ public class Main extends JavaPlugin {
 		return commandHandler;
 	}
 
+	// Original code by moom0o, https://github.com/moom0o/AnarchyExploitFixes
+	public void revert(ItemStack item) {
+		if (item != null) {
+			if (ConfigCache.AntiillegalDeleteStackedTotem && item.getType() == Material.TOTEM_OF_UNDYING && item.getAmount() > item.getMaxStackSize()) {
+					item.setAmount(item.getMaxStackSize());
+			}
+		}
+	}
 }

@@ -119,21 +119,6 @@ public class CleanIllegal implements Listener {
     }
 
     @EventHandler
-    @AntiIllegal(EventName = "PlayerItemHeldEvent")
-    public void onScroll(PlayerItemHeldEvent event) {
-        for (ItemStack itemStack : event.getPlayer().getInventory().getContents()) {
-            if (!ConfigCache.AntiillegalDeleteStackedTotem) {
-                return;
-            }
-            if (itemStack != null && itemStack.getType() == Material.TOTEM_OF_UNDYING) {
-                if (itemStack.getAmount() > itemStack.getMaxStackSize()) {
-                    itemStack.setAmount(itemStack.getMaxStackSize());
-                }
-            }
-        }
-    }
-
-    @EventHandler
     @AntiIllegal(EventName = "PlayerSwapHandItemsEvent")
     public void onSwapItem(PlayerSwapHandItemsEvent event) {
         if (ConfigCache.AntiillegalPlayerSwapOffhandEnabled) {
