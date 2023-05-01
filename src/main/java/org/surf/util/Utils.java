@@ -6,9 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.surf.Main;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import java.util.logging.Level;
 
 public class Utils {
@@ -25,11 +22,11 @@ public class Utils {
 	}
 
 	public static void sendMessage(Player player, String string) {
-		player.sendMessage(ChatColor.translateAlternateColorCodes('&', string));
+		player.sendMessage(net.kyori.adventure.text.Component.text(ChatColor.translateAlternateColorCodes('&', string)));
 	}
 
 	public static void sendMessage(CommandSender sender, String string) {
-		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', string));
+		sender.sendMessage(net.kyori.adventure.text.Component.text(ChatColor.translateAlternateColorCodes('&', string)));
 	}
 
 	public static void kickPlayer(Player player, String string) {
@@ -39,7 +36,7 @@ public class Utils {
 	public static void sendOpMessage(String message) {
 		for (Player online : Bukkit.getOnlinePlayers()) {
 			if (online.isOp()) {
-				online.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+				online.sendMessage(net.kyori.adventure.text.Component.text(ChatColor.translateAlternateColorCodes('&', message)));
 
 			}
 		}

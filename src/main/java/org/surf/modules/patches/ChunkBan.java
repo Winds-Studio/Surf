@@ -12,6 +12,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.surf.util.ConfigCache;
+import org.surf.util.Utils;
 
 import java.util.Arrays;
 
@@ -30,7 +31,7 @@ public class ChunkBan implements Listener {
         }
         if (isChecked(block) && chunk.getTileEntities().length > ConfigCache.ChunkBanTileEntityMax) {
             event.setCancelled(true);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigCache.ChunkBanPreventMessage));
+            Utils.sendMessage(player, ConfigCache.ChunkBanPreventMessage);
             return;
         }
         if (isSkull(block.getType())) {
@@ -38,7 +39,7 @@ public class ChunkBan implements Listener {
             long skullCount = Arrays.stream(chunk.getTileEntities()).filter(tileEntity -> isSkull(tileEntity.getType())).count();
             if (skullCount > ConfigCache.ChunkBanSkullMax) {
                 event.setCancelled(true);
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigCache.ChunkBanPreventMessage));
+                Utils.sendMessage(player, ConfigCache.ChunkBanPreventMessage);
             }
         }
     }
@@ -59,7 +60,7 @@ public class ChunkBan implements Listener {
             long amount = Arrays.stream(chunk.getEntities()).filter(entity -> entity instanceof ItemFrame).count();
             if (amount + chunk.getTileEntities().length > ConfigCache.ChunkBanTileEntityMax) {
                 event.setCancelled(true);
-                event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigCache.ChunkBanPreventMessage));
+                Utils.sendMessage(event.getPlayer(), ConfigCache.ChunkBanPreventMessage);
             }
         }
     }
