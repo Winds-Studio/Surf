@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK 17
+      - name: Set up JDK 19
         uses: actions/setup-java@v3
         with:
-          java-version: 17
+          java-version: 19
           distribution: temurin
           cache: maven
       - name: Build with Maven
@@ -24,8 +24,8 @@ jobs:
       - name: Release Surf
         uses: marvinpinto/action-automatic-releases@latest
         with:
-          title: "Surf v3.3.7"
-          automatic_release_tag: "3.3.7"
+          title: "Surf v3.3.8"
+          automatic_release_tag: "3.3.8"
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           files: "target/Surf-*.jar"
           prerelease: false

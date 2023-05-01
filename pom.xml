@@ -6,7 +6,7 @@
 
     <groupId>org.surf</groupId>
     <artifactId>Surf</artifactId>
-    <version>3.3.7</version>
+    <version>3.3.8</version>
     <packaging>jar</packaging>
 
     <name>Surf</name>
@@ -90,7 +90,7 @@
         <dependency>
             <groupId>io.papermc</groupId>
             <artifactId>paperlib</artifactId>
-            <version>1.0.7</version>
+            <version>1.0.8</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
