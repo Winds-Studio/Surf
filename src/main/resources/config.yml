@@ -25,6 +25,7 @@ Antiillegal:
   HotbarMove-Enabled: true
   ItemPickup-Enabled: true
   PlayerSwapOffhand-Enabled: true
+  PlayerInteract-Enabled: true
   Delete-Stacked-Totem: true
   Check-Illegal-Damage: true
   Illegal-Items-List:

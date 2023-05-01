@@ -142,4 +142,18 @@ public class CleanIllegal implements Listener {
             }
         }
     }
+
+    @EventHandler
+    @AntiIllegal(EventName = "PlayerInteractEvent")
+    public void onSwapItem(PlayerInteractEvent event) {
+        if (ConfigCache.AntiillegalPlayerInteractEnabled) {
+            Player player = event.getPlayer();
+            ItemUtils.deleteIllegals(player.getInventory());
+        }
+        for (ItemStack itemStack : event.getPlayer().getInventory().getContents()) {
+            if (!ConfigCache.AntiillegalDeleteStackedTotem) {
+                return;
+            }
+        }
+    }
 }

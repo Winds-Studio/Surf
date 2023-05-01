@@ -50,6 +50,7 @@ public class ConfigCache {
     public static boolean AntiillegalHotbarMoveEnabled;
     public static boolean AntiillegalDeleteStackedTotem;
     public static boolean AntiillegalPlayerSwapOffhandEnabled;
+    public static boolean AntiillegalPlayerInteractEnabled;
     public static List<String> AntiillegalIllegalItemsList;
 
     public static int IllegalEnchantsThreshold;
@@ -87,6 +88,7 @@ public class ConfigCache {
         AntiillegalHotbarMoveEnabled = plugin.getConfig().getBoolean("Antiillegal.HotbarMove-Enabled");
         AntiillegalDeleteStackedTotem = plugin.getConfig().getBoolean("Antiillegal.Delete-Stacked-Totem");
         AntiillegalPlayerSwapOffhandEnabled = plugin.getConfig().getBoolean("Antiillegal.PlayerSwapOffhand-Enabled");
+        AntiillegalPlayerInteractEnabled = plugin.getConfig().getBoolean("Antiillegal.PlayerInteract-Enabled");
         AntiillegalIllegalItemsList = plugin.getConfig().getStringList("Antiillegal.Illegal-Items-List");
         ItemUtils.loadIllegalMaterials();
         IllegalEnchantsThreshold = plugin.getConfig().getInt("IllegalEnchants.Threshold");

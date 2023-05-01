@@ -1,0 +1,13 @@
+
+    '#(?i)_SPAWN_EGG':
+      armorstandplace: {}
+      armorstandtake: {}
+      attack: {}
+      click: {}
+      delete: {}
+      dispense: {}
+      inventoryclick: {}
+      swap: {}
+      hold: {}
+      use: {}
+      transfer: {}
