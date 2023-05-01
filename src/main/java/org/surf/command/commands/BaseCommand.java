@@ -28,7 +28,7 @@ public class BaseCommand extends org.surf.command.BaseCommand {
                 case "reload":
                     plugin.reloadConfig();
                     ConfigCache.loadConfig();
-                    Utils.sendMessage(sender, Utils.getPrefix() + "&aReloaded configuration file");
+                    sendMessage(sender, Utils.getPrefix() + "&aReloaded configuration file");
                     break;
                 case "version":
                     sendMessage(sender, Utils.getPrefix() + "&6Version &r&c" + plugin.getDescription().getVersion());

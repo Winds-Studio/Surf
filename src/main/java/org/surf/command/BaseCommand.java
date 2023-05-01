@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.surf.Main;
+import org.surf.util.Utils;
 
 public abstract class BaseCommand {
     public final String CONSOLE_ONLY = "This command is console only";
@@ -54,19 +55,17 @@ public abstract class BaseCommand {
         return subCommands;
     }
     public void sendMessage(CommandSender sender, String message) {
-        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+        Utils.sendMessage(sender, message);
     }
 
     public void sendNoPermission(CommandSender sender) {
-        sender.sendMessage(ChatColor.translateAlternateColorCodes(
-                '&',
-                "&4Error:&r&c You are lacking the permission " + getPermission()));
+        Utils.sendMessage(sender, "&4Error:&r&c You are lacking the permission " + getPermission());
     }
 
     public void sendErrorMessage(CommandSender sender, String message) {
         String finalMessage = "&4Error:&r&c " + message;
         finalMessage = ChatColor.translateAlternateColorCodes('&', finalMessage);
-        sender.sendMessage(finalMessage);
+        Utils.sendMessage(sender, finalMessage);
     }
 
     public Player getSenderAsPlayer(CommandSender sender) {

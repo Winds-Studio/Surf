@@ -36,10 +36,10 @@ public class GateWay implements Listener {
             return;
         }
         for (Player nearby : entity.getLocation().getNearbyPlayers(30)) {
-            nearby.sendMessage(ChatColor.GOLD
-                    + "Going through ENDGATEWAY while riding "
+            nearby.sendMessage(net.kyori.adventure.text.Component.text(
+                    "Going through ENDGATEWAY while riding "
                     + entity.getName()
-                    + " is currently patched");
+                    + " is currently patched", net.kyori.adventure.text.format.NamedTextColor.GOLD));
             nearby.teleport(new Location(nearby.getWorld(), nearby.getLocation().getBlockX(),
                     nearby.getLocation().getBlockY() + 5, nearby.getLocation().getBlockZ() + 30));
             entity.setVelocity(vector);
