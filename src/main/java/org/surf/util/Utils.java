@@ -57,7 +57,7 @@ public class Utils {
 	}
 
 	public static void println(String message) {
-		System.out.println(ChatColor.translateAlternateColorCodes('&', message));
+		System.out.println(net.kyori.adventure.text.Component.text(ChatColor.translateAlternateColorCodes('&', message)));
 
 	}
 
