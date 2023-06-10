@@ -26,7 +26,7 @@ public class ChunkBan implements Listener {
         Block block = event.getBlock();
         Player player = event.getPlayer();
         Chunk chunk = block.getChunk();
-        if (player.hasPermission("chunkban.bypass")) {
+        if (player.hasPermission("surf.bypass.chunkban")) {
             return;
         }
         if (isChecked(block) && chunk.getTileEntities().length > ConfigCache.ChunkBanTileEntityMax) {

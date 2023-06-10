@@ -3,9 +3,9 @@ Surf is a fork of [LeeesExploitFixer](https://github.com/XeraPlugins/LeeesExploi
 
 A plugin to remove illegal and NBT items.
 
-Native support 1.19.4
+Native support 1.20
 
-Support 1.7.x - 1.19.x (maybe?)
+Support 1.7.x - 1.20.x (maybe?)
 
 Join Winds Anarchy>>*IP Breeze.asia*
 ___

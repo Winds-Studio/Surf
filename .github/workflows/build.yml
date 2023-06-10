@@ -24,8 +24,8 @@ jobs:
       - name: Release Surf
         uses: marvinpinto/action-automatic-releases@latest
         with:
-          title: "Surf v3.3.8"
-          automatic_release_tag: "3.3.8"
+          title: "Surf v3.3.9"
+          automatic_release_tag: "3.3.9"
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           files: "target/Surf-*.jar"
           prerelease: false
