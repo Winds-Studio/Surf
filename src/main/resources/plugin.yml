@@ -4,7 +4,7 @@ main: org.surf.Main
 authors: [ 254n_m, Leeewith3Es, Dreeam, Loyisa ]
 description:  ${project.description}
 website: https://breeze.asia
-api-version: '1.20'
+api-version: 1.13
 softdepend: [ NBTAPI ]
 commands:
   surf:
