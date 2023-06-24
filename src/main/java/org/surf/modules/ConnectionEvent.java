@@ -16,9 +16,11 @@ public class ConnectionEvent implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        event.setJoinMessage(
-                ChatColor.translateAlternateColorCodes('&', ConfigCache.ConnectionPlayerJoinMessage.replace("%player%", event.getPlayer().getDisplayName())));
-        if (ConfigCache.FirstJoinEnabled && !player.hasPlayedBefore()) {
+        if (ConfigCache.ConnectionEnabled) {
+            event.setJoinMessage(
+                    ChatColor.translateAlternateColorCodes('&', ConfigCache.ConnectionPlayerJoinMessage.replace("%player%", event.getPlayer().getDisplayName())));
+        }
+        else if (ConfigCache.FirstJoinEnabled && !player.hasPlayedBefore()) {
             Bukkit.getServer().broadcastMessage(
                     ChatColor.translateAlternateColorCodes('&', ConfigCache.FirstJoinMessage.replace("%Player%", player.getName())));
         }
@@ -34,8 +36,10 @@ public class ConnectionEvent implements Listener {
                 }
             }
         }
-        event.setQuitMessage(
-                ChatColor.translateAlternateColorCodes('&', ConfigCache.ConnectionPlayerLeaveMessage.replace("%player%", event.getPlayer().getDisplayName())));
+        else if (ConfigCache.ConnectionEnabled) {
+            event.setQuitMessage(
+                    ChatColor.translateAlternateColorCodes('&', ConfigCache.ConnectionPlayerLeaveMessage.replace("%player%", event.getPlayer().getDisplayName())));
+        }
     }
 
     @EventHandler

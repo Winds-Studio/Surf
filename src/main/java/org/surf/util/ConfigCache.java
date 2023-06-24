@@ -38,6 +38,7 @@ public class ConfigCache {
     public static boolean FirstJoinEnabled;
     public static String FirstJoinMessage;
 
+    public static boolean ConnectionEnabled;
     public static String ConnectionPlayerJoinMessage;
     public static String ConnectionPlayerLeaveMessage;
 
@@ -77,6 +78,7 @@ public class ConfigCache {
         MinecartPerChunkLimit = plugin.getConfig().getInt("Minecart-per-chunk.limit");
         FirstJoinEnabled = plugin.getConfig().getBoolean("FirstJoin.Enabled");
         FirstJoinMessage = plugin.getConfig().getString("FirstJoin.Message");
+        ConnectionEnabled = plugin.getConfig().getBoolean("Connection.Enabled");
         ConnectionPlayerJoinMessage = plugin.getConfig().getString("Connection.Player-Join-Message");
         ConnectionPlayerLeaveMessage = plugin.getConfig().getString("Connection.Player-Leave-Message");
         AntiillegalBlockPlaceEnabled = plugin.getConfig().getBoolean("Antiillegal.BlockPlace-Enabled");
