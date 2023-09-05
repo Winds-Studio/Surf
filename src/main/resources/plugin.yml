@@ -5,6 +5,7 @@ authors: [ 254n_m, Leeewith3Es, Dreeam, Loyisa ]
 description:  ${project.description}
 website: https://breeze.asia
 api-version: 1.13
+folia-supported: true
 softdepend: [ NBTAPI ]
 commands:
   surf:
