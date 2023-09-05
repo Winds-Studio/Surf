@@ -49,7 +49,7 @@ public class Main extends JavaPlugin {
 		// register event
 		this.registerEvents();
 		if (ConfigCache.AntiillegalDeleteStackedTotem) {
-			Bukkit.getServer().getGlobalRegionScheduler().runAtFixedRate(this, scheduledTask -> Bukkit.getWorlds().forEach(b -> b.getPlayers().forEach(e -> e.getInventory().forEach(this::revert))), 0L, 20L);
+			Bukkit.getServer().getScheduler().runTaskTimer(this, () -> Bukkit.getWorlds().forEach(b -> b.getPlayers().forEach(e -> e.getInventory().forEach(this::revert))), 0L, 20L);
 		}
 		//Alert system events
 		PaperLib.suggestPaper(this);
