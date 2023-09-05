@@ -75,7 +75,9 @@ Minecart-per-chunk:
   limit: 500
 #water / lava flowing disable tps this is useful on new servers with lots of block physics updates that cause lag
 #Set -1 to disable
-BlockPhysics-disable-tps: 15
+BlockPhysics:
+  Enabled: false
+  disable-tps: 15
 GateWay:
   PreventCrashExploit: false
   PreventEntityEnterPortal: false
