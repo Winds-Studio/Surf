@@ -7,11 +7,9 @@ Surf is a fork of [LeeesExploitFixer](https://github.com/XeraPlugins/LeeesExploi
 
 A plugin to remove illegal and NBT items.
 
-Native support 1.20
+- Support 1.7.x - 1.20.x (maybe?)
+- Folia support
 
-Support 1.7.x - 1.20.x (maybe?)
-
-Join Winds Anarchy>>*IP Breeze.asia*
 ___
 
 ## Features
@@ -30,12 +28,11 @@ ___
 * LagAssist or React
 * TrChat
 * Openinv
-* Essentials (if you want)
 * NoChunkLag
 
 ## Contact
 
-- 📫 Discord: `Dreeam#0851` | QQ: `2682173972`
+- 📫 Discord: `dreeam___` | QQ: `2682173972`
 
 ## TODO list
 * Detect items in OffHand
