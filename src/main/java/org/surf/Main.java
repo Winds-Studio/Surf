@@ -1,5 +1,6 @@
 package org.surf;
 
+import com.tcoded.folialib.FoliaLib;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -26,8 +27,6 @@ import org.surf.util.ConfigCache;
 import org.surf.util.SecondPassEvent;
 import org.surf.util.TenSecondPassEvent;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class Main extends JavaPlugin {
@@ -40,7 +39,7 @@ public class Main extends JavaPlugin {
 
 	private final PluginManager pluginManager = getServer().getPluginManager();
 
-	private final ScheduledExecutorService service = Executors.newScheduledThreadPool(4);
+	public FoliaLib foliaLib = new FoliaLib(this);
 
 	private final CommandHandler commandHandler = new CommandHandler(this);
 
@@ -59,12 +58,12 @@ public class Main extends JavaPlugin {
 		// register event
 		this.registerEvents();
 		if (ConfigCache.AntiillegalDeleteStackedTotem) {
-			Bukkit.getServer().getScheduler().runTaskTimer(this, () -> Bukkit.getWorlds().forEach(b -> b.getPlayers().forEach(e -> e.getInventory().forEach(this::revert))), 0L, 20L);
+			foliaLib.getImpl().runTimer(() -> Bukkit.getWorlds().forEach(b -> b.getPlayers().forEach(e -> e.getInventory().forEach(this::revert))), 0L, 20L);
 		}
 		// Server specific events
-		service.scheduleAtFixedRate(() -> pluginManager.callEvent(new SecondPassEvent()), 1, 1, TimeUnit.SECONDS);
-		service.scheduleAtFixedRate(() -> pluginManager.callEvent(new TenSecondPassEvent()), 1, 10, TimeUnit.SECONDS);
-		getLogger().info("Surf enabled. By Dreeam.");
+		foliaLib.getImpl().runTimerAsync(() -> pluginManager.callEvent(new SecondPassEvent()), 1, 1, TimeUnit.SECONDS);
+		foliaLib.getImpl().runTimerAsync(() -> pluginManager.callEvent(new TenSecondPassEvent()), 1, 10, TimeUnit.SECONDS);
+		getLogger().info("Surf Enabled. By Dreeam.");
 	}
 
 	public void registerEvents() {
@@ -81,7 +80,7 @@ public class Main extends JavaPlugin {
 		}
 		pluginManager.registerEvents(new BucketEvent(), this);
 		pluginManager.registerEvents(new MinecartLag(this), this);
-//		pluginManager.registerEvents(new ChestLagFix(this), this);
+		//pluginManager.registerEvents(new ChestLagFix(this), this);
 		pluginManager.registerEvents(new DispenserCrash(), this);
 		pluginManager.registerEvents(new ConnectionEvent(), this);
 		// AntiIllegal events
