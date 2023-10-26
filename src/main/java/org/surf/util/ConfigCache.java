@@ -9,6 +9,7 @@ public class ConfigCache {
 
     private final static Main plugin = Main.getInstance();
 
+    public static String Prefix;
     public static boolean IllegalBlockPlaceEnabled;
     public static String IllegalBlockPlaceMessage;
 
@@ -58,6 +59,7 @@ public class ConfigCache {
     public static int IllegalEnchantsThreshold;
 
     public static void loadConfig() {
+        Prefix = plugin.getConfig().getString("Prefix");
         IllegalBlockPlaceEnabled = plugin.getConfig().getBoolean("IllegalBlockPlace.Enabled");
         IllegalBlockPlaceMessage = plugin.getConfig().getString("IllegalBlockPlace.Message");
         GateWayPreventCrashExploit = plugin.getConfig().getBoolean("GateWay.PreventCrashExploit");

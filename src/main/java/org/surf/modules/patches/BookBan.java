@@ -11,7 +11,6 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.BookMeta;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class BookBan implements Listener {

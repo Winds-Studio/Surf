@@ -1,13 +1,19 @@
 package org.surf.modules.patches;
 
 import com.destroystokyo.paper.event.entity.EntityTeleportEndGatewayEvent;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.entity.*;
+import org.bukkit.entity.ChestedHorse;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Vehicle;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -36,15 +42,15 @@ public class GateWay implements Listener {
             return;
         }
         for (Player nearby : entity.getLocation().getNearbyPlayers(30)) {
-            nearby.sendMessage(net.kyori.adventure.text.Component.text(
+            nearby.sendMessage(Component.text(
                     "Going through ENDGATEWAY while riding "
                     + entity.getName()
-                    + " is currently patched", net.kyori.adventure.text.format.NamedTextColor.GOLD));
+                    + " is currently patched", NamedTextColor.GOLD));
             nearby.teleport(new Location(nearby.getWorld(), nearby.getLocation().getBlockX(),
                     nearby.getLocation().getBlockY() + 5, nearby.getLocation().getBlockZ() + 30));
             entity.setVelocity(vector);
             event.setCancelled(true);
-            System.out.println(ChatColor.translateAlternateColorCodes('&',
+            System.out.println(LegacyComponentSerializer.legacyAmpersand().deserialize(
                     "&1Prevented&r&e " + nearby.getName() + "&r&1 at &r&e" + x + " " + y + " " + z
                             + " &r&1in world&e " + entity.getWorld().getName() + " &r&1from crashing the server"));
         }
@@ -89,7 +95,7 @@ public class GateWay implements Listener {
                 vehicle.eject();
                 vehicle.remove();
                 Utils.kickPlayer(player, "[&b&lSurf&r]&6 Sorry that exploit got patched :(");
-                System.out.println(ChatColor.translateAlternateColorCodes('&', "&1Prevented&r&e " + player.getName() + "&r&1 at &r&e" + x + " " + y + " " + z + " &r&1in world&e " + worldString + " &r&1from crashing the server"));
+                System.out.println(LegacyComponentSerializer.legacyAmpersand().deserialize("&1Prevented&r&e " + player.getName() + "&r&1 at &r&e" + x + " " + y + " " + z + " &r&1in world&e " + worldString + " &r&1from crashing the server"));
             }
         }
     }

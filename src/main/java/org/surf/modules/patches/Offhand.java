@@ -1,6 +1,7 @@
 package org.surf.modules.patches;
 
 import com.google.common.collect.Lists;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
 import org.surf.util.SecondPassEvent;
+import org.surf.util.Utils;
 
 import java.util.List;
 import java.util.Map;
@@ -33,9 +35,9 @@ public class Offhand implements Listener {
 		Player player = event.getPlayer();
 		ItemStack mainHand = event.getMainHandItem();
 		ItemStack offHand = event.getOffHandItem();
-		if (mainHand != null && isItemNeedToCheck(mainHand)) {
+		if (isItemNeedToCheck(mainHand)) {
 			check(player);
-		} else if (offHand != null && isItemNeedToCheck(offHand)) {
+		} else if (isItemNeedToCheck(offHand)) {
 			check(player);
 		}
 	}
@@ -47,7 +49,7 @@ public class Offhand implements Listener {
 			offhandMap.put(player.getUniqueId(), 1);
 		}
 		if (offhandMap.get(player.getUniqueId()) > 10) {
-			player.kickPlayer("&cPacket Exploit Detected");
+			player.kick(LegacyComponentSerializer.legacyAmpersand().deserialize(Utils.getPrefix() + "&cPacket Exploit Detected"));
 		}
 	}
 

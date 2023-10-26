@@ -4,7 +4,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.TippedArrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDispenseEvent;
@@ -104,11 +103,11 @@ public class IllegalDamageAndPotionCheck implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onHit(ProjectileHitEvent event) {
-        if (!(event.getEntity() instanceof TippedArrow) || !(event.getEntity().getShooter() instanceof Player)
+        if (!(event.getEntity() instanceof Arrow) || !(event.getEntity().getShooter() instanceof Player)
                 || !(event.getHitEntity() instanceof Player)) {
             return;
         }
-        TippedArrow arrow = (TippedArrow) event.getEntity();
+        Arrow arrow = (Arrow) event.getEntity();
         Player shooter = (Player) arrow.getShooter();
         for (PotionEffect effects : arrow.getCustomEffects()) {
             if (effects.getAmplifier() > 4 || effects.getDuration() > 12000) {

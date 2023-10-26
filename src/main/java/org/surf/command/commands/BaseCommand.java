@@ -35,7 +35,7 @@ public class BaseCommand extends org.surf.command.BaseCommand {
                     break;
                 case "help":
                     sendMessage(sender, Utils.getPrefix() + "&1---&r " + Utils.getPrefix() + "&6Help &r&1---");
-                    sendMessage(sender, Utils.getPrefix() + "");
+                    sendMessage(sender, Utils.getPrefix());
                     plugin.getCommandHandler().getCommands().forEach(command -> {
                         String helpMsg = "&1---&r&3&l /" + command.getName() + "&r&6 Help &r&1---";
                         sendMessage(sender, Utils.getPrefix() + helpMsg);
@@ -54,7 +54,7 @@ public class BaseCommand extends org.surf.command.BaseCommand {
                                 sendMessage(sender, Utils.getPrefix() + "&1--------------------");
                             }
                         }
-                        sendMessage(sender, Utils.getPrefix() + "");
+                        sendMessage(sender, Utils.getPrefix());
                     });
                     break;
             }

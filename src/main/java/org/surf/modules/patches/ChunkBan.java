@@ -1,6 +1,5 @@
 package org.surf.modules.patches;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

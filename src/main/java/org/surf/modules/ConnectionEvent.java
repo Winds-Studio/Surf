@@ -1,7 +1,7 @@
 package org.surf.modules;
 
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,12 +17,12 @@ public class ConnectionEvent implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         if (ConfigCache.ConnectionEnabled) {
-            event.setJoinMessage(
-                    ChatColor.translateAlternateColorCodes('&', ConfigCache.ConnectionPlayerJoinMessage.replace("%player%", event.getPlayer().getDisplayName())));
+            event.joinMessage(
+                    LegacyComponentSerializer.legacyAmpersand().deserialize(ConfigCache.ConnectionPlayerJoinMessage.replace("%player%", event.getPlayer().getDisplayName())));
         }
         else if (ConfigCache.FirstJoinEnabled && !player.hasPlayedBefore()) {
-            Bukkit.getServer().broadcastMessage(
-                    ChatColor.translateAlternateColorCodes('&', ConfigCache.FirstJoinMessage.replace("%Player%", player.getName())));
+            Bukkit.getServer().broadcast(
+                    LegacyComponentSerializer.legacyAmpersand().deserialize(ConfigCache.FirstJoinMessage.replace("%Player%", player.getName())));
         }
     }
 
@@ -37,8 +37,8 @@ public class ConnectionEvent implements Listener {
             }
         }
         else if (ConfigCache.ConnectionEnabled) {
-            event.setQuitMessage(
-                    ChatColor.translateAlternateColorCodes('&', ConfigCache.ConnectionPlayerLeaveMessage.replace("%player%", event.getPlayer().getDisplayName())));
+            event.quitMessage(
+                    LegacyComponentSerializer.legacyAmpersand().deserialize(ConfigCache.ConnectionPlayerLeaveMessage.replace("%player%", event.getPlayer().getDisplayName())));
         }
     }
 

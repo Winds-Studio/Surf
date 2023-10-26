@@ -1,6 +1,6 @@
 package org.surf;
 
-import io.papermc.lib.PaperLib;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -8,12 +8,23 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.surf.command.CommandHandler;
 import org.surf.command.NotInPluginYMLException;
+import org.surf.modules.ConnectionEvent;
 import org.surf.modules.IllegalBlockCheck;
-import org.surf.modules.*;
-import org.surf.modules.antiillegal.*;
-import org.surf.modules.antilag.*;
-import org.surf.modules.patches.*;
-import org.surf.util.*;
+import org.surf.modules.NetherCheck;
+import org.surf.modules.antiillegal.CleanIllegal;
+import org.surf.modules.antilag.BlockPhysics;
+import org.surf.modules.antilag.MinecartLag;
+import org.surf.modules.antilag.WitherSpawn;
+import org.surf.modules.patches.BookBan;
+import org.surf.modules.patches.BucketEvent;
+import org.surf.modules.patches.ChunkBan;
+import org.surf.modules.patches.DispenserCrash;
+import org.surf.modules.patches.GateWay;
+import org.surf.modules.patches.IllegalDamageAndPotionCheck;
+import org.surf.modules.patches.Offhand;
+import org.surf.util.ConfigCache;
+import org.surf.util.SecondPassEvent;
+import org.surf.util.TenSecondPassEvent;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -37,8 +48,7 @@ public class Main extends JavaPlugin {
 		instance = this;
 		// TODO: config system
 		this.loadConfig();
-		int pluginId = 16810;
-		new Metrics(this, pluginId);
+		new Metrics(this, 16810);
 
 		// register commands
 		try {
@@ -51,9 +61,7 @@ public class Main extends JavaPlugin {
 		if (ConfigCache.AntiillegalDeleteStackedTotem) {
 			Bukkit.getServer().getScheduler().runTaskTimer(this, () -> Bukkit.getWorlds().forEach(b -> b.getPlayers().forEach(e -> e.getInventory().forEach(this::revert))), 0L, 20L);
 		}
-		//Alert system events
-		PaperLib.suggestPaper(this);
-		//Server specific events
+		// Server specific events
 		service.scheduleAtFixedRate(() -> pluginManager.callEvent(new SecondPassEvent()), 1, 1, TimeUnit.SECONDS);
 		service.scheduleAtFixedRate(() -> pluginManager.callEvent(new TenSecondPassEvent()), 1, 10, TimeUnit.SECONDS);
 		getLogger().info("Surf enabled. By Dreeam.");
@@ -62,9 +70,7 @@ public class Main extends JavaPlugin {
 	public void registerEvents() {
 		pluginManager.registerEvents(new IllegalBlockCheck(), this);
 		pluginManager.registerEvents(new Offhand(), this);
-		if (PaperLib.isPaper()) {
-			pluginManager.registerEvents(new GateWay(), this);
-		}
+		pluginManager.registerEvents(new GateWay(), this);
 		pluginManager.registerEvents(new BookBan(), this);
 		pluginManager.registerEvents(new ChunkBan(), this);
 		pluginManager.registerEvents(new NetherCheck(), this);

@@ -2,9 +2,7 @@ package org.surf.util;
 
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-import org.surf.Main;
-
-import java.util.logging.Logger;
+import org.jetbrains.annotations.NotNull;
 
 public class TenSecondPassEvent extends Event {
 	private static final HandlerList handlers = new HandlerList();
@@ -14,7 +12,7 @@ public class TenSecondPassEvent extends Event {
 	}
 
 	@Override
-	public HandlerList getHandlers() {
+	public @NotNull HandlerList getHandlers() {
 		return handlers;
 	}
 }

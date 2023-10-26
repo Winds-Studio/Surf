@@ -5,10 +5,10 @@ Surf is not good enough, use as your own risk, and I recommend you to use [Anarc
 # Surf
 Surf is a fork of [LeeesExploitFixer](https://github.com/XeraPlugins/LeeesExploitFixer-3.0) of a fork of 254nm's [L2X9Core](https://github.com/254nm/L2X9Core)
 
-A plugin to remove illegal and NBT items.
+A plugin to fix exploits and remove illegal/NBT items for anarchy servers.
 
-- Support 1.7.x - 1.20.x (maybe?)
-- Folia support
+- Paper 1.8.x - Latest Minecraft Version (Currently 1.20.2)
+- Folia Support
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 - 📫 Discord: `dreeam___` | QQ: `2682173972`
 
-## TODO list
+## TODOs
 * Detect items in OffHand
 * Detect items in Equipment slot
 * Delete illegal enchantments or NBT tags rather than removing items.

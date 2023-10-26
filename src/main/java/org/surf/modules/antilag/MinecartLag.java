@@ -1,6 +1,6 @@
 package org.surf.modules.antilag;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -33,7 +33,7 @@ public class MinecartLag implements Listener {
             event.setCancelled(true);
             Utils.sendMessage(player, Utils.getPrefix() + "&6Please limit " + formattedName + " to &r&c" + ConfigCache.MinecartPerChunkLimit + "&r&6 per chunk");
             Utils.sendOpMessage(Utils.getPrefix() + "&6Removed &r&3" + chunk.getEntities().length + " " + formattedName + "&r&6 from a lag machine owned by&r&3 " + player.getName());
-            System.out.println(ChatColor.translateAlternateColorCodes('&', Utils.getPrefix() + "&6Removed &r&3" + chunk.getEntities().length + " " + formattedName + "&r&6 from a lag machine owned by&r&3 " + player.getName()));
+            System.out.println(LegacyComponentSerializer.legacyAmpersand().deserialize(Utils.getPrefix() + "&6Removed &r&3" + chunk.getEntities().length + " " + formattedName + "&r&6 from a lag machine owned by&r&3 " + player.getName()));
             for (Entity ent : event.getVehicle().getChunk().getEntities()) {
                 if (ent instanceof Vehicle) {
                     ent.remove();
@@ -53,13 +53,9 @@ public class MinecartLag implements Listener {
         if (!event.getFrom().getChunk().equals(event.getTo().getChunk())) {
             if (chunk.getEntities().length >= max) {
                 vehicle.remove();
-                Utils.sendMessage(player,
-                        Utils.getPrefix() + "&6Please limit " + formattedName + " to &r&c" + max + "&r&6 per chunk");
-                Utils.sendOpMessage(Utils.getPrefix() + "&6Deleted a &r&3" + formattedName1
-                        + "&r&6 from a lag machine owned by&r&3 " + player.getName() + " &4BYPASS ATTEMPT");
-                plugin.getLogger().info(ChatColor.translateAlternateColorCodes('&',
-                        Utils.getPrefix() + "&6Deleted a &r&3" + formattedName1
-                                + "&r&6 from a lag machine owned by&r&3 " + player.getName() + " &4BYPASS ATTEMPT"));
+                Utils.sendMessage(player, Utils.getPrefix() + "&6Please limit " + formattedName + " to &r&c" + max + "&r&6 per chunk");
+                Utils.sendOpMessage(Utils.getPrefix() + "&6Deleted a &r&3" + formattedName1 + "&r&6 from a lag machine owned by&r&3 " + player.getName() + " &4BYPASS ATTEMPT");
+                plugin.getLogger().info(Utils.getPrefix() + "&6Deleted a &r&3" + formattedName1 + "&r&6 from a lag machine owned by&r&3 " + player.getName() + " &4BYPASS ATTEMPT");
             }
         }
     }

@@ -1,6 +1,5 @@
 package org.surf.command;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.surf.Main;
@@ -64,7 +63,6 @@ public abstract class BaseCommand {
 
     public void sendErrorMessage(CommandSender sender, String message) {
         String finalMessage = "&4Error:&r&c " + message;
-        finalMessage = ChatColor.translateAlternateColorCodes('&', finalMessage);
         Utils.sendMessage(sender, finalMessage);
     }
 
