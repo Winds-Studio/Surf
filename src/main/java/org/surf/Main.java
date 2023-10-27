@@ -61,8 +61,8 @@ public class Main extends JavaPlugin {
 			foliaLib.getImpl().runTimer(() -> Bukkit.getWorlds().forEach(b -> b.getPlayers().forEach(e -> e.getInventory().forEach(this::revert))), 0L, 20L);
 		}
 		// Server specific events
-		foliaLib.getImpl().runTimerAsync(() -> pluginManager.callEvent(new SecondPassEvent()), 1, 1, TimeUnit.SECONDS);
-		foliaLib.getImpl().runTimerAsync(() -> pluginManager.callEvent(new TenSecondPassEvent()), 1, 10, TimeUnit.SECONDS);
+		foliaLib.getImpl().runTimer(() -> pluginManager.callEvent(new SecondPassEvent()), 1, 1, TimeUnit.SECONDS);
+		foliaLib.getImpl().runTimer(() -> pluginManager.callEvent(new TenSecondPassEvent()), 1, 10, TimeUnit.SECONDS);
 		getLogger().info("Surf Enabled. By Dreeam.");
 	}
 

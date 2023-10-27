@@ -54,7 +54,6 @@ public class BaseCommand extends org.surf.command.BaseCommand {
                                 sendMessage(sender, Utils.getPrefix() + "&1--------------------");
                             }
                         }
-                        sendMessage(sender, Utils.getPrefix());
                     });
                     break;
             }
