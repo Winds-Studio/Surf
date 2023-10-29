@@ -1,5 +1,5 @@
 name: Surf
-version: '${version}'
+version: ${project.version}
 main: org.surf.Main
 authors: [ 254n_m, Leeewith3Es, Dreeam, Loyisa ]
 description:  ${project.description}
