@@ -7,7 +7,11 @@ Surf is a fork of [LeeesExploitFixer](https://github.com/XeraPlugins/LeeesExploi
 
 A plugin to fix exploits and remove illegal/NBT items for anarchy servers.
 
-- Paper 1.8.x - Latest Minecraft Version (Currently 1.20.2)
+## Compatibility
+
+- Support Java 17 and higher
+- Support 1.8.x - Latest Minecraft version (1.20.3)
+- Compatible with Paper / Paper Forks
 - Folia Support
 
 ___
@@ -35,6 +39,8 @@ ___
 - 📫 Discord: `dreeam___` | QQ: `2682173972`
 
 ## TODOs
+* Support lower version
+* Support Spigot (maybe)
 * Detect items in OffHand
 * Detect items in Equipment slot
 * Delete illegal enchantments or NBT tags rather than removing items.

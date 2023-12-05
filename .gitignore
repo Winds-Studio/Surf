@@ -1,14 +1,8 @@
-# User-specific stuff
-.idea/
+.gradle
+**/build/
 
+.idea
 *.iml
 
-# IntelliJ
-out/
-
-# Compiled class file
-*.class
-
-# Common working directory
-run/
-/target/
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar

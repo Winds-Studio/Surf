@@ -2,10 +2,12 @@ name: Build Surf
 on:
   push:
     branches: [ main ]
+
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    if: "github.actor != 'dependabot[bot]'"
     steps:
       - uses: actions/checkout@main
       - name: Set up JDK 17
@@ -14,8 +16,10 @@ jobs:
           java-version: 17
           distribution: temurin
 
-      - name: Build with Maven
-        run: mvn clean package
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build
+        run: ./gradlew clean build
 
       - name: Release Surf
         uses: marvinpinto/action-automatic-releases@master
@@ -23,5 +27,5 @@ jobs:
           title: "Surf v3.4.0"
           automatic_release_tag: "3.4.0"
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          files: "target/Surf-*.jar"
-          prerelease: true
+          files: "build/libs/Surf-*.jar"
+          prerelease: false

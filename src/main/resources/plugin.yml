@@ -1,8 +1,8 @@
 name: Surf
-version: ${project.version}
+version: ${version}
 main: org.surf.Main
 authors: [ 254n_m, Leeewith3Es, Dreeam, Loyisa ]
-description:  ${project.description}
+description:  ${description}
 api-version: 1.13
 folia-supported: true
 softdepend: [ NBTAPI ]

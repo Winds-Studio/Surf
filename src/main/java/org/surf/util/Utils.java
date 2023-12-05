@@ -1,6 +1,7 @@
 package org.surf.util;
 
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.surf.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
@@ -45,6 +46,6 @@ public class Utils {
 	}
 
 	public static void println(String message) {
-		System.out.println(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
+		Main.getInstance().getLogger().info(message);
 	}
 }
