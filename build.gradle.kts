@@ -1,5 +1,3 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
 plugins {
     `java-library`
     `maven-publish`
@@ -35,7 +33,7 @@ repositories {
 val adventureVersion = "4.14.0"
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT") // Dreeam TODO - Update to 1.20.3
+    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
     api("org.bstats:bstats-bukkit:3.0.2")
     api("com.tcoded:FoliaLib:0.3.1")
 
@@ -58,7 +56,8 @@ tasks.build.configure {
     dependsOn("shadowJar")
 }
 
-tasks.withType<ShadowJar> {
+tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+    archiveFileName = "${project.name}-${project.version}.jar"
     exclude("META-INF/**") // Dreeam - Avoid to include META-INF/maven in Jar
     minimize {
         exclude(dependency("com.tcoded.folialib:.*:.*"))
