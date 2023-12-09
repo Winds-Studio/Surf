@@ -14,11 +14,11 @@ public class Utils {
 	}
 
 	public static void sendMessage(Player player, String string) {
-		player.sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(string));
+		Main.getInstance().adventure().player(player).sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(string));
 	}
 
 	public static void sendMessage(CommandSender sender, String string) {
-		sender.sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(string));
+		Main.getInstance().adventure().sender(sender).sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(string));
 	}
 
 	public static void kickPlayer(Player player, String string) {
@@ -28,7 +28,7 @@ public class Utils {
 	public static void sendOpMessage(String message) {
 		for (Player online : Bukkit.getOnlinePlayers()) {
 			if (online.isOp()) {
-				online.sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
+				Main.getInstance().adventure().player(online).sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
 			}
 		}
 	}
@@ -46,6 +46,6 @@ public class Utils {
 	}
 
 	public static void println(String message) {
-		Main.getInstance().getLogger().info(message);
+		Main.getInstance().adventure().console().sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
 	}
 }

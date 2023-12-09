@@ -20,6 +20,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPortalEvent;
 import org.bukkit.event.vehicle.VehicleMoveEvent;
 import org.bukkit.util.Vector;
+import org.surf.Main;
 import org.surf.util.ConfigCache;
 import org.surf.util.Utils;
 
@@ -95,7 +96,7 @@ public class GateWay implements Listener {
                 vehicle.eject();
                 vehicle.remove();
                 Utils.kickPlayer(player, "[&b&lSurf&r]&6 Sorry that exploit got patched :(");
-                System.out.println(LegacyComponentSerializer.legacyAmpersand().deserialize("&1Prevented&r&e " + player.getName() + "&r&1 at &r&e" + x + " " + y + " " + z + " &r&1in world&e " + worldString + " &r&1from crashing the server"));
+                Utils.println("&1Prevented&r&e " + player.getName() + "&r&1 at &r&e" + x + " " + y + " " + z + " &r&1in world&e " + worldString + " &r&1from crashing the server");
             }
         }
     }

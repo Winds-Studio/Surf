@@ -1,12 +1,14 @@
 package org.surf;
 
 import com.tcoded.folialib.FoliaLib;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 import org.surf.command.CommandHandler;
 import org.surf.command.NotInPluginYMLException;
 import org.surf.modules.ConnectionEvent;
@@ -31,7 +33,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Main extends JavaPlugin {
 
-	public static Main instance;
+	private static Main instance;
+	private BukkitAudiences adventure;
 
 	public static Main getInstance() {
 		return instance;
@@ -45,6 +48,7 @@ public class Main extends JavaPlugin {
 
 	public void onEnable() {
 		instance = this;
+		this.adventure = BukkitAudiences.create(this);
 		// TODO: config system
 		this.loadConfig();
 		new Metrics(this, 16810);
@@ -93,6 +97,10 @@ public class Main extends JavaPlugin {
 	}
 
 	public void onDisable() {
+		if (this.adventure != null) {
+			this.adventure.close();
+			this.adventure = null;
+		}
 		getLogger().info("Surf disabled. By Dreeam");
 	}
 
@@ -107,5 +115,12 @@ public class Main extends JavaPlugin {
 					item.setAmount(item.getMaxStackSize());
 			}
 		}
+	}
+
+	public @NotNull BukkitAudiences adventure() {
+		if (this.adventure == null) {
+			throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
+		}
+		return this.adventure;
 	}
 }
