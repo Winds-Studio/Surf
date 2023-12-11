@@ -37,7 +37,7 @@ dependencies {
     api("org.bstats:bstats-bukkit:3.0.2")
     api("com.tcoded:FoliaLib:0.3.1")
 
-    compileOnly("de.tr7zw:item-nbt-api-plugin:2.12.1")
+    compileOnly("de.tr7zw:item-nbt-api-plugin:2.12.2")
 
     api("net.kyori:adventure-platform-bukkit:4.3.1")
     api("net.kyori:adventure-api:$adventureVersion")
