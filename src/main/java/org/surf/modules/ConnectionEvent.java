@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.surf.util.ConfigCache;
+import org.surf.util.Utils;
 
 public class ConnectionEvent implements Listener {
 
@@ -44,11 +45,13 @@ public class ConnectionEvent implements Listener {
 
     @EventHandler
     public void onKick(PlayerKickEvent event) {
-        if (event.getReason().equalsIgnoreCase("Kicked for spamming")) {
-            event.setCancelled(true);
-        }
-        if (event.getReason().equalsIgnoreCase("Invalid hotbar selection (Hacking?)")) {
-            event.setCancelled(true);
+        if (ConfigCache.ConnectionPreventKickEnabled) {
+            ConfigCache.ConnectionKickReasons.forEach(reason -> {
+                if (event.getReason().equalsIgnoreCase(reason)) {
+                    event.setCancelled(true);
+                    Utils.println(Utils.getPrefix() + "Canceled a kick, Reason: " + reason);
+                }
+            });
         }
     }
 }

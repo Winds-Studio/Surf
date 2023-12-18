@@ -43,6 +43,8 @@ public class ConfigCache {
     public static boolean ConnectionEnabled;
     public static String ConnectionPlayerJoinMessage;
     public static String ConnectionPlayerLeaveMessage;
+    public static boolean ConnectionPreventKickEnabled;
+    public static List<String> ConnectionKickReasons;
 
     public static boolean AntiillegalBlockPlaceEnabled;
     public static boolean AntiillegalChunkLoadEnabled;
@@ -85,6 +87,8 @@ public class ConfigCache {
         ConnectionEnabled = plugin.getConfig().getBoolean("Connection.Enabled");
         ConnectionPlayerJoinMessage = plugin.getConfig().getString("Connection.Player-Join-Message");
         ConnectionPlayerLeaveMessage = plugin.getConfig().getString("Connection.Player-Leave-Message");
+        ConnectionPreventKickEnabled = plugin.getConfig().getBoolean("Connection-Prevent-Kick.Enabled");
+        ConnectionKickReasons = plugin.getConfig().getStringList("Connection-Prevent-Kick.Kick-Reasons");
         AntiillegalBlockPlaceEnabled = plugin.getConfig().getBoolean("Antiillegal.BlockPlace-Enabled");
         AntiillegalChunkLoadEnabled = plugin.getConfig().getBoolean("Antiillegal.ChunkLoad-Enabled");
         AntiillegalHopperTransferEnabled = plugin.getConfig().getBoolean("Antiillegal.HopperTransfer-Enabled");
