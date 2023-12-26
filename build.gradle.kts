@@ -30,7 +30,7 @@ repositories {
     }
 }
 
-val adventureVersion = "4.14.0"
+val adventureVersion = "4.15.0"
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
