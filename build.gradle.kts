@@ -39,7 +39,7 @@ dependencies {
 
     compileOnly("de.tr7zw:item-nbt-api-plugin:2.12.2")
 
-    api("net.kyori:adventure-platform-bukkit:4.3.1")
+    api("net.kyori:adventure-platform-bukkit:4.3.2")
     api("net.kyori:adventure-api:$adventureVersion")
     api("net.kyori:adventure-text-serializer-legacy:$adventureVersion")
 }
