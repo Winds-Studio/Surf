@@ -20,7 +20,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPortalEvent;
 import org.bukkit.event.vehicle.VehicleMoveEvent;
 import org.bukkit.util.Vector;
-import org.surf.Main;
 import org.surf.util.ConfigCache;
 import org.surf.util.Utils;
 
@@ -82,10 +81,9 @@ public class GateWay implements Listener {
         if (vehicle.getWorld().getEnvironment() != Environment.THE_END) {
             return;
         }
-        if (!(vehicle.getPassenger() instanceof Player)) {
+        if (!(vehicle.getPassenger() instanceof Player player)) {
             return;
         }
-        Player player = (Player) vehicle.getPassenger();
         for (BlockFace face : BlockFace.values()) {
             Block next = vehicle.getLocation().getBlock().getRelative(face);
             if (next.getType() == Material.END_GATEWAY) {

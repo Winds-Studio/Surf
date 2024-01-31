@@ -19,12 +19,9 @@ public class BlockPhysics implements Listener {
     }
 
     private boolean isChecked(Material material) {
-        switch (material) {
-            case LAVA:
-            case WATER:
-                return true;
-            default:
-                return false;
-        }
+        return switch (material) {
+            case LAVA, WATER -> true;
+            default -> false;
+        };
     }
 }

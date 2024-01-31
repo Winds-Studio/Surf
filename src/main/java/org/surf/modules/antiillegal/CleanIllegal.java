@@ -42,8 +42,7 @@ public class CleanIllegal implements Listener {
             return;
         }
         for (BlockState state : event.getChunk().getTileEntities()) {
-            if (state instanceof Container) {
-                Container container = (Container) state;
+            if (state instanceof Container container) {
                 ItemUtils.deleteIllegals(container.getInventory());
             }
         }

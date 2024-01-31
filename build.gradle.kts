@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "org.surf"
-version = "3.4.0"
+version = "3.4.1"
 description = "Fix exploits and remove illegal/NBT items for anarchy servers"
 
 repositories {
@@ -44,7 +44,7 @@ dependencies {
     api("net.kyori:adventure-text-serializer-legacy:$adventureVersion")
 }
 
-tasks.withType<JavaCompile>() {
+tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
 
