@@ -12,7 +12,7 @@ public class DispenserCrash implements Listener {
 
     /**
      * Code from:
-     * https://github.com/unionofblackbean/UBBDispenserShulkerBoxCrashFixer/blob/master/src/main/java/asia/ubb/ubbdispensershulkerboxcrashfixer/UBBDispenserShulkerBoxFixerPlugin.java
+     * <a href="https://github.com/unionofblackbean/UBBDispenserShulkerBoxCrashFixer/blob/master/src/main/java/asia/ubb/ubbdispensershulkerboxcrashfixer/UBBDispenserShulkerBoxFixerPlugin.java">...</a>
      */
     @EventHandler(ignoreCancelled = true)
     public void dispense(BlockDispenseEvent event) {

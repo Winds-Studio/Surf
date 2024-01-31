@@ -90,14 +90,18 @@ public class IllegalDamageAndPotionCheck implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onDispense(BlockDispenseEvent event) {
         String material = event.getItem().getType().name();
+
         if (material.contains("POTION")|| material.contains("ARROW") || material.contains("TRIDENT")) {
             Dispenser disp = (Dispenser) event.getBlock().getState();
             PotionMeta pot = (PotionMeta) event.getItem().getItemMeta();
+
             for (PotionEffect effects : pot.getCustomEffects()) {
                 if (effects.getAmplifier() > 5
                         || effects.getDuration() > 12000) {
                     event.setCancelled(true);
                     disp.getInventory().remove(event.getItem());
+                    // One illegal potion effect appear, remove whole item
+                    // then break the for loop.
                     break;
                 }
             }
