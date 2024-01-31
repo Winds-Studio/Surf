@@ -57,7 +57,8 @@ public class IllegalDamageAndPotionCheck implements Listener {
         Player player = (Player) event.getPotion().getShooter();
         ItemStack pot = event.getPotion().getItem();
         for (PotionEffect effects : event.getPotion().getEffects()) {
-            if (effects.getAmplifier() > 5 || effects.getDuration() > 12000) {
+            if (effects.getAmplifier() > 5
+                    || effects.getDuration() > 12000) {
                 event.setCancelled(true);
                 player.getInventory().remove(pot);
                 Utils.sendMessage(player, ConfigCache.IllegalPotionMessage);
@@ -76,7 +77,8 @@ public class IllegalDamageAndPotionCheck implements Listener {
         }
         PotionMeta potion = (PotionMeta) e.getItem().getItemMeta();
         for (PotionEffect pe : potion.getCustomEffects()) {
-            if (pe.getAmplifier() > 5 || pe.getDuration() > 12000) {
+            if (pe.getAmplifier() > 5
+                    || pe.getDuration() > 12000) {
                 e.setCancelled(true);
                 e.getPlayer().getInventory().remove(e.getItem());
                 Utils.sendMessage(e.getPlayer(), ConfigCache.IllegalPotionMessage);
@@ -93,7 +95,8 @@ public class IllegalDamageAndPotionCheck implements Listener {
         Dispenser disp = (Dispenser) event.getBlock().getState();
         PotionMeta pot = (PotionMeta) event.getItem().getItemMeta();
         for (PotionEffect effects : pot.getCustomEffects()) {
-            if (effects.getAmplifier() > 5 || effects.getDuration() > 12000) {
+            if (effects.getAmplifier() > 5
+                    || effects.getDuration() > 12000) {
                 event.setCancelled(true);
                 disp.getInventory().remove(event.getItem());
                 break;
@@ -110,7 +113,8 @@ public class IllegalDamageAndPotionCheck implements Listener {
         Arrow arrow = (Arrow) event.getEntity();
         Player shooter = (Player) arrow.getShooter();
         for (PotionEffect effects : arrow.getCustomEffects()) {
-            if (effects.getAmplifier() > 4 || effects.getDuration() > 12000) {
+            if (effects.getAmplifier() > 4
+                    || effects.getDuration() > 12000) {
                 event.setCancelled(true);
                 Utils.sendMessage(shooter, ConfigCache.IllegalPotionMessage);
                 break;
