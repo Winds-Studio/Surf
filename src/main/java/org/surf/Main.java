@@ -71,24 +71,30 @@ public class Main extends JavaPlugin {
 	}
 
 	public void registerEvents() {
-		pluginManager.registerEvents(new IllegalBlockCheck(), this);
-		pluginManager.registerEvents(new Offhand(), this);
-		pluginManager.registerEvents(new GateWay(), this);
-		pluginManager.registerEvents(new BookBan(), this);
-		pluginManager.registerEvents(new ChunkBan(), this);
-		pluginManager.registerEvents(new NetherCheck(), this);
-		pluginManager.registerEvents(new IllegalDamageAndPotionCheck(), this);
-		pluginManager.registerEvents(new WitherSpawn(), this);
+		// AntiIllegal
+		pluginManager.registerEvents(new CleanIllegal(), this);
+
+		// AntiLag
 		if (ConfigCache.BlockPhysicsEnabled) {
 			pluginManager.registerEvents(new BlockPhysics(), this);
 		}
-		pluginManager.registerEvents(new BucketEvent(), this);
 		pluginManager.registerEvents(new MinecartLag(this), this);
+		pluginManager.registerEvents(new WitherSpawn(), this);
+
+		// Patches
+		pluginManager.registerEvents(new BucketEvent(), this);
+		pluginManager.registerEvents(new BookBan(), this);
 		//pluginManager.registerEvents(new ChestLagFix(this), this);
+		pluginManager.registerEvents(new ChunkBan(), this);
 		pluginManager.registerEvents(new DispenserCrash(), this);
+		pluginManager.registerEvents(new GateWay(), this);
+		pluginManager.registerEvents(new IllegalDamageAndPotionCheck(), this);
+		pluginManager.registerEvents(new Offhand(), this);
+
+		// Misc
 		pluginManager.registerEvents(new ConnectionEvent(), this);
-		// AntiIllegal events
-		pluginManager.registerEvents(new CleanIllegal(), this);
+		pluginManager.registerEvents(new IllegalBlockCheck(), this);
+		pluginManager.registerEvents(new NetherCheck(), this);
 	}
 
 	public void loadConfig() {
