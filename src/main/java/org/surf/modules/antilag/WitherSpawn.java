@@ -9,10 +9,8 @@ import org.surf.util.Utils;
 public class WitherSpawn implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onWitherSpawn(EntitySpawnEvent event) {
-        if (event.getEntity() instanceof Wither) {
-            if (Utils.getTps() <= 16) {
-                event.setCancelled(true);
-            }
+        if (event.getEntity() instanceof Wither && Utils.getTps() <= 16) {
+            event.setCancelled(true);
         }
     }
 }
