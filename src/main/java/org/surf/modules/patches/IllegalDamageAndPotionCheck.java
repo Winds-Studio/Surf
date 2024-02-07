@@ -73,16 +73,16 @@ public class IllegalDamageAndPotionCheck implements Listener {
         }
     }
 
-    // Player consume potion
+    // Player consume Potion with illegal potion effects
+    // Dreeam TODO: Check wheter need add foods with illegal effects
     @EventHandler(ignoreCancelled = true)
     public void PlayerInteractEvent(PlayerItemConsumeEvent e) {
-        if (!e.getItem().getType().equals(Material.POTION)) {
+        if (!e.getItem().getType().equals(Material.POTION) || !e.getItem().hasItemMeta()) {
             return;
         }
-        if (!e.getItem().hasItemMeta()) {
-            return;
-        }
+
         PotionMeta potion = (PotionMeta) e.getItem().getItemMeta();
+
         for (PotionEffect pe : potion.getCustomEffects()) {
             if (pe.getAmplifier() > 5
                     || pe.getDuration() > 12000) {
@@ -94,11 +94,13 @@ public class IllegalDamageAndPotionCheck implements Listener {
         }
     }
 
-    // Potion/Arrow/Trident despense from dispenser
+    // Check Potion/Arrow/Trident with illegal potion effects dispense from dispenser
     @EventHandler(ignoreCancelled = true)
     public void onDispense(BlockDispenseEvent event) {
         String material = event.getItem().getType().name();
 
+        // Needs to add more items if they are added in newer MC version,
+        // or remove material check
         if (material.contains("POTION")|| material.contains("ARROW") || material.contains("TRIDENT")) {
             Dispenser disp = (Dispenser) event.getBlock().getState();
             PotionMeta pot = (PotionMeta) event.getItem().getItemMeta();
@@ -108,6 +110,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
                         || effects.getDuration() > 12000) {
                     event.setCancelled(true);
                     disp.getInventory().remove(event.getItem());
+                    Utils.println(ConfigCache.IllegalPotionMessage);
                     // One illegal potion effect appear, remove whole item
                     // then break the for loop.
                     break;
