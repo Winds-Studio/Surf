@@ -22,9 +22,6 @@ public class IllegalDamageAndPotionCheck implements Listener {
     // Player get damage
     @EventHandler(ignoreCancelled = true)
     public void onDamage(EntityDamageByEntityEvent event) {
-        if (!ConfigCache.AntiIllegalCheckIllegalDamage) {
-            return;
-        }
         if (!(event.getDamager() instanceof Player damager)) {
             return;
         }
@@ -49,9 +46,6 @@ public class IllegalDamageAndPotionCheck implements Listener {
     // Arrow shoot by player
     @EventHandler(ignoreCancelled = true)
     public void onBow(EntityDamageByEntityEvent event) {
-        if (!ConfigCache.AntiIllegalCheckIllegalDamage) {
-            return;
-        }
         if (!(event.getDamager() instanceof Arrow)) {
             return;
         }

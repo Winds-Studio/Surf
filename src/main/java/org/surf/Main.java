@@ -86,7 +86,7 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new ChunkBan(), this);
 		pluginManager.registerEvents(new DispenserCrash(), this);
 		pluginManager.registerEvents(new GateWay(), this);
-		pluginManager.registerEvents(new IllegalDamageAndPotionCheck(), this);
+		if (ConfigCache.CheckIllegalDamage) pluginManager.registerEvents(new IllegalDamageAndPotionCheck(), this);
 		pluginManager.registerEvents(new Offhand(), this);
 
 		// Misc

@@ -28,7 +28,7 @@ public class ConfigCache {
     public static String IllegalBlockPlaceMessage;
     public static int IllegalEnchantsThreshold;
 
-    public static boolean AntiIllegalCheckIllegalDamage;
+    public static boolean CheckIllegalDamage;
     public static String IllegalDamageMessage;
     public static String IllegalPotionMessage;
 
@@ -89,7 +89,7 @@ public class ConfigCache {
         IllegalBlockPlaceMessage = plugin.getConfig().getString("IllegalBlockPlace.Message");
         IllegalEnchantsThreshold = plugin.getConfig().getInt("IllegalEnchants.Threshold");
 
-        AntiIllegalCheckIllegalDamage = plugin.getConfig().getBoolean("Antiillegal.Check-Illegal-Damage");
+        CheckIllegalDamage = plugin.getConfig().getBoolean("Check-Illegal-Damage");
         IllegalDamageMessage = plugin.getConfig().getString("IllegalDamage.Message");
         IllegalPotionMessage = plugin.getConfig().getString("IllegalPotion.Message");
 

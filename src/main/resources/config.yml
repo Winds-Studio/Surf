@@ -28,7 +28,6 @@ Antiillegal:
   PlayerSwapOffhand-Enabled: true
   PlayerInteract-Enabled: true
   Delete-Stacked-Totem: true
-  Check-Illegal-Damage: true
   Illegal-Items-List:
     - "BARRIER"
     - "BEDROCK"
@@ -46,7 +45,8 @@ Antiillegal:
     - "STRUCTURE_VOID"
     - "JIGSAW"
     - "LIGHT"
-    -
+
+Check-Illegal-Damage: true
 IllegalDamage:
   Message: "&6&l[&b&lSurf&6&l]&6&6 You can not use this illegal item"
 IllegalPotion:
