@@ -19,6 +19,7 @@ import org.surf.util.Utils;
 
 public class IllegalDamageAndPotionCheck implements Listener {
 
+    // Player get damage
     @EventHandler(ignoreCancelled = true)
     public void onDamage(EntityDamageByEntityEvent event) {
         if (!ConfigCache.AntiIllegalCheckIllegalDamage) {
@@ -45,6 +46,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
          */
     }
 
+    // Arrow shoot by player
     @EventHandler(ignoreCancelled = true)
     public void onBow(EntityDamageByEntityEvent event) {
         if (!ConfigCache.AntiIllegalCheckIllegalDamage) {
@@ -59,6 +61,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
         }
     }
 
+    // Player throw potion
     @EventHandler(ignoreCancelled = true)
     public void onThrow(PotionSplashEvent event) {
         if (!(event.getPotion().getShooter() instanceof Player player)) {
@@ -76,6 +79,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
         }
     }
 
+    // Player consume potion
     @EventHandler(ignoreCancelled = true)
     public void PlayerInteractEvent(PlayerItemConsumeEvent e) {
         if (!e.getItem().getType().equals(Material.POTION)) {
@@ -96,6 +100,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
         }
     }
 
+    // Potion/Arrow/Trident despense from dispenser
     @EventHandler(ignoreCancelled = true)
     public void onDispense(BlockDispenseEvent event) {
         String material = event.getItem().getType().name();
@@ -117,6 +122,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
         }
     }
 
+    // Arrow shoot by player
     @EventHandler(ignoreCancelled = true)
     public void onHit(ProjectileHitEvent event) {
         if (!(event.getEntity() instanceof Arrow arrow) || !(event.getEntity().getShooter() instanceof Player)
