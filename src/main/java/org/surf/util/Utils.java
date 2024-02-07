@@ -10,7 +10,8 @@ import org.bukkit.entity.Player;
 public class Utils {
 
     public static double getTps() {
-		return Math.round(Bukkit.getServer().getTPS()[0]);
+		double tps = Bukkit.getServer().getTPS()[0];
+		return Double.parseDouble(String.format("%.2f", tps));
 	}
 
 	public static void sendMessage(Player player, String string) {
