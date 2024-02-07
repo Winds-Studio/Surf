@@ -75,9 +75,7 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new CleanIllegal(), this);
 
 		// AntiLag
-		if (ConfigCache.BlockPhysicsEnabled) {
-			pluginManager.registerEvents(new BlockPhysics(), this);
-		}
+		if (ConfigCache.BlockPhysicsEnabled) pluginManager.registerEvents(new BlockPhysics(), this);
 		pluginManager.registerEvents(new MinecartLag(this), this);
 		pluginManager.registerEvents(new WitherSpawn(), this);
 

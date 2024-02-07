@@ -10,9 +10,35 @@ public class ConfigCache {
     private final static Main plugin = Main.getInstance();
 
     public static String Prefix;
+
+    // Anti Illegal
+    public static boolean AntiillegalBlockPlaceEnabled;
+    public static boolean AntiillegalChunkLoadEnabled;
+    public static boolean AntiillegalHopperTransferEnabled;
+    public static boolean AntiillegalInventoryCloseEnabled;
+    public static boolean AntiillegalInventoryOpenEnabled;
+    public static boolean AntiillegalItemPickupEnabled;
+    public static boolean AntiillegalHotbarMoveEnabled;
+    public static boolean AntiillegalDeleteStackedTotem;
+    public static boolean AntiillegalPlayerSwapOffhandEnabled;
+    public static boolean AntiillegalPlayerInteractEnabled;
+    public static List<String> AntiillegalIllegalItemsList;
+
     public static boolean IllegalBlockPlaceEnabled;
     public static String IllegalBlockPlaceMessage;
+    public static int IllegalEnchantsThreshold;
 
+    public static boolean AntiIllegalCheckIllegalDamage;
+    public static String IllegalDamageMessage;
+    public static String IllegalPotionMessage;
+
+    // Anti Lag
+    public static boolean BlockPhysicsEnabled;
+    public static int BlockPhysicsDisableTPS;
+
+    public static int MinecartPerChunkLimit;
+
+    // Patches
     public static boolean GateWayPreventCrashExploit;
     public static boolean GateWayPreventEntityEnterPortal;
 
@@ -28,67 +54,19 @@ public class ConfigCache {
     public static String NetherBottomMessage;
     public static boolean NetherTopBottomDoDamage;
 
-    public static boolean AntiIllegalCheckIllegalDamage;
-    public static String IllegalDamageMessage;
-    public static String IllegalPotionMessage;
-
-    public static boolean BlockPhysicsEnabled;
-    public static int BlockPhysicsDisableTPS;
-
-    public static int MinecartPerChunkLimit;
-
-    public static boolean FirstJoinEnabled;
-    public static String FirstJoinMessage;
-
+    // Connection
     public static boolean ConnectionEnabled;
     public static String ConnectionPlayerJoinMessage;
     public static String ConnectionPlayerLeaveMessage;
     public static boolean ConnectionPreventKickEnabled;
     public static List<String> ConnectionKickReasons;
-
-    public static boolean AntiillegalBlockPlaceEnabled;
-    public static boolean AntiillegalChunkLoadEnabled;
-    public static boolean AntiillegalHopperTransferEnabled;
-    public static boolean AntiillegalInventoryCloseEnabled;
-    public static boolean AntiillegalInventoryOpenEnabled;
-    public static boolean AntiillegalItemPickupEnabled;
-    public static boolean AntiillegalHotbarMoveEnabled;
-    public static boolean AntiillegalDeleteStackedTotem;
-    public static boolean AntiillegalPlayerSwapOffhandEnabled;
-    public static boolean AntiillegalPlayerInteractEnabled;
-    public static List<String> AntiillegalIllegalItemsList;
-
-    public static int IllegalEnchantsThreshold;
+    public static boolean FirstJoinEnabled;
+    public static String FirstJoinMessage;
 
     public static void loadConfig() {
         Prefix = plugin.getConfig().getString("Prefix");
-        IllegalBlockPlaceEnabled = plugin.getConfig().getBoolean("IllegalBlockPlace.Enabled");
-        IllegalBlockPlaceMessage = plugin.getConfig().getString("IllegalBlockPlace.Message");
-        GateWayPreventCrashExploit = plugin.getConfig().getBoolean("GateWay.PreventCrashExploit");
-        GateWayPreventEntityEnterPortal = plugin.getConfig().getBoolean("GateWay.PreventEntityEnterPortal");
-        ChunkBanEnabled = plugin.getConfig().getBoolean("ChunkBan.Enabled");
-        ChunkBanTileEntityMax = plugin.getConfig().getInt("ChunkBan.TileEntity-Max");
-        ChunkBanPreventMessage = plugin.getConfig().getString("ChunkBan.Prevent-Message");
-        ChunkBanSkullMax = plugin.getConfig().getInt("ChunkBan.Skull-Max");
-        NetherEnabled = plugin.getConfig().getBoolean("Nether.Enabled");
-        NetherTopLayer = plugin.getConfig().getInt("Nether.Top-Layer");
-        NetherBottomLayer = plugin.getConfig().getInt("Nether.Bottom-Layer");
-        NetherTopMessage = plugin.getConfig().getString("Nether.Top-message");
-        NetherBottomMessage = plugin.getConfig().getString("Nether.Bottom-message");
-        NetherTopBottomDoDamage = plugin.getConfig().getBoolean("Nether.top-bottom-do-damage");
-        AntiIllegalCheckIllegalDamage = plugin.getConfig().getBoolean("Antiillegal.Check-Illegal-Damage");
-        IllegalDamageMessage = plugin.getConfig().getString("IllegalDamage.Message");
-        IllegalPotionMessage = plugin.getConfig().getString("IllegalPotion.Message");
-        BlockPhysicsEnabled = plugin.getConfig().getBoolean("BlockPhysics.Enabled");
-        BlockPhysicsDisableTPS = plugin.getConfig().getInt("BlockPhysics.disable-tps");
-        MinecartPerChunkLimit = plugin.getConfig().getInt("Minecart-per-chunk.limit");
-        FirstJoinEnabled = plugin.getConfig().getBoolean("FirstJoin.Enabled");
-        FirstJoinMessage = plugin.getConfig().getString("FirstJoin.Message");
-        ConnectionEnabled = plugin.getConfig().getBoolean("Connection.Enabled");
-        ConnectionPlayerJoinMessage = plugin.getConfig().getString("Connection.Player-Join-Message");
-        ConnectionPlayerLeaveMessage = plugin.getConfig().getString("Connection.Player-Leave-Message");
-        ConnectionPreventKickEnabled = plugin.getConfig().getBoolean("Connection-Prevent-Kick.Enabled");
-        ConnectionKickReasons = plugin.getConfig().getStringList("Connection-Prevent-Kick.Kick-Reasons");
+
+        // Anti Illegal
         AntiillegalBlockPlaceEnabled = plugin.getConfig().getBoolean("Antiillegal.BlockPlace-Enabled");
         AntiillegalChunkLoadEnabled = plugin.getConfig().getBoolean("Antiillegal.ChunkLoad-Enabled");
         AntiillegalHopperTransferEnabled = plugin.getConfig().getBoolean("Antiillegal.HopperTransfer-Enabled");
@@ -101,6 +79,43 @@ public class ConfigCache {
         AntiillegalPlayerInteractEnabled = plugin.getConfig().getBoolean("Antiillegal.PlayerInteract-Enabled");
         AntiillegalIllegalItemsList = plugin.getConfig().getStringList("Antiillegal.Illegal-Items-List");
         ItemUtils.loadIllegalMaterials();
+
+        IllegalBlockPlaceEnabled = plugin.getConfig().getBoolean("IllegalBlockPlace.Enabled");
+        IllegalBlockPlaceMessage = plugin.getConfig().getString("IllegalBlockPlace.Message");
         IllegalEnchantsThreshold = plugin.getConfig().getInt("IllegalEnchants.Threshold");
+
+        AntiIllegalCheckIllegalDamage = plugin.getConfig().getBoolean("Antiillegal.Check-Illegal-Damage");
+        IllegalDamageMessage = plugin.getConfig().getString("IllegalDamage.Message");
+        IllegalPotionMessage = plugin.getConfig().getString("IllegalPotion.Message");
+
+        // Anti Lag
+        BlockPhysicsEnabled = plugin.getConfig().getBoolean("BlockPhysics.Enabled");
+        BlockPhysicsDisableTPS = plugin.getConfig().getInt("BlockPhysics.disable-tps");
+        MinecartPerChunkLimit = plugin.getConfig().getInt("Minecart-per-chunk.limit");
+
+        // Patches
+        GateWayPreventCrashExploit = plugin.getConfig().getBoolean("GateWay.PreventCrashExploit");
+        GateWayPreventEntityEnterPortal = plugin.getConfig().getBoolean("GateWay.PreventEntityEnterPortal");
+
+        ChunkBanEnabled = plugin.getConfig().getBoolean("ChunkBan.Enabled");
+        ChunkBanTileEntityMax = plugin.getConfig().getInt("ChunkBan.TileEntity-Max");
+        ChunkBanPreventMessage = plugin.getConfig().getString("ChunkBan.Prevent-Message");
+        ChunkBanSkullMax = plugin.getConfig().getInt("ChunkBan.Skull-Max");
+
+        NetherEnabled = plugin.getConfig().getBoolean("Nether.Enabled");
+        NetherTopLayer = plugin.getConfig().getInt("Nether.Top-Layer");
+        NetherBottomLayer = plugin.getConfig().getInt("Nether.Bottom-Layer");
+        NetherTopMessage = plugin.getConfig().getString("Nether.Top-message");
+        NetherBottomMessage = plugin.getConfig().getString("Nether.Bottom-message");
+        NetherTopBottomDoDamage = plugin.getConfig().getBoolean("Nether.top-bottom-do-damage");
+
+        // Connection
+        ConnectionEnabled = plugin.getConfig().getBoolean("Connection.Enabled");
+        ConnectionPlayerJoinMessage = plugin.getConfig().getString("Connection.Player-Join-Message");
+        ConnectionPlayerLeaveMessage = plugin.getConfig().getString("Connection.Player-Leave-Message");
+        ConnectionPreventKickEnabled = plugin.getConfig().getBoolean("Connection-Prevent-Kick.Enabled");
+        ConnectionKickReasons = plugin.getConfig().getStringList("Connection-Prevent-Kick.Kick-Reasons");
+        FirstJoinEnabled = plugin.getConfig().getBoolean("FirstJoin.Enabled");
+        FirstJoinMessage = plugin.getConfig().getString("FirstJoin.Message");
     }
 }
