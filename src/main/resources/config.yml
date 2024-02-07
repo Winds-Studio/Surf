@@ -6,7 +6,6 @@
 Prefix: "&6&l[&b&lSurf&6&l]&6 "
 
 #Anti-illegal >>
-
 #Messages to send the player when they try to place illegal blocks
 IllegalBlockPlace:
   Enabled: true
@@ -54,8 +53,23 @@ IllegalPotion:
   Message: "&6&l[&b&lSurf&6&l]&6&6 You can not use this illegal potion"
 
 
-#Patch >>
+#AntiLag >>
+#water / lava flowing disable tps this is useful on new servers with lots of block physics updates that cause lag
+#Set -1 to disable
+LimitLiquidSpread:
+  Enabled: true
+  disable-tps: 17
+LimitVehicle:
+  Enabled: true
+  disable-tps: 17
+  #Ammount of vehicles allowed in a chunk
+  Minecart-per-chunk:
+    limit: 500
+LimitWitherSpawnOnLag:
+  Enabled: true
+  disable-tps: 17
 
+#Patch >>
 #ChunkBan skull limit tile entity limit and prevent message
 ChunkBan:
   Enabled: true
@@ -72,21 +86,12 @@ Nether:
   top-bottom-do-damage: false
 UnbookBan:
   Message: "&6&l[&b&lSurf&6&l]&6&6 You have been unbookbanned"
-#Ammount of vehicles allowed in a chunk
-Minecart-per-chunk:
-  limit: 500
-#water / lava flowing disable tps this is useful on new servers with lots of block physics updates that cause lag
-#Set -1 to disable
-BlockPhysics:
-  Enabled: false
-  disable-tps: 15
 GateWay:
   PreventCrashExploit: false
   PreventEntityEnterPortal: false
 
 
 #Misc >>
-
 #These are the connection messages for when a player joins / leaves
 #Use & for colours and %player% as a placeholder for the players name
 Connection:
@@ -102,8 +107,3 @@ Connection-Prevent-Kick:
     - "Kicked for spamming"
     - "Invalid hotbar selection (Hacking?)"
     - "You released use item too quickly (Hacking?)"
-#This is to prevent people from crashing / lagging the server by spam opening chest and other containers
-#ChestLagFix:
-#  MaxOpensPerSecond: 64
-#  KickMessage: "&6&l[&b&lSurf&6&l]&6&c [AntiChestLag]&r&6 You have lost connection to the server"
-#  RemoveUnicodeBooks: false

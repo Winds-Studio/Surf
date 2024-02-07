@@ -11,15 +11,15 @@ public class BlockPhysics implements Listener {
 
     @EventHandler
     public void onLiquidSpread(BlockFromToEvent event) {
-        if (Utils.getTps() <= ConfigCache.BlockPhysicsDisableTPS) {
-            if (isChecked(event.getBlock().getType())) {
+        if (Utils.getTps() <= ConfigCache.LimitLiquidSpreadDisableTPS) {
+            if (isLiquid(event.getBlock().getType())) {
                 event.setCancelled(true);
             }
         }
     }
 
-    private boolean isChecked(Material material) {
-        return switch (material) {
+    private boolean isLiquid(Material m) {
+        return switch (m) {
             case LAVA, WATER -> true;
             default -> false;
         };

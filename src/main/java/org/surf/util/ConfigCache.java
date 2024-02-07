@@ -33,10 +33,15 @@ public class ConfigCache {
     public static String IllegalPotionMessage;
 
     // Anti Lag
-    public static boolean BlockPhysicsEnabled;
-    public static int BlockPhysicsDisableTPS;
+    public static boolean LimitLiquidSpreadEnabled;
+    public static int LimitLiquidSpreadDisableTPS;
 
+    public static boolean LimitVehicleEnabled;
+    public static int LimitVehicleDisableTPS;
     public static int MinecartPerChunkLimit;
+
+    public static boolean LimitWitherSpawnOnLagEnabled;
+    public static int LimitWitherSpawnOnLagDisableTPS;
 
     // Patches
     public static boolean GateWayPreventCrashExploit;
@@ -89,9 +94,15 @@ public class ConfigCache {
         IllegalPotionMessage = plugin.getConfig().getString("IllegalPotion.Message");
 
         // Anti Lag
-        BlockPhysicsEnabled = plugin.getConfig().getBoolean("BlockPhysics.Enabled");
-        BlockPhysicsDisableTPS = plugin.getConfig().getInt("BlockPhysics.disable-tps");
-        MinecartPerChunkLimit = plugin.getConfig().getInt("Minecart-per-chunk.limit");
+        LimitLiquidSpreadEnabled = plugin.getConfig().getBoolean("LimitLiquidSpread.Enabled");
+        LimitLiquidSpreadDisableTPS = plugin.getConfig().getInt("LimitLiquidSpread.disable-tps");
+
+        LimitVehicleEnabled = plugin.getConfig().getBoolean("LimitVehicle.Enabled");
+        LimitVehicleDisableTPS = plugin.getConfig().getInt("LimitVehicle.disable-tps");
+        MinecartPerChunkLimit = plugin.getConfig().getInt("LimitVehicle.Minecart-per-chunk.limit");
+
+        LimitWitherSpawnOnLagEnabled = plugin.getConfig().getBoolean("LimitWitherSpawnOnLag.Enabled");
+        LimitWitherSpawnOnLagDisableTPS = plugin.getConfig().getInt("LimitWitherSpawnOnLag.disable-tps");
 
         // Patches
         GateWayPreventCrashExploit = plugin.getConfig().getBoolean("GateWay.PreventCrashExploit");
