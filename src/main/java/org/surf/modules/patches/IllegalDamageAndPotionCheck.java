@@ -55,12 +55,31 @@ public class IllegalDamageAndPotionCheck implements Listener {
         }
     }
 
-    // Player throw potion
+    // Arrow shoot by player
+    @EventHandler(ignoreCancelled = true)
+    public void onHit(ProjectileHitEvent event) {
+        if (!(event.getEntity() instanceof Arrow arrow) || !(event.getEntity().getShooter() instanceof Player)
+                || !(event.getHitEntity() instanceof Player)) {
+            return;
+        }
+        Player shooter = (Player) arrow.getShooter();
+        for (PotionEffect effects : arrow.getCustomEffects()) {
+            if (effects.getAmplifier() > 4
+                    || effects.getDuration() > 12000) {
+                event.setCancelled(true);
+                Utils.sendMessage(shooter, ConfigCache.IllegalPotionMessage);
+                break;
+            }
+        }
+    }
+
+    // Check Player throw Potion with illegal potion effects
     @EventHandler(ignoreCancelled = true)
     public void onThrow(PotionSplashEvent event) {
         if (!(event.getPotion().getShooter() instanceof Player player)) {
             return;
         }
+
         ItemStack pot = event.getPotion().getItem();
         for (PotionEffect effects : event.getPotion().getEffects()) {
             if (effects.getAmplifier() > 5
@@ -73,7 +92,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
         }
     }
 
-    // Player consume Potion with illegal potion effects
+    // Check Player consume Potion with illegal potion effects
     // Dreeam TODO: Check wheter need add foods with illegal effects
     @EventHandler(ignoreCancelled = true)
     public void PlayerInteractEvent(PlayerItemConsumeEvent e) {
@@ -115,24 +134,6 @@ public class IllegalDamageAndPotionCheck implements Listener {
                     // then break the for loop.
                     break;
                 }
-            }
-        }
-    }
-
-    // Arrow shoot by player
-    @EventHandler(ignoreCancelled = true)
-    public void onHit(ProjectileHitEvent event) {
-        if (!(event.getEntity() instanceof Arrow arrow) || !(event.getEntity().getShooter() instanceof Player)
-                || !(event.getHitEntity() instanceof Player)) {
-            return;
-        }
-        Player shooter = (Player) arrow.getShooter();
-        for (PotionEffect effects : arrow.getCustomEffects()) {
-            if (effects.getAmplifier() > 4
-                    || effects.getDuration() > 12000) {
-                event.setCancelled(true);
-                Utils.sendMessage(shooter, ConfigCache.IllegalPotionMessage);
-                break;
             }
         }
     }
