@@ -29,15 +29,7 @@ public class ConnectionEvent implements Listener {
 
     @EventHandler
     public void onLeave(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
-        if (!player.getActivePotionEffects().isEmpty()) {
-            for (PotionEffect effects : player.getActivePotionEffects()) {
-                if (effects.getAmplifier() > 5 || effects.getDuration() > 12000) {
-                    player.removePotionEffect(effects.getType());
-                }
-            }
-        }
-        else if (ConfigCache.ConnectionEnabled) {
+        if (ConfigCache.ConnectionEnabled) {
             event.quitMessage(
                     LegacyComponentSerializer.legacyAmpersand().deserialize(ConfigCache.ConnectionPlayerLeaveMessage.replace("%player%", event.getPlayer().getDisplayName())));
         }
