@@ -15,7 +15,7 @@ import org.surf.util.Utils;
 
 public class IllegalDamageAndPotionCheck implements Listener {
 
-    // Player get damage
+    // Entity gets damage
     @EventHandler(ignoreCancelled = true)
     public void onDamage(EntityDamageByEntityEvent event) {
         // Player => Entity
@@ -37,18 +37,6 @@ public class IllegalDamageAndPotionCheck implements Listener {
                     }
                 }
             }
-        }
-    }
-
-    // Arrow shoot by player
-    @EventHandler(ignoreCancelled = true)
-    public void onBow(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow)) {
-            return;
-        }
-        if (((Arrow) event.getDamager()).getShooter() instanceof Player damager && event.getDamage() > 40) {
-            event.setCancelled(true);
-            Utils.sendMessage(damager, ConfigCache.IllegalDamageMessage);
         }
     }
 
