@@ -24,6 +24,7 @@ import org.surf.modules.patches.ChunkBan;
 import org.surf.modules.patches.DispenserCrash;
 import org.surf.modules.patches.GateWay;
 import org.surf.modules.patches.IllegalDamageAndPotionCheck;
+import org.surf.modules.patches.NBTBan;
 import org.surf.modules.patches.Offhand;
 import org.surf.util.ConfigCache;
 import org.surf.util.SecondPassEvent;
@@ -87,6 +88,7 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new DispenserCrash(), this);
 		pluginManager.registerEvents(new GateWay(), this);
 		if (ConfigCache.CheckIllegalDamage) pluginManager.registerEvents(new IllegalDamageAndPotionCheck(), this);
+		if (ConfigCache.AntiNBTBanEnabeld) pluginManager.registerEvents(new NBTBan(), this);
 		pluginManager.registerEvents(new Offhand(), this);
 
 		// Misc

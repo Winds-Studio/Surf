@@ -86,6 +86,10 @@ Nether:
   top-bottom-do-damage: false
 UnbookBan:
   Message: "&6&l[&b&lSurf&6&l]&6&6 You have been unbookbanned"
+AntiNBTBan:
+  Enabled: true
+  NBT-limit: 85000
+  Message: "&6&l[&b&lSurf&6&l]&6&6 You have been un-NBT-banned"
 GateWay:
   PreventCrashExploit: false
   PreventEntityEnterPortal: false

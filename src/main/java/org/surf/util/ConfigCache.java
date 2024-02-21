@@ -59,6 +59,10 @@ public class ConfigCache {
     public static String NetherBottomMessage;
     public static boolean NetherTopBottomDoDamage;
 
+    public static boolean AntiNBTBanEnabeld;
+    public static int AntiNBTBanLimit;
+    public static String AntiNBTBanMessage;
+
     // Connection
     public static boolean ConnectionEnabled;
     public static String ConnectionPlayerJoinMessage;
@@ -119,6 +123,10 @@ public class ConfigCache {
         NetherTopMessage = plugin.getConfig().getString("Nether.Top-message");
         NetherBottomMessage = plugin.getConfig().getString("Nether.Bottom-message");
         NetherTopBottomDoDamage = plugin.getConfig().getBoolean("Nether.top-bottom-do-damage");
+
+        AntiNBTBanEnabeld = plugin.getConfig().getBoolean("AntiNBTBan.Enabled");
+        AntiNBTBanLimit = plugin.getConfig().getInt("AntiNBTBan.NBT-limit");
+        AntiNBTBanMessage = plugin.getConfig().getString("AntiNBTBan.Message");
 
         // Connection
         ConnectionEnabled = plugin.getConfig().getBoolean("Connection.Enabled");
