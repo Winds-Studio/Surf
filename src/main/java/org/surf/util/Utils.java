@@ -1,6 +1,7 @@
 package org.surf.util;
 
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.surf.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -25,7 +26,7 @@ public class Utils {
 	}
 
 	public static void kickPlayer(Player player, String string) {
-		player.kick(LegacyComponentSerializer.legacyAmpersand().deserialize(string));
+		player.kickPlayer(string);
 	}
 
 	public static void sendOpMessage(String message) {

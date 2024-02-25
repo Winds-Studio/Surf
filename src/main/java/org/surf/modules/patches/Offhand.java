@@ -1,7 +1,6 @@
 package org.surf.modules.patches;
 
 import com.google.common.collect.Lists;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -49,7 +48,7 @@ public class Offhand implements Listener {
 			offhandMap.put(player.getUniqueId(), 1);
 		}
 		if (offhandMap.get(player.getUniqueId()) > 10) {
-			player.kick(LegacyComponentSerializer.legacyAmpersand().deserialize(Utils.getPrefix() + "&cPacket Exploit Detected"));
+			Utils.kickPlayer(player, Utils.getPrefix() + "&cPacket Exploit Detected");
 		}
 	}
 
