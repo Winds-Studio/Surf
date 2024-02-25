@@ -1,7 +1,6 @@
 package org.surf.util;
 
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.surf.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
