@@ -4,16 +4,14 @@ import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.command.commands.SurfCommand;
 import org.jetbrains.annotations.NotNull;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class CommandHandler implements CommandExecutor, TabCompleter {
+public class CommandHandler implements org.bukkit.command.CommandExecutor, org.bukkit.command.TabCompleter {
 
     private final ArrayList<BaseCommand> commands = new ArrayList<>();
     private final Surf plugin;

@@ -46,7 +46,7 @@ public class Utils {
         return ConfigCache.Prefix;
     }
 
-    public static void println(String message) {
+    public static void println(String message, Player player) {
         Surf.getInstance().adventure().console().sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
     }
 }

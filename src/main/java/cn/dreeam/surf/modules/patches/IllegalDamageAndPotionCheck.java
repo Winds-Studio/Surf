@@ -53,6 +53,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
     @EventHandler
     public void onLeave(PlayerQuitEvent event) {
         Player player = event.getPlayer();
+
         if (!player.getActivePotionEffects().isEmpty()) {
             for (PotionEffect effects : player.getActivePotionEffects()) {
                 if (effects.getAmplifier() > 5 || effects.getDuration() > 12000) {
@@ -68,8 +69,6 @@ public class IllegalDamageAndPotionCheck implements Listener {
         PotionEffect effect = event.getNewEffect();
 
         if (effect != null) {
-            if (event.getEntity().getUniqueId().toString().equals("dba7869d-1ab8-3e2e-86cd-2d425324c496"))
-                System.out.println(effect.getAmplifier() + "|" + effect.getDuration() + "|" + effect.getType());
             if (effect.getAmplifier() > 5 || effect.getDuration() > 12000) {
                 event.setCancelled(true);
                 if (event.getEntity() instanceof Player) {
@@ -87,8 +86,10 @@ public class IllegalDamageAndPotionCheck implements Listener {
                 || !(event.getHitEntity() instanceof Player)) {
             return;
         }
+
         Arrow arrow = (Arrow) event.getEntity();
         Player shooter = (Player) arrow.getShooter();
+
         for (PotionEffect effects : arrow.getCustomEffects()) {
             if (effects.getAmplifier() > 4
                     || effects.getDuration() > 12000) {
@@ -104,9 +105,10 @@ public class IllegalDamageAndPotionCheck implements Listener {
         if (!(event.getPotion().getShooter() instanceof Player)) {
             return;
         }
-        Player player = (Player) event.getPotion().getShooter();
 
+        Player player = (Player) event.getPotion().getShooter();
         ItemStack pot = event.getPotion().getItem();
+
         for (PotionEffect effects : event.getPotion().getEffects()) {
             if (effects.getAmplifier() > 5
                     || effects.getDuration() > 12000) {

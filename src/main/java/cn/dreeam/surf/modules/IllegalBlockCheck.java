@@ -15,7 +15,9 @@ public class IllegalBlockCheck implements Listener {
         if (!ConfigCache.IllegalBlockPlaceEnabled) {
             return;
         }
+
         Player player = event.getPlayer();
+
         // GET HAND
         switch (event.getBlock().getType()) {
             case BEDROCK:

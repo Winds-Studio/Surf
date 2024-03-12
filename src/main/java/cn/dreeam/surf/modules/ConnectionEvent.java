@@ -16,6 +16,7 @@ public class ConnectionEvent implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+
         if (ConfigCache.ConnectionEnabled) {
             event.joinMessage(
                     LegacyComponentSerializer.legacyAmpersand().deserialize(ConfigCache.ConnectionPlayerJoinMessage.replace("%player%", event.getPlayer().getDisplayName())));

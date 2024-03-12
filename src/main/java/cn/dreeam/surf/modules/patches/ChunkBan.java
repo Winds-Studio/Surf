@@ -22,17 +22,21 @@ public class ChunkBan implements Listener {
         if (!ConfigCache.ChunkBanEnabled) {
             return;
         }
+
         Block block = event.getBlock();
         Player player = event.getPlayer();
         Chunk chunk = block.getChunk();
+
         if (player.hasPermission("surf.bypass.chunkban")) {
             return;
         }
+
         if (isChecked(block) && chunk.getTileEntities().length > ConfigCache.ChunkBanTileEntityMax) {
             event.setCancelled(true);
             Utils.sendMessage(player, ConfigCache.ChunkBanPreventMessage);
             return;
         }
+
         if (isSkull(block.getType())) {
             // get chunk skull count
             long skullCount = Arrays.stream(chunk.getTileEntities()).filter(tileEntity -> isSkull(tileEntity.getType())).count();
@@ -48,12 +52,15 @@ public class ChunkBan implements Listener {
         if (!ConfigCache.ChunkBanEnabled) {
             return;
         }
+
         if (event.getClickedBlock() == null) {
             return;
         }
+
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK || event.getItem() == null) {
             return;
         }
+
         Chunk chunk = event.getClickedBlock().getChunk();
         if (event.getItem().getType() == Material.ITEM_FRAME) {
             long amount = Arrays.stream(chunk.getEntities()).filter(entity -> entity instanceof ItemFrame).count();

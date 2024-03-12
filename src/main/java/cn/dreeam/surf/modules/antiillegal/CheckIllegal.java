@@ -28,6 +28,7 @@ public class CheckIllegal implements Listener {
     public void onPlace(BlockPlaceEvent event) {
         if (ConfigCache.AntiillegalBlockPlaceEnabled && ItemUtils.isIllegal(event.getItemInHand())) {
             event.setCancelled(true);
+
             if (event.getHand() == EquipmentSlot.HAND) {
                 event.getPlayer().getInventory().setItemInMainHand(null);
             } else {
@@ -42,6 +43,7 @@ public class CheckIllegal implements Listener {
         if (!ConfigCache.AntiillegalChunkLoadEnabled) {
             return;
         }
+
         for (BlockState state : event.getChunk().getTileEntities()) {
             if (state instanceof Container) {
                 Container container = (Container) state;
@@ -56,15 +58,19 @@ public class CheckIllegal implements Listener {
         if (!ConfigCache.AntiillegalHopperTransferEnabled) {
             return;
         }
+
         Inventory inv = event.getSource();
+
         if (inv.getContents().length == 0) {
             return;
         }
+
         for (ItemStack item : inv.getStorageContents()) {
             if (item != null) {
                 if (item.getDurability() > item.getType().getMaxDurability()) {
                     item.setDurability(item.getType().getMaxDurability());
                 }
+
                 if (item.getDurability() < 0) {
                     item.setDurability((short) 1);
                 }
@@ -92,6 +98,7 @@ public class CheckIllegal implements Listener {
     @AntiIllegal(EventName = "InventoryOpenEvent")
     public void onInventoryOpen(InventoryOpenEvent event) {
         Inventory inv = event.getInventory();
+
         if (ConfigCache.AntiillegalInventoryOpenEnabled) {
             ItemUtils.deleteIllegals(inv);
         }
@@ -101,7 +108,9 @@ public class CheckIllegal implements Listener {
     @AntiIllegal(EventName = "PlayerPickupItemEvent")
     public void onPickup(PlayerPickupItemEvent event) {
         if (ConfigCache.AntiillegalItemPickupEnabled) {
+
             ItemStack item = event.getItem().getItemStack();
+
             if (ItemUtils.isEnchantedBlock(item) || ItemUtils.hasIllegalItemFlag(item) || ItemUtils.hasIllegalEnchants(item)
                     || ItemUtils.isIllegal(item) || ItemUtils.hasIllegalAttributes(item)) {
                 event.setCancelled(true);
@@ -126,10 +135,12 @@ public class CheckIllegal implements Listener {
             Player player = event.getPlayer();
             ItemUtils.deleteIllegals(player.getInventory());
         }
+
         for (ItemStack itemStack : event.getPlayer().getInventory().getContents()) {
             if (!ConfigCache.AntiillegalDeleteStackedTotem) {
                 return;
             }
+
             if (itemStack != null && itemStack.getType() == Material.TOTEM_OF_UNDYING) {
                 if (itemStack.getAmount() > itemStack.getMaxStackSize()) {
                     event.setCancelled(true);
@@ -145,6 +156,7 @@ public class CheckIllegal implements Listener {
             Player player = event.getPlayer();
             ItemUtils.deleteIllegals(player.getInventory());
         }
+
         for (ItemStack itemStack : event.getPlayer().getInventory().getContents()) {
             if (!ConfigCache.AntiillegalDeleteStackedTotem) {
                 return;

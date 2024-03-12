@@ -30,6 +30,7 @@ public class GateWay implements Listener {
         if (!ConfigCache.GateWayPreventCrashExploit) {
             return;
         }
+
         double randomX = (Math.random() * ((50) + 1)) + 0;
         double randomY = (Math.random() * ((50) + 1)) + 0;
         double randomZ = (Math.random() * ((50) + 1)) + 0;
@@ -38,9 +39,11 @@ public class GateWay implements Listener {
         int z = event.getFrom().getBlockZ();
         Vector vector = new Vector(-randomX, randomY, randomZ);
         Entity entity = event.getEntity();
+
         if (!(entity instanceof Vehicle)) {
             return;
         }
+
         for (Player nearby : entity.getLocation().getNearbyPlayers(30)) {
             nearby.sendMessage(Component.text(
                     "Going through ENDGATEWAY while riding "
@@ -61,11 +64,14 @@ public class GateWay implements Listener {
         if (!ConfigCache.GateWayPreventEntityEnterPortal) {
             return;
         }
+
         Entity entity = event.getEntity();
+
         if (entity instanceof Item) {
             event.setCancelled(true);
             return;
         }
+
         if (entity instanceof ChestedHorse) {
             entity.eject();
             event.setCancelled(true);
@@ -77,13 +83,17 @@ public class GateWay implements Listener {
         if (!ConfigCache.GateWayPreventEntityEnterPortal) {
             return;
         }
+
         Vehicle vehicle = event.getVehicle();
+
         if (vehicle.getWorld().getEnvironment() != Environment.THE_END) {
             return;
         }
+
         if (!(vehicle.getPassenger() instanceof Player)) {
             return;
         }
+
         Player player = (Player) vehicle.getPassenger();
         for (BlockFace face : BlockFace.values()) {
             Block next = vehicle.getLocation().getBlock().getRelative(face);

@@ -35,6 +35,7 @@ public class EnderDragonFix implements Listener {
         EnderDragon dragon = (EnderDragon) Bukkit.getEntity(uuid);
         Surf.getInstance().adventure().player(Bukkit.getPlayer("Dreeam__")).sendMessage(Component.text(dragon.getHealth()));
         Surf.getInstance().adventure().player(Bukkit.getPlayer("Dreeam__")).sendMessage(Component.text(dragon.getPhase().name()));
+
         if (dragon.getBossBar() == null) {
             Component component = Component.text().append(Component.text("")).build();
             float progress = 1f; // TODO: need to update with the dragon health

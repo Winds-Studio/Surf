@@ -42,6 +42,7 @@ public class ItemUtils {
             ItemMeta meta = item.getItemMeta();
             return meta.hasItemFlag(ItemFlag.HIDE_ATTRIBUTES) || meta.hasItemFlag(ItemFlag.HIDE_DESTROYS) || meta.hasItemFlag(ItemFlag.HIDE_DYE) || meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_PLACED_ON) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS) || meta.hasItemFlag(ItemFlag.HIDE_UNBREAKABLE) || meta.isUnbreakable();
         }
+
         return false;
     }
 
@@ -51,6 +52,7 @@ public class ItemUtils {
             ItemMeta meta = item.getItemMeta();
             return meta.hasAttributeModifiers();
         }
+
         return false;
     }
 
@@ -59,6 +61,7 @@ public class ItemUtils {
         for (int level : enchants.values()) {
             return level > ConfigCache.IllegalEnchantsThreshold;
         }
+
         return false;
     }
 
@@ -68,6 +71,7 @@ public class ItemUtils {
                 return item.getItemMeta().hasEnchants();
             }
         }
+
         return false;
     }
 
@@ -75,19 +79,23 @@ public class ItemUtils {
         // TODO: use a list to store the items to delete
         ItemStack itemStack = null;
         boolean illegalsFound = false;
+
         // if inventory is empty, skip
         if (inventory.getContents().length == 0) {
             return;
         }
+
         for (ItemStack item : inventory.getContents()) {
             // if item is null, skip
             if (item == null) {
                 continue;
             }
+
             if (item.getDurability() > item.getType().getMaxDurability()) {
                 item.setDurability(item.getType().getMaxDurability());
                 itemStack = item;
             }
+
             if (item.getDurability() < 0) {
                 item.setDurability((short) 1);
                 itemStack = item;
@@ -99,12 +107,14 @@ public class ItemUtils {
                 itemStack = item;
                 continue;
             }
+
             if (hasIllegalItemFlag(item)) {
                 inventory.remove(item);
                 illegalsFound = true;
                 itemStack = item;
                 continue;
             }
+
             if (hasIllegalAttributes(item)) {
                 inventory.remove(item);
                 //TODO
@@ -126,6 +136,7 @@ public class ItemUtils {
                 itemStack = item;
                 continue;
             }
+
             if (hasIllegalEnchants(item)) {
                 for (Entry<Enchantment, Integer> enchantmentIntegerEntry : item.getEnchantments().entrySet()) {
                     item.removeEnchantment(enchantmentIntegerEntry.getKey());
@@ -133,6 +144,7 @@ public class ItemUtils {
                     itemStack = item;
                 }
             }
+
             if (item.hasItemMeta()) {
                 if (isEnchantedBlock(item)) {
                     Iterator<Entry<Enchantment, Integer>> enchants = item.getEnchantments().entrySet()
@@ -145,6 +157,7 @@ public class ItemUtils {
                 }
             }
         }
+
         if (illegalsFound) {
             Utils.println(Utils.getPrefix() + "&6Deleted illegals " + itemStack.getType() + " " + itemStack.getI18NDisplayName() + " " + itemStack.getEnchantments() + (itemStack.hasItemMeta() ? " " + itemStack.getItemMeta().getAttributeModifiers() : ""));
         }

@@ -15,13 +15,16 @@ public class NetherCheck implements Listener {
     public void onMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         World world = event.getTo().getWorld();
+
         // is nether world
         if (world.getEnvironment() != Environment.NETHER) {
             return;
         }
+
         if (!ConfigCache.NetherEnabled || player.hasPermission("surf.bypass.netherroof")) {
             return;
         }
+
         // is in nether roof
         if (event.getTo().getBlockY() > ConfigCache.NetherTopLayer) {
             event.setCancelled(true);

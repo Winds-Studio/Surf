@@ -31,12 +31,14 @@ public class BucketEvent implements Listener {
         if (block.getType() != Material.END_PORTAL_FRAME) {
             return false;
         }
+
         for (BlockFace face : POSSIBLE_FACES) {
             Block relative = block.getRelative(face);
             if (relative.getType() == Material.END_PORTAL) {
                 return true;
             }
         }
+
         return false;
     }
 }

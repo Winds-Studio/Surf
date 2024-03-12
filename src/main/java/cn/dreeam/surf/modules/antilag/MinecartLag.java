@@ -28,11 +28,13 @@ public class MinecartLag implements Listener {
             Player player = Utils.getNearbyPlayer(20, vehicle.getLocation());
             String formattedName = vehicle.getType().toString().toLowerCase().concat("s");
             long amount = Arrays.stream(chunk.getEntities()).filter(entity -> entity instanceof Vehicle).count();
+
             if (amount >= ConfigCache.MinecartPerChunkLimit) {
                 event.setCancelled(true);
                 Utils.sendMessage(player, Utils.getPrefix() + "&6Please limit " + formattedName + " to &r&c" + ConfigCache.MinecartPerChunkLimit + "&r&6 per chunk");
                 Utils.sendOpMessage(Utils.getPrefix() + "&6Removed &r&3" + chunk.getEntities().length + " " + formattedName + "&r&6 from a lag machine owned by&r&3 " + player.getName());
                 System.out.println(LegacyComponentSerializer.legacyAmpersand().deserialize(Utils.getPrefix() + "&6Removed &r&3" + chunk.getEntities().length + " " + formattedName + "&r&6 from a lag machine owned by&r&3 " + player.getName()));
+
                 for (Entity ent : event.getVehicle().getChunk().getEntities()) {
                     if (ent instanceof Vehicle) {
                         ent.remove();
@@ -51,6 +53,7 @@ public class MinecartLag implements Listener {
             String formattedName1 = vehicle.getType().toString().toLowerCase().replace("_", " ");
             int max = ConfigCache.MinecartPerChunkLimit;
             Player player = Utils.getNearbyPlayer(20, vehicle.getLocation());
+
             if (!event.getFrom().getChunk().equals(event.getTo().getChunk())) {
                 if (chunk.getEntities().length >= max) {
                     vehicle.remove();

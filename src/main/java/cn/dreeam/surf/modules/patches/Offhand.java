@@ -15,8 +15,8 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Offhand implements Listener {
-    private final Map<UUID, Integer> offhandMap = new ConcurrentHashMap<>();
 
+    private final Map<UUID, Integer> offhandMap = new ConcurrentHashMap<>();
     private final List<Material> MATERIALS = Lists.newArrayList(Material.BOOK, Material.WRITTEN_BOOK, Material.WRITABLE_BOOK);
 
     public Offhand() {
@@ -33,6 +33,7 @@ public class Offhand implements Listener {
         Player player = event.getPlayer();
         ItemStack mainHand = event.getMainHandItem();
         ItemStack offHand = event.getOffHandItem();
+
         if (isItemNeedToCheck(mainHand)) {
             check(player);
         } else if (isItemNeedToCheck(offHand)) {
@@ -46,6 +47,7 @@ public class Offhand implements Listener {
         } else {
             offhandMap.put(player.getUniqueId(), 1);
         }
+
         if (offhandMap.get(player.getUniqueId()) > 10) {
             Utils.kickPlayer(player, Utils.getPrefix() + "&cPacket Exploit Detected");
         }

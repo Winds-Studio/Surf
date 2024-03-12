@@ -30,30 +30,30 @@ public class SurfCommand extends cn.dreeam.surf.command.BaseCommand {
                 case "reload":
                     plugin.reloadConfig();
                     ConfigCache.loadConfig();
-                    sendMessage(sender, Utils.getPrefix() + "&aReloaded configuration file");
+                    Utils.sendMessage(sender, Utils.getPrefix() + "&aReloaded configuration file");
                     break;
                 case "version":
-                    sendMessage(sender, Utils.getPrefix() + "&6Version &r&c" + plugin.getDescription().getVersion());
+                    Utils.sendMessage(sender, Utils.getPrefix() + "&6Version &r&c" + plugin.getDescription().getVersion());
                     break;
                 case "help":
-                    sendMessage(sender, Utils.getPrefix() + "&1---&r " + Utils.getPrefix() + "&6Help &r&1---");
-                    sendMessage(sender, Utils.getPrefix());
+                    Utils.sendMessage(sender, Utils.getPrefix() + "&1---&r " + Utils.getPrefix() + "&6Help &r&1---");
+                    Utils.sendMessage(sender, Utils.getPrefix());
                     plugin.getCommandHandler().getCommands().forEach(command -> {
                         String helpMsg = "&1---&r&3&l /" + command.getName() + "&r&6 Help &r&1---";
-                        sendMessage(sender, Utils.getPrefix() + helpMsg);
-                        sendMessage(sender, Utils.getPrefix() + "&3Description: " + command.getDescription());
+                        Utils.sendMessage(sender, Utils.getPrefix() + helpMsg);
+                        Utils.sendMessage(sender, Utils.getPrefix() + "&3Description: " + command.getDescription());
                         if (command.getSubCommands() != null) {
                             if (command.getSubCommands().length > 0) {
-                                sendMessage(sender, Utils.getPrefix() + helpMsg.replace("Help", "Subcommands"));
+                                Utils.sendMessage(sender, Utils.getPrefix() + helpMsg.replace("Help", "Subcommands"));
                                 for (String subCommand : command.getSubCommands()) {
                                     String[] split = subCommand.split("::");
                                     if (split.length > 0) {
-                                        sendMessage(sender, Utils.getPrefix() + "&6 /" + command.getName() + " " + split[0] + " |&r&e " + split[1]);
+                                        Utils.sendMessage(sender, Utils.getPrefix() + "&6 /" + command.getName() + " " + split[0] + " |&r&e " + split[1]);
                                     } else {
-                                        sendMessage(sender, Utils.getPrefix() + "&6 /" + command.getName() + " " + subCommand);
+                                        Utils.sendMessage(sender, Utils.getPrefix() + "&6 /" + command.getName() + " " + subCommand);
                                     }
                                 }
-                                sendMessage(sender, Utils.getPrefix() + "&1--------------------");
+                                Utils.sendMessage(sender, Utils.getPrefix() + "&1--------------------");
                             }
                         }
                     });
