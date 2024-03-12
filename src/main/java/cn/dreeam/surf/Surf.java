@@ -1,6 +1,8 @@
 package cn.dreeam.surf;
 
 import cn.dreeam.surf.command.CommandHandler;
+import cn.dreeam.surf.config.Config;
+import cn.dreeam.surf.config.ConfigManager;
 import cn.dreeam.surf.modules.ConnectionEvent;
 import cn.dreeam.surf.modules.IllegalBlockCheck;
 import cn.dreeam.surf.modules.NetherCheck;
@@ -16,7 +18,7 @@ import cn.dreeam.surf.modules.patches.GateWay;
 import cn.dreeam.surf.modules.patches.IllegalDamageAndPotionCheck;
 import cn.dreeam.surf.modules.patches.NBTBan;
 import cn.dreeam.surf.modules.patches.Offhand;
-import cn.dreeam.surf.util.ConfigCache;
+import cn.dreeam.surf.config.ConfigCache;
 import com.tcoded.folialib.FoliaLib;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.apache.logging.log4j.LogManager;
@@ -33,8 +35,12 @@ public class Surf extends JavaPlugin {
 
     private static Surf instance;
     public static Logger LOGGER;
+
+    private static ConfigManager<Config> configManager;
+    public static Config config;
     private final PluginManager pluginManager = getServer().getPluginManager();
     private final CommandHandler commandHandler = new CommandHandler(this);
+
     public FoliaLib foliaLib = new FoliaLib(this);
     private BukkitAudiences adventure;
 
@@ -95,7 +101,12 @@ public class Surf extends JavaPlugin {
     }
 
     public void loadConfig() {
-        saveDefaultConfig();
+        configManager = ConfigManager.create(instance.getDataFolder().toPath(), "config.yml", Config.class);
+
+        configManager.reloadConfig();
+
+        config = configManager.getConfigData();
+
         ConfigCache.loadConfig();
     }
 

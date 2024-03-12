@@ -34,6 +34,7 @@ val adventureVersion = "4.16.0"
 
 dependencies {
     compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
+    api("space.arim.dazzleconf:dazzleconf-ext-snakeyaml:1.3.0-M2")
     api("org.bstats:bstats-bukkit:3.0.2")
     api("com.tcoded:FoliaLib:0.3.1")
     compileOnly("de.tr7zw:item-nbt-api-plugin:2.12.2")
@@ -64,6 +65,7 @@ tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
         exclude(dependency("com.tcoded.folialib:.*:.*"))
     }
     relocate("net.kyori", "cn.dreeam.surf.libs.kyori")
+    relocate("space.arim.dazzleconf", "cn.dreeam.surf.libs.dazzleconf")
     relocate("org.bstats", "cn.dreeam.surf.libs.bstats")
     relocate("com.tcoded.folialib", "cn.dreeam.surf.libs.folialib")
 }

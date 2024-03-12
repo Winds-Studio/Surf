@@ -1,6 +1,7 @@
 package cn.dreeam.surf.util;
 
 import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.config.ConfigCache;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;

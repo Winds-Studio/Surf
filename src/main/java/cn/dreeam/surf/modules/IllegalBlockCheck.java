@@ -1,6 +1,6 @@
 package cn.dreeam.surf.modules;
 
-import cn.dreeam.surf.util.ConfigCache;
+import cn.dreeam.surf.config.ConfigCache;
 import cn.dreeam.surf.util.Utils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

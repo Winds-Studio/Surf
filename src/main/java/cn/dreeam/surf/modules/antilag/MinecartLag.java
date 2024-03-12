@@ -1,7 +1,7 @@
 package cn.dreeam.surf.modules.antilag;
 
 import cn.dreeam.surf.Surf;
-import cn.dreeam.surf.util.ConfigCache;
+import cn.dreeam.surf.config.ConfigCache;
 import cn.dreeam.surf.util.Utils;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Chunk;

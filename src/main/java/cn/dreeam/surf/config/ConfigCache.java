@@ -1,6 +1,7 @@
-package cn.dreeam.surf.util;
+package cn.dreeam.surf.config;
 
 import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.util.ItemUtils;
 
 import java.util.List;
 

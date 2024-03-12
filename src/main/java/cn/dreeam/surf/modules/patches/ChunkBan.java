@@ -1,6 +1,6 @@
 package cn.dreeam.surf.modules.patches;
 
-import cn.dreeam.surf.util.ConfigCache;
+import cn.dreeam.surf.config.ConfigCache;
 import cn.dreeam.surf.util.Utils;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
