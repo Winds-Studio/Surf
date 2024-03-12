@@ -1,14 +1,12 @@
 package cn.dreeam.surf.util;
 
 import cn.dreeam.surf.Surf;
-import cn.dreeam.surf.modules.antiillegal.ItemUtils;
 
 import java.util.List;
 
 public class ConfigCache {
 
     private final static Surf plugin = Surf.getInstance();
-
     public static String Prefix;
 
     // Anti Illegal

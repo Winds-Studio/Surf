@@ -1,6 +1,7 @@
 package cn.dreeam.surf.command;
 
 import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.command.commands.SurfCommand;
 import org.jetbrains.annotations.NotNull;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -13,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class CommandHandler implements TabExecutor {
+
     private final ArrayList<BaseCommand> commands = new ArrayList<>();
     private final Surf plugin;
 
@@ -21,7 +23,7 @@ public class CommandHandler implements TabExecutor {
     }
 
     public void registerCommands() {
-        addCommand(new cn.dreeam.surf.command.commands.BaseCommand());
+        addCommand(new SurfCommand());
     }
 
     private void addCommand(BaseCommand command) {

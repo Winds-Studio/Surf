@@ -4,7 +4,7 @@ import cn.dreeam.surf.command.CommandHandler;
 import cn.dreeam.surf.modules.ConnectionEvent;
 import cn.dreeam.surf.modules.IllegalBlockCheck;
 import cn.dreeam.surf.modules.NetherCheck;
-import cn.dreeam.surf.modules.antiillegal.CleanIllegal;
+import cn.dreeam.surf.modules.antiillegal.CheckIllegal;
 import cn.dreeam.surf.modules.antilag.BlockPhysics;
 import cn.dreeam.surf.modules.antilag.MinecartLag;
 import cn.dreeam.surf.modules.antilag.WitherSpawn;
@@ -17,8 +17,6 @@ import cn.dreeam.surf.modules.patches.IllegalDamageAndPotionCheck;
 import cn.dreeam.surf.modules.patches.NBTBan;
 import cn.dreeam.surf.modules.patches.Offhand;
 import cn.dreeam.surf.util.ConfigCache;
-import cn.dreeam.surf.util.SecondPassEvent;
-import cn.dreeam.surf.util.TenSecondPassEvent;
 import com.tcoded.folialib.FoliaLib;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.apache.logging.log4j.LogManager;
@@ -30,8 +28,6 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.concurrent.TimeUnit;
 
 public class Surf extends JavaPlugin {
 
@@ -60,9 +56,6 @@ public class Surf extends JavaPlugin {
         if (ConfigCache.AntiillegalDeleteStackedTotem) {
             foliaLib.getImpl().runTimer(() -> Bukkit.getWorlds().forEach(b -> b.getPlayers().forEach(e -> e.getInventory().forEach(this::revert))), 0L, 20L);
         }
-        // Server specific events
-        foliaLib.getImpl().runTimer(() -> pluginManager.callEvent(new SecondPassEvent()), 1, 1, TimeUnit.SECONDS);
-        foliaLib.getImpl().runTimer(() -> pluginManager.callEvent(new TenSecondPassEvent()), 1, 10, TimeUnit.SECONDS);
 
         LOGGER.info("Surf {} enabled. By Dreeam.", instance.getDescription().getVersion());
     }
@@ -78,17 +71,16 @@ public class Surf extends JavaPlugin {
 
     public void registerEvents() {
         // AntiIllegal
-        pluginManager.registerEvents(new CleanIllegal(), this);
+        pluginManager.registerEvents(new CheckIllegal(), this);
 
         // AntiLag
         if (ConfigCache.LimitLiquidSpreadEnabled) pluginManager.registerEvents(new BlockPhysics(), this);
-        if (ConfigCache.LimitVehicleEnabled) pluginManager.registerEvents(new MinecartLag(this), this);
+        if (ConfigCache.LimitVehicleEnabled) pluginManager.registerEvents(new MinecartLag(), this);
         if (ConfigCache.LimitWitherSpawnOnLagEnabled) pluginManager.registerEvents(new WitherSpawn(), this);
 
         // Patches
         pluginManager.registerEvents(new BucketEvent(), this);
         pluginManager.registerEvents(new BookBan(), this);
-        //pluginManager.registerEvents(new ChestLagFix(this), this);
         pluginManager.registerEvents(new ChunkBan(), this);
         pluginManager.registerEvents(new DispenserCrash(), this);
         pluginManager.registerEvents(new GateWay(), this);

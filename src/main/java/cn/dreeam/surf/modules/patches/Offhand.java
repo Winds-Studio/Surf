@@ -1,6 +1,5 @@
 package cn.dreeam.surf.modules.patches;
 
-import cn.dreeam.surf.util.SecondPassEvent;
 import cn.dreeam.surf.util.Utils;
 import com.google.common.collect.Lists;
 import org.bukkit.Material;
@@ -50,12 +49,6 @@ public class Offhand implements Listener {
         if (offhandMap.get(player.getUniqueId()) > 10) {
             Utils.kickPlayer(player, Utils.getPrefix() + "&cPacket Exploit Detected");
         }
-    }
-
-    @EventHandler
-    public void onSecond(SecondPassEvent event) {
-        // clear map
-        offhandMap.clear();
     }
 
     private boolean isItemNeedToCheck(ItemStack itemStack) {

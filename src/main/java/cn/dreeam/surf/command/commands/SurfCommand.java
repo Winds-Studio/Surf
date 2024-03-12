@@ -7,9 +7,9 @@ import cn.dreeam.surf.util.Utils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class BaseCommand extends cn.dreeam.surf.command.BaseCommand {
+public class SurfCommand extends cn.dreeam.surf.command.BaseCommand {
 
-    public BaseCommand() {
+    public SurfCommand() {
         super(
                 "surf",
                 "/surf reload | version | help",

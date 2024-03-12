@@ -1,8 +1,6 @@
-package cn.dreeam.surf.modules.antiillegal;
+package cn.dreeam.surf.util;
 
 import cn.dreeam.surf.Surf;
-import cn.dreeam.surf.util.ConfigCache;
-import cn.dreeam.surf.util.Utils;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;

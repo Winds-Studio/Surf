@@ -1,6 +1,6 @@
 name: Surf
 version: ${version}
-main: org.surf.Main
+main: cn.dreeam.surf.Surf
 authors:
   - 254n_m
   - Leeewith3Es

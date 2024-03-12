@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public abstract class BaseCommand {
+
     public final String CONSOLE_ONLY = "This command is console only";
     public final String PLAYER_ONLY = "This command is player only";
     private final String name;

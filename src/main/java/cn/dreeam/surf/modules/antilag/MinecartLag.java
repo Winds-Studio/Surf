@@ -16,10 +16,8 @@ import org.bukkit.event.vehicle.VehicleMoveEvent;
 import java.util.Arrays;
 
 public class MinecartLag implements Listener {
-    private final Surf plugin;
 
-    public MinecartLag(Surf plugin) {
-        this.plugin = plugin;
+    public MinecartLag() {
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -58,7 +56,7 @@ public class MinecartLag implements Listener {
                     vehicle.remove();
                     Utils.sendMessage(player, Utils.getPrefix() + "&6Please limit " + formattedName + " to &r&c" + max + "&r&6 per chunk");
                     Utils.sendOpMessage(Utils.getPrefix() + "&6Deleted a &r&3" + formattedName1 + "&r&6 from a lag machine owned by&r&3 " + player.getName() + " &4BYPASS ATTEMPT");
-                    plugin.getLogger().info(Utils.getPrefix() + "&6Deleted a &r&3" + formattedName1 + "&r&6 from a lag machine owned by&r&3 " + player.getName() + " &4BYPASS ATTEMPT");
+                    Surf.LOGGER.info("{}&6Deleted a &r&3{}&r&6 from a lag machine owned by&r&3 {} &4BYPASS ATTEMPT", Utils.getPrefix(), formattedName1, player.getName());
                 }
             }
         }

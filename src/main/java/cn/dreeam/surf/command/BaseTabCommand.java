@@ -3,6 +3,7 @@ package cn.dreeam.surf.command;
 import java.util.List;
 
 public abstract class BaseTabCommand extends BaseCommand {
+
     private List<String> tabCompletions;
 
     public BaseTabCommand(String name, String usage, String permission) {

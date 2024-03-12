@@ -1,6 +1,7 @@
 package cn.dreeam.surf.modules.antiillegal;
 
 import cn.dreeam.surf.util.ConfigCache;
+import cn.dreeam.surf.util.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Container;
@@ -20,7 +21,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class CleanIllegal implements Listener {
+public class CheckIllegal implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     @AntiIllegal(EventName = "BlockPlaceEvent")
