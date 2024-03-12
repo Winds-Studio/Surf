@@ -1,16 +1,21 @@
 name: Surf
 version: ${version}
 main: org.surf.Main
-authors: [ 254n_m, Leeewith3Es, Dreeam, Loyisa ]
-description:  ${description}
+authors:
+  - 254n_m
+  - Leeewith3Es
+  - Dreeam-qwq
+  - Loyisa
+description: ${description}
 api-version: 1.13
 folia-supported: true
-softdepend: [ NBTAPI ]
+softdepend:
+  - NBTAPI
 commands:
   surf:
     description: The main command of Surf.
 permissions:
-  surf.main:
+  surf.command.main:
     description: The main command of Surf.
     default: op
   surf.bypass.chunkban:

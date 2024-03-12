@@ -1,9 +1,12 @@
 ## ⚠️WARNING⚠️
 
-Surf is not good enough, use as your own risk, and I recommend you to use [AnarchyExploitFixes](https://github.com/moom0o/AnarchyExploitFixes)
+Surf is not good enough, use as your own risk, and I recommend you to
+use [AnarchyExploitFixes](https://github.com/moom0o/AnarchyExploitFixes)
 
 # Surf
-Surf is a fork of [LeeesExploitFixer](https://github.com/XeraPlugins/LeeesExploitFixer-3.0) of a fork of 254nm's [L2X9Core](https://github.com/254nm/L2X9Core)
+
+Surf is a fork of [LeeesExploitFixer](https://github.com/XeraPlugins/LeeesExploitFixer-3.0) of a fork of
+254nm's [L2X9Core](https://github.com/254nm/L2X9Core)
 
 A plugin to fix exploits and remove illegal/NBT items for anarchy servers.
 
@@ -29,6 +32,7 @@ ___
 * Active development
 
 ## Alternatives for deleted features
+
 * LagAssist or React
 * TrChat
 * Openinv

@@ -1,11 +1,11 @@
 plugins {
     `java-library`
     `maven-publish`
-    id("com.github.johnrengelman.shadow") version "8.1.1" apply true
+    id("io.github.goooler.shadow") version "8.1.7" apply true
 }
 
-group = "org.surf"
-version = "3.4.1"
+group = "cn.dreeam.surf"
+version = "5.0.0"
 description = "Fix exploits and remove illegal/NBT items for anarchy servers"
 
 repositories {
@@ -36,7 +36,6 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
     api("org.bstats:bstats-bukkit:3.0.2")
     api("com.tcoded:FoliaLib:0.3.1")
-
     compileOnly("de.tr7zw:item-nbt-api-plugin:2.12.2")
 
     api("net.kyori:adventure-platform-bukkit:4.3.2")
@@ -71,7 +70,10 @@ tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
 tasks {
     processResources {
         filesMatching("**/plugin.yml") {
-            expand("version" to project.version, "description" to project.description)
+            expand(
+                "version" to project.version,
+                "description" to project.description
+            )
         }
     }
 }
