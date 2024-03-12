@@ -31,7 +31,7 @@ public class IllegalBlockCheck implements Listener {
             case STRUCTURE_BLOCK:
             case STRUCTURE_VOID:
             case JIGSAW:
-            case LIGHT:
+            //case LIGHT:
             case END_PORTAL_FRAME:
                 event.setCancelled(true);
                 Utils.sendMessage(player, ConfigCache.IllegalBlockPlaceMessage);

@@ -33,10 +33,11 @@ repositories {
 val adventureVersion = "4.16.0"
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
+    compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
     api("org.bstats:bstats-bukkit:3.0.2")
     api("com.tcoded:FoliaLib:0.3.1")
     compileOnly("de.tr7zw:item-nbt-api-plugin:2.12.2")
+    compileOnly("org.apache.logging.log4j:log4j-api:2.23.1")
 
     api("net.kyori:adventure-platform-bukkit:4.3.2")
     api("net.kyori:adventure-api:$adventureVersion")
@@ -48,8 +49,8 @@ tasks.withType<JavaCompile> {
 }
 
 configure<JavaPluginExtension> {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 tasks.build.configure {
@@ -62,9 +63,9 @@ tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
     minimize {
         exclude(dependency("com.tcoded.folialib:.*:.*"))
     }
-    relocate("net.kyori", "org.surf.libs.kyori")
-    relocate("org.bstats", "org.surf.libs.bstats")
-    relocate("com.tcoded.folialib", "org.surf.libs.folialib")
+    relocate("net.kyori", "cn.dreeam.surf.libs.kyori")
+    relocate("org.bstats", "cn.dreeam.surf.libs.bstats")
+    relocate("com.tcoded.folialib", "cn.dreeam.surf.libs.folialib")
 }
 
 tasks {

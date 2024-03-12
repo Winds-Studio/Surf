@@ -43,7 +43,8 @@ public class CheckIllegal implements Listener {
             return;
         }
         for (BlockState state : event.getChunk().getTileEntities()) {
-            if (state instanceof Container container) {
+            if (state instanceof Container) {
+                Container container = (Container) state;
                 ItemUtils.deleteIllegals(container.getInventory());
             }
         }

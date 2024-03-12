@@ -59,14 +59,16 @@ public class SurfCommand extends cn.dreeam.surf.command.BaseCommand {
                     });
                     break;
                 case "fixdargon":
-                    if (sender instanceof Player p) {
+                    if (sender instanceof Player) {
+                        Player p = (Player) sender;
                         EnderDragonFix.fix(p);
                     } else {
                         sendErrorMessage(sender, "You should only use this command in game!");
                     }
                     break;
                 case "checkdargon":
-                    if (sender instanceof Player p) {
+                    if (sender instanceof Player) {
+                        Player p = (Player) sender;
                         EnderDragonFix.getHealth(p);
                     } else {
                         sendErrorMessage(sender, "You should only use this command in game!");

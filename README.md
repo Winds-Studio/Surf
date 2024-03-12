@@ -12,9 +12,9 @@ A plugin to fix exploits and remove illegal/NBT items for anarchy servers.
 
 ## Compatibility
 
-- Support Java 17 and higher
-- Support Latest Minecraft version (1.20.4)
-- Compatible with Paper / Paper Forks
+- Support Java 8 and higher
+- Support 1.8 ~ Latest Minecraft version (1.20.4)
+- Compatible with Spigot / Paper / Paper Forks
 - Folia Support
 
 ___
@@ -30,13 +30,6 @@ ___
 * Remove illegal potion effects from players
 * Remove falling block server crashers
 * Active development
-
-## Alternatives for deleted features
-
-* LagAssist or React
-* TrChat
-* Openinv
-* NoChunkLag
 
 ## Contact
 

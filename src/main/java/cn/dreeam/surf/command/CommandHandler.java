@@ -50,7 +50,8 @@ public class CommandHandler implements TabExecutor {
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String alias, String[] args) {
         for (BaseCommand command : commands) {
             if (command.getName().equalsIgnoreCase(cmd.getName())) {
-                if (command instanceof BaseTabCommand tabCommand) {
+                if (command instanceof BaseTabCommand) {
+                    BaseTabCommand tabCommand = (BaseTabCommand) command;
                     return tabCommand.onTab(args);
                 } else {
                     List<String> players = new ArrayList<>();

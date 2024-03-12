@@ -19,9 +19,12 @@ public class BlockPhysics implements Listener {
     }
 
     private boolean isLiquid(Material m) {
-        return switch (m) {
-            case LAVA, WATER -> true;
-            default -> false;
-        };
+        switch (m) {
+            case LAVA:
+            case WATER:
+                return true;
+            default:
+                return false;
+        }
     }
 }

@@ -27,7 +27,8 @@ public class IllegalDamageAndPotionCheck implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onDamage(EntityDamageByEntityEvent event) {
         // Player => Entity
-        if (event.getDamager() instanceof Player damager) {
+        if (event.getDamager() instanceof Player) {
+            Player damager = (Player) event.getDamager();
             if (event.getDamage() > 30) {
                 event.setCancelled(true);
                 Utils.sendMessage(damager, ConfigCache.IllegalDamageMessage);
@@ -36,7 +37,8 @@ public class IllegalDamageAndPotionCheck implements Listener {
             // Entity => Entity
             Entity entity = event.getDamager();
 
-            if (entity instanceof LivingEntity damager) {
+            if (entity instanceof LivingEntity) {
+                LivingEntity damager = (LivingEntity) entity;
                 // Only check entities using illegal items
                 if (damager.getEquipment() != null && damager.getEquipment().getItemInMainHand().hasItemMeta()) {
                     if (event.getDamage() > 30) {
@@ -70,8 +72,10 @@ public class IllegalDamageAndPotionCheck implements Listener {
                 System.out.println(effect.getAmplifier() + "|" + effect.getDuration() + "|" + effect.getType());
             if (effect.getAmplifier() > 5 || effect.getDuration() > 12000) {
                 event.setCancelled(true);
-                if (event.getEntity() instanceof Player player)
+                if (event.getEntity() instanceof Player) {
+                    Player player = (Player) event.getEntity();
                     Utils.sendMessage(player, ConfigCache.IllegalPotionMessage);
+                }
             }
         }
     }
@@ -79,10 +83,11 @@ public class IllegalDamageAndPotionCheck implements Listener {
     // Arrow shoot by player
     @EventHandler(ignoreCancelled = true)
     public void onHit(ProjectileHitEvent event) {
-        if (!(event.getEntity() instanceof Arrow arrow) || !(event.getEntity().getShooter() instanceof Player)
+        if (!(event.getEntity() instanceof Arrow) || !(event.getEntity().getShooter() instanceof Player)
                 || !(event.getHitEntity() instanceof Player)) {
             return;
         }
+        Arrow arrow = (Arrow) event.getEntity();
         Player shooter = (Player) arrow.getShooter();
         for (PotionEffect effects : arrow.getCustomEffects()) {
             if (effects.getAmplifier() > 4
@@ -96,9 +101,10 @@ public class IllegalDamageAndPotionCheck implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onThrow(PotionSplashEvent event) {
-        if (!(event.getPotion().getShooter() instanceof Player player)) {
+        if (!(event.getPotion().getShooter() instanceof Player)) {
             return;
         }
+        Player player = (Player) event.getPotion().getShooter();
 
         ItemStack pot = event.getPotion().getItem();
         for (PotionEffect effects : event.getPotion().getEffects()) {

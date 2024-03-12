@@ -81,9 +81,10 @@ public class GateWay implements Listener {
         if (vehicle.getWorld().getEnvironment() != Environment.THE_END) {
             return;
         }
-        if (!(vehicle.getPassenger() instanceof Player player)) {
+        if (!(vehicle.getPassenger() instanceof Player)) {
             return;
         }
+        Player player = (Player) vehicle.getPassenger();
         for (BlockFace face : BlockFace.values()) {
             Block next = vehicle.getLocation().getBlock().getRelative(face);
             if (next.getType() == Material.END_GATEWAY) {

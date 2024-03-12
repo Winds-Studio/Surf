@@ -15,7 +15,7 @@ public class NBTBan implements Listener {
 
         inv.forEach(i -> {
             if (i != null && i.getType().name().contains("SHULKER_BOX")) {
-                if (i.getItemMeta().getAsString().length() > ConfigCache.AntiNBTBanLimit) {
+                if (i.getItemMeta().serialize().size() > ConfigCache.AntiNBTBanLimit) {
                     inv.remove(i);
                     Utils.sendMessage(event.getPlayer(), ConfigCache.AntiNBTBanMessage);
                 }

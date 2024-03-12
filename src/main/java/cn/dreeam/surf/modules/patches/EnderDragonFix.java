@@ -25,7 +25,8 @@ public class EnderDragonFix implements Listener {
             List<Entity> e = world.getEntities();
 
             e.forEach(d -> {
-                if (d instanceof EnderDragon dragon) {
+                if (d instanceof EnderDragon) {
+                    EnderDragon dragon = (EnderDragon) d;
                     uuid = dragon.getUniqueId();
                 }
             });
@@ -50,7 +51,8 @@ public class EnderDragonFix implements Listener {
         List<Entity> list = world.getEntities();
 
         list.forEach(e -> {
-            if (e instanceof EnderDragon dragon) {
+            if (e instanceof EnderDragon) {
+                EnderDragon dragon = (EnderDragon) e;
                 double health = dragon.getHealth();
                 Surf.getInstance().adventure().player(p).sendMessage(Component.text(health));
             }
