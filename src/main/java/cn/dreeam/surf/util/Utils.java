@@ -16,12 +16,10 @@ public class Utils {
 
     public static void sendMessage(Player player, String string) {
         Surf.getInstance().adventure().player(player).sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(string));
-        println(string);
     }
 
     public static void sendMessage(CommandSender sender, String string) {
         Surf.getInstance().adventure().sender(sender).sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(string));
-        println(string);
     }
 
     public static void kickPlayer(Player player, String string) {

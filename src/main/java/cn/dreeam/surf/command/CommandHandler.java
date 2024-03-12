@@ -3,17 +3,17 @@ package cn.dreeam.surf.command;
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.command.commands.SurfCommand;
 import org.jetbrains.annotations.NotNull;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
-import org.bukkit.entity.Player;
+import org.bukkit.command.TabCompleter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class CommandHandler implements TabExecutor {
+public class CommandHandler implements CommandExecutor, TabCompleter {
 
     private final ArrayList<BaseCommand> commands = new ArrayList<>();
     private final Surf plugin;
@@ -29,6 +29,7 @@ public class CommandHandler implements TabExecutor {
     private void addCommand(BaseCommand command) {
         commands.add(command);
         plugin.getCommand(command.getName()).setExecutor(this);
+        plugin.getCommand(command.getName()).setTabCompleter(this);
     }
 
     @Override
@@ -47,22 +48,18 @@ public class CommandHandler implements TabExecutor {
     }
 
     @Override
-    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String alias, String[] args) {
-        for (BaseCommand command : commands) {
-            if (command.getName().equalsIgnoreCase(cmd.getName())) {
-                if (command instanceof BaseTabCommand) {
-                    BaseTabCommand tabCommand = (BaseTabCommand) command;
-                    return tabCommand.onTab(args);
-                } else {
-                    List<String> players = new ArrayList<>();
-                    for (Player player : Bukkit.getOnlinePlayers()) {
-                        players.add(player.getName());
-                    }
-                    return players;
-                }
-            }
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        if (args.length == 1) {
+            // Dreeam - refer to https://github.com/mrgeneralq/sleep-most/blob/5f2f7772c9715cf57530e2af3573652d17cd7420/src/main/java/me/mrgeneralq/sleepmost/commands/SleepmostCommand.java#L135
+            return Stream.of(
+                            "reload",
+                            "version",
+                            "help"
+                    ).filter(arg -> sender.hasPermission("surf.command." + arg))
+                    .collect(Collectors.toList());
         }
-        return Collections.singletonList("Not a tab command");
+
+        return null;
     }
 
     public ArrayList<BaseCommand> getCommands() {

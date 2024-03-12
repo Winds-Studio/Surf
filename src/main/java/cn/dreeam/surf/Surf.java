@@ -31,8 +31,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Surf extends JavaPlugin {
 
-    public static Logger LOGGER;
     private static Surf instance;
+    public static Logger LOGGER;
     private final PluginManager pluginManager = getServer().getPluginManager();
     private final CommandHandler commandHandler = new CommandHandler(this);
     public FoliaLib foliaLib = new FoliaLib(this);
@@ -74,9 +74,9 @@ public class Surf extends JavaPlugin {
         pluginManager.registerEvents(new CheckIllegal(), this);
 
         // AntiLag
-        if (ConfigCache.LimitLiquidSpreadEnabled) pluginManager.registerEvents(new BlockPhysics(), this);
-        if (ConfigCache.LimitVehicleEnabled) pluginManager.registerEvents(new MinecartLag(), this);
-        if (ConfigCache.LimitWitherSpawnOnLagEnabled) pluginManager.registerEvents(new WitherSpawn(), this);
+        pluginManager.registerEvents(new BlockPhysics(), this);
+        pluginManager.registerEvents(new MinecartLag(), this);
+        pluginManager.registerEvents(new WitherSpawn(), this);
 
         // Patches
         pluginManager.registerEvents(new BucketEvent(), this);
@@ -84,8 +84,8 @@ public class Surf extends JavaPlugin {
         pluginManager.registerEvents(new ChunkBan(), this);
         pluginManager.registerEvents(new DispenserCrash(), this);
         pluginManager.registerEvents(new GateWay(), this);
-        if (ConfigCache.CheckIllegalDamage) pluginManager.registerEvents(new IllegalDamageAndPotionCheck(), this);
-        if (ConfigCache.AntiNBTBanEnabeld) pluginManager.registerEvents(new NBTBan(), this);
+        pluginManager.registerEvents(new IllegalDamageAndPotionCheck(), this);
+        pluginManager.registerEvents(new NBTBan(), this);
         pluginManager.registerEvents(new Offhand(), this);
 
         // Misc
