@@ -1,4 +1,4 @@
-package cn.dreeam.surf.modules.patches;
+package cn.dreeam.surf.modules.patch;
 
 import cn.dreeam.surf.config.ConfigCache;
 import cn.dreeam.surf.util.Utils;

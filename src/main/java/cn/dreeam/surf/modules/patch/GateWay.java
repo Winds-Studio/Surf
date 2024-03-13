@@ -1,4 +1,4 @@
-package cn.dreeam.surf.modules.patches;
+package cn.dreeam.surf.modules.patch;
 
 import cn.dreeam.surf.config.ConfigCache;
 import cn.dreeam.surf.util.Utils;
@@ -105,7 +105,7 @@ public class GateWay implements Listener {
                 vehicle.eject();
                 vehicle.remove();
                 Utils.kickPlayer(player, "[&b&lSurf&r]&6 Sorry that exploit got patched :(");
-                Utils.println("&1Prevented&r&e " + player.getName() + "&r&1 at &r&e" + x + " " + y + " " + z + " &r&1in world&e " + worldString + " &r&1from crashing the server");
+                Utils.println(player, "&1Prevented&r&e " + player.getName() + "&r&1 at &r&e" + x + " " + y + " " + z + " &r&1in world&e " + worldString + " &r&1from crashing the server");
             }
         }
     }

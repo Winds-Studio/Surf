@@ -1,7 +1,7 @@
 package cn.dreeam.surf.command.commands;
 
 import cn.dreeam.surf.Surf;
-import cn.dreeam.surf.modules.patches.EnderDragonFix;
+import cn.dreeam.surf.modules.patch.EnderDragonFix;
 import cn.dreeam.surf.config.ConfigCache;
 import cn.dreeam.surf.util.Utils;
 import org.bukkit.command.CommandSender;

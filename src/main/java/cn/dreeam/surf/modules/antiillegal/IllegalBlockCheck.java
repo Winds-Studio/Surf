@@ -1,4 +1,4 @@
-package cn.dreeam.surf.modules;
+package cn.dreeam.surf.modules.antiillegal;
 
 import cn.dreeam.surf.config.ConfigCache;
 import cn.dreeam.surf.util.Utils;

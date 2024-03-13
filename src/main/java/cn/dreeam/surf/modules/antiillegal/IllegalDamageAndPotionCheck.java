@@ -1,4 +1,4 @@
-package cn.dreeam.surf.modules.patches;
+package cn.dreeam.surf.modules.antiillegal;
 
 import cn.dreeam.surf.config.ConfigCache;
 import cn.dreeam.surf.util.Utils;
@@ -157,7 +157,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
                         || effects.getDuration() > 12000) {
                     event.setCancelled(true);
                     disp.getInventory().remove(event.getItem());
-                    Utils.println(ConfigCache.IllegalPotionMessage);
+                    Utils.println(event.getBlock(), ConfigCache.IllegalPotionMessage);
                     // One illegal potion effect appear, remove whole item
                     // then break the for loop.
                     break;

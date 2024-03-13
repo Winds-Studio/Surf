@@ -3,21 +3,21 @@ package cn.dreeam.surf;
 import cn.dreeam.surf.command.CommandHandler;
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.config.ConfigManager;
-import cn.dreeam.surf.modules.ConnectionEvent;
-import cn.dreeam.surf.modules.IllegalBlockCheck;
-import cn.dreeam.surf.modules.NetherCheck;
+import cn.dreeam.surf.modules.misc.ConnectionEvent;
+import cn.dreeam.surf.modules.antiillegal.IllegalBlockCheck;
+import cn.dreeam.surf.modules.misc.NetherCheck;
 import cn.dreeam.surf.modules.antiillegal.CheckIllegal;
 import cn.dreeam.surf.modules.antilag.BlockPhysics;
 import cn.dreeam.surf.modules.antilag.MinecartLag;
 import cn.dreeam.surf.modules.antilag.WitherSpawn;
-import cn.dreeam.surf.modules.patches.BookBan;
-import cn.dreeam.surf.modules.patches.BucketEvent;
-import cn.dreeam.surf.modules.patches.ChunkBan;
-import cn.dreeam.surf.modules.patches.DispenserCrash;
-import cn.dreeam.surf.modules.patches.GateWay;
-import cn.dreeam.surf.modules.patches.IllegalDamageAndPotionCheck;
-import cn.dreeam.surf.modules.patches.NBTBan;
-import cn.dreeam.surf.modules.patches.Offhand;
+import cn.dreeam.surf.modules.patch.BookBan;
+import cn.dreeam.surf.modules.patch.BucketEvent;
+import cn.dreeam.surf.modules.patch.ChunkBan;
+import cn.dreeam.surf.modules.patch.DispenserCrash;
+import cn.dreeam.surf.modules.patch.GateWay;
+import cn.dreeam.surf.modules.antiillegal.IllegalDamageAndPotionCheck;
+import cn.dreeam.surf.modules.patch.NBTBan;
+import cn.dreeam.surf.modules.antilag.Offhand;
 import cn.dreeam.surf.config.ConfigCache;
 import com.tcoded.folialib.FoliaLib;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
@@ -27,9 +27,13 @@ import org.bstats.bukkit.Metrics;
 import org.jetbrains.annotations.NotNull;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class Surf extends JavaPlugin {
 
@@ -43,10 +47,6 @@ public class Surf extends JavaPlugin {
 
     public FoliaLib foliaLib = new FoliaLib(this);
     private BukkitAudiences adventure;
-
-    public static Surf getInstance() {
-        return instance;
-    }
 
     @Override
     public void onEnable() {
@@ -76,42 +76,40 @@ public class Surf extends JavaPlugin {
     }
 
     public void registerEvents() {
-        // AntiIllegal
-        pluginManager.registerEvents(new CheckIllegal(), this);
+        List<Listener> listeners = Arrays.asList(
+                // CheckIllegal
+                new CheckIllegal(),
+                new IllegalBlockCheck(),
+                new IllegalDamageAndPotionCheck(),
 
-        // AntiLag
-        pluginManager.registerEvents(new BlockPhysics(), this);
-        pluginManager.registerEvents(new MinecartLag(), this);
-        pluginManager.registerEvents(new WitherSpawn(), this);
+                // AntiLag
+                new BlockPhysics(),
+                new MinecartLag(),
+                new Offhand(),
+                new WitherSpawn(),
 
-        // Patches
-        pluginManager.registerEvents(new BucketEvent(), this);
-        pluginManager.registerEvents(new BookBan(), this);
-        pluginManager.registerEvents(new ChunkBan(), this);
-        pluginManager.registerEvents(new DispenserCrash(), this);
-        pluginManager.registerEvents(new GateWay(), this);
-        pluginManager.registerEvents(new IllegalDamageAndPotionCheck(), this);
-        pluginManager.registerEvents(new NBTBan(), this);
-        pluginManager.registerEvents(new Offhand(), this);
+                // Misc
+                new ConnectionEvent(),
+                new NetherCheck(),
 
-        // Misc
-        pluginManager.registerEvents(new ConnectionEvent(), this);
-        pluginManager.registerEvents(new IllegalBlockCheck(), this);
-        pluginManager.registerEvents(new NetherCheck(), this);
+                // Patches
+                new BookBan(),
+                new BucketEvent(),
+                new ChunkBan(),
+                new DispenserCrash(),
+                new GateWay(),
+                new NBTBan()
+        );
+
+        for (Listener listener : listeners) {
+            pluginManager.registerEvents(listener, instance);
+        }
     }
 
     public void loadConfig() {
         configManager = ConfigManager.create(instance.getDataFolder().toPath(), "config.yml", Config.class);
-
         configManager.reloadConfig();
-
         config = configManager.getConfigData();
-
-        ConfigCache.loadConfig();
-    }
-
-    public CommandHandler getCommandHandler() {
-        return commandHandler;
     }
 
     // Original code by moom0o, https://github.com/moom0o/AnarchyExploitFixes
@@ -121,6 +119,13 @@ public class Surf extends JavaPlugin {
                 item.setAmount(item.getMaxStackSize());
             }
         }
+    }
+
+    public static Surf getInstance() {
+        return instance;
+    }
+    public CommandHandler getCommandHandler() {
+        return commandHandler;
     }
 
     public @NotNull BukkitAudiences adventure() {

@@ -1,4 +1,4 @@
-package cn.dreeam.surf.modules.patches;
+package cn.dreeam.surf.modules.patch;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;

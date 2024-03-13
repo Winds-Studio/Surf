@@ -5,6 +5,7 @@ import cn.dreeam.surf.config.ConfigCache;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -44,10 +45,22 @@ public class Utils {
     }
 
     public static String getPrefix() {
-        return ConfigCache.Prefix;
+        return (ConfigCache.Prefix != null && !ConfigCache.Prefix.isEmpty()) ? ConfigCache.Prefix : "";
     }
 
-    public static void println(String message, Player player) {
+    public static void println(Player player, String message) {
+        if (player != null) {
+            message = player.getName() + " | " + message;
+        }
+
+        println(message);
+    }
+
+    public static void println(Block block, String message) {
+        println(message);
+    }
+
+    public static void println(String message) {
         Surf.getInstance().adventure().console().sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
     }
 }

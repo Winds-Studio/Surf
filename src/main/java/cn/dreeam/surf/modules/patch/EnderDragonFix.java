@@ -1,4 +1,4 @@
-package cn.dreeam.surf.modules.patches;
+package cn.dreeam.surf.modules.patch;
 
 import cn.dreeam.surf.Surf;
 import net.kyori.adventure.bossbar.BossBar;

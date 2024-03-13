@@ -1,4 +1,4 @@
-package cn.dreeam.surf.modules.patches;
+package cn.dreeam.surf.modules.antilag;
 
 import cn.dreeam.surf.util.Utils;
 import com.google.common.collect.Lists;
