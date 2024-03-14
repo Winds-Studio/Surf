@@ -62,14 +62,12 @@ tasks.build.configure {
 tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
     archiveFileName = "${project.name}-${project.version}.${archiveExtension.get()}"
     exclude("META-INF/**") // Dreeam - Avoid to include META-INF/maven in Jar
-    minimize {
-        exclude(dependency("com.tcoded.folialib:.*:.*"))
-    }
     relocate("net.kyori", "cn.dreeam.surf.libs.kyori")
+    relocate("org.yaml.snakeyaml", "cn.dreeam.surf.libs.snakeyaml")
     relocate("space.arim.dazzleconf", "cn.dreeam.surf.libs.dazzleconf")
     relocate("org.bstats", "cn.dreeam.surf.libs.bstats")
     relocate("com.tcoded.folialib", "cn.dreeam.surf.libs.folialib")
-    relocate("com.github.cryptomorin", "cn.dreeam.surf.libs.xseries")
+    relocate("com.cryptomorin.xseries", "cn.dreeam.surf.libs.xseries")
 }
 
 tasks {

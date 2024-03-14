@@ -10,6 +10,7 @@ import cn.dreeam.surf.modules.antiillegal.CheckIllegal;
 import cn.dreeam.surf.modules.antilag.BlockPhysics;
 import cn.dreeam.surf.modules.antilag.MinecartLag;
 import cn.dreeam.surf.modules.antilag.WitherSpawn;
+import cn.dreeam.surf.modules.misc.StackedTotem;
 import cn.dreeam.surf.modules.patch.BookBan;
 import cn.dreeam.surf.modules.patch.BucketEvent;
 import cn.dreeam.surf.modules.patch.ChunkBan;
@@ -57,17 +58,6 @@ public class Surf extends JavaPlugin {
         instance.registerEvents(); // register event
         new Metrics(instance, 16810);
 
-        // Dreeam TODO
-        if (ConfigCache.AntiillegalDeleteStackedTotem) {
-            foliaLib.getImpl().runTimer(() -> Bukkit.getWorlds().forEach(b -> b.getPlayers().forEach(e -> e.getInventory().forEach(item -> {
-                if (item != null) {
-                    if (ConfigCache.AntiillegalDeleteStackedTotem && item.getType() == Material.TOTEM_OF_UNDYING && item.getAmount() > item.getMaxStackSize()) {
-                        item.setAmount(item.getMaxStackSize());
-                    }
-                }
-            }))), 0L, 20L);
-        }
-
         LOGGER.info("Surf {} enabled. By Dreeam.", instance.getDescription().getVersion());
     }
 
@@ -109,6 +99,8 @@ public class Surf extends JavaPlugin {
         for (Listener listener : listeners) {
             pluginManager.registerEvents(listener, instance);
         }
+
+        StackedTotem.revertPeriodically();
     }
 
     public void loadConfig() {

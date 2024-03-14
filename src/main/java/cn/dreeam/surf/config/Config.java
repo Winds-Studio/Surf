@@ -26,39 +26,130 @@ public interface Config {
     String Prefix();
 
     // Anti Illegal
-    AntiillegalBlockPlaceEnabled = plugin.getConfig().getBoolean("Antiillegal.BlockPlace-Enabled");
-    AntiillegalChunkLoadEnabled = plugin.getConfig().getBoolean("Antiillegal.ChunkLoad-Enabled");
-    AntiillegalHopperTransferEnabled = plugin.getConfig().getBoolean("Antiillegal.HopperTransfer-Enabled");
-    AntiillegalInventoryCloseEnabled = plugin.getConfig().getBoolean("Antiillegal.InventoryClose-Enabled");
-    AntiillegalInventoryOpenEnabled = plugin.getConfig().getBoolean("Antiillegal.InventoryOpen-Enabled");
-    AntiillegalItemPickupEnabled = plugin.getConfig().getBoolean("Antiillegal.ItemPickup-Enabled");
-    AntiillegalHotbarMoveEnabled = plugin.getConfig().getBoolean("Antiillegal.HotbarMove-Enabled");
-    AntiillegalDeleteStackedTotem = plugin.getConfig().getBoolean("Antiillegal.Delete-Stacked-Totem");
-    AntiillegalPlayerSwapOffhandEnabled = plugin.getConfig().getBoolean("Antiillegal.PlayerSwapOffhand-Enabled");
-    AntiillegalPlayerInteractEnabled = plugin.getConfig().getBoolean("Antiillegal.PlayerInteract-Enabled");
-    AntiillegalIllegalItemsList = plugin.getConfig().getStringList("Antiillegal.Illegal-Items-List");
-        ItemUtil.loadIllegalMaterials();
+    @ConfKey("anti-illegal.check-illegal-block.enabled")
+    @ConfDefault.DefaultBoolean(true)
+    boolean antiIllegalCheckIllegalBlockEnabled();
 
-    IllegalBlockPlaceEnabled = plugin.getConfig().getBoolean("IllegalBlockPlace.Enabled");
-    IllegalBlockPlaceMessage = plugin.getConfig().getString("IllegalBlockPlace.Message");
-    IllegalEnchantsThreshold = plugin.getConfig().getInt("IllegalEnchants.Threshold");
+    @ConfKey("anti-illegal.check-illegal-block.message")
+    @ConfDefault.DefaultString("&6This block is not allowed")
+    String antiIllegalCheckIllegalBlockMessage();
 
-    CheckIllegalDamage = plugin.getConfig().getBoolean("Check-Illegal-Damage");
-    IllegalDamageMessage = plugin.getConfig().getString("IllegalDamage.Message");
-    IllegalPotionMessage = plugin.getConfig().getString("IllegalPotion.Message");
+    @ConfKey("anti-illegal.check-illegal-block.list")
+    @ConfDefault.DefaultStrings({
+            "BARRIER",
+            "BEDROCK",
+            "REPEATING_COMMAND_BLOCK",
+            "COMMAND_BLOCK_MINECART",
+            "CHAIN_COMMAND_BLOCK",
+            "COMMAND_BLOCK",
+            "KNOWLEDGE_BOOK",
+            "SPAWNER",
+            "END_PORTAL",
+            "END_PORTAL_FRAME",
+            "END_GATEWAY",
+            "NETHER_PORTAL",
+            "STRUCTURE_BLOCK",
+            "STRUCTURE_VOID",
+            "JIGSAW",
+            "LIGHT",
+            "REINFORCED_DEEPSLATE"
+    })
+    List<String> antiIllegalCheckIllegalBlockList();
+
+    @ConfComments({
+            "set to -1 to disable the threshold"
+    })
+    @ConfKey("anti-illegal.illegal-enchant-threshold")
+    @ConfDefault.DefaultInteger(5)
+    int antiIllegalEnchantsThreshold();
+
+    @ConfKey("anti-illegal.check-when.HopperTransfer")
+    @ConfDefault.DefaultBoolean(false)
+    boolean antiIllegalCheckWhenHopperTransferEnabled();
+
+    @ConfKey("anti-illegal.check-when.InventoryClose")
+    @ConfDefault.DefaultBoolean(false)
+    boolean antiIllegalCheckWhenInventoryCloseEnabled();
+
+    @ConfKey("anti-illegal.check-when.InventoryOpen")
+    @ConfDefault.DefaultBoolean(false)
+    boolean antiIllegalCheckWhenInventoryOpenEnabled();
+
+    @ConfKey("anti-illegal.check-when.HotbarMove")
+    @ConfDefault.DefaultBoolean(false)
+    boolean antiIllegalCheckWhenHotbarMoveEnabled();
+
+    @ConfKey("anti-illegal.check-when.ItemPickup")
+    @ConfDefault.DefaultBoolean(false)
+    boolean antiIllegalCheckWhenItemPickupEnabled();
+
+    @ConfKey("anti-illegal.check-when.PlayerSwapOffhand")
+    @ConfDefault.DefaultBoolean(false)
+    boolean antiIllegalCheckWhenPlayerSwapOffhandEnabled();
+
+    @ConfKey("anti-illegal.check-when.PlayerInteract")
+    @ConfDefault.DefaultBoolean(false)
+    boolean antiIllegalCheckWhenPlayerInteractEnabled();
+
+    @ConfKey("check-illegal-damage.enabled")
+    @ConfDefault.DefaultBoolean(false)
+    boolean checkIllegalDamageEnabled();
+
+    @ConfKey("check-illegal-damage.message")
+    @ConfDefault.DefaultString("&6 You can not use this illegal item.")
+    String checkIllegalDamageMessage();
+
+    @ConfKey("check-illegal-potion.enabled")
+    @ConfDefault.DefaultBoolean(false)
+    boolean checkIllegalPotionEnabled();
+
+    @ConfKey("check-illegal-potion.message")
+    @ConfDefault.DefaultString("&6 You can not use this illegal potion")
+    String checkIllegalPotionMessage();
 
     // Anti Lag
-    LimitLiquidSpreadEnabled = plugin.getConfig().getBoolean("LimitLiquidSpread.Enabled");
-    LimitLiquidSpreadDisableTPS = plugin.getConfig().getInt("LimitLiquidSpread.disable-tps");
+    @ConfComments({
+            "water / lava flowing disable tps this is useful on new servers with lots of block physics updates that cause lag",
+            "Set -1 to disable"
+    })
+    @ConfKey("limit.liquid-spread.enabled")
+    @ConfDefault.DefaultBoolean(false)
+    boolean limitLiquidSpreadEnabled();
 
-    LimitVehicleEnabled = plugin.getConfig().getBoolean("LimitVehicle.Enabled");
-    LimitVehicleDisableTPS = plugin.getConfig().getInt("LimitVehicle.disable-tps");
-    MinecartPerChunkLimit = plugin.getConfig().getInt("LimitVehicle.Minecart-per-chunk.limit");
+    @ConfKey("limit.liquid-spread.disable-tps")
+    @ConfDefault.DefaultInteger(18)
+    int limitLiquidSpreadDisableTPS();
 
-    Offhand;
+    @ConfKey("limit.vehicle.enabled")
+    @ConfDefault.DefaultBoolean(false)
+    boolean limitVehicleEnabled();
 
-    LimitWitherSpawnOnLagEnabled = plugin.getConfig().getBoolean("LimitWitherSpawnOnLag.Enabled");
-    LimitWitherSpawnOnLagDisableTPS = plugin.getConfig().getInt("LimitWitherSpawnOnLag.disable-tps");
+    @ConfKey("limit.vehicle.disable-tps")
+    @ConfDefault.DefaultInteger(18)
+    int limitVehicleDisableTPS();
+
+    @ConfComments({
+            "Amount of vehicles allowed per chunk"
+    })
+    @ConfKey("limit.vehicle.minecart-per-chunk")
+    @ConfDefault.DefaultInteger(500)
+    int limitVehicleMinecartPerChunkLimit();
+
+    @ConfKey("limit.offhand-swap.enabled")
+    @ConfDefault.DefaultBoolean(false)
+    boolean limitOffhandSwapEnabled();
+
+    @ConfKey("limit.offhand-swap.message")
+    @ConfDefault.DefaultString("You can't do this.")
+    String limitOffhandSwapMessage();
+
+    @ConfKey("limit.wither-spawn.enabled")
+    @ConfDefault.DefaultBoolean(false)
+    boolean limitWitherSpawnOnLagEnabled();
+
+    @ConfKey("limit.wither-spawn.disable-tps")
+    @ConfDefault.DefaultInteger(18)
+    int limitWitherSpawnOnLagDisableTPS();
 
     // Misc / Connection / Nether
     @ConfComments({
@@ -124,7 +215,18 @@ public interface Config {
     @ConfDefault.DefaultBoolean(false)
     boolean netherTopBottomDoDamage();
 
-    // Patches
+    @ConfKey("stacked-totem.revert-periodically.enabled")
+    @ConfDefault.DefaultBoolean(false)
+    boolean stackedTotemRevertPeriodicallyEnabled();
+
+    @ConfComments({
+            "TODO"
+    })
+    @ConfKey("stacked-totem.use-stacked-as-one.enabled")
+    @ConfDefault.DefaultBoolean(false)
+    boolean stackedTotemUseStackedAsOneEnabled();
+
+    // Patch
     @ConfKey("prevent-book-ban.enabled")
     @ConfDefault.DefaultBoolean(false)
     boolean preventBookBanEnabled();
@@ -141,6 +243,9 @@ public interface Config {
     @ConfDefault.DefaultString("&6You can't do this")
     String preventBuketPortalMessage();
 
+    @ConfComments({
+            "ChunkBan skull limit tile entity limit and prevent message"
+    })
     @ConfKey("per-chunk-limit.enabled")
     @ConfDefault.DefaultBoolean(false)
     boolean perChunkLimitEnabled();

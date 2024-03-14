@@ -1,5 +1,6 @@
 package cn.dreeam.surf.modules.antilag;
 
+import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.util.Util;
 import com.google.common.collect.Lists;
 import org.bukkit.Material;
@@ -30,6 +31,8 @@ public class Offhand implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void PlayerSwapHandItemsEvent(PlayerSwapHandItemsEvent event) {
+        if (!Surf.config.limitOffhandSwapEnabled()) return;
+
         Player player = event.getPlayer();
         ItemStack mainHand = event.getMainHandItem();
         ItemStack offHand = event.getOffHandItem();

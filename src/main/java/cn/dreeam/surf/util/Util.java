@@ -28,20 +28,14 @@ public class Util {
         player.kickPlayer(message);
     }
 
-    public static void sendOpMessage(String message) {
-        for (Player online : Bukkit.getOnlinePlayers()) {
-            if (online.isOp()) {
-                Surf.getInstance().adventure().player(online).sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
-            }
-        }
-    }
+    public static Player getNearbyPlayer(int radius, Location loc) {
+        Player p = null;
 
-    public static Player getNearbyPlayer(int i, Location loc) {
-        Player plrs = null;
-        for (Player nearby : loc.getNearbyPlayers(i)) {
-            plrs = nearby;
+        for (Player nearby : loc.getNearbyPlayers(radius)) {
+            p = nearby;
         }
-        return plrs;
+
+        return p;
     }
 
     public static String getPrefix() {
