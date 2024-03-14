@@ -1,7 +1,7 @@
 package cn.dreeam.surf.modules.misc;
 
 import cn.dreeam.surf.Surf;
-import cn.dreeam.surf.util.Utils;
+import cn.dreeam.surf.util.Util;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,7 +17,8 @@ public class ConnectionEvent implements Listener {
         if (!Surf.config.connectionMessageEnabled()) return;
 
         Player player = event.getPlayer();
-        event.joinMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(
+        event.setJoinMessage(null);
+        Surf.getInstance().adventure().all().sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(
                 ((Surf.config.connectionFirstJoinEnabled() && !player.hasPlayedBefore()) ? Surf.config.connectionFirstJoinMessage() : Surf.config.connectionPlayerJoin())
                         .replace("%Player%", player.getDisplayName())));
     }
@@ -26,18 +27,19 @@ public class ConnectionEvent implements Listener {
     public void onLeave(PlayerQuitEvent event) {
         if (!Surf.config.connectionMessageEnabled()) return;
 
-        event.quitMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(
+        event.setQuitMessage(null);
+        Surf.getInstance().adventure().all().sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(
                 Surf.config.connectionPlayerLeave().replace("%player%", event.getPlayer().getDisplayName())));
     }
 
     @EventHandler
     public void onKick(PlayerKickEvent event) {
-        if (Surf.config.connectionPreventKickEnabled()) return;
+        if (!Surf.config.connectionPreventKickEnabled()) return;
 
         Surf.config.connectionKickReasons().forEach(reason -> {
             if (event.getReason().equalsIgnoreCase(reason)) {
                 event.setCancelled(true);
-                Utils.println(event.getPlayer(), Utils.getPrefix() + "Canceled a kick, Reason: " + reason);
+                Util.println(event.getPlayer(), Util.getPrefix() + "Canceled a kick, Reason: " + reason);
             }
         });
     }

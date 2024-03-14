@@ -1,7 +1,8 @@
 package cn.dreeam.surf.modules.patch;
 
-import cn.dreeam.surf.config.ConfigCache;
-import cn.dreeam.surf.util.Utils;
+import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.util.Util;
+import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -19,60 +20,49 @@ public class ChunkBan implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onPlace(BlockPlaceEvent event) {
-        if (!ConfigCache.ChunkBanEnabled) {
-            return;
-        }
+        if (!Surf.config.perChunkLimitEnabled()) return;
 
         Block block = event.getBlock();
         Player player = event.getPlayer();
         Chunk chunk = block.getChunk();
 
-        if (player.hasPermission("surf.bypass.chunkban")) {
-            return;
-        }
+        if (player.hasPermission("surf.bypass.chunkban")) return;
 
-        if (isChecked(block) && chunk.getTileEntities().length > ConfigCache.ChunkBanTileEntityMax) {
+        if (isTileEntity(block.getType()) && chunk.getTileEntities().length > Surf.config.perChunkLimitTitleEntityMax()) {
             event.setCancelled(true);
-            Utils.sendMessage(player, ConfigCache.ChunkBanPreventMessage);
+            Util.sendMessage(player, Surf.config.perChunkLimitMessage());
             return;
         }
 
         if (isSkull(block.getType())) {
             // get chunk skull count
             long skullCount = Arrays.stream(chunk.getTileEntities()).filter(tileEntity -> isSkull(tileEntity.getType())).count();
-            if (skullCount > ConfigCache.ChunkBanSkullMax) {
+            if (skullCount > Surf.config.perChunkLimitSkullMax()) {
                 event.setCancelled(true);
-                Utils.sendMessage(player, ConfigCache.ChunkBanPreventMessage);
+                Util.sendMessage(player, Surf.config.perChunkLimitMessage());
             }
         }
     }
 
     @EventHandler(ignoreCancelled = true)
     public void onSpawn(PlayerInteractEvent event) {
-        if (!ConfigCache.ChunkBanEnabled) {
-            return;
-        }
+        if (!Surf.config.perChunkLimitEnabled() || event.getClickedBlock() == null || event.getAction() != Action.RIGHT_CLICK_BLOCK || event.getItem() == null) return;
 
-        if (event.getClickedBlock() == null) {
-            return;
-        }
-
-        if (event.getAction() != Action.RIGHT_CLICK_BLOCK || event.getItem() == null) {
-            return;
-        }
+        Player player = event.getPlayer();
+        if (player.hasPermission("surf.bypass.chunkban")) return;
 
         Chunk chunk = event.getClickedBlock().getChunk();
         if (event.getItem().getType() == Material.ITEM_FRAME) {
             long amount = Arrays.stream(chunk.getEntities()).filter(entity -> entity instanceof ItemFrame).count();
-            if (amount + chunk.getTileEntities().length > ConfigCache.ChunkBanTileEntityMax) {
+            if (amount + chunk.getTileEntities().length > Surf.config.perChunkLimitTitleEntityMax()) {
                 event.setCancelled(true);
-                Utils.sendMessage(event.getPlayer(), ConfigCache.ChunkBanPreventMessage);
+                Util.sendMessage(event.getPlayer(), Surf.config.perChunkLimitMessage());
             }
         }
     }
 
-    private boolean isChecked(Block block) {
-        switch (block.getType()) {
+    private boolean isTileEntity(Material m) {
+        switch (m) {
             //TODO
             //case ENCHANTMENT_TABLE:
             //case WALL_BANNER:
@@ -98,12 +88,7 @@ public class ChunkBan implements Listener {
     }
 
     private boolean isSkull(Material material) {
-        switch (material) {
-            case PLAYER_HEAD:
-            case PLAYER_WALL_HEAD:
-                return true;
-            default:
-                return false;
-        }
+        return material.equals(XMaterial.PLAYER_HEAD.parseMaterial())
+                || material.equals(XMaterial.PLAYER_WALL_HEAD.parseMaterial());
     }
 }

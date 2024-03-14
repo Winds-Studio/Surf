@@ -1,7 +1,7 @@
 package cn.dreeam.surf.modules.antiillegal;
 
 import cn.dreeam.surf.config.ConfigCache;
-import cn.dreeam.surf.util.Utils;
+import cn.dreeam.surf.util.Util;
 import org.bukkit.Material;
 import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Arrow;
@@ -31,7 +31,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
             Player damager = (Player) event.getDamager();
             if (event.getDamage() > 30) {
                 event.setCancelled(true);
-                Utils.sendMessage(damager, ConfigCache.IllegalDamageMessage);
+                Util.sendMessage(damager, ConfigCache.IllegalDamageMessage);
             }
         } else {
             // Entity => Entity
@@ -43,7 +43,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
                 if (damager.getEquipment() != null && damager.getEquipment().getItemInMainHand().hasItemMeta()) {
                     if (event.getDamage() > 30) {
                         event.setCancelled(true);
-                        Utils.sendMessage(damager, ConfigCache.IllegalDamageMessage);
+                        Util.sendMessage(damager, ConfigCache.IllegalDamageMessage);
                     }
                 }
             }
@@ -73,7 +73,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
                 event.setCancelled(true);
                 if (event.getEntity() instanceof Player) {
                     Player player = (Player) event.getEntity();
-                    Utils.sendMessage(player, ConfigCache.IllegalPotionMessage);
+                    Util.sendMessage(player, ConfigCache.IllegalPotionMessage);
                 }
             }
         }
@@ -94,7 +94,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
             if (effects.getAmplifier() > 4
                     || effects.getDuration() > 12000) {
                 event.setCancelled(true);
-                Utils.sendMessage(shooter, ConfigCache.IllegalPotionMessage);
+                Util.sendMessage(shooter, ConfigCache.IllegalPotionMessage);
                 break;
             }
         }
@@ -114,7 +114,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
                     || effects.getDuration() > 12000) {
                 event.setCancelled(true);
                 player.getInventory().remove(pot);
-                Utils.sendMessage(player, ConfigCache.IllegalPotionMessage);
+                Util.sendMessage(player, ConfigCache.IllegalPotionMessage);
                 break;
             }
         }
@@ -135,7 +135,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
                     || pe.getDuration() > 12000) {
                 e.setCancelled(true);
                 e.getPlayer().getInventory().remove(e.getItem());
-                Utils.sendMessage(e.getPlayer(), ConfigCache.IllegalPotionMessage);
+                Util.sendMessage(e.getPlayer(), ConfigCache.IllegalPotionMessage);
                 break;
             }
         }
@@ -157,7 +157,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
                         || effects.getDuration() > 12000) {
                     event.setCancelled(true);
                     disp.getInventory().remove(event.getItem());
-                    Utils.println(event.getBlock(), ConfigCache.IllegalPotionMessage);
+                    Util.println(event.getBlock(), ConfigCache.IllegalPotionMessage);
                     // One illegal potion effect appear, remove whole item
                     // then break the for loop.
                     break;

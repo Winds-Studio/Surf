@@ -1,5 +1,7 @@
 package cn.dreeam.surf.modules.patch;
 
+import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.util.Util;
 import org.bukkit.Material;
 import org.bukkit.block.ShulkerBox;
 import org.bukkit.entity.Player;
@@ -19,6 +21,8 @@ public class BookBan implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
+        if (!Surf.config.preventBookBanEnabled()) return;
+
         Player player = event.getPlayer();
         PlayerInventory inv = player.getInventory();
 
@@ -47,14 +51,13 @@ public class BookBan implements Listener {
             }
             meta.setBlockState(shulkerBox);
             item.setItemMeta(meta);
+            Util.sendMessage(player, Surf.config.preventBookBanMessage());
         }
     }
 
     private boolean isBanBook(BookMeta book) {
-        for (String bookPages : book.getPages()) {
-            if (PATTERN.matcher(bookPages).find()) {
-                return true;
-            }
+        for (String content : book.getPages()) {
+                return PATTERN.matcher(content).find();
         }
 
         return false;

@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class ItemUtils {
+public class ItemUtil {
 
     public final static Set<Material> ILLEGALMATERIALS = new HashSet<>();
 
@@ -161,7 +161,7 @@ public class ItemUtils {
         }
 
         if (illegalsFound) {
-            Utils.println((Player) null, Utils.getPrefix() + "&6Deleted illegals " + itemStack.getType() + " " + itemStack.getI18NDisplayName() + " " + itemStack.getEnchantments() + (itemStack.hasItemMeta() ? " " + itemStack.getItemMeta().getAttributeModifiers() : ""));
+            Util.println((Player) null, Util.getPrefix() + "&6Deleted illegals " + itemStack.getType() + " " + itemStack.getI18NDisplayName() + " " + itemStack.getEnchantments() + (itemStack.hasItemMeta() ? " " + itemStack.getItemMeta().getAttributeModifiers() : ""));
         }
     }
 

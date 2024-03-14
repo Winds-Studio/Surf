@@ -1,7 +1,6 @@
 package cn.dreeam.surf.util;
 
 import cn.dreeam.surf.Surf;
-import cn.dreeam.surf.config.ConfigCache;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -9,23 +8,24 @@ import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Utils {
+public class Util {
 
     public static double getTps() {
         double tps = Bukkit.getServer().getTPS()[0];
         return Double.parseDouble(String.format("%.2f", tps));
     }
 
-    public static void sendMessage(Player player, String string) {
-        Surf.getInstance().adventure().player(player).sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(string));
+    public static void sendMessage(Player player, String message) {
+        Surf.getInstance().adventure().player(player).sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
+        println(player, message);
     }
 
-    public static void sendMessage(CommandSender sender, String string) {
-        Surf.getInstance().adventure().sender(sender).sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(string));
+    public static void sendMessage(CommandSender sender, String message) {
+        Surf.getInstance().adventure().sender(sender).sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
     }
 
-    public static void kickPlayer(Player player, String string) {
-        player.kickPlayer(string);
+    public static void kickPlayer(Player player, String message) {
+        player.kickPlayer(message);
     }
 
     public static void sendOpMessage(String message) {
@@ -45,7 +45,7 @@ public class Utils {
     }
 
     public static String getPrefix() {
-        return (ConfigCache.Prefix != null && !ConfigCache.Prefix.isEmpty()) ? ConfigCache.Prefix : "";
+        return (Surf.config.Prefix() != null && !Surf.config.Prefix().isEmpty()) ? Surf.config.Prefix() : "";
     }
 
     public static void println(Player player, String message) {

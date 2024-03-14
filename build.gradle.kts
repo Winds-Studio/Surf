@@ -34,15 +34,16 @@ val adventureVersion = "4.16.0"
 
 dependencies {
     compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
-    api("space.arim.dazzleconf:dazzleconf-ext-snakeyaml:1.3.0-M2")
-    api("org.bstats:bstats-bukkit:3.0.2")
-    api("com.tcoded:FoliaLib:0.3.1")
-    compileOnly("de.tr7zw:item-nbt-api-plugin:2.12.2")
     compileOnly("org.apache.logging.log4j:log4j-api:2.23.1")
+    implementation("space.arim.dazzleconf:dazzleconf-ext-snakeyaml:1.3.0-M2")
+    implementation("org.bstats:bstats-bukkit:3.0.2")
+    implementation("com.tcoded:FoliaLib:0.3.1")
+    implementation("com.github.cryptomorin:XSeries:9.9.0")
+    compileOnly("de.tr7zw:item-nbt-api-plugin:2.12.2")
 
-    api("net.kyori:adventure-platform-bukkit:4.3.2")
-    api("net.kyori:adventure-api:$adventureVersion")
-    api("net.kyori:adventure-text-serializer-legacy:$adventureVersion")
+    implementation("net.kyori:adventure-platform-bukkit:4.3.2")
+    implementation("net.kyori:adventure-api:$adventureVersion")
+    implementation("net.kyori:adventure-text-serializer-legacy:$adventureVersion")
 }
 
 tasks.withType<JavaCompile> {
@@ -68,6 +69,7 @@ tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
     relocate("space.arim.dazzleconf", "cn.dreeam.surf.libs.dazzleconf")
     relocate("org.bstats", "cn.dreeam.surf.libs.bstats")
     relocate("com.tcoded.folialib", "cn.dreeam.surf.libs.folialib")
+    relocate("com.github.cryptomorin", "cn.dreeam.surf.libs.xseries")
 }
 
 tasks {

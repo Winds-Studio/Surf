@@ -1,6 +1,6 @@
 package cn.dreeam.surf.config;
 
-import cn.dreeam.surf.util.ItemUtils;
+import cn.dreeam.surf.util.ItemUtil;
 import space.arim.dazzleconf.annote.ConfComments;
 import space.arim.dazzleconf.annote.ConfDefault;
 import space.arim.dazzleconf.annote.ConfHeader;
@@ -37,7 +37,7 @@ public interface Config {
     AntiillegalPlayerSwapOffhandEnabled = plugin.getConfig().getBoolean("Antiillegal.PlayerSwapOffhand-Enabled");
     AntiillegalPlayerInteractEnabled = plugin.getConfig().getBoolean("Antiillegal.PlayerInteract-Enabled");
     AntiillegalIllegalItemsList = plugin.getConfig().getStringList("Antiillegal.Illegal-Items-List");
-        ItemUtils.loadIllegalMaterials();
+        ItemUtil.loadIllegalMaterials();
 
     IllegalBlockPlaceEnabled = plugin.getConfig().getBoolean("IllegalBlockPlace.Enabled");
     IllegalBlockPlaceMessage = plugin.getConfig().getString("IllegalBlockPlace.Message");
@@ -125,21 +125,60 @@ public interface Config {
     boolean netherTopBottomDoDamage();
 
     // Patches
-    BookBan;
-    BucketEvent;
+    @ConfKey("prevent-book-ban.enabled")
+    @ConfDefault.DefaultBoolean(false)
+    boolean preventBookBanEnabled();
 
-    ChunkBanEnabled = plugin.getConfig().getBoolean("ChunkBan.Enabled");
-    ChunkBanTileEntityMax = plugin.getConfig().getInt("ChunkBan.TileEntity-Max");
-    ChunkBanPreventMessage = plugin.getConfig().getString("ChunkBan.Prevent-Message");
-    ChunkBanSkullMax = plugin.getConfig().getInt("ChunkBan.Skull-Max");
+    @ConfKey("prevent-book-ban.message")
+    @ConfDefault.DefaultString("&6You have been unbookbanned")
+    String preventBookBanMessage();
 
-    DispenserCrash;
+    @ConfKey("prevent-buket-on-portal.enabled")
+    @ConfDefault.DefaultBoolean(false)
+    boolean preventBuketPortalEnabled();
 
-    GateWayPreventCrashExploit = plugin.getConfig().getBoolean("GateWay.PreventCrashExploit");
-    GateWayPreventEntityEnterPortal = plugin.getConfig().getBoolean("GateWay.PreventEntityEnterPortal");
+    @ConfKey("prevent-buket-on-portal.message")
+    @ConfDefault.DefaultString("&6You can't do this")
+    String preventBuketPortalMessage();
 
-    AntiNBTBanEnabeld = plugin.getConfig().getBoolean("AntiNBTBan.Enabled");
-    AntiNBTBanLimit = plugin.getConfig().getInt("AntiNBTBan.NBT-limit");
-    AntiNBTBanMessage = plugin.getConfig().getString("AntiNBTBan.Message");
+    @ConfKey("per-chunk-limit.enabled")
+    @ConfDefault.DefaultBoolean(false)
+    boolean perChunkLimitEnabled();
+
+    @ConfKey("per-chunk-limit.message")
+    @ConfDefault.DefaultString("&6ChunkBan has been disabled")
+    String perChunkLimitMessage();
+
+    @ConfKey("per-chunk-limit.tile-entity-max")
+    @ConfDefault.DefaultInteger(500)
+    int perChunkLimitTitleEntityMax();
+
+    @ConfKey("per-chunk-limit.skull-max")
+    @ConfDefault.DefaultInteger(100)
+    int perChunkLimitSkullMax();
+
+    @ConfKey("prevent-dispenser-crash.enabled")
+    @ConfDefault.DefaultBoolean(true)
+    boolean preventDispenserCrash();
+
+    @ConfKey("gate-way.prevent-crash-exploit")
+    @ConfDefault.DefaultBoolean(false)
+    boolean gateWayPreventCrashExploit();
+
+    @ConfKey("gate-way.prevent-entity-enter-portal")
+    @ConfDefault.DefaultBoolean(false)
+    boolean gateWayPreventEntityEnterPortal();
+
+    @ConfKey("prevent-nbt-ban.enabled")
+    @ConfDefault.DefaultBoolean(true)
+    boolean preventNBTBanEnabeld();
+
+    @ConfKey("prevent-nbt-ban.nbt-limit")
+    @ConfDefault.DefaultInteger(85000)
+    int preventNBTBanLimit();
+
+    @ConfKey("prevent-nbt-ban.message")
+    @ConfDefault.DefaultString("&6 You have been un-NBT-banned")
+    String preventNBTBanMessage();
 }
 

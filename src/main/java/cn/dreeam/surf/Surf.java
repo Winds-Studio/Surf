@@ -18,7 +18,6 @@ import cn.dreeam.surf.modules.patch.GateWay;
 import cn.dreeam.surf.modules.antiillegal.IllegalDamageAndPotionCheck;
 import cn.dreeam.surf.modules.patch.NBTBan;
 import cn.dreeam.surf.modules.antilag.Offhand;
-import cn.dreeam.surf.config.ConfigCache;
 import com.tcoded.folialib.FoliaLib;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.apache.logging.log4j.LogManager;
@@ -28,7 +27,6 @@ import org.jetbrains.annotations.NotNull;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -40,7 +38,7 @@ public class Surf extends JavaPlugin {
     private static Surf instance;
     public static Logger LOGGER;
 
-    private static ConfigManager<Config> configManager;
+    public ConfigManager<Config> configManager;
     public static Config config;
     private final PluginManager pluginManager = getServer().getPluginManager();
     private final CommandHandler commandHandler = new CommandHandler(this);
@@ -59,8 +57,15 @@ public class Surf extends JavaPlugin {
         instance.registerEvents(); // register event
         new Metrics(instance, 16810);
 
+        // Dreeam TODO
         if (ConfigCache.AntiillegalDeleteStackedTotem) {
-            foliaLib.getImpl().runTimer(() -> Bukkit.getWorlds().forEach(b -> b.getPlayers().forEach(e -> e.getInventory().forEach(this::revert))), 0L, 20L);
+            foliaLib.getImpl().runTimer(() -> Bukkit.getWorlds().forEach(b -> b.getPlayers().forEach(e -> e.getInventory().forEach(item -> {
+                if (item != null) {
+                    if (ConfigCache.AntiillegalDeleteStackedTotem && item.getType() == Material.TOTEM_OF_UNDYING && item.getAmount() > item.getMaxStackSize()) {
+                        item.setAmount(item.getMaxStackSize());
+                    }
+                }
+            }))), 0L, 20L);
         }
 
         LOGGER.info("Surf {} enabled. By Dreeam.", instance.getDescription().getVersion());
@@ -110,15 +115,6 @@ public class Surf extends JavaPlugin {
         configManager = ConfigManager.create(instance.getDataFolder().toPath(), "config.yml", Config.class);
         configManager.reloadConfig();
         config = configManager.getConfigData();
-    }
-
-    // Original code by moom0o, https://github.com/moom0o/AnarchyExploitFixes
-    public void revert(ItemStack item) {
-        if (item != null) {
-            if (ConfigCache.AntiillegalDeleteStackedTotem && item.getType() == Material.TOTEM_OF_UNDYING && item.getAmount() > item.getMaxStackSize()) {
-                item.setAmount(item.getMaxStackSize());
-            }
-        }
     }
 
     public static Surf getInstance() {

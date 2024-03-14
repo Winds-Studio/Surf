@@ -1,7 +1,7 @@
 package cn.dreeam.surf.modules.antiillegal;
 
 import cn.dreeam.surf.config.ConfigCache;
-import cn.dreeam.surf.util.ItemUtils;
+import cn.dreeam.surf.util.ItemUtil;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Container;
@@ -26,7 +26,7 @@ public class CheckIllegal implements Listener {
     @EventHandler(ignoreCancelled = true)
     @AntiIllegal(EventName = "BlockPlaceEvent")
     public void onPlace(BlockPlaceEvent event) {
-        if (ConfigCache.AntiillegalBlockPlaceEnabled && ItemUtils.isIllegal(event.getItemInHand())) {
+        if (ConfigCache.AntiillegalBlockPlaceEnabled && ItemUtil.isIllegal(event.getItemInHand())) {
             event.setCancelled(true);
 
             if (event.getHand() == EquipmentSlot.HAND) {
@@ -47,7 +47,7 @@ public class CheckIllegal implements Listener {
         for (BlockState state : event.getChunk().getTileEntities()) {
             if (state instanceof Container) {
                 Container container = (Container) state;
-                ItemUtils.deleteIllegals(container.getInventory());
+                ItemUtil.deleteIllegals(container.getInventory());
             }
         }
     }
@@ -75,7 +75,7 @@ public class CheckIllegal implements Listener {
                     item.setDurability((short) 1);
                 }
 
-                if (ItemUtils.isIllegal(item) || ItemUtils.hasIllegalItemFlag(item) || ItemUtils.hasIllegalAttributes(item) || ItemUtils.hasIllegalEnchants(item) || item.hasItemMeta()) {
+                if (ItemUtil.isIllegal(item) || ItemUtil.hasIllegalItemFlag(item) || ItemUtil.hasIllegalAttributes(item) || ItemUtil.hasIllegalEnchants(item) || item.hasItemMeta()) {
                     inv.remove(item);
                     event.setCancelled(true);
                 }
@@ -88,9 +88,9 @@ public class CheckIllegal implements Listener {
     public void onInventoryClose(InventoryCloseEvent event) {
         if (ConfigCache.AntiillegalInventoryCloseEnabled) {
             Inventory inv = event.getInventory();
-            ItemUtils.deleteIllegals(inv);
+            ItemUtil.deleteIllegals(inv);
             Inventory playerInv = event.getPlayer().getInventory();
-            ItemUtils.deleteIllegals(playerInv);
+            ItemUtil.deleteIllegals(playerInv);
         }
     }
 
@@ -100,7 +100,7 @@ public class CheckIllegal implements Listener {
         Inventory inv = event.getInventory();
 
         if (ConfigCache.AntiillegalInventoryOpenEnabled) {
-            ItemUtils.deleteIllegals(inv);
+            ItemUtil.deleteIllegals(inv);
         }
     }
 
@@ -111,8 +111,8 @@ public class CheckIllegal implements Listener {
 
             ItemStack item = event.getItem().getItemStack();
 
-            if (ItemUtils.isEnchantedBlock(item) || ItemUtils.hasIllegalItemFlag(item) || ItemUtils.hasIllegalEnchants(item)
-                    || ItemUtils.isIllegal(item) || ItemUtils.hasIllegalAttributes(item)) {
+            if (ItemUtil.isEnchantedBlock(item) || ItemUtil.hasIllegalItemFlag(item) || ItemUtil.hasIllegalEnchants(item)
+                    || ItemUtil.isIllegal(item) || ItemUtil.hasIllegalAttributes(item)) {
                 event.setCancelled(true);
                 event.getItem().remove();
             }
@@ -124,7 +124,7 @@ public class CheckIllegal implements Listener {
     public void onItemMove(PlayerItemHeldEvent event) {
         if (ConfigCache.AntiillegalHotbarMoveEnabled) {
             Player player = event.getPlayer();
-            ItemUtils.deleteIllegals(player.getInventory());
+            ItemUtil.deleteIllegals(player.getInventory());
         }
     }
 
@@ -133,7 +133,7 @@ public class CheckIllegal implements Listener {
     public void onSwapItem(PlayerSwapHandItemsEvent event) {
         if (ConfigCache.AntiillegalPlayerSwapOffhandEnabled) {
             Player player = event.getPlayer();
-            ItemUtils.deleteIllegals(player.getInventory());
+            ItemUtil.deleteIllegals(player.getInventory());
         }
 
         for (ItemStack itemStack : event.getPlayer().getInventory().getContents()) {
@@ -154,7 +154,7 @@ public class CheckIllegal implements Listener {
     public void onSwapItem(PlayerInteractEvent event) {
         if (ConfigCache.AntiillegalPlayerInteractEnabled) {
             Player player = event.getPlayer();
-            ItemUtils.deleteIllegals(player.getInventory());
+            ItemUtil.deleteIllegals(player.getInventory());
         }
 
         for (ItemStack itemStack : event.getPlayer().getInventory().getContents()) {

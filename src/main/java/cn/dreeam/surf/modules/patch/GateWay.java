@@ -1,11 +1,8 @@
 package cn.dreeam.surf.modules.patch;
 
-import cn.dreeam.surf.config.ConfigCache;
-import cn.dreeam.surf.util.Utils;
+import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.util.Util;
 import com.destroystokyo.paper.event.entity.EntityTeleportEndGatewayEvent;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World.Environment;
@@ -27,43 +24,28 @@ public class GateWay implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onCrashAttempt(EntityTeleportEndGatewayEvent event) {
-        if (!ConfigCache.GateWayPreventCrashExploit) {
-            return;
-        }
+        if (!Surf.config.gateWayPreventCrashExploit()) return;
 
         double randomX = (Math.random() * ((50) + 1)) + 0;
         double randomY = (Math.random() * ((50) + 1)) + 0;
         double randomZ = (Math.random() * ((50) + 1)) + 0;
-        int x = event.getFrom().getBlockX();
-        int y = event.getGateway().getLocation().getBlockY();
-        int z = event.getFrom().getBlockZ();
         Vector vector = new Vector(-randomX, randomY, randomZ);
         Entity entity = event.getEntity();
 
-        if (!(entity instanceof Vehicle)) {
-            return;
-        }
+        if (!(entity instanceof Vehicle)) return;
 
         for (Player nearby : entity.getLocation().getNearbyPlayers(30)) {
-            nearby.sendMessage(Component.text(
-                    "Going through ENDGATEWAY while riding "
-                            + entity.getName()
-                            + " is currently patched", NamedTextColor.GOLD));
             nearby.teleport(new Location(nearby.getWorld(), nearby.getLocation().getBlockX(),
                     nearby.getLocation().getBlockY() + 5, nearby.getLocation().getBlockZ() + 30));
             entity.setVelocity(vector);
             event.setCancelled(true);
-            System.out.println(LegacyComponentSerializer.legacyAmpersand().deserialize(
-                    "&1Prevented&r&e " + nearby.getName() + "&r&1 at &r&e" + x + " " + y + " " + z
-                            + " &r&1in world&e " + entity.getWorld().getName() + " &r&1from crashing the server"));
+            Util.sendMessage(nearby, "Going through ENDGATEWAY while riding " + entity.getName() + " is currently patched");
         }
     }
 
     @EventHandler(ignoreCancelled = true)
     public void onEntityPortal(EntityPortalEvent event) {
-        if (!ConfigCache.GateWayPreventEntityEnterPortal) {
-            return;
-        }
+        if (!Surf.config.gateWayPreventEntityEnterPortal()) return;
 
         Entity entity = event.getEntity();
 
@@ -75,24 +57,17 @@ public class GateWay implements Listener {
         if (entity instanceof ChestedHorse) {
             entity.eject();
             event.setCancelled(true);
+            Util.println("&1Prevented a entity enter portal crash at" + entity.getLocation());
         }
     }
 
     @EventHandler
     public void EndGatewayTeleportProtection(VehicleMoveEvent event) {
-        if (!ConfigCache.GateWayPreventEntityEnterPortal) {
-            return;
-        }
+        if (!Surf.config.gateWayPreventEntityEnterPortal()) return;
 
         Vehicle vehicle = event.getVehicle();
 
-        if (vehicle.getWorld().getEnvironment() != Environment.THE_END) {
-            return;
-        }
-
-        if (!(vehicle.getPassenger() instanceof Player)) {
-            return;
-        }
+        if (vehicle.getWorld().getEnvironment() != Environment.THE_END || !(vehicle.getPassenger() instanceof Player)) return;
 
         Player player = (Player) vehicle.getPassenger();
         for (BlockFace face : BlockFace.values()) {
@@ -104,8 +79,8 @@ public class GateWay implements Listener {
                 String worldString = vehicle.getWorld().getName();
                 vehicle.eject();
                 vehicle.remove();
-                Utils.kickPlayer(player, "[&b&lSurf&r]&6 Sorry that exploit got patched :(");
-                Utils.println(player, "&1Prevented&r&e " + player.getName() + "&r&1 at &r&e" + x + " " + y + " " + z + " &r&1in world&e " + worldString + " &r&1from crashing the server");
+                Util.kickPlayer(player, "[&b&lSurf&r]&6 Sorry that exploit got patched :(");
+                Util.println(player, "&1Prevented&r&e " + player.getName() + "&r&1 at &r&e" + x + " " + y + " " + z + " &r&1in world&e " + worldString + " &r&1from crashing the server");
             }
         }
     }

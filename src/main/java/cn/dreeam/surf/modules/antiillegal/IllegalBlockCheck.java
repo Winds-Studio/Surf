@@ -1,7 +1,6 @@
 package cn.dreeam.surf.modules.antiillegal;
 
-import cn.dreeam.surf.config.ConfigCache;
-import cn.dreeam.surf.util.Utils;
+import cn.dreeam.surf.util.Util;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -36,7 +35,7 @@ public class IllegalBlockCheck implements Listener {
             //case LIGHT:
             case END_PORTAL_FRAME:
                 event.setCancelled(true);
-                Utils.sendMessage(player, ConfigCache.IllegalBlockPlaceMessage);
+                Util.sendMessage(player, ConfigCache.IllegalBlockPlaceMessage);
                 // clear item by hand
                 if (event.getHand() == EquipmentSlot.HAND) {
                     player.getInventory().setItemInMainHand(null);

@@ -1,6 +1,6 @@
 package cn.dreeam.surf.modules.antilag;
 
-import cn.dreeam.surf.util.Utils;
+import cn.dreeam.surf.util.Util;
 import com.google.common.collect.Lists;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -49,7 +49,7 @@ public class Offhand implements Listener {
         }
 
         if (offhandMap.get(player.getUniqueId()) > 10) {
-            Utils.kickPlayer(player, Utils.getPrefix() + "&cPacket Exploit Detected");
+            Util.kickPlayer(player, Util.getPrefix() + "&cPacket Exploit Detected");
         }
     }
 
