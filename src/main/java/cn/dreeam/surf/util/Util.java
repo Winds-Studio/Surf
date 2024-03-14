@@ -18,17 +18,14 @@ public class Util {
     }
 
     public static void sendMessage(Player player, String message) {
-        Component component = LegacyComponentSerializer.legacyAmpersand().deserialize(message).replaceText(TextReplacementConfig.builder().match("%prefix%").replacement(getPrefix()).build());
-        Surf.getInstance().adventure().player(player).sendMessage(component);
+        message = message.replaceAll("%prefix%", getPrefix());
+
+        Surf.getInstance().adventure().player(player).sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
         println(player, message);
     }
 
     public static void sendMessage(CommandSender sender, String message) {
-        sendMessage(sender, LegacyComponentSerializer.legacyAmpersand().deserialize(message));
-    }
-
-    public static void sendMessage(CommandSender sender, Component component) {
-        Surf.getInstance().adventure().sender(sender).sendMessage(component);
+        Surf.getInstance().adventure().sender(sender).sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
     }
 
     public static void kickPlayer(Player player, String message) {
@@ -45,8 +42,8 @@ public class Util {
         return p;
     }
 
-    public static Component getPrefix() {
-        return (Surf.config.Prefix() != null && !Surf.config.Prefix().isEmpty()) ? LegacyComponentSerializer.legacyAmpersand().deserialize(Surf.config.Prefix()) : Component.empty();
+    public static String getPrefix() {
+        return (Surf.config.Prefix() != null && !Surf.config.Prefix().isEmpty()) ? Surf.config.Prefix() : "";
     }
 
     public static void println(Player player, String message) {
