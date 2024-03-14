@@ -1,6 +1,5 @@
 package cn.dreeam.surf.config;
 
-import cn.dreeam.surf.util.ItemUtil;
 import space.arim.dazzleconf.annote.ConfComments;
 import space.arim.dazzleconf.annote.ConfDefault;
 import space.arim.dazzleconf.annote.ConfHeader;
@@ -11,8 +10,8 @@ import java.util.List;
 
 @ConfHeader({
         "Surf 5.0.0",
-        "# Contact me on QQ:2682173972 or Discord: dreeam___",
-        "# For help with this plugin"
+        "Contact me on QQ:2682173972 or Discord: dreeam___",
+        "For help with this plugin"
 })
 public interface Config {
 
@@ -31,7 +30,7 @@ public interface Config {
     boolean antiIllegalCheckIllegalBlockEnabled();
 
     @ConfKey("anti-illegal.check-illegal-block.message")
-    @ConfDefault.DefaultString("&6This block is not allowed")
+    @ConfDefault.DefaultString("%prefix%&6This block is not allowed")
     String antiIllegalCheckIllegalBlockMessage();
 
     @ConfKey("anti-illegal.check-illegal-block.list")
@@ -96,7 +95,7 @@ public interface Config {
     boolean checkIllegalDamageEnabled();
 
     @ConfKey("check-illegal-damage.message")
-    @ConfDefault.DefaultString("&6 You can not use this illegal item.")
+    @ConfDefault.DefaultString("%prefix%&6You can not use this illegal item.")
     String checkIllegalDamageMessage();
 
     @ConfKey("check-illegal-potion.enabled")
@@ -104,7 +103,7 @@ public interface Config {
     boolean checkIllegalPotionEnabled();
 
     @ConfKey("check-illegal-potion.message")
-    @ConfDefault.DefaultString("&6 You can not use this illegal potion")
+    @ConfDefault.DefaultString("%prefix%&6You can not use this illegal potion")
     String checkIllegalPotionMessage();
 
     // Anti Lag
@@ -140,7 +139,7 @@ public interface Config {
     boolean limitOffhandSwapEnabled();
 
     @ConfKey("limit.offhand-swap.message")
-    @ConfDefault.DefaultString("You can't do this.")
+    @ConfDefault.DefaultString("%prefix%&6You can not do this.")
     String limitOffhandSwapMessage();
 
     @ConfKey("limit.wither-spawn.enabled")
@@ -204,11 +203,11 @@ public interface Config {
     int netherBottomLayer();
 
     @ConfKey("nether.top-message")
-    @ConfDefault.DefaultString("&6The nether top has been disabled due to lag")
+    @ConfDefault.DefaultString("%prefix%&6The nether top has been disabled due to lag")
     String netherTopMessage();
 
     @ConfKey("nether.bottom-message")
-    @ConfDefault.DefaultString("&6The nether bottom has been disabled due to lag")
+    @ConfDefault.DefaultString("%prefix%&6The nether bottom has been disabled due to lag")
     String netherBottomMessage();
 
     @ConfKey("nether.top-bottom-do-damage")
@@ -232,7 +231,7 @@ public interface Config {
     boolean preventBookBanEnabled();
 
     @ConfKey("prevent-book-ban.message")
-    @ConfDefault.DefaultString("&6You have been unbookbanned")
+    @ConfDefault.DefaultString("%prefix%&6You have been unbookbanned")
     String preventBookBanMessage();
 
     @ConfKey("prevent-buket-on-portal.enabled")
@@ -240,7 +239,7 @@ public interface Config {
     boolean preventBuketPortalEnabled();
 
     @ConfKey("prevent-buket-on-portal.message")
-    @ConfDefault.DefaultString("&6You can't do this")
+    @ConfDefault.DefaultString("%prefix%&6You can not do this")
     String preventBuketPortalMessage();
 
     @ConfComments({
@@ -251,7 +250,7 @@ public interface Config {
     boolean perChunkLimitEnabled();
 
     @ConfKey("per-chunk-limit.message")
-    @ConfDefault.DefaultString("&6ChunkBan has been disabled")
+    @ConfDefault.DefaultString("%prefix%&6ChunkBan has been disabled")
     String perChunkLimitMessage();
 
     @ConfKey("per-chunk-limit.tile-entity-max")
@@ -283,7 +282,7 @@ public interface Config {
     int preventNBTBanLimit();
 
     @ConfKey("prevent-nbt-ban.message")
-    @ConfDefault.DefaultString("&6 You have been un-NBT-banned")
+    @ConfDefault.DefaultString("%prefix%&6You have been un-NBT-banned")
     String preventNBTBanMessage();
 }
 

@@ -1,6 +1,8 @@
 package cn.dreeam.surf.util;
 
 import cn.dreeam.surf.Surf;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -16,12 +18,17 @@ public class Util {
     }
 
     public static void sendMessage(Player player, String message) {
-        Surf.getInstance().adventure().player(player).sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
+        Component component = LegacyComponentSerializer.legacyAmpersand().deserialize(message).replaceText(TextReplacementConfig.builder().match("%prefix%").replacement(getPrefix()).build());
+        Surf.getInstance().adventure().player(player).sendMessage(component);
         println(player, message);
     }
 
     public static void sendMessage(CommandSender sender, String message) {
-        Surf.getInstance().adventure().sender(sender).sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
+        sendMessage(sender, LegacyComponentSerializer.legacyAmpersand().deserialize(message));
+    }
+
+    public static void sendMessage(CommandSender sender, Component component) {
+        Surf.getInstance().adventure().sender(sender).sendMessage(component);
     }
 
     public static void kickPlayer(Player player, String message) {
@@ -38,8 +45,8 @@ public class Util {
         return p;
     }
 
-    public static String getPrefix() {
-        return (Surf.config.Prefix() != null && !Surf.config.Prefix().isEmpty()) ? Surf.config.Prefix() : "";
+    public static Component getPrefix() {
+        return (Surf.config.Prefix() != null && !Surf.config.Prefix().isEmpty()) ? LegacyComponentSerializer.legacyAmpersand().deserialize(Surf.config.Prefix()) : Component.empty();
     }
 
     public static void println(Player player, String message) {
@@ -55,6 +62,10 @@ public class Util {
     }
 
     public static void println(String message) {
-        Surf.getInstance().adventure().console().sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
+        println(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
+    }
+
+    public static void println(Component component) {
+        Surf.getInstance().adventure().console().sendMessage(component);
     }
 }
