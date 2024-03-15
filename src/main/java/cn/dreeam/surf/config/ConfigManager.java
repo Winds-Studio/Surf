@@ -45,16 +45,16 @@ public final class ConfigManager<C> {
     public void reloadConfig() {
         try {
             configData = configHelper.reloadConfigData();
-        } catch (IOException ex) {
-            throw new UncheckedIOException(ex);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
 
-        } catch (ConfigFormatSyntaxException ex) {
+        } catch (ConfigFormatSyntaxException e) {
             configData = configHelper.getFactory().loadDefaults();
-            Surf.LOGGER.error("The yaml syntax in your configuration is invalid", ex);
+            Surf.LOGGER.error("The yaml syntax in your configuration is invalid", e);
 
-        } catch (InvalidConfigException ex) {
+        } catch (InvalidConfigException e) {
             configData = configHelper.getFactory().loadDefaults();
-            Surf.LOGGER.error("One of the values in your configuration is not valid", ex);
+            Surf.LOGGER.error("One of the values in your configuration is not valid", e);
         }
     }
 
