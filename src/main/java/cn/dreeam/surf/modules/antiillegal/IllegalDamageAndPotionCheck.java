@@ -47,7 +47,8 @@ public class IllegalDamageAndPotionCheck implements Listener {
                 if (damager.getEquipment() != null && damager.getEquipment().getItemInMainHand().hasItemMeta()) {
                     if (event.getDamage() > 30) {
                         event.setCancelled(true);
-                        Util.sendMessage(damager, Surf.config.checkIllegalDamageMessage());
+                        damager.getEquipment().setItemInMainHand(null); // Seems only can use item on main hand to attack
+                        Util.println(damager.getLocation() + " | " + Surf.config.checkIllegalDamageMessage());
                     }
                 }
             }
