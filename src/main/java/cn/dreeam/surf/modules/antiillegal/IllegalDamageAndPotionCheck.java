@@ -180,6 +180,6 @@ public class IllegalDamageAndPotionCheck implements Listener {
     private boolean isIllegalEffect(PotionEffect effect) {
         int duration = effect.getType() == PotionEffectType.BAD_OMEN ? 120000 : 12000;
 
-        return effect.getAmplifier() > 5 || effect.getDuration() > duration;
+        return effect.getAmplifier() > 5 || effect.getDuration() < 0 || effect.getDuration() > duration;
     }
 }
