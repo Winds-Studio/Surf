@@ -10,7 +10,7 @@ import cn.dreeam.surf.modules.antiillegal.CheckIllegal;
 import cn.dreeam.surf.modules.antilag.BlockPhysics;
 import cn.dreeam.surf.modules.antilag.MinecartLag;
 import cn.dreeam.surf.modules.antilag.WitherSpawn;
-import cn.dreeam.surf.modules.misc.StackedTotem;
+import cn.dreeam.surf.modules.antiillegal.StackedTotem;
 import cn.dreeam.surf.modules.patch.BookBan;
 import cn.dreeam.surf.modules.patch.BucketEvent;
 import cn.dreeam.surf.modules.patch.ChunkBan;
@@ -25,8 +25,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bstats.bukkit.Metrics;
 import org.jetbrains.annotations.NotNull;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -76,6 +74,7 @@ public class Surf extends JavaPlugin {
                 new CheckIllegal(),
                 new IllegalBlockCheck(),
                 new IllegalDamageAndPotionCheck(),
+                new StackedTotem(),
 
                 // AntiLag
                 new BlockPhysics(),
@@ -99,8 +98,6 @@ public class Surf extends JavaPlugin {
         for (Listener listener : listeners) {
             pluginManager.registerEvents(listener, instance);
         }
-
-        StackedTotem.revertPeriodically();
     }
 
     public void loadConfig() {

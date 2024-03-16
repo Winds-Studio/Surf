@@ -106,6 +106,10 @@ public interface Config {
     @ConfDefault.DefaultString("%prefix%&6You can not use this illegal potion")
     String checkIllegalPotionMessage();
 
+    @ConfKey("anti-illegal.revert-stacked-totem-as-one.enabled")
+    @ConfDefault.DefaultBoolean(false)
+    boolean stackedTotemRevertAsOneEnabled();
+
     // Anti Lag
     @ConfComments({
             "water / lava flowing disable tps this is useful on new servers with lots of block physics updates that cause lag",
@@ -213,17 +217,6 @@ public interface Config {
     @ConfKey("nether.top-bottom-do-damage")
     @ConfDefault.DefaultBoolean(false)
     boolean netherTopBottomDoDamage();
-
-    @ConfKey("stacked-totem.revert-periodically.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean stackedTotemRevertPeriodicallyEnabled();
-
-    @ConfComments({
-            "TODO"
-    })
-    @ConfKey("stacked-totem.use-stacked-as-one.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean stackedTotemUseStackedAsOneEnabled();
 
     // Patch
     @ConfKey("prevent-book-ban.enabled")

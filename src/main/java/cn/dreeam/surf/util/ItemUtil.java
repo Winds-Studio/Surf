@@ -1,6 +1,8 @@
 package cn.dreeam.surf.util;
 
 import cn.dreeam.surf.Surf;
+import com.cryptomorin.xseries.XMaterial;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -16,6 +18,10 @@ public class ItemUtil {
 
     public static boolean isIllegalBlock(ItemStack item) {
         return Surf.config.antiIllegalCheckIllegalBlockList().contains(item.getType().toString());
+    }
+
+    public static boolean isIllegalTotem(ItemStack item) {
+        return item.getType().equals(XMaterial.TOTEM_OF_UNDYING.parseMaterial()) || item.getAmount() > item.getMaxStackSize();
     }
 
     public static boolean hasIllegalItemFlag(ItemStack item) {
