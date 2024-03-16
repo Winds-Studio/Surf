@@ -34,6 +34,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
             Player damager = (Player) event.getDamager();
             if (event.getDamage() > 30) {
                 event.setCancelled(true);
+                damager.getInventory().remove(damager.getInventory().getItemInMainHand()); // Seems only can use item on main hand to attack
                 Util.sendMessage(damager, Surf.config.checkIllegalDamageMessage());
             }
         } else {
