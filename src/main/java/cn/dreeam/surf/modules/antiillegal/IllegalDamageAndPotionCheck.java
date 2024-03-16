@@ -4,10 +4,12 @@ import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.util.Util;
 import org.bukkit.Material;
 import org.bukkit.block.Dispenser;
+import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDispenseEvent;
@@ -49,6 +51,19 @@ public class IllegalDamageAndPotionCheck implements Listener {
                         event.setCancelled(true);
                         damager.getEquipment().setItemInMainHand(null); // Seems only can use item on main hand to attack
                         Util.println(damager.getLocation() + " | " + Surf.config.checkIllegalDamageMessage());
+                    }
+                }
+            }
+            // Player: Projectile -> Entity
+            // Dreeam TODO: this is temp fix, need to rewrite.
+            if (entity instanceof Projectile) {
+                Projectile projectile = (Projectile) entity;
+                if (event.getDamage() > 30) {
+                    event.setCancelled(true);
+                    if (projectile.getShooter() instanceof Player) {
+                        Player shooter = (Player) projectile.getShooter();
+                        if (shooter.getInventory().getItemInMainHand().getType().toString().endsWith("BOW")) shooter.getInventory().setItemInMainHand(null); // Seems only can use item on main hand to attack
+                        Util.sendMessage(shooter, Surf.config.checkIllegalDamageMessage());
                     }
                 }
             }
