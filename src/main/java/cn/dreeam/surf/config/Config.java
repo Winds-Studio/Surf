@@ -68,24 +68,72 @@ public interface Config {
     })
     List<String> antiIllegalIllegalItemFlagList();
 
+    @ConfComments({
+            "Set the value to -1 or remove the entire enchant",
+            "to disable check to that illegal enchant"
+    })
     @ConfKey("anti-illegal.checks.illegal-enchant-list")
     @ConfDefault.DefaultStrings({
-            "HIDE_ARMOR_TRIM"
+            "ARROW_DAMAGE:5",
+            "ARROW_FIRE:5",
+            "ARROW_INFINITE:5",
+            "ARROW_KNOCKBACK:5",
+            "BINDING_CURSE:5",
+            "CHANNELING:5",
+            "DAMAGE_ALL:5",
+            "DAMAGE_ARTHROPODS:5",
+            "DAMAGE_UNDEAD:5",
+            "DEPTH_STRIDER:5",
+            "DIG_SPEED:5",
+            "DURABILITY:5",
+            "FIRE_ASPECT:5",
+            "FROST_WALKER:5",
+            "IMPALING:5",
+            "KNOCKBACK:5",
+            "LOOT_BONUS_BLOCKS:5",
+            "LOOT_BONUS_MOBS:5",
+            "LOYALTY:5",
+            "LUCK:5",
+            "LURE:5",
+            "MENDING:5",
+            "MULTISHOT:5",
+            "OXYGEN:5",
+            "PIERCING:5",
+            "PROTECTION_ENVIRONMENTAL:5",
+            "PROTECTION_EXPLOSIONS:5",
+            "PROTECTION_FALL:5",
+            "PROTECTION_FIRE:5",
+            "PROTECTION_PROJECTILE:5",
+            "QUICK_CHARGE:5",
+            "RIPTIDE:5",
+            "SILK_TOUCH:5",
+            "SOUL_SPEED:5",
+            "SWEEPING_EDGE:5",
+            "SWIFT_SNEAK:5",
+            "THORNS:5",
+            "VANISHING_CURSE:5",
+            "WATER_WORKER:5"
     })
     List<String> antiIllegalIllegalEnchantList();
 
     @ConfKey("anti-illegal.checks.illegal-attribute-modifier-list")
     @ConfDefault.DefaultStrings({
-            "HIDE_ARMOR_TRIM"
+            "GENERIC_ARMOR",
+            "GENERIC_ARMOR_TOUGHNESS",
+            "GENERIC_ATTACK_DAMAGE",
+            "GENERIC_ATTACK_KNOCKBACK",
+            "GENERIC_ATTACK_SPEED",
+            "GENERIC_FLYING_SPEED",
+            "GENERIC_FOLLOW_RANGE",
+            "GENERIC_KNOCKBACK_RESISTANCE",
+            "GENERIC_LUCK",
+            "GENERIC_MAX_ABSORPTION",
+            "GENERIC_MAX_HEALTH",
+            "GENERIC_MOVEMENT_SPEED",
+            "HORSE_JUMP_STRENGTH",
+            "ZOMBIE_SPAWN_REINFORCEMENTS",
     })
     List<String> antiIllegalIllegalAttributeModifierList();
-
-    @ConfComments({
-            "set to -1 to disable the threshold"
-    })
-    @ConfKey("anti-illegal.illegal-enchant-threshold")
-    @ConfDefault.DefaultInteger(5)
-    int antiIllegalEnchantsThreshold();
 
     @ConfKey("anti-illegal.check-when.HopperTransfer")
     @ConfDefault.DefaultBoolean(false)

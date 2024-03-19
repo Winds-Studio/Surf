@@ -46,8 +46,9 @@ public class CheckIllegal implements Listener {
         if (!Surf.config.antiIllegalCheckWhenInventoryCloseEnabled()) return;
 
         Inventory inv = event.getInventory();
-        ItemUtil.deleteIllegals(inv);
         Inventory playerInv = event.getPlayer().getInventory();
+
+        ItemUtil.deleteIllegals(inv);
         ItemUtil.deleteIllegals(playerInv);
     }
 
@@ -57,6 +58,7 @@ public class CheckIllegal implements Listener {
         if (!Surf.config.antiIllegalCheckWhenInventoryOpenEnabled()) return;
 
         Inventory inv = event.getInventory();
+
         ItemUtil.deleteIllegals(inv);
     }
 
@@ -65,10 +67,11 @@ public class CheckIllegal implements Listener {
     public void onPickup(EntityPickupItemEvent event) {
         if (!Surf.config.antiIllegalCheckWhenItemPickupEnabled()) return;
 
-        ItemStack item = event.getItem().getItemStack();
+        ItemStack i = event.getItem().getItemStack();
 
-        if (ItemUtil.isEnchantedBlock(item) || ItemUtil.hasIllegalItemFlag(item) || ItemUtil.hasIllegalEnchants(item)
-                || ItemUtil.isIllegalBlock(item) || ItemUtil.hasIllegalAttributes(item)) {
+        if (ItemUtil.isIllegalBlock(i) || ItemUtil.isEnchantedBlock(i)
+                || ItemUtil.hasIllegalDurability(i) || ItemUtil.hasIllegalEnchants(i)
+                || ItemUtil.hasIllegalItemFlag(i) || ItemUtil.hasIllegalAttributes(i)) {
             event.setCancelled(true);
             event.getItem().remove();
         }

@@ -36,10 +36,5 @@ ___
 
 prefix
 modules
-    antiillegal
     ChunkBan
     NBTBAN
-
-* Detect items in OffHand
-* Detect items in Equipment slot
-* Delete illegal enchantments or NBT tags rather than removing items.
