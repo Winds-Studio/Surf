@@ -14,24 +14,32 @@ import java.util.Map.Entry;
 
 public class ItemUtil {
 
-    public static boolean isIllegalBlock(ItemStack item) {
-        return Surf.config.antiIllegalCheckIllegalBlockList().contains(item.getType().toString());
+    public static boolean isContainer(ItemStack i) {
+        switch (i.getType()) {
+            case
+        }
+        return ;
     }
 
-    public static boolean isIllegalTotem(ItemStack item) {
-        return item.getType().equals(XMaterial.TOTEM_OF_UNDYING.parseMaterial()) || item.getAmount() > item.getMaxStackSize();
+    public static boolean isIllegalBlock(ItemStack i) {
+        return Surf.config.antiIllegalIllegalBlockList().contains(i.getType().toString());
     }
 
-    public static boolean hasIllegalItemFlag(ItemStack item) {
-        if (item.hasItemMeta()) {
-            ItemMeta meta = item.getItemMeta();
-            return meta.hasItemFlag(ItemFlag.HIDE_ATTRIBUTES)
-                    || meta.hasItemFlag(ItemFlag.HIDE_DESTROYS)
-                    || meta.hasItemFlag(ItemFlag.HIDE_DYE)
-                    || meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS)
-                    || meta.hasItemFlag(ItemFlag.HIDE_PLACED_ON)
-                    || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)
-                    || meta.hasItemFlag(ItemFlag.HIDE_UNBREAKABLE);
+    public static boolean isIllegalTotem(ItemStack i) {
+        return i.getType().equals(XMaterial.TOTEM_OF_UNDYING.parseMaterial()) || i.getAmount() > i.getMaxStackSize();
+    }
+
+    public static boolean isEnchantedBlock(ItemStack i) {
+        return i.getType().isBlock() && i.hasItemMeta() && i.getItemMeta().hasEnchants();
+    }
+
+    public static boolean hasIllegalItemFlag(ItemStack i) {
+        if (i.hasItemMeta()) {
+            for (String flag : Surf.config.antiIllegalIllegalItemFlagList()) {
+                if (i.getItemMeta().hasItemFlag(ItemFlag.valueOf(flag))) {
+                    return true;
+                }
+            }
         }
 
         return false;
@@ -50,16 +58,8 @@ public class ItemUtil {
     public static boolean hasIllegalEnchants(ItemStack item) {
         Map<Enchantment, Integer> enchants = item.getEnchantments();
         for (int level : enchants.values()) {
-            return Surf.config.antiIllegalEnchantsThreshold() > 0 && level > Surf.config.antiIllegalEnchantsThreshold();
-        }
-
-        return false;
-    }
-
-    public static boolean isEnchantedBlock(ItemStack item) {
-        if (item.getType().isBlock()) {
-            if (item.hasItemMeta()) {
-                return item.getItemMeta().hasEnchants();
+            if (Surf.config.antiIllegalEnchantsThreshold() > 0 && level > Surf.config.antiIllegalEnchantsThreshold()) {
+                return true;
             }
         }
 
@@ -153,5 +153,4 @@ public class ItemUtil {
             Util.println(Util.getPrefix() + "&6Deleted illegals " + itemStack.getType() + " " + itemStack.getI18NDisplayName() + " " + itemStack.getEnchantments() + (itemStack.hasItemMeta() ? " " + itemStack.getItemMeta().getAttributeModifiers() : ""));
         }
     }
-
 }

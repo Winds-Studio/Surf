@@ -57,7 +57,9 @@ public class BookBan implements Listener {
 
     private boolean isBanBook(BookMeta book) {
         for (String content : book.getPages()) {
-                return PATTERN.matcher(content).find();
+            if (PATTERN.matcher(content).find()) {
+                return true;
+            }
         }
 
         return false;

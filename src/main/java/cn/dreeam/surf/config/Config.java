@@ -33,7 +33,7 @@ public interface Config {
     @ConfDefault.DefaultString("%prefix%&6This block is not allowed")
     String antiIllegalCheckIllegalBlockMessage();
 
-    @ConfKey("anti-illegal.check-illegal-block.list")
+    @ConfKey("anti-illegal.checks.illegal-block-list")
     @ConfDefault.DefaultStrings({
             "BARRIER",
             "BEDROCK",
@@ -53,7 +53,32 @@ public interface Config {
             "LIGHT",
             "REINFORCED_DEEPSLATE"
     })
-    List<String> antiIllegalCheckIllegalBlockList();
+    List<String> antiIllegalIllegalBlockList();
+
+    @ConfKey("anti-illegal.checks.illegal-item-flag-list")
+    @ConfDefault.DefaultStrings({
+            "HIDE_ARMOR_TRIM",
+            "HIDE_ATTRIBUTES",
+            "HIDE_DESTROYS",
+            "HIDE_DYE",
+            "HIDE_ENCHANTS",
+            "HIDE_PLACED_ON",
+            "HIDE_POTION_EFFECTS",
+            "HIDE_UNBREAKABLE"
+    })
+    List<String> antiIllegalIllegalItemFlagList();
+
+    @ConfKey("anti-illegal.checks.illegal-enchant-list")
+    @ConfDefault.DefaultStrings({
+            "HIDE_ARMOR_TRIM"
+    })
+    List<String> antiIllegalIllegalEnchantList();
+
+    @ConfKey("anti-illegal.checks.illegal-attribute-modifier-list")
+    @ConfDefault.DefaultStrings({
+            "HIDE_ARMOR_TRIM"
+    })
+    List<String> antiIllegalIllegalAttributeModifierList();
 
     @ConfComments({
             "set to -1 to disable the threshold"
@@ -74,21 +99,9 @@ public interface Config {
     @ConfDefault.DefaultBoolean(false)
     boolean antiIllegalCheckWhenInventoryOpenEnabled();
 
-    @ConfKey("anti-illegal.check-when.HotbarMove")
-    @ConfDefault.DefaultBoolean(false)
-    boolean antiIllegalCheckWhenHotbarMoveEnabled();
-
     @ConfKey("anti-illegal.check-when.ItemPickup")
     @ConfDefault.DefaultBoolean(false)
     boolean antiIllegalCheckWhenItemPickupEnabled();
-
-    @ConfKey("anti-illegal.check-when.PlayerSwapOffhand")
-    @ConfDefault.DefaultBoolean(false)
-    boolean antiIllegalCheckWhenPlayerSwapOffhandEnabled();
-
-    @ConfKey("anti-illegal.check-when.PlayerInteract")
-    @ConfDefault.DefaultBoolean(false)
-    boolean antiIllegalCheckWhenPlayerInteractEnabled();
 
     @ConfKey("check-illegal-damage.enabled")
     @ConfDefault.DefaultBoolean(false)

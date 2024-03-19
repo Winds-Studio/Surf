@@ -2,16 +2,12 @@ package cn.dreeam.surf.modules.antiillegal;
 
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.util.ItemUtil;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerItemHeldEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -65,8 +61,8 @@ public class CheckIllegal implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    @AntiIllegal(EventName = "PlayerPickupItemEvent")
-    public void onPickup(PlayerPickupItemEvent event) {
+    @AntiIllegal(EventName = "EntityPickupItemEvent")
+    public void onPickup(EntityPickupItemEvent event) {
         if (!Surf.config.antiIllegalCheckWhenItemPickupEnabled()) return;
 
         ItemStack item = event.getItem().getItemStack();
@@ -76,32 +72,5 @@ public class CheckIllegal implements Listener {
             event.setCancelled(true);
             event.getItem().remove();
         }
-    }
-
-    @EventHandler
-    @AntiIllegal(EventName = "PlayerItemHeldEvent")
-    public void onItemMove(PlayerItemHeldEvent event) {
-        if (!Surf.config.antiIllegalCheckWhenHotbarMoveEnabled()) return;
-
-        Player player = event.getPlayer();
-        ItemUtil.deleteIllegals(player.getInventory());
-    }
-
-    @EventHandler
-    @AntiIllegal(EventName = "PlayerSwapHandItemsEvent")
-    public void onSwapItem(PlayerSwapHandItemsEvent event) {
-        if (!Surf.config.antiIllegalCheckWhenPlayerSwapOffhandEnabled()) return;
-
-        Player player = event.getPlayer();
-        ItemUtil.deleteIllegals(player.getInventory());
-    }
-
-    @EventHandler
-    @AntiIllegal(EventName = "PlayerInteractEvent")
-    public void onSwapItem(PlayerInteractEvent event) {
-        if (!Surf.config.antiIllegalCheckWhenPlayerInteractEnabled()) return;
-
-        Player player = event.getPlayer();
-        ItemUtil.deleteIllegals(player.getInventory());
     }
 }
