@@ -2,7 +2,6 @@ package cn.dreeam.surf.util;
 
 import cn.dreeam.surf.Surf;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
