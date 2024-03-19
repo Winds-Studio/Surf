@@ -26,7 +26,7 @@ public class ItemUtil {
     }
 
     public static boolean isIllegalTotem(ItemStack i) {
-        return i.getType().equals(XMaterial.TOTEM_OF_UNDYING.parseMaterial()) || i.getAmount() > i.getMaxStackSize();
+        return i.getType().equals(XMaterial.TOTEM_OF_UNDYING.parseMaterial()) && i.getAmount() > i.getMaxStackSize();
     }
 
     public static boolean isEnchantedBlock(ItemStack i) {
