@@ -1,23 +1,21 @@
 package cn.dreeam.surf.modules.patch;
 
 import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.util.ItemUtil;
 import cn.dreeam.surf.util.Util;
 import org.bukkit.Material;
 import org.bukkit.block.ShulkerBox;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.BookMeta;
 
-import java.util.regex.Pattern;
-
 public class BookBan implements Listener {
-
-    private final Pattern PATTERN = Pattern.compile("[^a-zA-Z0-9]");
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
@@ -55,9 +53,32 @@ public class BookBan implements Listener {
         }
     }
 
+    // Fix https://github.com/PaperMC/Paper/issues/7866
+    @EventHandler
+    public void onOpenBook(PlayerInteractEvent event) {
+        if (!Surf.config.preventBookBanEnabled()) return;
+
+        ItemStack i = event.getItem();
+
+        if (i == null || !ItemUtil.isBook(i)) return;
+
+        BookMeta book = (BookMeta) i.getItemMeta();
+
+        if (isBanBook(book)) {
+            Player player = event.getPlayer();
+            event.setCancelled(true);
+            player.getWorld().dropItem(player.getLocation(), i);
+            Util.sendMessage(player, Surf.config.preventBookBanMessage());
+        }
+    }
+
     private boolean isBanBook(BookMeta book) {
+        if (book.getPageCount() > 100) {
+            return true;
+        }
+
         for (String content : book.getPages()) {
-            if (PATTERN.matcher(content).find()) {
+            if (content.contains("nbt")) {
                 return true;
             }
         }

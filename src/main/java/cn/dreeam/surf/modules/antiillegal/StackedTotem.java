@@ -14,14 +14,15 @@ public class StackedTotem implements Listener {
     public void onDamage(EntityDamageEvent event) {
         if (!Surf.config.stackedTotemRevertAsOneEnabled()) return;
 
+        // Check when player gets damage or make damage to others
         if (event.getEntity() instanceof Player) {
-            Player damager = (Player) event.getEntity();
-            ItemStack item = damager.getInventory().getItemInMainHand();
-            ItemStack item2 = damager.getInventory().getItemInOffHand();
+            Player entity = (Player) event.getEntity();
+            ItemStack item = entity.getInventory().getItemInMainHand();
+            ItemStack item2 = entity.getInventory().getItemInOffHand();
 
             if (!ItemUtil.isIllegalTotem(item) && !ItemUtil.isIllegalTotem(item2)) return;
 
-            damager.getInventory().forEach(i -> {
+            entity.getInventory().forEach(i -> {
                         if (i != null && ItemUtil.isIllegalTotem(i)) {
                             i.setAmount(1);
                         }

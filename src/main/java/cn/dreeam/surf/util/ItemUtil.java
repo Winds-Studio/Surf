@@ -29,6 +29,10 @@ public class ItemUtil {
     }
      */
 
+    public static boolean isBook(ItemStack i) {
+        return i.getType().toString().endsWith("BOOK") || i.getType().toString().equals("LEGACY_BOOK_AND_QUILL");
+    }
+
     public static boolean isIllegalTotem(ItemStack i) {
         return i.getType().equals(XMaterial.TOTEM_OF_UNDYING.parseMaterial()) && i.getAmount() > i.getMaxStackSize();
     }
