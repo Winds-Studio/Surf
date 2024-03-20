@@ -8,6 +8,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
 import java.util.List;
@@ -125,6 +126,7 @@ public class ItemUtil {
             }
 
             if (illegalsFound.get()) {
+                System.out.println("什么都没有？");
                 Util.println(Util.getPrefix() + "&6Deleted illegals " + item.getType() + " " + item.getI18NDisplayName() + " " + item.getEnchantments() + (item.hasItemMeta() ? " " + item.getItemMeta().getAttributeModifiers() : ""));
             }
         }
@@ -151,36 +153,43 @@ public class ItemUtil {
             i.setDurability((short) 1);
         }
 
+        // Clean illegal Enchantment
+        Map<Enchantment, Integer> enchants = i.getEnchantments();
+        if (i.getType().isBlock()) {
+            enchants.keySet().forEach(i::removeEnchantment);
+        } else {
+            enchants.keySet().forEach(ench -> {
+                if (ench.canEnchantItem(i)) {
+                    String key = ench.getKey().getKey();
+                    int level = enchants.get(ench);
+                    if (illegalEnchants.containsKey(key) && illegalEnchants.get(key) > 0 && level > illegalEnchants.get(key)) {
+                        i.addEnchantment(ench, ench.getMaxLevel());
+                    }
+                } else {
+                    // Should remove conflict/incompatible ench, since the item is illegal.
+                    i.removeEnchantment(ench);
+                }
+            });
+        }
+
         if (i.hasItemMeta()) {
+            ItemMeta meta = i.getItemMeta();
+
             // Clean illegal itemFlag
             for (String flag : Surf.config.antiIllegalIllegalItemFlagList()) {
-                if (i.getItemMeta().hasItemFlag(ItemFlag.valueOf(flag))) {
-                    i.getItemMeta().removeItemFlags(ItemFlag.valueOf(flag));
+                if (meta.hasItemFlag(ItemFlag.valueOf(flag))) {
+                    meta.removeItemFlags(ItemFlag.valueOf(flag));
                 }
             }
 
             // Clean illegal AttributeModifier
             for (String attribute : Surf.config.antiIllegalIllegalAttributeModifierList()) {
-                if (i.getItemMeta().getAttributeModifiers(Attribute.valueOf(attribute)) != null) {
-                    i.getItemMeta().removeAttributeModifier(Attribute.valueOf(attribute));
+                if (meta.getAttributeModifiers(Attribute.valueOf(attribute)) != null) {
+                    meta.removeAttributeModifier(Attribute.valueOf(attribute));
                 }
             }
 
-            // Clean illegal Enchantment
-            Map<Enchantment, Integer> enchants = i.getEnchantments();
-            if (i.getType().isBlock()) {
-                enchants.keySet().forEach(i::removeEnchantment);
-            } else {
-                enchants.keySet().forEach(ench -> {
-                    String key = ench.getKey().getKey();
-                    int level = enchants.get(ench);
-                    if (illegalEnchants.containsKey(key)
-                            && illegalEnchants.get(key) > 0
-                            && level > illegalEnchants.get(key)) {
-                        i.addEnchantment(ench, ench.getMaxLevel());
-                    }
-                });
-            }
+            i.setItemMeta(meta); // Remember to set cleaned meta back
         }
 
         return i;
