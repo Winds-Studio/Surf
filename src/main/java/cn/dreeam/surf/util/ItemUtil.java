@@ -10,11 +10,10 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ItemUtil {
 
@@ -49,10 +48,11 @@ public class ItemUtil {
         Map<Enchantment, Integer> enchants = i.getEnchantments();
         Map<String, Integer> illegalEnchants = initIllegalEnchantMap();
         for (Enchantment ench : enchants.keySet()) {
+            String key = ench.getKey().getKey();
             int level = enchants.get(ench);
-            if (illegalEnchants.containsKey(ench.toString())
-                    && illegalEnchants.get(ench.toString()) > 0
-                    && level > illegalEnchants.get(ench.toString())) {
+            if (illegalEnchants.containsKey(key)
+                    && illegalEnchants.get(key) > 0
+                    && level > illegalEnchants.get(key)) {
                 return true;
             }
         }
@@ -112,10 +112,11 @@ public class ItemUtil {
         Map<Enchantment, Integer> enchants = i.getEnchantments();
         Map<String, Integer> illegalEnchants = initIllegalEnchantMap();
         for (Enchantment ench : enchants.keySet()) {
+            String key = ench.getKey().getKey();
             int level = enchants.get(ench);
-            if (illegalEnchants.containsKey(ench.toString())
-                    && illegalEnchants.get(ench.toString()) > 0
-                    && level > illegalEnchants.get(ench.toString())) {
+            if (illegalEnchants.containsKey(key)
+                    && illegalEnchants.get(key) > 0
+                    && level > illegalEnchants.get(key)) {
                 i.addEnchantment(ench, ench.getMaxLevel());
             }
         }
@@ -141,44 +142,45 @@ public class ItemUtil {
         }
     }
 
+    private static void cleanEnchantedBlock(ItemStack i) {
+        if (i.getType().isBlock() && i.hasItemMeta() && i.getItemMeta().hasEnchants()) {
+            Map<Enchantment, Integer> enchants = i.getEnchantments();
+            enchants.keySet().forEach(i::removeEnchantment);
+        }
+    }
+
     public static void deleteIllegals(Inventory inventory) {
-        // TODO: use a list to store the items to delete
-        ItemStack itemStack = null;
-        boolean illegalsFound = false;
+        ItemStack newItem = null;
+        AtomicBoolean illegalsFound = new AtomicBoolean(false);
 
         // if inventory is empty, skip
         if (inventory.getContents().length == 0) return;
 
-        for (ItemStack item : inventory.getContents()) {
+        ItemStack[] contents = inventory.getContents();
+        for (int i = 0; i < contents.length; i++) {
+            ItemStack item = contents[i];
             // if item is null, skip
             if (item == null) {
                 continue;
             }
 
-            item = deleteIllegals(item);
+            newItem = deleteIllegals(item);
 
-            if (item.hasItemMeta()) {
-                if (isEnchantedBlock(item)) {
-                    Iterator<Entry<Enchantment, Integer>> enchants = item.getEnchantments().entrySet()
-                            .iterator();
-                    illegalsFound = true;
-                    itemStack = item;
-                    while (enchants.hasNext()) {
-                        item.removeEnchantment(enchants.next().getKey());
-                    }
-                }
+            if (newItem != null && !newItem.equals(item)) {
+                inventory.setItem(i, newItem);
+                illegalsFound.set(true);
             }
-        }
 
-        if (illegalsFound) {
-            Util.println(Util.getPrefix() + "&6Deleted illegals " + itemStack.getType() + " " + itemStack.getI18NDisplayName() + " " + itemStack.getEnchantments() + (itemStack.hasItemMeta() ? " " + itemStack.getItemMeta().getAttributeModifiers() : ""));
+            if (illegalsFound.get()) {
+                Util.println(Util.getPrefix() + "&6Deleted illegals " + item.getType() + " " + item.getI18NDisplayName() + " " + item.getEnchantments() + (item.hasItemMeta() ? " " + item.getItemMeta().getAttributeModifiers() : ""));
+            }
         }
     }
 
     private static ItemStack deleteIllegals(ItemStack i) {
         if (i == null || i.getType().isAir()) return i;
 
-        if (i.getType().isBlock() && (isIllegalBlock(i) || isEnchantedBlock(i))) {
+        if (i.getType().isBlock() && (isIllegalBlock(i) || isEnchantedBlock(i))) { // Dreeam TODO
             return new ItemStack(Material.AIR);
         }
 
@@ -187,6 +189,7 @@ public class ItemUtil {
             cleanEnchants(i);
             cleanItemFlags(i);
             cleanAttributes(i);
+            cleanEnchantedBlock(i);
         } else {
             if (hasIllegalDurability(i)
                     || hasIllegalItemFlag(i) || hasIllegalAttributes(i) || hasIllegalEnchants(i)) {

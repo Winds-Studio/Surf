@@ -74,6 +74,7 @@ public class CheckIllegal implements Listener {
                 || ItemUtil.hasIllegalItemFlag(i) || ItemUtil.hasIllegalAttributes(i)) {
             event.setCancelled(true);
             event.getItem().remove();
+            // Dreeam TODO
         }
     }
 }
