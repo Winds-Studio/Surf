@@ -134,6 +134,11 @@ public interface Config {
     })
     List<String> antiIllegalIllegalAttributeModifierList();
 
+
+    @ConfKey("anti-illegal.check-when.PlayerJoin")
+    @ConfDefault.DefaultBoolean(false)
+    boolean antiIllegalCheckWhenPlayerJoinEnabled();
+
     @ConfKey("anti-illegal.check-when.HopperTransfer")
     @ConfDefault.DefaultBoolean(false)
     boolean antiIllegalCheckWhenHopperTransferEnabled();

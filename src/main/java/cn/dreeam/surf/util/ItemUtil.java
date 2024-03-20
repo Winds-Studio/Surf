@@ -47,7 +47,6 @@ public class ItemUtil {
 
     public static boolean hasIllegalEnchants(ItemStack i) {
         Map<Enchantment, Integer> enchants = i.getEnchantments();
-        Map<String, Integer> illegalEnchants = initIllegalEnchantMap();
         for (Enchantment ench : enchants.keySet()) {
             String key = ench.getKey().getKey();
             int level = enchants.get(ench);
