@@ -278,6 +278,10 @@ public interface Config {
     @ConfDefault.DefaultBoolean(false)
     boolean netherTopBottomDoDamage();
 
+    @ConfKey("simple-burrow.enabled")
+    @ConfDefault.DefaultBoolean(false)
+    boolean simpleBurrowEnabled();
+
     // Patch
     @ConfKey("prevent-book-ban.enabled")
     @ConfDefault.DefaultBoolean(false)

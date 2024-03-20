@@ -13,6 +13,7 @@ import cn.dreeam.surf.modules.antilag.Offhand;
 import cn.dreeam.surf.modules.antilag.WitherSpawn;
 import cn.dreeam.surf.modules.misc.ConnectionEvent;
 import cn.dreeam.surf.modules.misc.NetherCheck;
+import cn.dreeam.surf.modules.misc.SimpleBurrow;
 import cn.dreeam.surf.modules.patch.BookBan;
 import cn.dreeam.surf.modules.patch.BucketEvent;
 import cn.dreeam.surf.modules.patch.ChunkBan;
@@ -85,6 +86,7 @@ public class Surf extends JavaPlugin {
                 // Misc
                 new ConnectionEvent(),
                 new NetherCheck(),
+                new SimpleBurrow(),
 
                 // Patches
                 new BookBan(),
