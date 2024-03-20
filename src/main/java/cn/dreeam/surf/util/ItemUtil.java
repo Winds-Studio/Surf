@@ -18,6 +18,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class ItemUtil {
 
     public static List<String> isBurrowBlock = Arrays.asList("ANVIL", "OBSIDIAN", "ENDER_CHEST");
+    public final static Map<String, Integer> illegalEnchants = initIllegalEnchantMap();
 
     /*
     public static boolean isContainer(ItemStack i) {
@@ -98,59 +99,8 @@ public class ItemUtil {
         return map;
     }
 
-    private static void cleanDurability(ItemStack i) {
-        if (i.getDurability() > i.getType().getMaxDurability()) {
-            i.setDurability(i.getType().getMaxDurability());
-        }
-
-        if (i.getDurability() < 0) {
-            i.setDurability((short) 1);
-        }
-    }
-
-    private static void cleanEnchants(ItemStack i) {
-        Map<Enchantment, Integer> enchants = i.getEnchantments();
-        Map<String, Integer> illegalEnchants = initIllegalEnchantMap();
-        for (Enchantment ench : enchants.keySet()) {
-            String key = ench.getKey().getKey();
-            int level = enchants.get(ench);
-            if (illegalEnchants.containsKey(key)
-                    && illegalEnchants.get(key) > 0
-                    && level > illegalEnchants.get(key)) {
-                i.addEnchantment(ench, ench.getMaxLevel());
-            }
-        }
-    }
-
-    private static void cleanItemFlags(ItemStack i) {
-        if (i.hasItemMeta()) {
-            for (String flag : Surf.config.antiIllegalIllegalItemFlagList()) {
-                if (i.getItemMeta().hasItemFlag(ItemFlag.valueOf(flag))) {
-                    i.getItemMeta().removeItemFlags(ItemFlag.valueOf(flag));
-                }
-            }
-        }
-    }
-
-    private static void cleanAttributes(ItemStack i) {
-        if (i.hasItemMeta()) {
-            for (String attribute : Surf.config.antiIllegalIllegalAttributeModifierList()) {
-                if (i.getItemMeta().getAttributeModifiers(Attribute.valueOf(attribute)) != null) {
-                    i.getItemMeta().removeAttributeModifier(Attribute.valueOf(attribute));
-                }
-            }
-        }
-    }
-
-    private static void cleanEnchantedBlock(ItemStack i) {
-        if (i.getType().isBlock() && i.hasItemMeta() && i.getItemMeta().hasEnchants()) {
-            Map<Enchantment, Integer> enchants = i.getEnchantments();
-            enchants.keySet().forEach(i::removeEnchantment);
-        }
-    }
-
     public static void deleteIllegals(Inventory inventory) {
-        ItemStack newItem = null;
+        ItemStack newItem;
         AtomicBoolean illegalsFound = new AtomicBoolean(false);
 
         // if inventory is empty, skip
@@ -178,23 +128,55 @@ public class ItemUtil {
     }
 
     private static ItemStack deleteIllegals(ItemStack i) {
-        if (i == null || i.getType().isAir()) return i;
+        if (i == null || i.getType().isAir() || isIllegalBlock(i)) new ItemStack(Material.AIR);
 
-        if (i.getType().isBlock() && (isIllegalBlock(i) || isEnchantedBlock(i))) { // Dreeam TODO
-            return new ItemStack(Material.AIR);
-        }
-
-        if (true) { // Dreeam TODO - Configurable
-            cleanDurability(i);
-            cleanEnchants(i);
-            cleanItemFlags(i);
-            cleanAttributes(i);
-            cleanEnchantedBlock(i);
-        } else {
-            if (hasIllegalDurability(i)
-                    || hasIllegalItemFlag(i) || hasIllegalAttributes(i) || hasIllegalEnchants(i)) {
+        if (false) { // Dreeam TODO - Configurable
+            if (isEnchantedBlock(i) || hasIllegalDurability(i) || hasIllegalItemFlag(i) || hasIllegalAttributes(i)
+                    || hasIllegalEnchants(i)) {
                 return new ItemStack(Material.AIR);
                 //i.setAmount(0); // need to try??
+            }
+        }
+
+        // Clean oversize durability
+        if (i.getDurability() > i.getType().getMaxDurability()) {
+            i.setDurability(i.getType().getMaxDurability());
+        }
+
+        // Clean negative durability
+        if (i.getDurability() < 0) {
+            i.setDurability((short) 1);
+        }
+
+        if (i.hasItemMeta()) {
+            // Clean illegal itemFlag
+            for (String flag : Surf.config.antiIllegalIllegalItemFlagList()) {
+                if (i.getItemMeta().hasItemFlag(ItemFlag.valueOf(flag))) {
+                    i.getItemMeta().removeItemFlags(ItemFlag.valueOf(flag));
+                }
+            }
+
+            // Clean illegal AttributeModifier
+            for (String attribute : Surf.config.antiIllegalIllegalAttributeModifierList()) {
+                if (i.getItemMeta().getAttributeModifiers(Attribute.valueOf(attribute)) != null) {
+                    i.getItemMeta().removeAttributeModifier(Attribute.valueOf(attribute));
+                }
+            }
+
+            // Clean illegal Enchantment
+            Map<Enchantment, Integer> enchants = i.getEnchantments();
+            if (i.getType().isBlock()) {
+                enchants.keySet().forEach(i::removeEnchantment);
+            } else {
+                enchants.keySet().forEach(ench -> {
+                    String key = ench.getKey().getKey();
+                    int level = enchants.get(ench);
+                    if (illegalEnchants.containsKey(key)
+                            && illegalEnchants.get(key) > 0
+                            && level > illegalEnchants.get(key)) {
+                        i.addEnchantment(ench, ench.getMaxLevel());
+                    }
+                });
             }
         }
 
