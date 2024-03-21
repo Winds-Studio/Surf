@@ -45,6 +45,10 @@ public class ItemUtil {
         return i.getType().isBlock() && i.hasItemMeta() && i.getItemMeta().hasEnchants();
     }
 
+    public static boolean isUnbreakable(ItemStack i) {
+        return i.hasItemMeta() && i.getItemMeta().isUnbreakable();
+    }
+
     public static boolean hasIllegalDurability(ItemStack i) {
         return i.getDurability() > i.getType().getMaxDurability() || i.getDurability() < 0;
     }
@@ -162,6 +166,9 @@ public class ItemUtil {
 
         if (i.hasItemMeta()) {
             ItemMeta meta = i.getItemMeta();
+
+            // Clear unbreakable flag
+            meta.setUnbreakable(false);
 
             // Clean illegal itemFlag
             for (String flag : Surf.config.antiIllegalIllegalItemFlagList()) {

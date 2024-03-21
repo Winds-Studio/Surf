@@ -73,7 +73,7 @@ public class CheckIllegal implements Listener {
         ItemStack i = event.getItem();
 
         if (ItemUtil.isIllegalBlock(i) || ItemUtil.isEnchantedBlock(i)
-                || ItemUtil.hasIllegalDurability(i) || ItemUtil.hasIllegalEnchants(i)
+                || ItemUtil.hasIllegalDurability(i) || ItemUtil.isUnbreakable(i) || ItemUtil.hasIllegalEnchants(i)
                 || ItemUtil.hasIllegalItemFlag(i) || ItemUtil.hasIllegalAttributes(i)) {
             event.setCancelled(true);
         }
@@ -87,7 +87,7 @@ public class CheckIllegal implements Listener {
         ItemStack i = event.getItem().getItemStack();
 
         if (ItemUtil.isIllegalBlock(i) || ItemUtil.isEnchantedBlock(i)
-                || ItemUtil.hasIllegalDurability(i) || ItemUtil.hasIllegalEnchants(i)
+                || ItemUtil.hasIllegalDurability(i) || ItemUtil.isUnbreakable(i) || ItemUtil.hasIllegalEnchants(i)
                 || ItemUtil.hasIllegalItemFlag(i) || ItemUtil.hasIllegalAttributes(i)) {
             event.setCancelled(true);
             event.getItem().remove();
