@@ -27,7 +27,7 @@ public class SurfCommand extends cn.dreeam.surf.command.BaseCommand {
         if (args.length > 0) {
             switch (args[0]) {
                 case "reload":
-                    Surf.getInstance().configManager.reloadConfig();
+                    Surf.getInstance().loadConfig();
                     Util.sendMessage(sender, Util.getPrefix() + "&aReloaded configuration file");
                     break;
                 case "version":
