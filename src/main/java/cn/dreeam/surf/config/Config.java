@@ -340,7 +340,7 @@ public interface Config {
     boolean preventNBTBanEnabeld();
 
     @ConfKey("prevent-nbt-ban.nbt-limit")
-    @ConfDefault.DefaultInteger(85000)
+    @ConfDefault.DefaultInteger(100000)
     int preventNBTBanLimit();
 
     @ConfKey("prevent-nbt-ban.message")
