@@ -14,12 +14,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ItemUtil {
 
     public static List<String> isBurrowBlock = Arrays.asList("ANVIL", "OBSIDIAN", "ENDER_CHEST");
-    public final static Map<String, Integer> illegalEnchants = initIllegalEnchantMap();
+    public static final Map<String, Integer> illegalEnchants = initIllegalEnchantMap();
 
     /*
     public static boolean isContainer(ItemStack i) {
@@ -104,30 +103,19 @@ public class ItemUtil {
     }
 
     public static void deleteIllegals(Inventory inventory) {
-        ItemStack newItem;
-        AtomicBoolean illegalsFound = new AtomicBoolean(false);
-
         // if inventory is empty, skip
         if (inventory.getContents().length == 0) return;
 
         ItemStack[] contents = inventory.getContents();
-        for (int i = 0; i < contents.length; i++) {
-            ItemStack item = contents[i];
+        for (ItemStack item : contents) {
             // if item is null, skip
-            if (item == null) {
-                continue;
-            }
+            if (item == null) continue;
 
-            newItem = deleteIllegals(item);
+            ItemStack original = item.clone();
+            ItemStack newItem = deleteIllegals(item);
 
-            if (newItem != null && !newItem.equals(item)) {
-                inventory.setItem(i, newItem);
-                illegalsFound.set(true);
-            }
-
-            if (illegalsFound.get()) {
-                System.out.println("什么都没有？");
-                Util.println(Util.getPrefix() + "&6Deleted illegals " + item.getType() + " " + item.getI18NDisplayName() + " " + item.getEnchantments() + (item.hasItemMeta() ? " " + item.getItemMeta().getAttributeModifiers() : ""));
+            if (!original.equals(newItem)) {
+                Util.println(Util.getPrefix() + "&6Deleted illegals " + original.getType() + " " + original.getI18NDisplayName() + " " + original.getEnchantments() + (original.hasItemMeta() ? " " + original.getItemMeta().getAttributeModifiers() : ""));
             }
         }
     }
