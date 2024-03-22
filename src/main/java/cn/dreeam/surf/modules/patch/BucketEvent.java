@@ -31,7 +31,7 @@ public class BucketEvent implements Listener {
 
         if (checkEndPortal(event.getBlock())) {
             event.setCancelled(true);
-            Util.println(event.getBlock(), Surf.config.preventBuketPortalMessage());
+            Util.println(Surf.config.preventBuketPortalMessage() + " | " + event.getBlock().getLocation());
         }
     }
 

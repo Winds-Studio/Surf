@@ -26,7 +26,7 @@ public class CheckIllegal implements Listener {
 
         Inventory inv = event.getPlayer().getInventory();
 
-        ItemUtil.deleteIllegals(inv);
+        ItemUtil.cleanIllegals(inv);
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -38,7 +38,7 @@ public class CheckIllegal implements Listener {
 
         if (!inv.getType().equals(InventoryType.CRAFTING)) return;
 
-        ItemUtil.deleteIllegals(inv);
+        ItemUtil.cleanIllegals(inv);
     }
 
     @EventHandler
@@ -50,7 +50,7 @@ public class CheckIllegal implements Listener {
 
         if (!inv.getType().equals(InventoryType.PLAYER)) return;
 
-        ItemUtil.deleteIllegals(inv);
+        ItemUtil.cleanIllegals(inv);
     }
 
     @EventHandler
@@ -62,7 +62,7 @@ public class CheckIllegal implements Listener {
 
         if (!inv.getType().equals(InventoryType.PLAYER)) return;
 
-        ItemUtil.deleteIllegals(inv);
+        ItemUtil.cleanIllegals(inv);
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -72,9 +72,7 @@ public class CheckIllegal implements Listener {
 
         ItemStack i = event.getItem();
 
-        if (ItemUtil.isIllegalBlock(i) || ItemUtil.isEnchantedBlock(i)
-                || ItemUtil.hasIllegalDurability(i) || ItemUtil.isUnbreakable(i) || ItemUtil.hasIllegalEnchants(i)
-                || ItemUtil.hasIllegalItemFlag(i) || ItemUtil.hasIllegalAttributes(i)) {
+        if (ItemUtil.isIllegal(i)) {
             event.setCancelled(true);
         }
     }
@@ -88,15 +86,14 @@ public class CheckIllegal implements Listener {
 
         ItemStack i = event.getItem().getItemStack();
 
-        if (ItemUtil.isIllegalBlock(i) || ItemUtil.isEnchantedBlock(i)
-                || ItemUtil.hasIllegalDurability(i) || ItemUtil.isUnbreakable(i) || ItemUtil.hasIllegalEnchants(i)
-                || ItemUtil.hasIllegalItemFlag(i) || ItemUtil.hasIllegalAttributes(i)) {
+        if (ItemUtil.isIllegal(i)) {
             event.setCancelled(true);
             event.getItem().remove();
             if (event.getEntity() instanceof Player) {
-                Util.sendMessage(((Player) event.getEntity()), "You can not pick up this illegal item.");
+                Player player = (Player) event.getEntity();
+                Util.sendMessage(player, "&6You can not pick up this illegal item.");
             } else {
-                Util.println(event.getEntity().getName() + " Try to pick up an illegal item at " + event.getItem().getLocation());
+                Util.println(event.getEntity().getName() + " try to pick up an illegal item at " + event.getItem().getLocation());
             }
         }
     }

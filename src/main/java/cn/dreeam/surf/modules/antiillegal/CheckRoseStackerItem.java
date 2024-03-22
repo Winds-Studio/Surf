@@ -18,15 +18,14 @@ public class CheckRoseStackerItem implements Listener {
 
         ItemStack i = event.getStackedItem().getItem().getItemStack();
 
-        if (ItemUtil.isIllegalBlock(i) || ItemUtil.isEnchantedBlock(i)
-                || ItemUtil.hasIllegalDurability(i) || ItemUtil.isUnbreakable(i) || ItemUtil.hasIllegalEnchants(i)
-                || ItemUtil.hasIllegalItemFlag(i) || ItemUtil.hasIllegalAttributes(i)) {
+        if (ItemUtil.isIllegal(i)) {
             event.setCancelled(true);
             event.getStackedItem().getItem().remove();
             if (event.getEntity() instanceof Player) {
-                Util.sendMessage(((Player) event.getEntity()), "You can not pick up this illegal item.");
+                Player player = (Player) event.getEntity();
+                Util.sendMessage(player, "&6You can not pick up this illegal item.");
             } else {
-                Util.println(event.getEntity().getName() + " Try to pick up an illegal item at " + event.getStackedItem().getLocation());
+                Util.println(event.getEntity().getName() + " try to pick up an illegal item at " + event.getStackedItem().getLocation());
             }
         }
     }

@@ -30,8 +30,56 @@ public interface Config {
     boolean antiIllegalCheckIllegalBlockEnabled();
 
     @ConfKey("anti-illegal.check-illegal-block.message")
-    @ConfDefault.DefaultString("%prefix%&6This block is not allowed")
+    @ConfDefault.DefaultString("&6You can not use this illegal block.")
     String antiIllegalCheckIllegalBlockMessage();
+
+    @ConfKey("check-illegal-damage.enabled")
+    @ConfDefault.DefaultBoolean(false)
+    boolean checkIllegalDamageEnabled();
+
+    @ConfKey("check-illegal-damage.message")
+    @ConfDefault.DefaultString("&6You can not use this illegal item.")
+    String checkIllegalDamageMessage();
+
+    @ConfKey("check-illegal-potion.enabled")
+    @ConfDefault.DefaultBoolean(false)
+    boolean checkIllegalPotionEnabled();
+
+    @ConfKey("check-illegal-potion.message")
+    @ConfDefault.DefaultString("&6You can not use this illegal potion.")
+    String checkIllegalPotionMessage();
+
+    @ConfKey("anti-illegal.revert-stacked-totem-as-one.enabled")
+    @ConfDefault.DefaultBoolean(false)
+    boolean stackedTotemRevertAsOneEnabled();
+
+    @ConfComments({
+            "Enable to delete illegals when found",
+            "Disable to only clean illegal attributes"
+    })
+    @ConfKey("anti-illegal.delete-illegals-when-found.enabled")
+    @ConfDefault.DefaultBoolean(false)
+    boolean antiIllegalDeleteIllegalsWhenFoundEnabled();
+
+    @ConfKey("anti-illegal.check-when.PlayerJoin")
+    @ConfDefault.DefaultBoolean(false)
+    boolean antiIllegalCheckWhenPlayerJoinEnabled();
+
+    @ConfKey("anti-illegal.check-when.HopperTransfer")
+    @ConfDefault.DefaultBoolean(false)
+    boolean antiIllegalCheckWhenHopperTransferEnabled();
+
+    @ConfKey("anti-illegal.check-when.InventoryClose")
+    @ConfDefault.DefaultBoolean(false)
+    boolean antiIllegalCheckWhenInventoryCloseEnabled();
+
+    @ConfKey("anti-illegal.check-when.InventoryOpen")
+    @ConfDefault.DefaultBoolean(false)
+    boolean antiIllegalCheckWhenInventoryOpenEnabled();
+
+    @ConfKey("anti-illegal.check-when.ItemPickup")
+    @ConfDefault.DefaultBoolean(false)
+    boolean antiIllegalCheckWhenItemPickupEnabled();
 
     @ConfKey("anti-illegal.checks.illegal-block-list")
     @ConfDefault.DefaultStrings({
@@ -69,7 +117,7 @@ public interface Config {
     List<String> antiIllegalIllegalItemFlagList();
 
     @ConfComments({
-            "Set the value to -1 or remove the entire enchant",
+            "Set the value to -1 or remove the entire enchant from the list",
             "to disable check to that illegal enchant"
     })
     @ConfKey("anti-illegal.checks.illegal-enchant-list")
@@ -134,47 +182,6 @@ public interface Config {
     })
     List<String> antiIllegalIllegalAttributeModifierList();
 
-
-    @ConfKey("anti-illegal.check-when.PlayerJoin")
-    @ConfDefault.DefaultBoolean(false)
-    boolean antiIllegalCheckWhenPlayerJoinEnabled();
-
-    @ConfKey("anti-illegal.check-when.HopperTransfer")
-    @ConfDefault.DefaultBoolean(false)
-    boolean antiIllegalCheckWhenHopperTransferEnabled();
-
-    @ConfKey("anti-illegal.check-when.InventoryClose")
-    @ConfDefault.DefaultBoolean(false)
-    boolean antiIllegalCheckWhenInventoryCloseEnabled();
-
-    @ConfKey("anti-illegal.check-when.InventoryOpen")
-    @ConfDefault.DefaultBoolean(false)
-    boolean antiIllegalCheckWhenInventoryOpenEnabled();
-
-    @ConfKey("anti-illegal.check-when.ItemPickup")
-    @ConfDefault.DefaultBoolean(false)
-    boolean antiIllegalCheckWhenItemPickupEnabled();
-
-    @ConfKey("check-illegal-damage.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean checkIllegalDamageEnabled();
-
-    @ConfKey("check-illegal-damage.message")
-    @ConfDefault.DefaultString("%prefix%&6You can not use this illegal item.")
-    String checkIllegalDamageMessage();
-
-    @ConfKey("check-illegal-potion.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean checkIllegalPotionEnabled();
-
-    @ConfKey("check-illegal-potion.message")
-    @ConfDefault.DefaultString("%prefix%&6You can not use this illegal potion")
-    String checkIllegalPotionMessage();
-
-    @ConfKey("anti-illegal.revert-stacked-totem-as-one.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean stackedTotemRevertAsOneEnabled();
-
     // Anti Lag
     @ConfComments({
             "water / lava flowing disable tps this is useful on new servers with lots of block physics updates that cause lag",
@@ -208,7 +215,7 @@ public interface Config {
     boolean limitOffhandSwapEnabled();
 
     @ConfKey("limit.offhand-swap.message")
-    @ConfDefault.DefaultString("%prefix%&6You can not do this.")
+    @ConfDefault.DefaultString("&6You swap offhand too quick!")
     String limitOffhandSwapMessage();
 
     @ConfKey("limit.wither-spawn.enabled")
@@ -272,11 +279,11 @@ public interface Config {
     int netherBottomLayer();
 
     @ConfKey("nether.top-message")
-    @ConfDefault.DefaultString("%prefix%&6The nether top has been disabled due to lag")
+    @ConfDefault.DefaultString("&6The nether top has been disabled due to lag")
     String netherTopMessage();
 
     @ConfKey("nether.bottom-message")
-    @ConfDefault.DefaultString("%prefix%&6The nether bottom has been disabled due to lag")
+    @ConfDefault.DefaultString("&6The nether bottom has been disabled due to lag")
     String netherBottomMessage();
 
     @ConfKey("nether.top-bottom-do-damage")
@@ -293,7 +300,7 @@ public interface Config {
     boolean preventBookBanEnabled();
 
     @ConfKey("prevent-book-ban.message")
-    @ConfDefault.DefaultString("%prefix%&6You have been unbookbanned")
+    @ConfDefault.DefaultString("&6Detected a book ban, successfully cancelled.")
     String preventBookBanMessage();
 
     @ConfKey("prevent-buket-on-portal.enabled")
@@ -301,7 +308,7 @@ public interface Config {
     boolean preventBuketPortalEnabled();
 
     @ConfKey("prevent-buket-on-portal.message")
-    @ConfDefault.DefaultString("%prefix%&6You can not do this")
+    @ConfDefault.DefaultString("&6You can not do this")
     String preventBuketPortalMessage();
 
     @ConfComments({
@@ -312,7 +319,7 @@ public interface Config {
     boolean perChunkLimitEnabled();
 
     @ConfKey("per-chunk-limit.message")
-    @ConfDefault.DefaultString("%prefix%&6ChunkBan has been disabled")
+    @ConfDefault.DefaultString("&6Detected a chunk ban, successfully cancelled.")
     String perChunkLimitMessage();
 
     @ConfKey("per-chunk-limit.tile-entity-max")
@@ -344,7 +351,7 @@ public interface Config {
     int preventNBTBanLimit();
 
     @ConfKey("prevent-nbt-ban.message")
-    @ConfDefault.DefaultString("%prefix%&6You have been un-NBT-banned")
+    @ConfDefault.DefaultString("&6Detected a nbt ban, successfully cancelled.")
     String preventNBTBanMessage();
 }
 

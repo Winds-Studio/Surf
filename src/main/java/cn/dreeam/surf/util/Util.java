@@ -5,7 +5,6 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -17,10 +16,10 @@ public class Util {
     }
 
     public static void sendMessage(Player player, String message) {
-        message = message.replaceAll("%prefix%", getPrefix());
+        Component component = LegacyComponentSerializer.legacyAmpersand().deserialize(getPrefix() + message);
 
-        Surf.getInstance().adventure().player(player).sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
-        println(player, message);
+        Surf.getInstance().adventure().player(player).sendMessage(component);
+        println(player + " | " + message);
     }
 
     public static void sendMessage(CommandSender sender, String message) {
@@ -28,7 +27,7 @@ public class Util {
     }
 
     public static void kickPlayer(Player player, String message) {
-        player.kickPlayer(message);
+        player.kickPlayer(getPrefix() + message);
     }
 
     public static Player getNearbyPlayer(int radius, Location loc) {
@@ -45,20 +44,8 @@ public class Util {
         return (Surf.config.Prefix() != null && !Surf.config.Prefix().isEmpty()) ? Surf.config.Prefix() : "";
     }
 
-    public static void println(Player player, String message) {
-        if (player != null) {
-            message = player.getName() + " | " + message;
-        }
-
-        println(message);
-    }
-
-    public static void println(Block block, String message) {
-        println(message);
-    }
-
     public static void println(String message) {
-        println(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
+        println(LegacyComponentSerializer.legacyAmpersand().deserialize(getPrefix() + message));
     }
 
     public static void println(Component component) {

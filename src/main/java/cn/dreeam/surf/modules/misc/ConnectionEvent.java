@@ -39,7 +39,7 @@ public class ConnectionEvent implements Listener {
         Surf.config.connectionKickReasons().forEach(reason -> {
             if (event.getReason().equalsIgnoreCase(reason)) {
                 event.setCancelled(true);
-                Util.println(event.getPlayer(), Util.getPrefix() + "Canceled a kick, Reason: " + reason);
+                Util.println("Cancelled a kick for " + event.getPlayer().getName() + ", Reason: " + reason);
             }
         });
     }

@@ -1,6 +1,7 @@
 package cn.dreeam.surf.modules.antiillegal;
 
 import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.util.ItemUtil;
 import cn.dreeam.surf.util.Util;
 import org.bukkit.Material;
 import org.bukkit.block.Dispenser;
@@ -21,7 +22,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 public class IllegalDamageAndPotionCheck implements Listener {
 
@@ -49,7 +49,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
                     if (event.getDamage() > 30) {
                         event.setCancelled(true);
                         damager.getEquipment().setItemInMainHand(null); // Seems only can use item on main hand to attack
-                        Util.println(damager.getLocation() + " | " + Surf.config.checkIllegalDamageMessage());
+                        Util.println(damager.getName() + " | " + Surf.config.checkIllegalDamageMessage() + " | " + damager.getLocation());
                     }
                 }
             }
@@ -77,7 +77,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
 
         if (!player.getActivePotionEffects().isEmpty()) {
             for (PotionEffect effect : player.getActivePotionEffects()) {
-                if (isIllegalEffect(effect)) {
+                if (ItemUtil.isIllegalEffect(effect)) {
                     player.removePotionEffect(effect.getType());
                 }
             }
@@ -92,7 +92,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
         PotionEffect effect = event.getNewEffect();
 
         if (effect != null) {
-            if (isIllegalEffect(effect)) {
+            if (ItemUtil.isIllegalEffect(effect)) {
                 event.setCancelled(true);
                 if (event.getEntity() instanceof Player) {
                     Player player = (Player) event.getEntity();
@@ -116,7 +116,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
         Player shooter = (Player) arrow.getShooter();
 
         for (PotionEffect effect : arrow.getCustomEffects()) {
-            if (isIllegalEffect(effect)) {
+            if (ItemUtil.isIllegalEffect(effect)) {
                 event.setCancelled(true);
                 Util.sendMessage(shooter, Surf.config.checkIllegalPotionMessage());
                 break;
@@ -136,7 +136,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
         ItemStack pot = event.getPotion().getItem();
 
         for (PotionEffect effect : event.getPotion().getEffects()) {
-            if (isIllegalEffect(effect)) {
+            if (ItemUtil.isIllegalEffect(effect)) {
                 event.setCancelled(true);
                 player.getInventory().remove(pot);
                 Util.sendMessage(player, Surf.config.checkIllegalPotionMessage());
@@ -158,7 +158,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
         PotionMeta potion = (PotionMeta) e.getItem().getItemMeta();
 
         for (PotionEffect effect : potion.getCustomEffects()) {
-            if (isIllegalEffect(effect)) {
+            if (ItemUtil.isIllegalEffect(effect)) {
                 e.setCancelled(true);
                 e.getPlayer().getInventory().remove(e.getItem());
                 Util.sendMessage(e.getPlayer(), Surf.config.checkIllegalPotionMessage());
@@ -181,21 +181,15 @@ public class IllegalDamageAndPotionCheck implements Listener {
             PotionMeta pot = (PotionMeta) event.getItem().getItemMeta();
 
             for (PotionEffect effect : pot.getCustomEffects()) {
-                if (isIllegalEffect(effect)) {
+                if (ItemUtil.isIllegalEffect(effect)) {
                     event.setCancelled(true);
                     disp.getInventory().remove(event.getItem());
-                    Util.println(event.getBlock(), Surf.config.checkIllegalPotionMessage());
+                    Util.println(Surf.config.checkIllegalPotionMessage() + " | " + event.getBlock().getLocation());
                     // One illegal potion effect appear, remove whole item
                     // then break the for loop.
                     break;
                 }
             }
         }
-    }
-
-    private boolean isIllegalEffect(PotionEffect effect) {
-        int duration = effect.getType() == PotionEffectType.BAD_OMEN ? 120000 : 12000;
-
-        return effect.getAmplifier() > 5 || effect.getDuration() < 0 || effect.getDuration() > duration;
     }
 }

@@ -73,14 +73,10 @@ public class GateWay implements Listener {
         for (BlockFace face : BlockFace.values()) {
             Block next = vehicle.getLocation().getBlock().getRelative(face);
             if (next.getType() == Material.END_GATEWAY) {
-                int x = vehicle.getLocation().getBlockX();
-                int y = vehicle.getLocation().getBlockY();
-                int z = vehicle.getLocation().getBlockZ();
-                String worldString = vehicle.getWorld().getName();
                 vehicle.eject();
                 vehicle.remove();
-                Util.kickPlayer(player, "[&b&lSurf&r]&6 Sorry that exploit got patched :(");
-                Util.println(player, "&1Prevented&r&e " + player.getName() + "&r&1 at &r&e" + x + " " + y + " " + z + " &r&1in world&e " + worldString + " &r&1from crashing the server");
+                Util.kickPlayer(player, "Sorry this exploit got patched :(");
+                Util.println("&1Prevented&r&e " + player.getName() + "&r&1 at &r&e" + vehicle.getLocation() + " &r&1from crashing the server");
             }
         }
     }

@@ -36,7 +36,6 @@ public class MinecartLag implements Listener {
                     }
                 }
                 Util.sendMessage(player, Util.getPrefix() + "&6Please limit " + formattedName + " to &r&c" + max + "&r&6 per chunk");
-                Util.println(Util.getPrefix() + "&6Removed &r&3" + chunk.getEntities().length + " " + formattedName + "&r&6 from a lag machine owned by&r&3 " + player.getName());
             }
         }
     }
@@ -49,14 +48,12 @@ public class MinecartLag implements Listener {
             Vehicle vehicle = event.getVehicle();
             Chunk chunk = vehicle.getChunk();
             String formattedName = vehicle.getType().toString().toLowerCase().concat("s").replace("_", " ");
-            String formattedName1 = vehicle.getType().toString().toLowerCase().replace("_", " ");
             Player player = Util.getNearbyPlayer(20, vehicle.getLocation());
 
             if (!event.getFrom().getChunk().equals(event.getTo().getChunk())) {
                 if (chunk.getEntities().length >= Surf.config.limitVehicleMinecartPerChunkLimit()) {
                     vehicle.remove();
                     Util.sendMessage(player, Util.getPrefix() + "&6Please limit " + formattedName + " to &r&c" + max + "&r&6 per chunk");
-                    Util.println(Util.getPrefix() + "&6Deleted a &r&3" + formattedName1 + "&r&6 from a lag machine owned by&r&3 " + player.getName() + " &4BYPASS ATTEMPT");
                 }
             }
         }

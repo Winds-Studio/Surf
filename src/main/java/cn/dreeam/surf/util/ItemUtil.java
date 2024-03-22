@@ -9,6 +9,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +32,26 @@ public class ItemUtil {
     }
      */
 
+    public static boolean isAir(ItemStack i) {
+        if (Surf.majorVersion <= 13) {
+            // From 1.14 org.bukkit.Material.isAir()
+            switch (i.getType()) {
+                //<editor-fold defaultstate="collapsed" desc="isAir">
+                case AIR:
+                case CAVE_AIR:
+                case VOID_AIR:
+                    // ----- Legacy Separator -----
+                case LEGACY_AIR:
+                    //</editor-fold>
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        return i.getType().isAir();
+    }
+
     public static boolean isBook(ItemStack i) {
         return i.getType().toString().endsWith("BOOK") || i.getType().toString().equals("LEGACY_BOOK_AND_QUILL");
     }
@@ -45,8 +68,28 @@ public class ItemUtil {
         return i.getType().isBlock() && i.hasItemMeta() && i.getItemMeta().hasEnchants();
     }
 
+    public static boolean isIllegalPotion(ItemStack i) {
+        if (i.getType().toString().contains("POTION") && i.hasItemMeta()) {
+            PotionMeta pot = (PotionMeta) i.getItemMeta();
+
+            for (PotionEffect effect : pot.getCustomEffects()) {
+                if (isIllegalEffect(effect)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public static boolean isUnbreakable(ItemStack i) {
         return i.hasItemMeta() && i.getItemMeta().isUnbreakable();
+    }
+
+    public static boolean isIllegalEffect(PotionEffect effect) {
+        int duration = effect.getType() == PotionEffectType.BAD_OMEN ? 120000 : 12000;
+
+        return effect.getAmplifier() > 5 || effect.getDuration() < 0 || effect.getDuration() > duration;
     }
 
     public static boolean hasIllegalDurability(ItemStack i) {
@@ -106,7 +149,12 @@ public class ItemUtil {
         return map;
     }
 
-    public static void deleteIllegals(Inventory inventory) {
+    public static boolean isIllegal(ItemStack i) {
+        return isIllegalBlock(i) || isEnchantedBlock(i) || isIllegalPotion(i) || hasIllegalDurability(i)
+                || isUnbreakable(i) || hasIllegalEnchants(i) || hasIllegalItemFlag(i) || hasIllegalAttributes(i);
+    }
+
+    public static void cleanIllegals(Inventory inventory) {
         // if inventory is empty, skip
         if (inventory.getContents().length == 0) return;
 
@@ -116,20 +164,20 @@ public class ItemUtil {
             if (item == null) continue;
 
             ItemStack original = item.clone();
-            ItemStack newItem = deleteIllegals(item);
+            ItemStack newItem = cleanIllegals(item);
 
             if (!original.equals(newItem)) {
-                Util.println(Util.getPrefix() + "&6Deleted illegals " + original.getType() + " " + original.getI18NDisplayName() + " " + original.getEnchantments() + (original.hasItemMeta() ? " " + original.getItemMeta().getAttributeModifiers() : ""));
+                Util.println("&6Detected illegals " + original.getI18NDisplayName());
             }
         }
     }
 
-    private static ItemStack deleteIllegals(ItemStack i) {
-        if (i == null || i.getType().isAir() || isIllegalBlock(i)) new ItemStack(Material.AIR);
+    private static ItemStack cleanIllegals(ItemStack i) {
+        if (i == null || isAir(i) || isIllegalBlock(i)) return new ItemStack(Material.AIR);
 
-        if (false) { // Dreeam TODO - Configurable
-            if (isEnchantedBlock(i) || hasIllegalDurability(i) || hasIllegalItemFlag(i) || hasIllegalAttributes(i)
-                    || hasIllegalEnchants(i)) {
+        if (Surf.config.antiIllegalDeleteIllegalsWhenFoundEnabled()) {
+            if (ItemUtil.isEnchantedBlock(i) || ItemUtil.hasIllegalDurability(i) || ItemUtil.isUnbreakable(i)
+                    || ItemUtil.hasIllegalEnchants(i) || ItemUtil.hasIllegalItemFlag(i) || ItemUtil.hasIllegalAttributes(i)) {
                 return new ItemStack(Material.AIR);
                 //i.setAmount(0); // need to try??
             }
