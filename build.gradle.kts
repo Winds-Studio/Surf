@@ -11,6 +11,10 @@ description = "Fix exploits and remove illegal/NBT items for anarchy servers"
 repositories {
     mavenCentral()
 
+    flatDir {
+        dirs("./libs")
+    }
+
     // PaperMC
     maven {
         name = "papermc-repo"
@@ -40,6 +44,7 @@ dependencies {
     implementation("com.tcoded:FoliaLib:0.3.1")
     implementation("com.github.cryptomorin:XSeries:9.9.0")
     compileOnly("de.tr7zw:item-nbt-api-plugin:2.12.2")
+    compileOnly("dev.rosewood.rosestacker:RoseStacker:1.5.20")
 
     implementation("net.kyori:adventure-platform-bukkit:4.3.2")
     implementation("net.kyori:adventure-api:$adventureVersion")

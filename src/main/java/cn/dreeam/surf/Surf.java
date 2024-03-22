@@ -4,6 +4,7 @@ import cn.dreeam.surf.command.CommandHandler;
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.config.ConfigManager;
 import cn.dreeam.surf.modules.antiillegal.CheckIllegal;
+import cn.dreeam.surf.modules.antiillegal.CheckRoseStackerItem;
 import cn.dreeam.surf.modules.antiillegal.IllegalBlockCheck;
 import cn.dreeam.surf.modules.antiillegal.IllegalDamageAndPotionCheck;
 import cn.dreeam.surf.modules.antiillegal.StackedTotem;
@@ -45,6 +46,8 @@ public class Surf extends JavaPlugin {
 
     public FoliaLib foliaLib = new FoliaLib(this);
     private BukkitAudiences adventure;
+
+    public boolean isRoseStackerEnabled = false;
 
     @Override
     public void onEnable() {
@@ -99,6 +102,11 @@ public class Surf extends JavaPlugin {
 
         for (Listener listener : listeners) {
             pluginManager.registerEvents(listener, instance);
+        }
+
+        if (getServer().getPluginManager().getPlugin("RoseStacker") != null) {
+            isRoseStackerEnabled = true;
+            pluginManager.registerEvents(new CheckRoseStackerItem(), instance);
         }
     }
 

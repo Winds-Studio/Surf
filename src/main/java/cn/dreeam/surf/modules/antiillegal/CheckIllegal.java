@@ -82,6 +82,8 @@ public class CheckIllegal implements Listener {
     @EventHandler(ignoreCancelled = true)
     @AntiIllegal(EventName = "EntityPickupItemEvent")
     public void onPickup(EntityPickupItemEvent event) {
+        if (Surf.getInstance().isRoseStackerEnabled) return;
+
         if (!Surf.config.antiIllegalCheckWhenItemPickupEnabled()) return;
 
         ItemStack i = event.getItem().getItemStack();
