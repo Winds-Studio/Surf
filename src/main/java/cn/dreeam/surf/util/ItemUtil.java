@@ -155,10 +155,11 @@ public class ItemUtil {
     }
 
     public static void cleanIllegals(Inventory inventory) {
-        // if inventory is empty, skip
-        if (inventory.getContents().length == 0) return;
-
         ItemStack[] contents = inventory.getContents();
+
+        // if inventory is empty, skip
+        if (contents.length == 0) return;
+
         for (ItemStack item : contents) {
             // if item is null, skip
             if (item == null) continue;
@@ -173,11 +174,11 @@ public class ItemUtil {
     }
 
     private static ItemStack cleanIllegals(ItemStack i) {
-        if (i == null || isAir(i) || isIllegalBlock(i)) return new ItemStack(Material.AIR);
+        if (i == null || isAir(i)) return new ItemStack(Material.AIR);
+        if (isIllegalBlock(i) || isIllegalPotion(i)) return new ItemStack(Material.AIR);
 
         if (Surf.config.antiIllegalDeleteIllegalsWhenFoundEnabled()) {
-            if (ItemUtil.isEnchantedBlock(i) || ItemUtil.hasIllegalDurability(i) || ItemUtil.isUnbreakable(i)
-                    || ItemUtil.hasIllegalEnchants(i) || ItemUtil.hasIllegalItemFlag(i) || ItemUtil.hasIllegalAttributes(i)) {
+            if (isIllegal(i)) {
                 return new ItemStack(Material.AIR);
                 //i.setAmount(0); // need to try??
             }
