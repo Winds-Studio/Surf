@@ -353,5 +353,13 @@ public interface Config {
     @ConfKey("prevent-nbt-ban.message")
     @ConfDefault.DefaultString("&6Detected a nbt ban, successfully cancelled.")
     String preventNBTBanMessage();
+
+    @ConfComments({
+            "Prevent player uses ender pearl to teleport to inside of block,",
+            "Enable this to let PVP more friendly."
+    })
+    @ConfKey("prevent-teleport-to-block.enabled")
+    @ConfDefault.DefaultBoolean(true)
+    boolean preventTeleportToBlock();
 }
 

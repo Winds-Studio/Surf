@@ -21,6 +21,7 @@ import cn.dreeam.surf.modules.patch.ChunkBan;
 import cn.dreeam.surf.modules.patch.DispenserCrash;
 import cn.dreeam.surf.modules.patch.GateWay;
 import cn.dreeam.surf.modules.patch.NBTBan;
+import cn.dreeam.surf.modules.patch.PreventEnderPearlClip;
 import com.tcoded.folialib.FoliaLib;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.apache.logging.log4j.LogManager;
@@ -104,7 +105,8 @@ public class Surf extends JavaPlugin {
                 new ChunkBan(),
                 new DispenserCrash(),
                 new GateWay(),
-                new NBTBan()
+                new NBTBan(),
+                new PreventEnderPearlClip()
         );
 
         for (Listener listener : listeners) {
