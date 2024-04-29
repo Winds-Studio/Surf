@@ -33,7 +33,7 @@ repositories {
 val adventureVersion = "4.16.0"
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.20.5-R0.1-SNAPSHOT")
     api("org.bstats:bstats-bukkit:3.0.2")
     api("com.tcoded:FoliaLib:0.3.1")
 
