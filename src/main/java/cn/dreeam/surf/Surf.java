@@ -48,12 +48,6 @@ public class Surf extends JavaPlugin {
     public FoliaLib foliaLib = new FoliaLib(this);
     private BukkitAudiences adventure;
 
-    // Dreeam - e.g. 1.20.2-R0.1-SNAPSHOT -> 20, replace string before first decimal point, then replace all string after the second decimal point
-    public static final int majorVersion = Integer.parseInt(Bukkit.getServer().getBukkitVersion()
-            .replaceFirst("^(\\d+)\\.", "")
-            .replaceAll("\\.(.+)", "")
-    );
-
     public boolean isRoseStackerEnabled = false;
 
     @Override

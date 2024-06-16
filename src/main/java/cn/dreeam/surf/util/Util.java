@@ -10,6 +10,15 @@ import org.bukkit.entity.Player;
 
 public class Util {
 
+    // Server version, e.g. 1.20.2-R0.1-SNAPSHOT -> {"1","20","2"}
+    private final static String[] serverVersion = Bukkit.getServer().getBukkitVersion()
+            .substring(0, Bukkit.getServer().getBukkitVersion().indexOf("-"))
+            .split("\\.");
+
+    private final static int mcFirstVersion = Integer.parseInt(serverVersion[0]);
+    public final static int majorVersion = Integer.parseInt(serverVersion[1]);
+    public final static int minorVersion = serverVersion.length == 3 ? Integer.parseInt(serverVersion[2]) : 0;
+
     public static double getTps() {
         double tps = Bukkit.getServer().getTPS()[0];
         return Double.parseDouble(String.format("%.2f", tps));

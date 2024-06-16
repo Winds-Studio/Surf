@@ -33,7 +33,7 @@ public class ItemUtil {
      */
 
     public static boolean isAir(ItemStack i) {
-        if (Surf.majorVersion <= 13) {
+        if (Util.majorVersion <= 13) {
             // From 1.14 org.bukkit.Material.isAir()
             switch (i.getType()) {
                 //<editor-fold defaultstate="collapsed" desc="isAir">
