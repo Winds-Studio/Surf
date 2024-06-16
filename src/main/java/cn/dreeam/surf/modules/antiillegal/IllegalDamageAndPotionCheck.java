@@ -3,7 +3,6 @@ package cn.dreeam.surf.modules.antiillegal;
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.util.ItemUtil;
 import cn.dreeam.surf.util.Util;
-import org.bukkit.Material;
 import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
@@ -151,7 +150,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
     public void PlayerInteractEvent(PlayerItemConsumeEvent e) {
         if (!Surf.config.checkIllegalPotionEnabled()) return;
 
-        if (!e.getItem().getType().equals(Material.POTION) || !e.getItem().hasItemMeta()) {
+        if (!e.getItem().getType().toString().contains("POTION") || !e.getItem().hasItemMeta()) {
             return;
         }
 

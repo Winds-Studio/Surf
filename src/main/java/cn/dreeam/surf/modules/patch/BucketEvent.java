@@ -2,7 +2,7 @@ package cn.dreeam.surf.modules.patch;
 
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.util.Util;
-import org.bukkit.Material;
+import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.event.EventHandler;
@@ -36,13 +36,13 @@ public class BucketEvent implements Listener {
     }
 
     private boolean checkEndPortal(Block block) {
-        if (block.getType() != Material.END_PORTAL_FRAME) {
+        if (!block.getType().equals(XMaterial.END_PORTAL_FRAME.parseMaterial())) {
             return false;
         }
 
         for (BlockFace face : POSSIBLE_FACES) {
             Block relative = block.getRelative(face);
-            if (relative.getType() == Material.END_PORTAL) {
+            if (relative.getType().equals(XMaterial.END_PORTAL.parseMaterial())) {
                 return true;
             }
         }

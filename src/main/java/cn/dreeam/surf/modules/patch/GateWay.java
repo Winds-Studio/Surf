@@ -2,9 +2,9 @@ package cn.dreeam.surf.modules.patch;
 
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.util.Util;
+import com.cryptomorin.xseries.XMaterial;
 import com.destroystokyo.paper.event.entity.EntityTeleportEndGatewayEvent;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -72,7 +72,7 @@ public class GateWay implements Listener {
         Player player = (Player) vehicle.getPassenger();
         for (BlockFace face : BlockFace.values()) {
             Block next = vehicle.getLocation().getBlock().getRelative(face);
-            if (next.getType() == Material.END_GATEWAY) {
+            if (next.getType().equals(XMaterial.END_GATEWAY.parseMaterial())) {
                 vehicle.eject();
                 vehicle.remove();
                 Util.kickPlayer(player, "Sorry this exploit got patched :(");

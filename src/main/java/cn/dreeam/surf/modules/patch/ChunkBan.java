@@ -52,7 +52,7 @@ public class ChunkBan implements Listener {
         if (player.hasPermission("surf.bypass.chunkban")) return;
 
         Chunk chunk = event.getClickedBlock().getChunk();
-        if (event.getItem().getType() == Material.ITEM_FRAME) {
+        if (event.getItem().getType().equals(XMaterial.ITEM_FRAME.parseMaterial())) {
             long amount = Arrays.stream(chunk.getEntities()).filter(entity -> entity instanceof ItemFrame).count();
             if (amount + chunk.getTileEntities().length > Surf.config.perChunkLimitTitleEntityMax()) {
                 event.setCancelled(true);

@@ -3,6 +3,7 @@ package cn.dreeam.surf.modules.patch;
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.util.ItemUtil;
 import cn.dreeam.surf.util.Util;
+import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Material;
 import org.bukkit.block.ShulkerBox;
 import org.bukkit.entity.Player;
@@ -38,8 +39,8 @@ public class BookBan implements Listener {
             ShulkerBox shulkerBox = (ShulkerBox) meta.getBlockState();
 
             for (ItemStack shulkerItem : shulkerBox.getInventory().getContents()) {
-                if (shulkerItem == null || shulkerItem.getType() == Material.AIR) continue;
-                if (shulkerItem.getType() == Material.WRITTEN_BOOK) {
+                if (shulkerItem == null || ItemUtil.isAir(shulkerItem)) continue;
+                if (shulkerItem.getType().equals(XMaterial.WRITTEN_BOOK.parseMaterial())) {
                     BookMeta book = (BookMeta) shulkerItem.getItemMeta();
                     if (isBanBook(book)) {
                         player.getWorld().dropItem(player.getLocation(), shulkerItem);

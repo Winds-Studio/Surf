@@ -1,8 +1,8 @@
 package cn.dreeam.surf.modules.patch;
 
 import cn.dreeam.surf.Surf;
+import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerTeleportEvent;
@@ -31,8 +31,8 @@ public class PreventEnderPearlClip implements Listener {
             create a new one. This can largely prevent pearl name inconsistency.
              */
             Inventory inv = event.getPlayer().getInventory();
-            int slot = inv.first(Material.ENDER_PEARL);
-            ItemStack pearl = new ItemStack(Material.ENDER_PEARL, 1);
+            int slot = inv.first(XMaterial.ENDER_PEARL.parseMaterial());
+            ItemStack pearl = new ItemStack(XMaterial.ENDER_PEARL.parseMaterial(), 1);
             ItemStack item = slot != -1 ? inv.getItem(slot) : pearl;
             inv.addItem(item != null ? item : pearl);
         }

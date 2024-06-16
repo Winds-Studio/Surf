@@ -2,6 +2,7 @@ package cn.dreeam.surf.modules.antilag;
 
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.util.Util;
+import com.cryptomorin.xseries.XMaterial;
 import com.google.common.collect.Lists;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -18,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Offhand implements Listener {
 
     private final Map<UUID, Integer> offhandMap = new ConcurrentHashMap<>();
-    private final List<Material> MATERIALS = Lists.newArrayList(Material.BOOK, Material.WRITTEN_BOOK, Material.WRITABLE_BOOK);
+    private final List<Material> MATERIALS = Lists.newArrayList(XMaterial.BOOK.parseMaterial(), XMaterial.WRITTEN_BOOK.parseMaterial(), XMaterial.WRITABLE_BOOK.parseMaterial());
 
     public Offhand() {
         // add all shulkers

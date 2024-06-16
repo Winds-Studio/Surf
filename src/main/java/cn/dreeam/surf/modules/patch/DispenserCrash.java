@@ -2,7 +2,7 @@ package cn.dreeam.surf.modules.patch;
 
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.util.Util;
-import org.bukkit.Material;
+import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Directional;
@@ -21,7 +21,7 @@ public class DispenserCrash implements Listener {
         if (!Surf.config.preventDispenserCrash()) return;
 
         Block block = event.getBlock();
-        if (block.getType() == Material.DISPENSER) {
+        if (block.getType().equals(XMaterial.DISPENSER.parseMaterial())) {
             BlockFace face = ((Directional) block.getBlockData()).getFacing();
             boolean isY0FacingDown = block.getY() == 0 && face == BlockFace.DOWN;
             boolean isYMaxFacingUp = block.getY() == block.getWorld().getMaxHeight() - 1 && face == BlockFace.UP;
