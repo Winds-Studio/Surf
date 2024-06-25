@@ -43,7 +43,7 @@ dependencies {
     implementation("org.bstats:bstats-bukkit:3.0.2")
     implementation("com.tcoded:FoliaLib:0.3.1")
     implementation("com.github.cryptomorin:XSeries:11.1.0")
-    compileOnly("de.tr7zw:item-nbt-api-plugin:2.12.3")
+    compileOnly("de.tr7zw:item-nbt-api-plugin:2.13.1")
     compileOnly("dev.rosewood.rosestacker:RoseStacker:1.5.20")
 
     implementation("net.kyori:adventure-platform-bukkit:4.3.2")
