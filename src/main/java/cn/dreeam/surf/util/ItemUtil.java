@@ -14,14 +14,13 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ItemUtil {
 
-    public static final List<String> isBurrowBlock = Arrays.asList("ANVIL", "OBSIDIAN", "ENDER_CHEST");
+    //public static final List<String> isBurrowBlock = Arrays.asList("ANVIL", "OBSIDIAN", "ENDER_CHEST");
     public static final List<String> illegalItemFlags = initIllegalItemFlags();
     public static final List<String> illegalAttributes = initIllegalAttribute();
     public static final Map<String, Integer> illegalEnchants = initIllegalEnchants();
@@ -90,7 +89,7 @@ public class ItemUtil {
     }
 
     public static boolean isIllegalEffect(PotionEffect effect) {
-        int duration = effect.getType() == PotionEffectType.BAD_OMEN ? 120000 : 12000;
+        int duration = Util.majorVersion >= 14 && effect.getType() == PotionEffectType.BAD_OMEN ? 120000 : 12000;
 
         return effect.getAmplifier() > 5 || effect.getDuration() < 0 || effect.getDuration() > duration;
     }
