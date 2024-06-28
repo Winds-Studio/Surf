@@ -13,6 +13,7 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -20,8 +21,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ItemUtil {
 
-    public static List<String> isBurrowBlock = Arrays.asList("ANVIL", "OBSIDIAN", "ENDER_CHEST");
-    public static final Map<String, Integer> illegalEnchants = initIllegalEnchantMap();
+    public static final List<String> isBurrowBlock = Arrays.asList("ANVIL", "OBSIDIAN", "ENDER_CHEST");
+    public static final List<String> illegalItemFlags = initIllegalItemFlags();
+    public static final List<String> illegalAttributes = initIllegalAttribute();
+    public static final Map<String, Integer> illegalEnchants = initIllegalEnchants();
 
     /*
     public static boolean isContainer(ItemStack i) {
@@ -135,18 +138,9 @@ public class ItemUtil {
         return false;
     }
 
+    // TODO
     public static boolean hasIllegalTag(ItemStack i) {
         return false;
-    }
-
-    private static Map<String, Integer> initIllegalEnchantMap() {
-        Map<String, Integer> map = new ConcurrentHashMap<>();
-        Surf.config.antiIllegalIllegalEnchantList().forEach(ench -> {
-            String[] list = ench.split(":");
-            map.put(list[0], Integer.valueOf(list[1]));
-        });
-
-        return map;
     }
 
     public static boolean isIllegal(ItemStack i) {
@@ -237,5 +231,35 @@ public class ItemUtil {
         }
 
         return i;
+    }
+
+    private static List<String> initIllegalItemFlags() {
+        List<String> list = new ArrayList<>();
+
+        for (Attribute attribute : Attribute.values()) {
+            list.add(attribute.toString());
+        }
+
+        return list;
+    }
+
+    private static List<String> initIllegalAttribute() {
+        List<String> list = new ArrayList<>();
+
+        for (ItemFlag itemFlag : ItemFlag.values()) {
+            list.add(itemFlag.toString());
+        }
+
+        return list;
+    }
+
+    private static Map<String, Integer> initIllegalEnchants() {
+        Map<String, Integer> map = new ConcurrentHashMap<>();
+        Surf.config.antiIllegalIllegalEnchantList().forEach(ench -> {
+            String[] list = ench.split(":");
+            map.put(list[0], Integer.valueOf(list[1]));
+        });
+
+        return map;
     }
 }

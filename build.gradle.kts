@@ -1,7 +1,7 @@
 plugins {
     `java-library`
     `maven-publish`
-    id("io.github.goooler.shadow") version "8.1.7" apply true
+    id("io.github.goooler.shadow") version "8.1.7"
 }
 
 group = "cn.dreeam.surf"
@@ -32,50 +32,55 @@ repositories {
         name = "devmart-other"
         url = uri("https://nexuslite.gcnt.net/repos/other/")
     }
+
+    // ConfigurationMaster
+    maven {
+        name = "cm-repo"
+        url = uri("https://ci.pluginwiki.us/plugin/repository/everything/")
+    }
 }
 
-val adventureVersion = "4.16.0"
+val adventureVersion = "4.17.0"
 
 dependencies {
-    compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
-    compileOnly("org.apache.logging.log4j:log4j-api:2.23.1")
-    implementation("space.arim.dazzleconf:dazzleconf-ext-snakeyaml:1.3.0-M2")
+    compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
+    implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.2")
     implementation("org.bstats:bstats-bukkit:3.0.2")
-    implementation("com.tcoded:FoliaLib:0.3.1")
-    implementation("com.github.cryptomorin:XSeries:11.1.0")
-    compileOnly("de.tr7zw:item-nbt-api-plugin:2.13.1")
-    compileOnly("dev.rosewood.rosestacker:RoseStacker:1.5.20")
+    implementation("com.tcoded:FoliaLib:0.4.0")
+    implementation("com.github.cryptomorin:XSeries:11.2.0")
+    implementation("de.tr7zw:item-nbt-api-plugin:2.13.1")
+    compileOnly("dev.rosewood.rosestacker:RoseStacker:1.5.22")
 
-    implementation("net.kyori:adventure-platform-bukkit:4.3.2")
+    implementation("net.kyori:adventure-platform-bukkit:4.3.3")
     implementation("net.kyori:adventure-api:$adventureVersion")
     implementation("net.kyori:adventure-text-serializer-legacy:$adventureVersion")
 }
 
-tasks.withType<JavaCompile> {
-    options.encoding = "UTF-8"
-}
-
-configure<JavaPluginExtension> {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
-
-tasks.build.configure {
-    dependsOn("shadowJar")
-}
-
-tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
-    archiveFileName = "${project.name}-${project.version}.${archiveExtension.get()}"
-    exclude("META-INF/**") // Dreeam - Avoid to include META-INF/maven in Jar
-    relocate("net.kyori", "cn.dreeam.surf.libs.kyori")
-    relocate("org.yaml.snakeyaml", "cn.dreeam.surf.libs.snakeyaml")
-    relocate("space.arim.dazzleconf", "cn.dreeam.surf.libs.dazzleconf")
-    relocate("org.bstats", "cn.dreeam.surf.libs.bstats")
-    relocate("com.tcoded.folialib", "cn.dreeam.surf.libs.folialib")
-    relocate("com.cryptomorin.xseries", "cn.dreeam.surf.libs.xseries")
-}
-
 tasks {
+    withType<JavaCompile> {
+        options.encoding = "UTF-8"
+    }
+
+    configure<JavaPluginExtension> {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    build.configure {
+        dependsOn(shadowJar)
+    }
+
+    shadowJar {
+        archiveFileName = "${project.name}-${project.version}.${archiveExtension.get()}"
+        exclude("META-INF/**") // Dreeam - Avoid to include META-INF/maven in Jar
+        relocate("net.kyori", "cn.dreeam.surf.libs.kyori")
+        relocate("org.yaml.snakeyaml", "cn.dreeam.surf.libs.snakeyaml")
+        relocate("space.arim.dazzleconf", "cn.dreeam.surf.libs.dazzleconf")
+        relocate("org.bstats", "cn.dreeam.surf.libs.bstats")
+        relocate("com.tcoded.folialib", "cn.dreeam.surf.libs.folialib")
+        relocate("com.cryptomorin.xseries", "cn.dreeam.surf.libs.xseries")
+    }
+
     processResources {
         filesMatching("**/plugin.yml") {
             expand(
