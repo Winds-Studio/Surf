@@ -1,6 +1,6 @@
 package cn.dreeam.surf.modules.misc;
 
-import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.Util;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
@@ -13,7 +13,7 @@ public class NetherCheck implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onMove(PlayerMoveEvent event) {
-        if (!Surf.config.netherEnabled()) return;
+        if (!Config.netherEnabled) return;
 
         Player player = event.getPlayer();
         World world = event.getTo().getWorld();
@@ -24,19 +24,19 @@ public class NetherCheck implements Listener {
         }
 
         // is in nether roof
-        if (event.getTo().getBlockY() > Surf.config.netherTopLayer()) {
+        if (event.getTo().getBlockY() > Config.netherTopLayer) {
             event.setCancelled(true);
-            if (Surf.config.netherTopBottomDoDamage()) {
+            if (Config.netherTopBottomDoDamage) {
                 player.damage(20);
             }
-            Util.sendMessage(player, Surf.config.netherTopMessage());
+            Util.sendMessage(player, Config.netherTopMessage);
         // is in nether bottom
-        } else if (event.getTo().getBlockY() < Surf.config.netherBottomLayer()) {
+        } else if (event.getTo().getBlockY() < Config.netherBottomLayer) {
             event.setCancelled(true);
-            if (Surf.config.netherTopBottomDoDamage()) {
+            if (Config.netherTopBottomDoDamage) {
                 player.damage(20);
             }
-            Util.sendMessage(player, Surf.config.netherBottomMessage());
+            Util.sendMessage(player, Config.netherBottomMessage);
         }
     }
 }

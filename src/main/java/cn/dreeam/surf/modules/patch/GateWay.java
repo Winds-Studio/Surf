@@ -1,6 +1,6 @@
 package cn.dreeam.surf.modules.patch;
 
-import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.Util;
 import com.cryptomorin.xseries.XMaterial;
 import com.destroystokyo.paper.event.entity.EntityTeleportEndGatewayEvent;
@@ -24,7 +24,7 @@ public class GateWay implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onCrashAttempt(EntityTeleportEndGatewayEvent event) {
-        if (!Surf.config.gateWayPreventCrashExploit()) return;
+        if (!Config.gateWayPreventCrashExploit) return;
 
         double randomX = (Math.random() * ((50) + 1)) + 0;
         double randomY = (Math.random() * ((50) + 1)) + 0;
@@ -45,7 +45,7 @@ public class GateWay implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onEntityPortal(EntityPortalEvent event) {
-        if (!Surf.config.gateWayPreventEntityEnterPortal()) return;
+        if (!Config.gateWayPreventEntityEnterPortal) return;
 
         Entity entity = event.getEntity();
 
@@ -63,7 +63,7 @@ public class GateWay implements Listener {
 
     @EventHandler
     public void EndGatewayTeleportProtection(VehicleMoveEvent event) {
-        if (!Surf.config.gateWayPreventEntityEnterPortal()) return;
+        if (!Config.gateWayPreventEntityEnterPortal) return;
 
         Vehicle vehicle = event.getVehicle();
 

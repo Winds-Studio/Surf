@@ -1,70 +1,115 @@
 package cn.dreeam.surf.config;
 
 import cn.dreeam.surf.Surf;
-import space.arim.dazzleconf.ConfigurationFactory;
-import space.arim.dazzleconf.ConfigurationOptions;
-import space.arim.dazzleconf.error.ConfigFormatSyntaxException;
-import space.arim.dazzleconf.error.InvalidConfigException;
-import space.arim.dazzleconf.ext.snakeyaml.CommentMode;
-import space.arim.dazzleconf.ext.snakeyaml.SnakeYamlConfigurationFactory;
-import space.arim.dazzleconf.ext.snakeyaml.SnakeYamlOptions;
-import space.arim.dazzleconf.helper.ConfigurationHelper;
-import space.arim.dazzleconf.sorter.AnnotationBasedSorter;
+import io.github.thatsmusic99.configurationmaster.api.ConfigFile;
+import io.github.thatsmusic99.configurationmaster.api.ConfigSection;
 
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.file.Path;
+import java.io.File;
+import java.util.List;
+import java.util.Map;
 
-/**
- * @author DongShaoNB
+/*
+ *  Yoinked from: https://github.com/xGinko/AnarchyExploitFixes/
+ *  @author: xGinko
  */
-public final class ConfigManager<C> {
+public class ConfigManager {
 
-    private final ConfigurationHelper<C> configHelper;
-    private volatile C configData;
+    private static ConfigFile config;
 
-    private ConfigManager(ConfigurationHelper<C> configHelper) {
-        this.configHelper = configHelper;
+    public ConfigManager() throws Exception {
+        // Load config.yml with ConfigMaster
+        config = ConfigFile.loadConfig(new File(Surf.getInstance().getDataFolder(), "config.yml"));
+        config.set("config-version", 1.0);
+        config.addComments("config-version", """
+                Surf 5.0.0
+                Contact me on QQ:2682173972 or Discord: dreeam___
+                For help with this plugin""");
+
+        // Pre-structure to force order
+        //structureConfig();
     }
 
-    public static <C> ConfigManager<C> create(Path configFolder, String fileName,
-                                              Class<C> configClass) {
-        // SnakeYaml example
-        SnakeYamlOptions yamlOptions = new SnakeYamlOptions.Builder()
-                .commentMode(CommentMode.alternativeWriter()) // Enables writing YAML comments
-                .build();
-        ConfigurationFactory<C> configFactory = SnakeYamlConfigurationFactory.create(
-                configClass,
-                new ConfigurationOptions.Builder().sorter(new AnnotationBasedSorter()).build(),
-                // change this if desired
-                yamlOptions);
-
-        return new ConfigManager<>(new ConfigurationHelper<>(configFolder, fileName, configFactory));
+    public void saveConfig() throws Exception {
+        Config.initConfig();
+        config.save();
     }
 
-    public void reloadConfig() {
-        try {
-            configData = configHelper.reloadConfigData();
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-
-        } catch (ConfigFormatSyntaxException e) {
-            configData = configHelper.getFactory().loadDefaults();
-            Surf.LOGGER.error("The yaml syntax in your configuration is invalid", e);
-
-        } catch (InvalidConfigException e) {
-            configData = configHelper.getFactory().loadDefaults();
-            Surf.LOGGER.error("One of the values in your configuration is not valid", e);
-        }
+    private void structureConfig() {
+        createTitledSection("Language", "language");
+        createTitledSection("General", "general");
+        createTitledSection("Miscellaneous", "misc");
     }
 
-    public C getConfigData() {
-        C configData = this.configData;
+    public void createTitledSection(String title, String path) {
+        config.addSection(title);
+        config.addDefault(path, null);
+    }
 
-        if (configData == null) {
-            throw new IllegalStateException("Configuration has not been loaded yet");
-        }
+    public boolean getBoolean(String path, boolean def, String comment) {
+        config.addDefault(path, def, comment);
+        return config.getBoolean(path, def);
+    }
 
-        return configData;
+    public boolean getBoolean(String path, boolean def) {
+        config.addDefault(path, def);
+        return config.getBoolean(path, def);
+    }
+
+    public String getString(String path, String def, String comment) {
+        config.addDefault(path, def, comment);
+        return config.getString(path, def);
+    }
+
+    public String getString(String path, String def) {
+        config.addDefault(path, def);
+        return config.getString(path, def);
+    }
+
+    public double getDouble(String path, double def, String comment) {
+        config.addDefault(path, def, comment);
+        return config.getDouble(path, def);
+    }
+
+    public double getDouble(String path, double def) {
+        config.addDefault(path, def);
+        return config.getDouble(path, def);
+    }
+
+    public int getInt(String path, int def, String comment) {
+        config.addDefault(path, def, comment);
+        return config.getInteger(path, def);
+    }
+
+    public int getInt(String path, int def) {
+        config.addDefault(path, def);
+        return config.getInteger(path, def);
+    }
+
+    public List<String> getList(String path, List<String> def, String comment) {
+        config.addDefault(path, def, comment);
+        return config.getStringList(path);
+    }
+
+    public List<String> getList(String path, List<String> def) {
+        config.addDefault(path, def);
+        return config.getStringList(path);
+    }
+
+    public ConfigSection getConfigSection(String path, Map<String, Object> defaultKeyValue) {
+        config.addDefault(path, null);
+        config.makeSectionLenient(path);
+        defaultKeyValue.forEach((string, object) -> config.addExample(path + "." + string, object));
+        return config.getConfigSection(path);
+    }
+
+    public ConfigSection getConfigSection(String path, Map<String, Object> defaultKeyValue, String comment) {
+        config.addDefault(path, null, comment);
+        config.makeSectionLenient(path);
+        defaultKeyValue.forEach((string, object) -> config.addExample(path + "." + string, object));
+        return config.getConfigSection(path);
+    }
+
+    public void addComment(String path, String comment) {
+        config.addComment(path, comment);
     }
 }

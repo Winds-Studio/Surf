@@ -1,6 +1,6 @@
 package cn.dreeam.surf.modules.patch;
 
-import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.ItemUtil;
 import cn.dreeam.surf.util.Util;
 import com.cryptomorin.xseries.XMaterial;
@@ -20,7 +20,7 @@ public class BookBan implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        if (!Surf.config.preventBookBanEnabled()) return;
+        if (!Config.preventBookBanEnabled) return;
 
         Player player = event.getPlayer();
         PlayerInventory inv = player.getInventory();
@@ -50,14 +50,14 @@ public class BookBan implements Listener {
             }
             meta.setBlockState(shulkerBox);
             item.setItemMeta(meta);
-            Util.sendMessage(player, Surf.config.preventBookBanMessage());
+            Util.sendMessage(player, Config.preventBookBanMessage);
         }
     }
 
     // Fix https://github.com/PaperMC/Paper/issues/7866
     @EventHandler
     public void onOpenBook(PlayerInteractEvent event) {
-        if (!Surf.config.preventBookBanEnabled()) return;
+        if (!Config.preventBookBanEnabled) return;
 
         ItemStack i = event.getItem();
 
@@ -69,7 +69,7 @@ public class BookBan implements Listener {
             Player player = event.getPlayer();
             event.setCancelled(true);
             player.getWorld().dropItem(player.getLocation(), i);
-            Util.sendMessage(player, Surf.config.preventBookBanMessage());
+            Util.sendMessage(player, Config.preventBookBanMessage);
         }
     }
 

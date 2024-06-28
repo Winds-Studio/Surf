@@ -1,6 +1,6 @@
 package cn.dreeam.surf.util;
 
-import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.config.Config;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -14,6 +14,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,9 +22,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ItemUtil {
 
     //public static final List<String> isBurrowBlock = Arrays.asList("ANVIL", "OBSIDIAN", "ENDER_CHEST");
+    public static final List<String> illegalBlocks = initIllegalBlocks();
     public static final List<String> illegalItemFlags = initIllegalItemFlags();
     public static final List<String> illegalAttributes = initIllegalAttribute();
-    public static final Map<String, Integer> illegalEnchants = initIllegalEnchants();
+    public static final List<String> illegalEnchants = initIllegalEnchants();
+    public static final Map<String, Integer> illegalEnchantsMap = initIllegalEnchantsMap();
 
     /*
     public static boolean isContainer(ItemStack i) {
@@ -63,7 +66,7 @@ public class ItemUtil {
     }
 
     public static boolean isIllegalBlock(ItemStack i) {
-        return i.getType().isBlock() && Surf.config.antiIllegalIllegalBlockList().contains(i.getType().toString());
+        return i.getType().isBlock() && Config.antiIllegalIllegalBlockList.contains(i.getType().toString());
     }
 
     public static boolean isEnchantedBlock(ItemStack i) {
@@ -103,9 +106,9 @@ public class ItemUtil {
         for (Enchantment ench : enchants.keySet()) {
             String key = ench.getKey().getKey();
             int level = enchants.get(ench);
-            if (illegalEnchants.containsKey(key)
-                    && illegalEnchants.get(key) > 0
-                    && level > illegalEnchants.get(key)) {
+            if (illegalEnchantsMap.containsKey(key)
+                    && illegalEnchantsMap.get(key) > 0
+                    && level > illegalEnchantsMap.get(key)) {
                 return true;
             }
         }
@@ -115,7 +118,7 @@ public class ItemUtil {
 
     public static boolean hasIllegalItemFlag(ItemStack i) {
         if (i.hasItemMeta()) {
-            for (String flag : Surf.config.antiIllegalIllegalItemFlagList()) {
+            for (String flag : Config.antiIllegalIllegalItemFlagList) {
                 if (i.getItemMeta().hasItemFlag(ItemFlag.valueOf(flag))) {
                     return true;
                 }
@@ -127,7 +130,7 @@ public class ItemUtil {
 
     public static boolean hasIllegalAttributes(ItemStack i) {
         if (i.hasItemMeta()) {
-            for (String attribute : Surf.config.antiIllegalIllegalAttributeModifierList()) {
+            for (String attribute : Config.antiIllegalIllegalAttributeModifierList) {
                 if (i.getItemMeta().getAttributeModifiers(Attribute.valueOf(attribute)) != null) {
                     return true;
                 }
@@ -170,7 +173,7 @@ public class ItemUtil {
         if (i == null || isAir(i)) return new ItemStack(Material.AIR);
         if (isIllegalBlock(i) || isIllegalPotion(i)) return new ItemStack(Material.AIR);
 
-        if (Surf.config.antiIllegalDeleteIllegalsWhenFoundEnabled()) {
+        if (Config.antiIllegalDeleteIllegalsWhenFoundEnabled) {
             if (isIllegal(i)) {
                 return new ItemStack(Material.AIR);
                 //i.setAmount(0); // need to try??
@@ -196,7 +199,7 @@ public class ItemUtil {
                 if (ench.canEnchantItem(i)) {
                     String key = ench.getKey().getKey();
                     int level = enchants.get(ench);
-                    if (illegalEnchants.containsKey(key) && illegalEnchants.get(key) > 0 && level > illegalEnchants.get(key)) {
+                    if (illegalEnchantsMap.containsKey(key) && illegalEnchantsMap.get(key) > 0 && level > illegalEnchantsMap.get(key)) {
                         i.addEnchantment(ench, ench.getMaxLevel());
                     }
                 } else {
@@ -213,14 +216,14 @@ public class ItemUtil {
             meta.setUnbreakable(false);
 
             // Clean illegal itemFlag
-            for (String flag : Surf.config.antiIllegalIllegalItemFlagList()) {
+            for (String flag : Config.antiIllegalIllegalItemFlagList) {
                 if (meta.hasItemFlag(ItemFlag.valueOf(flag))) {
                     meta.removeItemFlags(ItemFlag.valueOf(flag));
                 }
             }
 
             // Clean illegal AttributeModifier
-            for (String attribute : Surf.config.antiIllegalIllegalAttributeModifierList()) {
+            for (String attribute : Config.antiIllegalIllegalAttributeModifierList) {
                 if (meta.getAttributeModifiers(Attribute.valueOf(attribute)) != null) {
                     meta.removeAttributeModifier(Attribute.valueOf(attribute));
                 }
@@ -230,6 +233,34 @@ public class ItemUtil {
         }
 
         return i;
+    }
+
+    // TODO
+    private static List<String> initIllegalBlocks() {
+        List<String> list = new ArrayList<>(Arrays.asList(
+                "BARRIER",
+                "BEDROCK",
+                "COMMAND_BLOCK",
+                "REPEATING_COMMAND_BLOCK",
+                "CHAIN_COMMAND_BLOCK",
+                "COMMAND_BLOCK_MINECART",
+                "KNOWLEDGE_BOOK",
+                "SPAWNER",
+                "END_PORTAL",
+                "END_PORTAL_FRAME",
+                "END_GATEWAY",
+                "NETHER_PORTAL",
+                "STRUCTURE_BLOCK",
+                "STRUCTURE_VOID",
+                "JIGSAW",
+                "LIGHT",
+                "REINFORCED_DEEPSLATE"
+        ));
+
+        if (Util.minorVersion >= 12) {
+        }
+
+        return list;
     }
 
     private static List<String> initIllegalItemFlags() {
@@ -252,12 +283,57 @@ public class ItemUtil {
         return list;
     }
 
-    private static Map<String, Integer> initIllegalEnchants() {
+    // TODO
+    private static List<String> initIllegalEnchants() {
+        return Arrays.asList(
+                "protection:5",
+                "fire_protection:5",
+                "feather_falling:5",
+                "blast_protection:5",
+                "projectile_protection:5",
+                "respiration:5",
+                "aqua_affinity:5",
+                "thorns:5",
+                "depth_strider:5",
+                "frost_walker:5",
+                "binding_curse:5",
+                "sharpness:5",
+                "smite:5",
+                "bane_of_arthropods:5",
+                "knockback:5",
+                "fire_aspect:5",
+                "looting:5",
+                "sweeping:5",
+                "efficiency:5",
+                "silk_touch:5",
+                "unbreaking:5",
+                "fortune:5",
+                "power:5",
+                "punch:5",
+                "flame:5",
+                "infinity:5",
+                "luck_of_the_sea:5",
+                "lure:5",
+                "loyalty:5",
+                "impaling:5",
+                "riptide:5",
+                "channeling:5",
+                "multishot:5",
+                "quick_charge:5",
+                "piercing:5",
+                "mending:5",
+                "vanishing_curse:5",
+                "soul_speed:5"
+        );
+    }
+
+    private static Map<String, Integer> initIllegalEnchantsMap() {
         Map<String, Integer> map = new ConcurrentHashMap<>();
-        Surf.config.antiIllegalIllegalEnchantList().forEach(ench -> {
+
+        for (String ench : illegalEnchants) {
             String[] list = ench.split(":");
             map.put(list[0], Integer.valueOf(list[1]));
-        });
+        }
 
         return map;
     }

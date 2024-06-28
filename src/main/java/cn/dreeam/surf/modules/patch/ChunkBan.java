@@ -1,6 +1,6 @@
 package cn.dreeam.surf.modules.patch;
 
-import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.Util;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Chunk;
@@ -20,7 +20,7 @@ public class ChunkBan implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onPlace(BlockPlaceEvent event) {
-        if (!Surf.config.perChunkLimitEnabled()) return;
+        if (!Config.perChunkLimitEnabled) return;
 
         Block block = event.getBlock();
         Player player = event.getPlayer();
@@ -28,25 +28,25 @@ public class ChunkBan implements Listener {
 
         if (player.hasPermission("surf.bypass.chunkban")) return;
 
-        if (isTileEntity(block.getType()) && chunk.getTileEntities().length > Surf.config.perChunkLimitTitleEntityMax()) {
+        if (isTileEntity(block.getType()) && chunk.getTileEntities().length > Config.perChunkLimitTitleEntityMax) {
             event.setCancelled(true);
-            Util.sendMessage(player, Surf.config.perChunkLimitMessage());
+            Util.sendMessage(player, Config.perChunkLimitMessage);
             return;
         }
 
         if (isSkull(block.getType())) {
             // get chunk skull count
             long skullCount = Arrays.stream(chunk.getTileEntities()).filter(tileEntity -> isSkull(tileEntity.getType())).count();
-            if (skullCount > Surf.config.perChunkLimitSkullMax()) {
+            if (skullCount > Config.perChunkLimitSkullMax) {
                 event.setCancelled(true);
-                Util.sendMessage(player, Surf.config.perChunkLimitMessage());
+                Util.sendMessage(player, Config.perChunkLimitMessage);
             }
         }
     }
 
     @EventHandler(ignoreCancelled = true)
     public void onSpawn(PlayerInteractEvent event) {
-        if (!Surf.config.perChunkLimitEnabled() || event.getClickedBlock() == null || event.getAction() != Action.RIGHT_CLICK_BLOCK || event.getItem() == null) return;
+        if (!Config.perChunkLimitEnabled || event.getClickedBlock() == null || event.getAction() != Action.RIGHT_CLICK_BLOCK || event.getItem() == null) return;
 
         Player player = event.getPlayer();
         if (player.hasPermission("surf.bypass.chunkban")) return;
@@ -54,9 +54,9 @@ public class ChunkBan implements Listener {
         Chunk chunk = event.getClickedBlock().getChunk();
         if (event.getItem().getType().equals(XMaterial.ITEM_FRAME.parseMaterial())) {
             long amount = Arrays.stream(chunk.getEntities()).filter(entity -> entity instanceof ItemFrame).count();
-            if (amount + chunk.getTileEntities().length > Surf.config.perChunkLimitTitleEntityMax()) {
+            if (amount + chunk.getTileEntities().length > Config.perChunkLimitTitleEntityMax) {
                 event.setCancelled(true);
-                Util.sendMessage(event.getPlayer(), Surf.config.perChunkLimitMessage());
+                Util.sendMessage(event.getPlayer(), Config.perChunkLimitMessage);
             }
         }
     }

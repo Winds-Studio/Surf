@@ -1,6 +1,6 @@
 package cn.dreeam.surf.modules.patch;
 
-import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.config.Config;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
@@ -13,7 +13,7 @@ public class PreventEnderPearlClip implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onTeleport(PlayerTeleportEvent event) {
-        if (!Surf.config.preventTeleportToBlock()) return;
+        if (!Config.preventTeleportToBlock) return;
 
         // Only check for ender pearl teleportation
         if (event.getCause() != PlayerTeleportEvent.TeleportCause.ENDER_PEARL) return;

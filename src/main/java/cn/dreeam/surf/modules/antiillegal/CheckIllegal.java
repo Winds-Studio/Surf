@@ -1,6 +1,7 @@
 package cn.dreeam.surf.modules.antiillegal;
 
 import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.ItemUtil;
 import cn.dreeam.surf.util.Util;
 import org.bukkit.entity.Player;
@@ -22,7 +23,7 @@ public class CheckIllegal implements Listener {
     @EventHandler(ignoreCancelled = true)
     @AntiIllegal(EventName = "PlayerJoinEvent")
     public void onJoin(PlayerJoinEvent event) {
-        if (!Surf.config.antiIllegalCheckWhenPlayerJoinEnabled()) return;
+        if (!Config.antiIllegalCheckWhenPlayerJoinEnabled) return;
 
         Inventory inv = event.getPlayer().getInventory();
 
@@ -32,7 +33,7 @@ public class CheckIllegal implements Listener {
     @EventHandler(ignoreCancelled = true)
     @AntiIllegal(EventName = "InventoryMoveItemEvent")
     public void onInventoryMove(InventoryMoveItemEvent event) {
-        if (!Surf.config.antiIllegalCheckWhenHopperTransferEnabled()) return;
+        if (!Config.antiIllegalCheckWhenHopperTransferEnabled) return;
 
         Inventory inv = event.getSource();
 
@@ -44,7 +45,7 @@ public class CheckIllegal implements Listener {
     @EventHandler
     @AntiIllegal(EventName = "InventoryCloseEvent")
     public void onInventoryClose(InventoryCloseEvent event) {
-        if (!Surf.config.antiIllegalCheckWhenInventoryCloseEnabled()) return;
+        if (!Config.antiIllegalCheckWhenInventoryCloseEnabled) return;
 
         Inventory inv = event.getPlayer().getInventory();
 
@@ -56,7 +57,7 @@ public class CheckIllegal implements Listener {
     @EventHandler
     @AntiIllegal(EventName = "InventoryOpenEvent")
     public void onInventoryOpen(InventoryOpenEvent event) {
-        if (!Surf.config.antiIllegalCheckWhenInventoryOpenEnabled()) return;
+        if (!Config.antiIllegalCheckWhenInventoryOpenEnabled) return;
 
         Inventory inv = event.getPlayer().getInventory();
 
@@ -68,7 +69,7 @@ public class CheckIllegal implements Listener {
     @EventHandler(ignoreCancelled = true)
     @AntiIllegal(EventName = "BlockDispenseArmorEvent")
     public void onDispenseEquip(BlockDispenseArmorEvent event) {
-        if (!Surf.config.antiIllegalCheckWhenItemPickupEnabled()) return;
+        if (!Config.antiIllegalCheckWhenItemPickupEnabled) return;
 
         ItemStack i = event.getItem();
 
@@ -82,7 +83,7 @@ public class CheckIllegal implements Listener {
     public void onPickup(EntityPickupItemEvent event) {
         if (Surf.getInstance().isRoseStackerEnabled) return;
 
-        if (!Surf.config.antiIllegalCheckWhenItemPickupEnabled()) return;
+        if (!Config.antiIllegalCheckWhenItemPickupEnabled) return;
 
         ItemStack i = event.getItem().getItemStack();
 

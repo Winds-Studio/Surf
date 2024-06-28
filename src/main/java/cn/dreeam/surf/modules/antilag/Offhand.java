@@ -1,6 +1,6 @@
 package cn.dreeam.surf.modules.antilag;
 
-import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.Util;
 import com.cryptomorin.xseries.XMaterial;
 import com.google.common.collect.Lists;
@@ -32,7 +32,7 @@ public class Offhand implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void PlayerSwapHandItemsEvent(PlayerSwapHandItemsEvent event) {
-        if (!Surf.config.limitOffhandSwapEnabled()) return;
+        if (!Config.limitOffhandSwapEnabled) return;
 
         Player player = event.getPlayer();
         ItemStack mainHand = event.getMainHandItem();

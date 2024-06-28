@@ -1,6 +1,6 @@
 package cn.dreeam.surf.modules.patch;
 
-import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.Util;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.block.Block;
@@ -18,7 +18,7 @@ public class DispenserCrash implements Listener {
      */
     @EventHandler(ignoreCancelled = true)
     public void dispense(BlockDispenseEvent event) {
-        if (!Surf.config.preventDispenserCrash()) return;
+        if (!Config.preventDispenserCrash) return;
 
         Block block = event.getBlock();
         if (block.getType().equals(XMaterial.DISPENSER.parseMaterial())) {

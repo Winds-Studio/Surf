@@ -44,7 +44,9 @@ val adventureVersion = "4.17.0"
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
-    implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.2")
+    implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.2") {
+        exclude(group = "org.yaml", module = "snakeyaml")
+    }
     implementation("org.bstats:bstats-bukkit:3.0.2")
     implementation("com.tcoded:FoliaLib:0.4.0")
     implementation("com.github.cryptomorin:XSeries:11.2.0")
@@ -74,11 +76,11 @@ tasks {
         archiveFileName = "${project.name}-${project.version}.${archiveExtension.get()}"
         exclude("META-INF/**") // Dreeam - Avoid to include META-INF/maven in Jar
         relocate("net.kyori", "cn.dreeam.surf.libs.kyori")
-        relocate("org.yaml.snakeyaml", "cn.dreeam.surf.libs.snakeyaml")
-        relocate("space.arim.dazzleconf", "cn.dreeam.surf.libs.dazzleconf")
+        relocate("io.github.thatsmusic99.configurationmaster", "cn.dreeam.surf.libs.configurationmaster")
         relocate("org.bstats", "cn.dreeam.surf.libs.bstats")
         relocate("com.tcoded.folialib", "cn.dreeam.surf.libs.folialib")
         relocate("com.cryptomorin.xseries", "cn.dreeam.surf.libs.xseries")
+        relocate("de.tr7zw.nbtapi", "cn.dreeam.surf.libs.nbtapi")
     }
 
     processResources {

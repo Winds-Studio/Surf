@@ -1,6 +1,6 @@
 package cn.dreeam.surf.modules.antiillegal;
 
-import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.ItemUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,7 +11,7 @@ public class StackedTotem implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
-        if (!Surf.config.stackedTotemRevertAsOneEnabled()) return;
+        if (!Config.stackedTotemRevertAsOneEnabled) return;
 
         // Check when player gets damage or make damage to others
         if (event.getEntity() instanceof Player) {

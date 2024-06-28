@@ -1,361 +1,137 @@
 package cn.dreeam.surf.config;
 
-import space.arim.dazzleconf.annote.ConfComments;
-import space.arim.dazzleconf.annote.ConfDefault;
-import space.arim.dazzleconf.annote.ConfHeader;
-import space.arim.dazzleconf.annote.ConfKey;
-import space.arim.dazzleconf.sorter.AnnotationBasedSorter;
+import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.util.ItemUtil;
 
+import java.util.Arrays;
 import java.util.List;
 
-@ConfHeader({
-        "Surf 5.0.0",
-        "Contact me on QQ:2682173972 or Discord: dreeam___",
-        "For help with this plugin"
-})
-public interface Config {
+public class Config {
 
     // Prefix
-    @ConfComments({
-            "Message prefix"
-    })
-    @ConfKey("Prefix")
-    @ConfDefault.DefaultString("&6&l[&b&lSurf&6&l]&6 ")
-    @AnnotationBasedSorter.Order(1)
-    String Prefix();
+    public static String prefix;
 
     // Anti Illegal
-    @ConfKey("anti-illegal.check-illegal-block.enabled")
-    @ConfDefault.DefaultBoolean(true)
-    boolean antiIllegalCheckIllegalBlockEnabled();
-
-    @ConfKey("anti-illegal.check-illegal-block.message")
-    @ConfDefault.DefaultString("&6You can not use this illegal block.")
-    String antiIllegalCheckIllegalBlockMessage();
-
-    @ConfKey("check-illegal-damage.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean checkIllegalDamageEnabled();
-
-    @ConfKey("check-illegal-damage.message")
-    @ConfDefault.DefaultString("&6You can not use this illegal item.")
-    String checkIllegalDamageMessage();
-
-    @ConfKey("check-illegal-potion.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean checkIllegalPotionEnabled();
-
-    @ConfKey("check-illegal-potion.message")
-    @ConfDefault.DefaultString("&6You can not use this illegal potion.")
-    String checkIllegalPotionMessage();
-
-    @ConfKey("anti-illegal.revert-stacked-totem-as-one.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean stackedTotemRevertAsOneEnabled();
-
-    @ConfComments({
-            "Enable to delete illegals when found",
-            "Disable to only clean illegal attributes"
-    })
-    @ConfKey("anti-illegal.delete-illegals-when-found.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean antiIllegalDeleteIllegalsWhenFoundEnabled();
-
-    @ConfKey("anti-illegal.check-when.PlayerJoin")
-    @ConfDefault.DefaultBoolean(false)
-    boolean antiIllegalCheckWhenPlayerJoinEnabled();
-
-    @ConfKey("anti-illegal.check-when.HopperTransfer")
-    @ConfDefault.DefaultBoolean(false)
-    boolean antiIllegalCheckWhenHopperTransferEnabled();
-
-    @ConfKey("anti-illegal.check-when.InventoryClose")
-    @ConfDefault.DefaultBoolean(false)
-    boolean antiIllegalCheckWhenInventoryCloseEnabled();
-
-    @ConfKey("anti-illegal.check-when.InventoryOpen")
-    @ConfDefault.DefaultBoolean(false)
-    boolean antiIllegalCheckWhenInventoryOpenEnabled();
-
-    @ConfKey("anti-illegal.check-when.ItemPickup")
-    @ConfDefault.DefaultBoolean(false)
-    boolean antiIllegalCheckWhenItemPickupEnabled();
-
-    @ConfKey("anti-illegal.checks.illegal-block-list")
-    @ConfDefault.DefaultStrings({
-            "BARRIER",
-            "BEDROCK",
-            "REPEATING_COMMAND_BLOCK",
-            "COMMAND_BLOCK_MINECART",
-            "CHAIN_COMMAND_BLOCK",
-            "COMMAND_BLOCK",
-            "KNOWLEDGE_BOOK",
-            "SPAWNER",
-            "END_PORTAL",
-            "END_PORTAL_FRAME",
-            "END_GATEWAY",
-            "NETHER_PORTAL",
-            "STRUCTURE_BLOCK",
-            "STRUCTURE_VOID",
-            "JIGSAW",
-            "LIGHT",
-            "REINFORCED_DEEPSLATE"
-    })
-    List<String> antiIllegalIllegalBlockList();
-
-    @ConfKey("anti-illegal.checks.illegal-item-flag-list")
-    @ConfDefault.DefaultStrings({
-            "HIDE_ARMOR_TRIM",
-            "HIDE_ATTRIBUTES",
-            "HIDE_DESTROYS",
-            "HIDE_DYE",
-            "HIDE_ENCHANTS",
-            "HIDE_PLACED_ON",
-            "HIDE_POTION_EFFECTS",
-            "HIDE_UNBREAKABLE"
-    })
-    List<String> antiIllegalIllegalItemFlagList();
-
-    @ConfComments({
-            "Set the value to -1 or remove the entire enchant from the list",
-            "to disable check to that illegal enchant"
-    })
-    @ConfKey("anti-illegal.checks.illegal-enchant-list")
-    @ConfDefault.DefaultStrings({
-            "protection:5",
-            "fire_protection:5",
-            "feather_falling:5",
-            "blast_protection:5",
-            "projectile_protection:5",
-            "respiration:5",
-            "aqua_affinity:5",
-            "thorns:5",
-            "depth_strider:5",
-            "frost_walker:5",
-            "binding_curse:5",
-            "sharpness:5",
-            "smite:5",
-            "bane_of_arthropods:5",
-            "knockback:5",
-            "fire_aspect:5",
-            "looting:5",
-            "sweeping:5",
-            "efficiency:5",
-            "silk_touch:5",
-            "unbreaking:5",
-            "fortune:5",
-            "power:5",
-            "punch:5",
-            "flame:5",
-            "infinity:5",
-            "luck_of_the_sea:5",
-            "lure:5",
-            "loyalty:5",
-            "impaling:5",
-            "riptide:5",
-            "channeling:5",
-            "multishot:5",
-            "quick_charge:5",
-            "piercing:5",
-            "mending:5",
-            "vanishing_curse:5",
-            "soul_speed:5"
-    })
-    List<String> antiIllegalIllegalEnchantList();
-
-    @ConfKey("anti-illegal.checks.illegal-attribute-modifier-list")
-    @ConfDefault.DefaultStrings({
-            "GENERIC_ARMOR",
-            "GENERIC_ARMOR_TOUGHNESS",
-            "GENERIC_ATTACK_DAMAGE",
-            "GENERIC_ATTACK_KNOCKBACK",
-            "GENERIC_ATTACK_SPEED",
-            "GENERIC_FLYING_SPEED",
-            "GENERIC_FOLLOW_RANGE",
-            "GENERIC_KNOCKBACK_RESISTANCE",
-            "GENERIC_LUCK",
-            "GENERIC_MAX_ABSORPTION",
-            "GENERIC_MAX_HEALTH",
-            "GENERIC_MOVEMENT_SPEED",
-            "HORSE_JUMP_STRENGTH",
-            "ZOMBIE_SPAWN_REINFORCEMENTS",
-    })
-    List<String> antiIllegalIllegalAttributeModifierList();
+    public static boolean antiIllegalCheckIllegalBlockEnabled, checkIllegalDamageEnabled, checkIllegalPotionEnabled, stackedTotemRevertAsOneEnabled, antiIllegalDeleteIllegalsWhenFoundEnabled, antiIllegalCheckWhenPlayerJoinEnabled, antiIllegalCheckWhenHopperTransferEnabled, antiIllegalCheckWhenInventoryCloseEnabled, antiIllegalCheckWhenInventoryOpenEnabled, antiIllegalCheckWhenItemPickupEnabled;
+    public static String antiIllegalCheckIllegalBlockMessage, checkIllegalDamageMessage, checkIllegalPotionMessage;
+    public static List<String> antiIllegalIllegalBlockList, antiIllegalIllegalItemFlagList, antiIllegalIllegalEnchantList, antiIllegalIllegalAttributeModifierList;
 
     // Anti Lag
-    @ConfComments({
-            "water / lava flowing disable tps this is useful on new servers with lots of block physics updates that cause lag",
-            "Set -1 to disable"
-    })
-    @ConfKey("limit.liquid-spread.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean limitLiquidSpreadEnabled();
-
-    @ConfKey("limit.liquid-spread.disable-tps")
-    @ConfDefault.DefaultInteger(18)
-    int limitLiquidSpreadDisableTPS();
-
-    @ConfKey("limit.vehicle.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean limitVehicleEnabled();
-
-    @ConfKey("limit.vehicle.disable-tps")
-    @ConfDefault.DefaultInteger(18)
-    int limitVehicleDisableTPS();
-
-    @ConfComments({
-            "Amount of vehicles allowed per chunk"
-    })
-    @ConfKey("limit.vehicle.minecart-per-chunk")
-    @ConfDefault.DefaultInteger(500)
-    int limitVehicleMinecartPerChunkLimit();
-
-    @ConfKey("limit.offhand-swap.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean limitOffhandSwapEnabled();
-
-    @ConfKey("limit.offhand-swap.message")
-    @ConfDefault.DefaultString("&6You swap offhand too quick!")
-    String limitOffhandSwapMessage();
-
-    @ConfKey("limit.wither-spawn.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean limitWitherSpawnOnLagEnabled();
-
-    @ConfKey("limit.wither-spawn.disable-tps")
-    @ConfDefault.DefaultInteger(18)
-    int limitWitherSpawnOnLagDisableTPS();
+    public static boolean limitLiquidSpreadEnabled, limitVehicleEnabled, limitOffhandSwapEnabled, limitWitherSpawnOnLagEnabled;
+    public static int limitLiquidSpreadDisableTPS, limitVehicleDisableTPS, limitVehicleMinecartPerChunkLimit, limitWitherSpawnOnLagDisableTPS;
+    public static String limitOffhandSwapMessage;
 
     // Misc / Connection / Nether
-    @ConfComments({
-            "These are the connection messages for when a player joins / leaves",
-            "Use & for colours and %player% as a placeholder for the players name"
-    })
-    @ConfKey("connection-meesage.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean connectionMessageEnabled();
-
-    @ConfKey("connection-meesage.player-join")
-    @ConfDefault.DefaultString("&7[&a+&7] &8%player%")
-    String connectionPlayerJoin();
-
-    @ConfKey("connection-meesage.player-leave")
-    @ConfDefault.DefaultString("&7[&c-&7] &8%player%")
-    String connectionPlayerLeave();
-
-    @ConfKey("connection-meesage.player-first-join.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean connectionFirstJoinEnabled();
-
-    @ConfKey("connection-meesage.player-first-join.message")
-    @ConfDefault.DefaultString("&c%player%&6 has joined the &bYour&3Server &6for the first time")
-    String connectionFirstJoinMessage();
-
-    @ConfKey("connection-prevent-kick.enabled")
-    @ConfDefault.DefaultBoolean(true)
-    boolean connectionPreventKickEnabled();
-
-    @ConfKey("connection-prevent-kick.reasons")
-    @ConfDefault.DefaultStrings({
-            "Kicked for spamming",
-            "Invalid hotbar selection (Hacking?)",
-            "You released use item too quickly (Hacking?)"
-    })
-    List<String> connectionKickReasons();
-
-    @ConfComments({
-            "Enable to prevent player go to Nether top or bottom layer"
-    })
-    @ConfKey("nether.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean netherEnabled();
-
-    @ConfKey("nether.top-layer")
-    @ConfDefault.DefaultInteger(127)
-    int netherTopLayer();
-
-    @ConfKey("nether.bottom-layer")
-    @ConfDefault.DefaultInteger(0)
-    int netherBottomLayer();
-
-    @ConfKey("nether.top-message")
-    @ConfDefault.DefaultString("&6The nether top has been disabled due to lag")
-    String netherTopMessage();
-
-    @ConfKey("nether.bottom-message")
-    @ConfDefault.DefaultString("&6The nether bottom has been disabled due to lag")
-    String netherBottomMessage();
-
-    @ConfKey("nether.top-bottom-do-damage")
-    @ConfDefault.DefaultBoolean(false)
-    boolean netherTopBottomDoDamage();
+    public static boolean connectionMessageEnabled, connectionFirstJoinEnabled, connectionPreventKickEnabled, netherEnabled, netherTopBottomDoDamage;
+    public static int netherTopLayer, netherBottomLayer;
+    public static String connectionPlayerJoin, connectionPlayerLeave, connectionFirstJoinMessage, netherTopMessage, netherBottomMessage;
+    public static List<String> connectionKickReasons;
 
     // Patch
-    @ConfKey("prevent-book-ban.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean preventBookBanEnabled();
+    public static boolean preventBookBanEnabled, preventBuketPortalEnabled, perChunkLimitEnabled, preventDispenserCrash, gateWayPreventCrashExploit, gateWayPreventEntityEnterPortal, preventNBTBanEnabled, preventTeleportToBlock;
+    public static int perChunkLimitTitleEntityMax, perChunkLimitSkullMax, preventNBTBanLimit;
+    public static String preventBookBanMessage, preventBuketPortalMessage, perChunkLimitMessage, preventNBTBanMessage;
 
-    @ConfKey("prevent-book-ban.message")
-    @ConfDefault.DefaultString("&6Detected a book ban, successfully cancelled.")
-    String preventBookBanMessage();
+    public static void initConfig() {
+        // Prefix
+        prefix = Surf.configManager().getString("Prefix", "&6&l[&b&lSurf&6&l]&6 ", "Message prefix");
 
-    @ConfKey("prevent-buket-on-portal.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean preventBuketPortalEnabled();
+        // Anti Illegal
+        antiIllegalCheckIllegalBlockEnabled = Surf.configManager().getBoolean("anti-illegal.check-illegal-block.enabled", true);
+        antiIllegalCheckIllegalBlockMessage = Surf.configManager().getString("anti-illegal.check-illegal-block.message", "&6You can not use this illegal block.");
 
-    @ConfKey("prevent-buket-on-portal.message")
-    @ConfDefault.DefaultString("&6You can not do this")
-    String preventBuketPortalMessage();
+        checkIllegalDamageEnabled = Surf.configManager().getBoolean("check-illegal-damage.enabled", false);
+        checkIllegalDamageMessage = Surf.configManager().getString("check-illegal-damage.message", "&6You can not use this illegal item.");
 
-    @ConfComments({
-            "ChunkBan skull limit tile entity limit and prevent message"
-    })
-    @ConfKey("per-chunk-limit.enabled")
-    @ConfDefault.DefaultBoolean(false)
-    boolean perChunkLimitEnabled();
+        checkIllegalPotionEnabled = Surf.configManager().getBoolean("check-illegal-potion.enabled", false);
+        checkIllegalPotionMessage = Surf.configManager().getString("check-illegal-potion.message", "&6You can not use this illegal potion.");
 
-    @ConfKey("per-chunk-limit.message")
-    @ConfDefault.DefaultString("&6Detected a chunk ban, successfully cancelled.")
-    String perChunkLimitMessage();
+        stackedTotemRevertAsOneEnabled = Surf.configManager().getBoolean("anti-illegal.revert-stacked-totem-as-one.enabled", false);
 
-    @ConfKey("per-chunk-limit.tile-entity-max")
-    @ConfDefault.DefaultInteger(500)
-    int perChunkLimitTitleEntityMax();
+        antiIllegalDeleteIllegalsWhenFoundEnabled = Surf.configManager().getBoolean("anti-illegal.delete-illegals-when-found.enabled", false, """
+                Enable to delete illegals when found
+                Disable to only clean illegal attributes""");
 
-    @ConfKey("per-chunk-limit.skull-max")
-    @ConfDefault.DefaultInteger(100)
-    int perChunkLimitSkullMax();
+        antiIllegalCheckWhenPlayerJoinEnabled = Surf.configManager().getBoolean("anti-illegal.check-when.PlayerJoin", false);
+        antiIllegalCheckWhenHopperTransferEnabled = Surf.configManager().getBoolean("anti-illegal.check-when.HopperTransfer", false);
+        antiIllegalCheckWhenInventoryCloseEnabled = Surf.configManager().getBoolean("anti-illegal.check-when.InventoryClose", false);
+        antiIllegalCheckWhenInventoryOpenEnabled = Surf.configManager().getBoolean("anti-illegal.check-when.InventoryOpen", false);
+        antiIllegalCheckWhenItemPickupEnabled = Surf.configManager().getBoolean("anti-illegal.check-when.ItemPickup", false);
 
-    @ConfKey("prevent-dispenser-crash.enabled")
-    @ConfDefault.DefaultBoolean(true)
-    boolean preventDispenserCrash();
+        antiIllegalIllegalBlockList = Surf.configManager().getList("anti-illegal.checks.illegal-block-list", ItemUtil.illegalBlocks);
+        antiIllegalIllegalItemFlagList = Surf.configManager().getList("anti-illegal.checks.illegal-item-flag-list", ItemUtil.illegalItemFlags);
+        antiIllegalIllegalEnchantList = Surf.configManager().getList("anti-illegal.checks.illegal-enchant-list", ItemUtil.illegalEnchants, """
+                Set the value to -1 or remove the entire enchant from the list
+                to disable check to that illegal enchant""");
+        antiIllegalIllegalAttributeModifierList = Surf.configManager().getList("anti-illegal.checks.illegal-attribute-modifier-list", ItemUtil.illegalAttributes);
 
-    @ConfKey("gate-way.prevent-crash-exploit")
-    @ConfDefault.DefaultBoolean(false)
-    boolean gateWayPreventCrashExploit();
+        // Anti Lag
+        limitLiquidSpreadEnabled = Surf.configManager().getBoolean("limit.liquid-spread.enabled", false, """
+                water / lava flowing disable tps this is useful on new servers with lots of block physics updates that cause lag
+                Set -1 to disable""");
+        limitLiquidSpreadDisableTPS = Surf.configManager().getInt("limit.liquid-spread.disable-tps", 18);
 
-    @ConfKey("gate-way.prevent-entity-enter-portal")
-    @ConfDefault.DefaultBoolean(false)
-    boolean gateWayPreventEntityEnterPortal();
+        limitVehicleEnabled = Surf.configManager().getBoolean("limit.vehicle.enabled", false);
+        limitVehicleDisableTPS = Surf.configManager().getInt("limit.vehicle.disable-tps", 18);
 
-    @ConfKey("prevent-nbt-ban.enabled")
-    @ConfDefault.DefaultBoolean(true)
-    boolean preventNBTBanEnabeld();
+        limitVehicleMinecartPerChunkLimit = Surf.configManager().getInt("limit.vehicle.minecart-per-chunk", 500, "Amount of vehicles allowed per chunk");
 
-    @ConfKey("prevent-nbt-ban.nbt-limit")
-    @ConfDefault.DefaultInteger(100000)
-    int preventNBTBanLimit();
+        limitOffhandSwapEnabled = Surf.configManager().getBoolean("limit.offhand-swap.enabled", false);
+        limitOffhandSwapMessage = Surf.configManager().getString("limit.offhand-swap.message", "&6You swap offhand too quick!");
 
-    @ConfKey("prevent-nbt-ban.message")
-    @ConfDefault.DefaultString("&6Detected a nbt ban, successfully cancelled.")
-    String preventNBTBanMessage();
+        limitWitherSpawnOnLagEnabled = Surf.configManager().getBoolean("limit.wither-spawn.enabled", false);
 
-    @ConfComments({
-            "Prevent player uses ender pearl to teleport to inside of block,",
-            "Enable this to let PVP more friendly."
-    })
-    @ConfKey("prevent-teleport-to-block.enabled")
-    @ConfDefault.DefaultBoolean(true)
-    boolean preventTeleportToBlock();
+        limitWitherSpawnOnLagDisableTPS = Surf.configManager().getInt("limit.wither-spawn.disable-tps", 18);
+
+        // Misc / Connection / Nether
+        connectionMessageEnabled = Surf.configManager().getBoolean("connection-meesage.enabled", false, """
+                These are the connection messages for when a player joins / leaves
+                Use & for colours and %player% as a placeholder for the players name""");
+
+        connectionPlayerJoin = Surf.configManager().getString("connection-meesage.player-join", "&7[&a+&7] &8%player%");
+        connectionPlayerLeave = Surf.configManager().getString("connection-meesage.player-leave", "&7[&c-&7] &8%player%");
+
+        connectionFirstJoinEnabled = Surf.configManager().getBoolean("connection-meesage.player-first-join.enabled", false);
+        connectionFirstJoinMessage = Surf.configManager().getString("connection-meesage.player-first-join.message", "&c%player%&6 has joined the &bYour&3Server &6for the first time");
+
+        connectionPreventKickEnabled = Surf.configManager().getBoolean("connection-prevent-kick.enabled", true);
+
+        connectionKickReasons = Surf.configManager().getList("connection-prevent-kick.reasons", Arrays.asList(
+                "Kicked for spamming",
+                "Invalid hotbar selection (Hacking?)",
+                "You released use item too quickly (Hacking?)"
+        ));
+
+        netherEnabled = Surf.configManager().getBoolean("nether.enabled", false, "Enable to prevent player go to Nether top or bottom layer");
+        netherTopLayer = Surf.configManager().getInt("nether.top-layer", 127);
+        netherBottomLayer = Surf.configManager().getInt("nether.bottom-layer", 0);
+        netherTopMessage = Surf.configManager().getString("nether.top-message", "&6The nether top has been disabled due to lag");
+        netherBottomMessage = Surf.configManager().getString("nether.bottom-message", "&6The nether bottom has been disabled due to lag");
+        netherTopBottomDoDamage = Surf.configManager().getBoolean("nether.top-bottom-do-damage", false);
+
+        // Patch
+        preventBookBanEnabled = Surf.configManager().getBoolean("prevent-book-ban.enabled", false);
+        preventBookBanMessage = Surf.configManager().getString("prevent-book-ban.message", "&6Detected a book ban, successfully cancelled.");
+
+        preventBuketPortalEnabled = Surf.configManager().getBoolean("prevent-buket-on-portal.enabled", false);
+        preventBuketPortalMessage = Surf.configManager().getString("prevent-buket-on-portal.message", "&6You can not do this");
+
+        perChunkLimitEnabled = Surf.configManager().getBoolean("per-chunk-limit.enabled", false, "ChunkBan skull limit tile entity limit and prevent message");
+        perChunkLimitMessage = Surf.configManager().getString("per-chunk-limit.message", "&6Detected a chunk ban, successfully cancelled.");
+        perChunkLimitTitleEntityMax = Surf.configManager().getInt("per-chunk-limit.tile-entity-max", 500);
+        perChunkLimitSkullMax = Surf.configManager().getInt("per-chunk-limit.skull-max", 100);
+
+        preventDispenserCrash = Surf.configManager().getBoolean("prevent-dispenser-crash.enabled", true);
+
+        gateWayPreventCrashExploit = Surf.configManager().getBoolean("gate-way.prevent-crash-exploit", false);
+        gateWayPreventEntityEnterPortal = Surf.configManager().getBoolean("gate-way.prevent-entity-enter-portal", false);
+
+        preventNBTBanEnabled = Surf.configManager().getBoolean("prevent-nbt-ban.enabled", true);
+        preventNBTBanLimit = Surf.configManager().getInt("prevent-nbt-ban.nbt-limit", 100000);
+        preventNBTBanMessage = Surf.configManager().getString("prevent-nbt-ban.message", "&6Detected a nbt ban, successfully cancelled.");
+
+        preventTeleportToBlock = Surf.configManager().getBoolean("prevent-teleport-to-block.enabled", true, """
+                Prevent player uses ender pearl to teleport to inside of block,
+                Enable this to let PVP more friendly.""");
+    }
 }
-

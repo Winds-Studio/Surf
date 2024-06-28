@@ -1,6 +1,6 @@
 package cn.dreeam.surf.modules.antilag;
 
-import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.Util;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Entity;
@@ -15,13 +15,13 @@ import java.util.Arrays;
 
 public class MinecartLag implements Listener {
 
-    private final int max = Surf.config.limitVehicleMinecartPerChunkLimit();
+    private final int max = Config.limitVehicleMinecartPerChunkLimit;
 
     @EventHandler(ignoreCancelled = true)
     public void onSpawn(VehicleCreateEvent event) {
-        if (!Surf.config.limitVehicleEnabled()) return;
+        if (!Config.limitVehicleEnabled) return;
 
-        if (Util.getTps() <= Surf.config.limitVehicleDisableTPS()) {
+        if (Util.getTps() <= Config.limitVehicleDisableTPS) {
             Vehicle vehicle = event.getVehicle();
             Chunk chunk = vehicle.getChunk();
             Player player = Util.getNearbyPlayer(20, vehicle.getLocation());
@@ -42,16 +42,16 @@ public class MinecartLag implements Listener {
 
     @EventHandler
     public void onVehicleMove(VehicleMoveEvent event) {
-        if (!Surf.config.limitVehicleEnabled()) return;
+        if (!Config.limitVehicleEnabled) return;
 
-        if (Util.getTps() <= Surf.config.limitVehicleDisableTPS()) {
+        if (Util.getTps() <= Config.limitVehicleDisableTPS) {
             Vehicle vehicle = event.getVehicle();
             Chunk chunk = vehicle.getChunk();
             String formattedName = vehicle.getType().toString().toLowerCase().concat("s").replace("_", " ");
             Player player = Util.getNearbyPlayer(20, vehicle.getLocation());
 
             if (!event.getFrom().getChunk().equals(event.getTo().getChunk())) {
-                if (chunk.getEntities().length >= Surf.config.limitVehicleMinecartPerChunkLimit()) {
+                if (chunk.getEntities().length >= Config.limitVehicleMinecartPerChunkLimit) {
                     vehicle.remove();
                     Util.sendMessage(player, Util.getPrefix() + "&6Please limit " + formattedName + " to &r&c" + max + "&r&6 per chunk");
                 }

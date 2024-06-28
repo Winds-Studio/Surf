@@ -1,6 +1,6 @@
 package cn.dreeam.surf.modules.antiillegal;
 
-import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.ItemUtil;
 import cn.dreeam.surf.util.Util;
 import dev.rosewood.rosestacker.event.ItemPickupEvent;
@@ -14,7 +14,7 @@ public class CheckRoseStackerItem implements Listener {
     @EventHandler(ignoreCancelled = true)
     @AntiIllegal(EventName = "ItemPickupEvent")
     public void onPickup(ItemPickupEvent event) {
-        if (!Surf.config.antiIllegalCheckWhenItemPickupEnabled()) return;
+        if (!Config.antiIllegalCheckWhenItemPickupEnabled) return;
 
         ItemStack i = event.getStackedItem().getItem().getItemStack();
 

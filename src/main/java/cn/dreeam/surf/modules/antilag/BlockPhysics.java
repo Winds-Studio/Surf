@@ -1,6 +1,6 @@
 package cn.dreeam.surf.modules.antilag;
 
-import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.Util;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,9 +10,9 @@ public class BlockPhysics implements Listener {
 
     @EventHandler
     public void onLiquidSpread(BlockFromToEvent event) {
-        if (!Surf.config.limitLiquidSpreadEnabled()) return;
+        if (!Config.limitLiquidSpreadEnabled) return;
 
-        if (Util.getTps() <= Surf.config.limitLiquidSpreadDisableTPS()) {
+        if (Util.getTps() <= Config.limitLiquidSpreadDisableTPS) {
             if (event.getBlock().isLiquid()) {
                 event.setCancelled(true);
             }

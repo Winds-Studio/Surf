@@ -1,6 +1,7 @@
 package cn.dreeam.surf.util;
 
 import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.config.Config;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
@@ -50,7 +51,7 @@ public class Util {
     }
 
     public static String getPrefix() {
-        return (Surf.config.Prefix() != null && !Surf.config.Prefix().isEmpty()) ? Surf.config.Prefix() : "";
+        return (Config.prefix != null && !Config.prefix.isEmpty()) ? Config.prefix : "";
     }
 
     public static void println(String message) {
