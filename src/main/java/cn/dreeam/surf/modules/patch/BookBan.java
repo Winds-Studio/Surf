@@ -61,7 +61,7 @@ public class BookBan implements Listener {
 
         ItemStack i = event.getItem();
 
-        if (i == null || !ItemUtil.isBook(i) || !i.hasItemMeta()) return;
+        if (i == null || !ItemUtil.isWritableBook(i) || !i.hasItemMeta()) return;
 
         BookMeta book = (BookMeta) i.getItemMeta();
 

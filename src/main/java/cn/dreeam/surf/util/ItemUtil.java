@@ -57,8 +57,8 @@ public class ItemUtil {
         return i.getType().isAir();
     }
 
-    public static boolean isBook(ItemStack i) {
-        return i.getType().toString().endsWith("BOOK") || i.getType().toString().equals("LEGACY_BOOK_AND_QUILL");
+    public static boolean isWritableBook(ItemStack i) {
+        return i.getType() == XMaterial.WRITABLE_BOOK.parseMaterial();
     }
 
     public static boolean isIllegalTotem(ItemStack i) {
