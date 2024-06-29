@@ -24,7 +24,7 @@ repositories {
     // NBT-API
     maven {
         name = "codemc-repo"
-        url = uri("https://repo.codemc.org/repository/maven-public/")
+        url = uri("https://repo.codemc.io/repository/maven-public/")
     }
 
     // FoliaLib
@@ -80,7 +80,7 @@ tasks {
         relocate("org.bstats", "cn.dreeam.surf.libs.bstats")
         relocate("com.tcoded.folialib", "cn.dreeam.surf.libs.folialib")
         relocate("com.cryptomorin.xseries", "cn.dreeam.surf.libs.xseries")
-        relocate("de.tr7zw.nbtapi", "cn.dreeam.surf.libs.nbtapi")
+        relocate("de.tr7zw.changeme.nbtapi", "cn.dreeam.surf.libs.nbtapi")
     }
 
     processResources {

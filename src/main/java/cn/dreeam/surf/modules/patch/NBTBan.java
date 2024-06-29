@@ -2,7 +2,7 @@ package cn.dreeam.surf.modules.patch;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.Util;
-import de.tr7zw.nbtapi.NBT;
+import de.tr7zw.changeme.nbtapi.NBT;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -19,15 +19,29 @@ public class NBTBan implements Listener {
         Inventory inv = event.getPlayer().getInventory();
         AtomicInteger itemSize = new AtomicInteger();
 
-        inv.forEach(i -> {
-            if (i != null && i.getType().name().contains("SHULKER_BOX")) {
-                itemSize.addAndGet(NBT.itemStackToNBT(i).toString().length());
+        // TODO
+        if (Util.majorVersion >= 20 && Util.minorVersion >= 5) {
+            inv.forEach(i -> {
+                if (i != null && i.getType().name().contains("SHULKER_BOX")) {
+                    itemSize.addAndGet(NBT.itemStackToNBT(i).toString().length());
 
-                if (itemSize.get() > Config.preventNBTBanLimit) {
-                    inv.remove(i);
-                    Util.sendMessage(event.getPlayer(), Config.preventNBTBanMessage);
+                    if (itemSize.get() > Config.preventNBTBanLimit) {
+                        inv.remove(i);
+                        Util.sendMessage(event.getPlayer(), Config.preventNBTBanMessage);
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            inv.forEach(i -> {
+                if (i != null && i.getType().name().contains("SHULKER_BOX")) {
+                    itemSize.addAndGet(NBT.itemStackToNBT(i).toString().length());
+
+                    if (itemSize.get() > Config.preventNBTBanLimit) {
+                        inv.remove(i);
+                        Util.sendMessage(event.getPlayer(), Config.preventNBTBanMessage);
+                    }
+                }
+            });
+        }
     }
 }
