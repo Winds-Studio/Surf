@@ -266,8 +266,8 @@ public class ItemUtil {
     private static List<String> initIllegalItemFlags() {
         List<String> list = new ArrayList<>();
 
-        for (Attribute attribute : Attribute.values()) {
-            list.add(attribute.toString());
+        for (ItemFlag itemFlag : ItemFlag.values()) {
+            list.add(itemFlag.toString());
         }
 
         return list;
@@ -276,8 +276,8 @@ public class ItemUtil {
     private static List<String> initIllegalAttribute() {
         List<String> list = new ArrayList<>();
 
-        for (ItemFlag itemFlag : ItemFlag.values()) {
-            list.add(itemFlag.toString());
+        for (Attribute attribute : Attribute.values()) {
+            list.add(attribute.toString());
         }
 
         return list;
