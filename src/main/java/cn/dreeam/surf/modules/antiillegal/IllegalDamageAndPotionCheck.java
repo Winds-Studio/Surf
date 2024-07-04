@@ -3,6 +3,7 @@ package cn.dreeam.surf.modules.antiillegal;
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.ItemUtil;
 import cn.dreeam.surf.util.Util;
+import org.bukkit.Material;
 import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
@@ -32,7 +33,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
         // Player => Entity
         if (event.getDamager() instanceof Player) {
             Player damager = (Player) event.getDamager();
-            if (event.getDamage() > 30) {
+            if (damager.getInventory().getItemInMainHand().getType() != Material.MACE && event.getDamage() > 30) { // Dreeam TODO: check illegal mace
                 event.setCancelled(true);
                 damager.getInventory().remove(damager.getInventory().getItemInMainHand()); // Seems only can use item on main hand to attack
                 Util.sendMessage(damager, Config.checkIllegalDamageMessage);
