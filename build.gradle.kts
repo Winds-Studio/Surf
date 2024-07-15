@@ -49,7 +49,7 @@ dependencies {
     }
     implementation("org.bstats:bstats-bukkit:3.0.2")
     implementation("com.tcoded:FoliaLib:0.4.0")
-    implementation("com.github.cryptomorin:XSeries:11.2.0")
+    implementation("com.github.cryptomorin:XSeries:11.2.0.1")
     implementation("de.tr7zw:item-nbt-api:2.13.1")
     compileOnly("dev.rosewood.rosestacker:RoseStacker:1.5.22")
 
