@@ -24,14 +24,16 @@ public class SurfCommand extends cn.dreeam.surf.command.BaseCommand {
     public void execute(CommandSender sender, String[] args, Surf plugin) {
         if (args.length > 0) {
             switch (args[0]) {
-                case "reload":
+                case "reload": {
                     Surf.getInstance().loadConfig();
                     Util.sendMessage(sender, Util.getPrefix() + "&aReloaded configuration file");
                     break;
-                case "version":
+                }
+                case "version": {
                     Util.sendMessage(sender, Util.getPrefix() + "&6Version &r&c" + plugin.getDescription().getVersion());
                     break;
-                case "help":
+                }
+                case "help": {
                     Util.sendMessage(sender, Util.getPrefix() + "&1---&r " + Util.getPrefix() + "&6Help &r&1---");
                     Util.sendMessage(sender, Util.getPrefix());
                     plugin.getCommandHandler().getCommands().forEach(command -> {
@@ -54,6 +56,7 @@ public class SurfCommand extends cn.dreeam.surf.command.BaseCommand {
                         }
                     });
                     break;
+                }
             }
         } else {
             sendErrorMessage(sender, getUsage());
