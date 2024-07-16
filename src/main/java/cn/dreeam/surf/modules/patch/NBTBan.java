@@ -20,7 +20,7 @@ public class NBTBan implements Listener {
         AtomicInteger itemSize = new AtomicInteger();
 
         // TODO
-        if (Util.majorVersion >= 20 && Util.minorVersion >= 5) {
+        if (Util.isNewerAndEqual(20, 5)) {
             inv.forEach(i -> {
                 if (i != null && i.getType().name().contains("SHULKER_BOX")) {
                     itemSize.addAndGet(NBT.itemStackToNBT(i).toString().length());

@@ -38,7 +38,7 @@ public class ItemUtil {
      */
 
     public static boolean isAir(ItemStack i) {
-        if (Util.majorVersion <= 13) {
+        if (Util.isOlderAndEqual(13, 2)) {
             // From 1.14 org.bukkit.Material.isAir()
             switch (i.getType()) {
                 //<editor-fold defaultstate="collapsed" desc="isAir">
@@ -92,7 +92,7 @@ public class ItemUtil {
     }
 
     public static boolean isIllegalEffect(PotionEffect effect) {
-        int duration = Util.majorVersion >= 14 && effect.getType() == PotionEffectType.BAD_OMEN ? 120000 : 12000;
+        int duration = Util.isNewerAndEqual(14, 0) && effect.getType() == PotionEffectType.BAD_OMEN ? 120000 : 12000;
 
         return effect.getAmplifier() > 5 || effect.getDuration() < 0 || effect.getDuration() > duration;
     }
@@ -257,7 +257,7 @@ public class ItemUtil {
                 "REINFORCED_DEEPSLATE"
         ));
 
-        if (Util.minorVersion >= 12) {
+        if (Util.isNewerAndEqual(12, 0)) {
         }
 
         return list;

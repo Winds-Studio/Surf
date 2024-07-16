@@ -11,15 +11,6 @@ import org.bukkit.entity.Player;
 
 public class Util {
 
-    // Server version, e.g. 1.20.2-R0.1-SNAPSHOT -> {"1","20","2"}
-    private final static String[] serverVersion = Bukkit.getServer().getBukkitVersion()
-            .substring(0, Bukkit.getServer().getBukkitVersion().indexOf("-"))
-            .split("\\.");
-
-    private final static int mcFirstVersion = Integer.parseInt(serverVersion[0]);
-    public final static int majorVersion = Integer.parseInt(serverVersion[1]);
-    public final static int minorVersion = serverVersion.length == 3 ? Integer.parseInt(serverVersion[2]) : 0;
-
     public static double getTps() {
         double tps = Bukkit.getServer().getTPS()[0];
         return Double.parseDouble(String.format("%.2f", tps));
@@ -60,5 +51,59 @@ public class Util {
 
     public static void println(Component component) {
         Surf.getInstance().adventure().console().sendMessage(component);
+    }
+
+    /*
+        Sakamoto Util
+    */
+
+    // Server version, e.g. 1.20.2-R0.1-SNAPSHOT -> {"1","20","2"}
+    private final static String[] serverVersion = Bukkit.getServer().getBukkitVersion()
+            .substring(0, Bukkit.getServer().getBukkitVersion().indexOf("-"))
+            .split("\\.");
+
+    private final static int mcFirstVersion = Integer.parseInt(serverVersion[0]);
+    private final static int majorVersion = Integer.parseInt(serverVersion[1]);
+    private final static int minorVersion = serverVersion.length == 3? Integer.parseInt(serverVersion[2]) : 0;
+
+    // > (major, minor)
+    public static boolean isNewerThan(int major, int minor) {
+        if (majorVersion > major) {
+            return true;
+        }
+
+        return majorVersion == major && minorVersion > minor;
+    }
+
+    // == (major, minor)
+    public static boolean isEqualTo(int major, int minor) {
+        return majorVersion == major && minorVersion == minor;
+    }
+
+    // < (major, minor)
+    public static boolean isOlderThan(int major, int minor) {
+        if (majorVersion < major) {
+            return true;
+        }
+
+        return majorVersion == major && minorVersion < minor;
+    }
+
+    // >= (major, minor)
+    public static boolean isNewerAndEqual(int major, int minor) {
+        if (majorVersion > major) {
+            return true;
+        }
+
+        return majorVersion == major && minorVersion >= minor;
+    }
+
+    // <= (major, minor)
+    public static boolean isOlderAndEqual(int major, int minor) {
+        if (majorVersion < major) {
+            return true;
+        }
+
+        return majorVersion == major && minorVersion <= minor;
     }
 }
