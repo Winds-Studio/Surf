@@ -177,17 +177,19 @@ public class IllegalDamageAndPotionCheck implements Listener {
         // Needs to add more items if they are added in newer MC version,
         // or remove material check
         if (material.contains("POTION") || material.contains("ARROW") || material.contains("TRIDENT")) {
-            Dispenser disp = (Dispenser) event.getBlock().getState();
-            PotionMeta pot = (PotionMeta) event.getItem().getItemMeta();
+            if (event.getItem().hasItemMeta() && event.getItem().getItemMeta() instanceof PotionMeta) {
+                PotionMeta pot = (PotionMeta) event.getItem().getItemMeta();
+                Dispenser disp = (Dispenser) event.getBlock().getState();
 
-            for (PotionEffect effect : pot.getCustomEffects()) {
-                if (ItemUtil.isIllegalEffect(effect)) {
-                    event.setCancelled(true);
-                    disp.getInventory().remove(event.getItem());
-                    Util.println(Config.checkIllegalPotionMessage + " | " + event.getBlock().getLocation());
-                    // One illegal potion effect appear, remove whole item
-                    // then break the for loop.
-                    break;
+                for (PotionEffect effect : pot.getCustomEffects()) {
+                    if (ItemUtil.isIllegalEffect(effect)) {
+                        event.setCancelled(true);
+                        disp.getInventory().remove(event.getItem());
+                        Util.println(Config.checkIllegalPotionMessage + " | " + event.getBlock().getLocation());
+                        // One illegal potion effect appear, remove whole item
+                        // then break the for loop.
+                        break;
+                    }
                 }
             }
         }
