@@ -92,7 +92,15 @@ public class ItemUtil {
     }
 
     public static boolean isIllegalEffect(PotionEffect effect) {
-        int duration = Util.isNewerAndEqual(14, 0) && effect.getType() == PotionEffectType.BAD_OMEN ? 120000 : 12000;
+        int duration;
+
+        if (Util.isNewerAndEqual(21, 0) && effect.getType() == PotionEffectType.TRIAL_OMEN) {
+            duration = 108000;
+        } else if (Util.isNewerAndEqual(14, 0) && effect.getType() == PotionEffectType.BAD_OMEN) {
+            duration = 120000;
+        } else {
+            duration = 12000;
+        }
 
         return effect.getAmplifier() > 5 || effect.getDuration() < 0 || effect.getDuration() > duration;
     }
