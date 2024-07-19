@@ -33,7 +33,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
         // Player => Entity
         if (event.getDamager() instanceof Player) {
             Player damager = (Player) event.getDamager();
-            if (damager.getInventory().getItemInMainHand().getType() != Material.MACE && event.getDamage() > 30) { // Dreeam TODO: check illegal mace
+            if (!damager.getInventory().getItemInMainHand().getType().toString().equals("MACE") && event.getDamage() > 30) { // Dreeam TODO: check illegal mace
                 event.setCancelled(true);
                 damager.getInventory().remove(damager.getInventory().getItemInMainHand()); // Seems only can use item on main hand to attack
                 Util.sendMessage(damager, Config.checkIllegalDamageMessage);
