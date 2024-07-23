@@ -172,20 +172,21 @@ public class ItemUtil {
             ItemStack newItem = cleanIllegals(item);
 
             if (!original.equals(newItem)) {
+                if (newItem.equals(ItemStack.empty())) {
+                    item.setAmount(0);
+                }
+
                 Util.println("&6Detected illegals " + original.getI18NDisplayName());
             }
         }
     }
 
     private static ItemStack cleanIllegals(ItemStack i) {
-        if (i == null || isAir(i)) return new ItemStack(Material.AIR);
-        if (isIllegalBlock(i) || isIllegalPotion(i)) return new ItemStack(Material.AIR);
+        if (i == null || isAir(i)) return ItemStack.empty();
+        if (isIllegalBlock(i) || isIllegalPotion(i)) return ItemStack.empty();
 
-        if (Config.antiIllegalDeleteIllegalsWhenFoundEnabled) {
-            if (isIllegal(i)) {
-                return new ItemStack(Material.AIR);
-                //i.setAmount(0); // need to try??
-            }
+        if (Config.antiIllegalDeleteIllegalsWhenFoundEnabled && isIllegal(i)) {
+            return ItemStack.empty();
         }
 
         // Clean oversize durability
