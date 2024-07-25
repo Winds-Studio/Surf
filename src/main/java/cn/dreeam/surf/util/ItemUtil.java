@@ -126,7 +126,13 @@ public class ItemUtil {
 
     public static boolean hasIllegalItemFlag(ItemStack i) {
         if (i.hasItemMeta()) {
+            final boolean isBanner = i.getType().toString().contains("BANNER");
+
             for (String flag : Config.antiIllegalIllegalItemFlagList) {
+                if (isBanner && flag.equalsIgnoreCase("HIDE_ADDITIONAL_TOOLTIP")) {
+                    continue;
+                }
+
                 if (i.getItemMeta().hasItemFlag(ItemFlag.valueOf(flag))) {
                     return true;
                 }
@@ -220,12 +226,17 @@ public class ItemUtil {
 
         if (i.hasItemMeta()) {
             ItemMeta meta = i.getItemMeta();
+            final boolean isBanner = i.getType().toString().contains("BANNER");
 
             // Clear unbreakable flag
             meta.setUnbreakable(false);
 
             // Clean illegal itemFlag
             for (String flag : Config.antiIllegalIllegalItemFlagList) {
+                if (isBanner && flag.equalsIgnoreCase("HIDE_ADDITIONAL_TOOLTIP")) {
+                    continue;
+                }
+
                 if (meta.hasItemFlag(ItemFlag.valueOf(flag))) {
                     meta.removeItemFlags(ItemFlag.valueOf(flag));
                 }
