@@ -53,7 +53,7 @@ dependencies {
     implementation("de.tr7zw:item-nbt-api:2.13.1")
     compileOnly("dev.rosewood.rosestacker:RoseStacker:1.5.22")
 
-    implementation("net.kyori:adventure-platform-bukkit:4.3.3")
+    implementation("net.kyori:adventure-platform-bukkit:4.3.4")
     implementation("net.kyori:adventure-api:$adventureVersion")
     implementation("net.kyori:adventure-text-serializer-legacy:$adventureVersion")
 }
