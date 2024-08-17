@@ -27,16 +27,16 @@ repositories {
         url = uri("https://repo.codemc.io/repository/maven-public/")
     }
 
-    // FoliaLib
-    maven {
-        name = "devmart-other"
-        url = uri("https://nexuslite.gcnt.net/repos/other/")
-    }
-
     // ConfigurationMaster
     maven {
         name = "cm-repo"
         url = uri("https://ci.pluginwiki.us/plugin/repository/everything/")
+    }
+
+    // FoliaLib
+    maven {
+        name = "devmart-other"
+        url = uri("https://nexuslite.gcnt.net/repos/other/")
     }
 }
 
