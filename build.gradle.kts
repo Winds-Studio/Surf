@@ -51,7 +51,7 @@ dependencies {
     implementation("com.tcoded:FoliaLib:0.4.2")
     implementation("com.github.cryptomorin:XSeries:11.2.0.1")
     implementation("de.tr7zw:item-nbt-api:2.13.2")
-    compileOnly("dev.rosewood.rosestacker:RoseStacker:1.5.22")
+    compileOnly(files("libs/RoseStacker-1.5.22.jar"))
 
     implementation("net.kyori:adventure-platform-bukkit:4.3.4")
     implementation("net.kyori:adventure-api:$adventureVersion")
