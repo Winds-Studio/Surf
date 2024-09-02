@@ -46,7 +46,7 @@ public class ItemUtil {
 
     public static boolean isAir(ItemStack i) {
         if (Util.isOlderAndEqual(13, 2)) {
-            // From 1.14 org.bukkit.Material.isAir()
+            // From >=1.14 org.bukkit.Material.isAir()
             switch (i.getType()) {
                 //<editor-fold defaultstate="collapsed" desc="isAir">
                 case AIR:
