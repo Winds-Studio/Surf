@@ -22,6 +22,13 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ItemUtil {
 
     //public static final List<String> isBurrowBlock = Arrays.asList("ANVIL", "OBSIDIAN", "ENDER_CHEST");
+
+    private static final int COMMON_EFFECT_DURATION = 10 * 60 * 20; // Duration: 0:10:00
+    private static final int HERO_OF_THE_VILLAGE_EFFECT_DURATION = 40 * 60 * 20; // Duration: 0:40:00
+    private static final int BAD_OMEN_EFFECT_DURATION = (60 + 40) * 60 * 20; // Duration: 1:40:00
+    private static final int RAID_OMEN_EFFECT_DURATION = 30 * 20; // Duration: 0:0:30
+    private static final int TRIAL_OMEN_EFFECT_DURATION = (15 * 60 * 20) * (Util.isNewerAndEqual(14, 0) ? 5 : 3); // Duration: 15mins * 3 or 5 (max Bad Omen amplifier)
+
     public static final List<String> illegalBlocks = initIllegalBlocks();
     public static final List<String> illegalItemFlags = initIllegalItemFlags();
     public static final List<String> illegalAttributes = initIllegalAttribute();
@@ -94,12 +101,16 @@ public class ItemUtil {
     public static boolean isIllegalEffect(PotionEffect effect) {
         int duration;
 
-        if (Util.isNewerAndEqual(21, 0) && effect.getType() == PotionEffectType.TRIAL_OMEN) {
-            duration = 108000;
-        } else if (Util.isNewerAndEqual(14, 0) && effect.getType() == PotionEffectType.BAD_OMEN) {
-            duration = 120000;
+        if (Util.isNewerAndEqual(20, 5) && effect.getType() == PotionEffectType.TRIAL_OMEN) { // Trial Omen Effect >=1.20.5
+            duration = TRIAL_OMEN_EFFECT_DURATION;
+        } else if (Util.isNewerAndEqual(20, 5) && effect.getType() == PotionEffectType.RAID_OMEN) { // Raid Omen Effect >=1.20.5
+            duration = RAID_OMEN_EFFECT_DURATION;
+        } else if (Util.isNewerAndEqual(14, 0) && effect.getType() == PotionEffectType.BAD_OMEN) { // Bad Omen Effect >=1.14
+            duration = BAD_OMEN_EFFECT_DURATION;
+        } else if (Util.isNewerAndEqual(14, 0) && effect.getType() == PotionEffectType.HERO_OF_THE_VILLAGE) { // Hero of the Village Effect >=1.14
+            duration = HERO_OF_THE_VILLAGE_EFFECT_DURATION;
         } else {
-            duration = 12000;
+            duration = COMMON_EFFECT_DURATION;
         }
 
         return effect.getAmplifier() > 5 || effect.getDuration() < 0 || effect.getDuration() > duration;
