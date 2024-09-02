@@ -21,8 +21,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ItemUtil {
 
-    //public static final List<String> isBurrowBlock = Arrays.asList("ANVIL", "OBSIDIAN", "ENDER_CHEST");
-
     private static final int COMMON_EFFECT_DURATION = 10 * 60 * 20; // Duration: 0:10:00
     private static final int HERO_OF_THE_VILLAGE_EFFECT_DURATION = 40 * 60 * 20; // Duration: 0:40:00
     private static final int BAD_OMEN_EFFECT_DURATION = (60 + 40) * 60 * 20; // Duration: 1:40:00
