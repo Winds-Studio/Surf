@@ -74,7 +74,7 @@ public class ItemUtil {
     }
 
     public static boolean isEnchantedBlock(ItemStack i) {
-        return i.getType().isBlock() && i.hasItemMeta() && i.getItemMeta().hasEnchants();
+        return i.getType().isBlock() && Config.antiIllegalRemoveBlockEnchant && i.hasItemMeta() && i.getItemMeta().hasEnchants();
     }
 
     public static boolean isIllegalPotion(ItemStack i) {
@@ -216,7 +216,7 @@ public class ItemUtil {
         // Clean illegal Enchantment
         Map<Enchantment, Integer> enchants = i.getEnchantments();
         if (i.getType().isBlock()) {
-            if (Config.antiIllegalCheckRemoveBlockEnchantsEnabled) {
+            if (Config.antiIllegalRemoveBlockEnchant) {
                 // Directly remove enchs
                 enchants.keySet().forEach(i::removeEnchantment);
             } else {
@@ -231,7 +231,7 @@ public class ItemUtil {
             }
         } else {
             enchants.keySet().forEach(ench -> {
-                if (ench.canEnchantItem(i)) {
+                if (Config.antiIllegalAllowInapplicableEnchant || ench.canEnchantItem(i)) {
                     String key = ench.getKey().getKey();
                     int level = enchants.get(ench);
                     if (illegalEnchantsMap.containsKey(key) && illegalEnchantsMap.get(key) > 0 && level > illegalEnchantsMap.get(key)) {
