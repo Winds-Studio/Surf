@@ -2,7 +2,6 @@ package cn.dreeam.surf.util;
 
 import cn.dreeam.surf.config.Config;
 import com.cryptomorin.xseries.XMaterial;
-import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
@@ -217,7 +216,19 @@ public class ItemUtil {
         // Clean illegal Enchantment
         Map<Enchantment, Integer> enchants = i.getEnchantments();
         if (i.getType().isBlock()) {
-            enchants.keySet().forEach(i::removeEnchantment);
+            if (Config.antiIllegalCheckRemoveBlockEnchantsEnabled) {
+                // Directly remove enchs
+                enchants.keySet().forEach(i::removeEnchantment);
+            } else {
+                // Correct enchs
+                enchants.keySet().forEach(ench -> {
+                    String key = ench.getKey().getKey();
+                    int level = enchants.get(ench);
+                    if (illegalEnchantsMap.containsKey(key) && illegalEnchantsMap.get(key) > 0 && level > illegalEnchantsMap.get(key)) {
+                        i.addEnchantment(ench, ench.getMaxLevel());
+                    }
+                });
+            }
         } else {
             enchants.keySet().forEach(ench -> {
                 if (ench.canEnchantItem(i)) {

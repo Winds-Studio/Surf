@@ -12,7 +12,7 @@ public class Config {
     public static String prefix;
 
     // Anti Illegal
-    public static boolean antiIllegalCheckIllegalBlockEnabled, checkIllegalDamageEnabled, checkIllegalPotionEnabled, stackedTotemRevertAsOneEnabled, antiIllegalDeleteIllegalsWhenFoundEnabled, antiIllegalCheckWhenPlayerJoinEnabled, antiIllegalCheckWhenHopperTransferEnabled, antiIllegalCheckWhenInventoryCloseEnabled, antiIllegalCheckWhenInventoryOpenEnabled, antiIllegalCheckWhenItemPickupEnabled;
+    public static boolean antiIllegalCheckIllegalBlockEnabled, antiIllegalCheckRemoveBlockEnchantsEnabled, checkIllegalDamageEnabled, checkIllegalPotionEnabled, stackedTotemRevertAsOneEnabled, antiIllegalDeleteIllegalsWhenFoundEnabled, antiIllegalCheckWhenPlayerJoinEnabled, antiIllegalCheckWhenHopperTransferEnabled, antiIllegalCheckWhenInventoryCloseEnabled, antiIllegalCheckWhenInventoryOpenEnabled, antiIllegalCheckWhenItemPickupEnabled;
     public static String antiIllegalCheckIllegalBlockMessage, checkIllegalDamageMessage, checkIllegalPotionMessage;
     public static List<String> antiIllegalIllegalBlockList, antiIllegalIllegalItemFlagList, antiIllegalIllegalEnchantList, antiIllegalIllegalAttributeModifierList;
 
@@ -37,7 +37,12 @@ public class Config {
         prefix = Surf.configManager().getString("Prefix", "&6&l[&b&lSurf&6&l]&6 ", "Message prefix");
 
         // Anti Illegal
-        antiIllegalCheckIllegalBlockEnabled = Surf.configManager().getBoolean("anti-illegal.check-illegal-block.enabled", true);
+        antiIllegalCheckIllegalBlockEnabled = Surf.configManager().getBoolean("anti-illegal.check-illegal-block.enabled", true, """
+                Should remove illegal blocks when placed
+                You can define illegal blocks in anti-illegal.checks.illegal-block-list""");
+        antiIllegalCheckRemoveBlockEnchantsEnabled = Surf.configManager().getBoolean("anti-illegal.check-illegal-block.remove-block-enchants", true, """
+                Whether remove all enchantments on blocks directly
+                Disable it to check illegal enchants for block like other normal items.""");
         antiIllegalCheckIllegalBlockMessage = Surf.configManager().getString("anti-illegal.check-illegal-block.message", "&6You can not use this illegal block.");
 
         checkIllegalDamageEnabled = Surf.configManager().getBoolean("check-illegal-damage.enabled", false);
