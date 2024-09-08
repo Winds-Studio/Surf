@@ -8,12 +8,15 @@ import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CommandHandler implements org.bukkit.command.CommandExecutor, org.bukkit.command.TabCompleter {
 
-    private final ArrayList<BaseCommand> commands = new ArrayList<>();
+    private final List<BaseCommand> commands = new ArrayList<>();
+    private final List<String> tabCompletion = new ArrayList<>(List.of(
+            "reload",
+            "version",
+            "help"
+    ));
     private final Surf plugin;
 
     public CommandHandler(Surf plugin) {
@@ -48,19 +51,23 @@ public class CommandHandler implements org.bukkit.command.CommandExecutor, org.b
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (args.length == 1) {
+            List<String> completions = new ArrayList<>();
+
             // Dreeam - refer to https://github.com/mrgeneralq/sleep-most/blob/5f2f7772c9715cf57530e2af3573652d17cd7420/src/main/java/me/mrgeneralq/sleepmost/commands/SleepmostCommand.java#L135
-            return Stream.of(
-                            "reload",
-                            "version",
-                            "help"
-                    ).filter(arg -> sender.hasPermission("surf.command." + arg))
-                    .collect(Collectors.toList());
+            for (String completion: tabCompletion) {
+                final String arg = args[0];
+                if (completion.startsWith(arg) && sender.hasPermission("surf.command." + arg)) {
+                    completions.add(completion);
+                }
+            }
+
+            return completions;
         }
 
         return null;
     }
 
-    public ArrayList<BaseCommand> getCommands() {
+    public List<BaseCommand> getCommands() {
         return commands;
     }
 }
