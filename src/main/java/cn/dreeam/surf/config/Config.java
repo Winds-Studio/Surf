@@ -40,7 +40,7 @@ public class Config {
         antiIllegalCheckIllegalBlockEnabled = Surf.configManager().getBoolean("anti-illegal.check-illegal-block.enabled", true, """
                 Should remove illegal blocks when placed
                 You can define illegal blocks in anti-illegal.checks.illegal-block-list""");
-        antiIllegalCheckRemoveBlockEnchantsEnabled = Surf.configManager().getBoolean("anti-illegal.check-illegal-block.remove-block-enchants", true, """
+        antiIllegalCheckRemoveBlockEnchantsEnabled = Surf.configManager().getBoolean("anti-illegal.remove-block-enchants", true, """
                 Whether remove all enchantments on blocks directly
                 Disable it to check illegal enchants for block like other normal items.""");
         antiIllegalCheckIllegalBlockMessage = Surf.configManager().getString("anti-illegal.check-illegal-block.message", "&6You can not use this illegal block.");
