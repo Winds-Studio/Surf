@@ -99,7 +99,8 @@ public class Config {
         connectionKickReasons = Surf.configManager().getList("connection-prevent-kick.reasons", Arrays.asList(
                 "Kicked for spamming",
                 "Invalid hotbar selection (Hacking?)",
-                "You released use item too quickly (Hacking?)"
+                "You released use item too quickly (Hacking?)",
+                "You dropped your items too quickly (Hacking?)"
         ));
 
         netherEnabled = Surf.configManager().getBoolean("nether.enabled", false, "Enable to prevent player go to Nether top or bottom layer");
