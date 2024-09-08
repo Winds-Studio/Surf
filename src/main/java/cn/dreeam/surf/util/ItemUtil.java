@@ -225,7 +225,7 @@ public class ItemUtil {
                     String key = ench.getKey().getKey();
                     int level = enchants.get(ench);
                     if (illegalEnchantsMap.containsKey(key) && illegalEnchantsMap.get(key) > 0 && level > illegalEnchantsMap.get(key)) {
-                        i.addEnchantment(ench, ench.getMaxLevel());
+                        i.addUnsafeEnchantment(ench, ench.getMaxLevel());
                     }
                 });
             }
@@ -235,7 +235,7 @@ public class ItemUtil {
                     String key = ench.getKey().getKey();
                     int level = enchants.get(ench);
                     if (illegalEnchantsMap.containsKey(key) && illegalEnchantsMap.get(key) > 0 && level > illegalEnchantsMap.get(key)) {
-                        i.addEnchantment(ench, ench.getMaxLevel());
+                        i.addUnsafeEnchantment(ench, ench.getMaxLevel());
                     }
                 } else {
                     // Should remove conflict/incompatible ench, since the item is illegal.
