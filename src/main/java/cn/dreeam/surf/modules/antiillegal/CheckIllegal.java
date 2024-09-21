@@ -3,6 +3,7 @@ package cn.dreeam.surf.modules.antiillegal;
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.ItemUtil;
+import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.Util;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -92,9 +93,9 @@ public class CheckIllegal implements Listener {
             event.getItem().remove();
             if (event.getEntity() instanceof Player) {
                 Player player = (Player) event.getEntity();
-                Util.sendMessage(player, "&6You can not pick up this illegal item.");
+                MessageUtil.sendMessage(player, "&6You can not pick up this illegal item.");
             } else {
-                Util.println(event.getEntity().getName() + " try to pick up an illegal item at " + event.getItem().getLocation());
+                MessageUtil.println(event.getEntity().getName() + " try to pick up an illegal item at " + event.getItem().getLocation());
             }
         }
     }

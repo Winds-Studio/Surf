@@ -2,6 +2,7 @@ package cn.dreeam.surf.modules.patch;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.ItemUtil;
+import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.Util;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Material;
@@ -50,7 +51,7 @@ public class BookBan implements Listener {
             }
             meta.setBlockState(shulkerBox);
             item.setItemMeta(meta);
-            Util.sendMessage(player, Config.preventBookBanMessage);
+            MessageUtil.sendMessage(player, Config.preventBookBanMessage);
         }
     }
 
@@ -69,7 +70,7 @@ public class BookBan implements Listener {
             Player player = event.getPlayer();
             event.setCancelled(true);
             player.getWorld().dropItem(player.getLocation(), i);
-            Util.sendMessage(player, Config.preventBookBanMessage);
+            MessageUtil.sendMessage(player, Config.preventBookBanMessage);
         }
     }
 

@@ -21,7 +21,6 @@ import cn.dreeam.surf.modules.patch.GateWay;
 import cn.dreeam.surf.modules.patch.NBTBan;
 import cn.dreeam.surf.modules.patch.PreventEnderPearlClip;
 import com.tcoded.folialib.FoliaLib;
-import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bstats.bukkit.Metrics;
@@ -47,7 +46,6 @@ public class Surf extends JavaPlugin {
     private final CommandHandler commandHandler = new CommandHandler(this);
 
     public FoliaLib foliaLib = new FoliaLib(this);
-    private BukkitAudiences adventure;
 
     public boolean isRoseStackerEnabled = false;
 
@@ -55,7 +53,6 @@ public class Surf extends JavaPlugin {
     public void onEnable() {
         instance = this;
         LOGGER = LogManager.getLogger(instance.getName());
-        instance.adventure = BukkitAudiences.create(instance);
 
         loadConfig();
         commandHandler.registerCommands(); // register commands
@@ -67,10 +64,6 @@ public class Surf extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if (this.adventure != null) {
-            this.adventure.close();
-            this.adventure = null;
-        }
         LOGGER.info("Surf {} disabled. By Dreeam", instance.getDescription().getVersion());
     }
 
@@ -138,12 +131,5 @@ public class Surf extends JavaPlugin {
     }
     public static ConfigManager configManager() {
         return configManager;
-    }
-
-    public @NotNull BukkitAudiences adventure() {
-        if (this.adventure == null) {
-            throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
-        }
-        return this.adventure;
     }
 }

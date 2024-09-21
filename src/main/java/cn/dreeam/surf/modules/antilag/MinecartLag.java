@@ -1,6 +1,7 @@
 package cn.dreeam.surf.modules.antilag;
 
 import cn.dreeam.surf.config.Config;
+import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.Util;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Entity;
@@ -35,7 +36,7 @@ public class MinecartLag implements Listener {
                         ent.remove();
                     }
                 }
-                Util.sendMessage(player, Util.getPrefix() + "&6Please limit " + formattedName + " to &r&c" + max + "&r&6 per chunk");
+                MessageUtil.sendMessage(player, Util.getPrefix() + "&6Please limit " + formattedName + " to &r&c" + max + "&r&6 per chunk");
             }
         }
     }
@@ -53,7 +54,7 @@ public class MinecartLag implements Listener {
             if (!event.getFrom().getChunk().equals(event.getTo().getChunk())) {
                 if (chunk.getEntities().length >= Config.limitVehicleMinecartPerChunkLimit) {
                     vehicle.remove();
-                    Util.sendMessage(player, Util.getPrefix() + "&6Please limit " + formattedName + " to &r&c" + max + "&r&6 per chunk");
+                    MessageUtil.sendMessage(player, Util.getPrefix() + "&6Please limit " + formattedName + " to &r&c" + max + "&r&6 per chunk");
                 }
             }
         }

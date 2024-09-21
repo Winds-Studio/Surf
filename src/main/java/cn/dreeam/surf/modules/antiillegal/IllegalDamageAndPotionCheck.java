@@ -2,6 +2,7 @@ package cn.dreeam.surf.modules.antiillegal;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.ItemUtil;
+import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.Util;
 import org.bukkit.Material;
 import org.bukkit.block.Dispenser;
@@ -36,7 +37,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
             if (!damager.getInventory().getItemInMainHand().getType().toString().equals("MACE") && event.getDamage() > 30) { // Dreeam TODO: check illegal mace
                 event.setCancelled(true);
                 damager.getInventory().remove(damager.getInventory().getItemInMainHand()); // Seems only can use item on main hand to attack
-                Util.sendMessage(damager, Config.checkIllegalDamageMessage);
+                MessageUtil.sendMessage(damager, Config.checkIllegalDamageMessage);
             }
         } else {
             // Entity => Entity
@@ -49,7 +50,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
                     if (event.getDamage() > 30) {
                         event.setCancelled(true);
                         damager.getEquipment().setItemInMainHand(null); // Seems only can use item on main hand to attack
-                        Util.println(damager.getName() + " | " + Config.checkIllegalDamageMessage + " | " + damager.getLocation());
+                        MessageUtil.println(damager.getName() + " | " + Config.checkIllegalDamageMessage + " | " + damager.getLocation());
                     }
                 }
             }
@@ -62,7 +63,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
                     if (projectile.getShooter() instanceof Player) {
                         Player shooter = (Player) projectile.getShooter();
                         if (shooter.getInventory().getItemInMainHand().getType().toString().endsWith("BOW")) shooter.getInventory().setItemInMainHand(null); // Seems only can use item on main hand to attack
-                        Util.sendMessage(shooter, Config.checkIllegalDamageMessage);
+                        MessageUtil.sendMessage(shooter, Config.checkIllegalDamageMessage);
                     }
                 }
             }
@@ -96,7 +97,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
                 event.setCancelled(true);
                 if (event.getEntity() instanceof Player) {
                     Player player = (Player) event.getEntity();
-                    Util.sendMessage(player, Config.checkIllegalPotionMessage);
+                    MessageUtil.sendMessage(player, Config.checkIllegalPotionMessage);
                 }
             }
         }
@@ -118,7 +119,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
         for (PotionEffect effect : arrow.getCustomEffects()) {
             if (ItemUtil.isIllegalEffect(effect)) {
                 event.setCancelled(true);
-                Util.sendMessage(shooter, Config.checkIllegalPotionMessage);
+                MessageUtil.sendMessage(shooter, Config.checkIllegalPotionMessage);
                 break;
             }
         }
@@ -139,7 +140,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
             if (ItemUtil.isIllegalEffect(effect)) {
                 event.setCancelled(true);
                 player.getInventory().remove(pot);
-                Util.sendMessage(player, Config.checkIllegalPotionMessage);
+                MessageUtil.sendMessage(player, Config.checkIllegalPotionMessage);
                 break;
             }
         }
@@ -161,7 +162,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
             if (ItemUtil.isIllegalEffect(effect)) {
                 e.setCancelled(true);
                 e.getPlayer().getInventory().remove(e.getItem());
-                Util.sendMessage(e.getPlayer(), Config.checkIllegalPotionMessage);
+                MessageUtil.sendMessage(e.getPlayer(), Config.checkIllegalPotionMessage);
                 break;
             }
         }
@@ -185,7 +186,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
                     if (ItemUtil.isIllegalEffect(effect)) {
                         event.setCancelled(true);
                         disp.getInventory().remove(event.getItem());
-                        Util.println(Config.checkIllegalPotionMessage + " | " + event.getBlock().getLocation());
+                        MessageUtil.println(Config.checkIllegalPotionMessage + " | " + event.getBlock().getLocation());
                         // One illegal potion effect appear, remove whole item
                         // then break the for loop.
                         break;

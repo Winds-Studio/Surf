@@ -1,6 +1,7 @@
 package cn.dreeam.surf.modules.patch;
 
 import cn.dreeam.surf.config.Config;
+import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.Util;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.block.Block;
@@ -27,7 +28,7 @@ public class DispenserCrash implements Listener {
             boolean isYMaxFacingUp = block.getY() == block.getWorld().getMaxHeight() - 1 && face == BlockFace.UP;
             if (isY0FacingDown || isYMaxFacingUp) {
                 event.setCancelled(true);
-                Util.println("Prevent a dispenser crash at " + block.getLocation() +".");
+                MessageUtil.println("Prevent a dispenser crash at " + block.getLocation() +".");
             }
         }
     }

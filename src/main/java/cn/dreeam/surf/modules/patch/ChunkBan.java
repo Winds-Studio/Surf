@@ -1,6 +1,7 @@
 package cn.dreeam.surf.modules.patch;
 
 import cn.dreeam.surf.config.Config;
+import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.Util;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Chunk;
@@ -30,7 +31,7 @@ public class ChunkBan implements Listener {
 
         if (isTileEntity(block.getType()) && chunk.getTileEntities().length > Config.perChunkLimitTitleEntityMax) {
             event.setCancelled(true);
-            Util.sendMessage(player, Config.perChunkLimitMessage);
+            MessageUtil.sendMessage(player, Config.perChunkLimitMessage);
             return;
         }
 
@@ -39,7 +40,7 @@ public class ChunkBan implements Listener {
             long skullCount = Arrays.stream(chunk.getTileEntities()).filter(tileEntity -> isSkull(tileEntity.getType())).count();
             if (skullCount > Config.perChunkLimitSkullMax) {
                 event.setCancelled(true);
-                Util.sendMessage(player, Config.perChunkLimitMessage);
+                MessageUtil.sendMessage(player, Config.perChunkLimitMessage);
             }
         }
     }
@@ -56,7 +57,7 @@ public class ChunkBan implements Listener {
             long amount = Arrays.stream(chunk.getEntities()).filter(entity -> entity instanceof ItemFrame).count();
             if (amount + chunk.getTileEntities().length > Config.perChunkLimitTitleEntityMax) {
                 event.setCancelled(true);
-                Util.sendMessage(event.getPlayer(), Config.perChunkLimitMessage);
+                MessageUtil.sendMessage(event.getPlayer(), Config.perChunkLimitMessage);
             }
         }
     }

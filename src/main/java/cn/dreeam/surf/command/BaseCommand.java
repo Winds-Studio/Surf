@@ -1,6 +1,7 @@
 package cn.dreeam.surf.command;
 
 import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.Util;
 import org.bukkit.command.CommandSender;
 
@@ -43,12 +44,12 @@ public abstract class BaseCommand {
     }
 
     public void sendNoPermission(CommandSender sender) {
-        Util.sendMessage(sender, "&4Error:&r&c You are lacking the permission " + getPermission());
+        MessageUtil.sendMessage(sender, "&4Error:&r&c You are lacking the permission " + getPermission());
     }
 
     public void sendErrorMessage(CommandSender sender, String message) {
         String finalMessage = "&4Error:&r&c " + message;
-        Util.sendMessage(sender, finalMessage);
+        MessageUtil.sendMessage(sender, finalMessage);
     }
 
     public abstract void execute(CommandSender sender, String[] args, Surf plugin);

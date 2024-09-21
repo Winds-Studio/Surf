@@ -1,7 +1,7 @@
 plugins {
     `java-library`
     `maven-publish`
-    id("com.gradleup.shadow") version "8.3.1"
+    id("com.gradleup.shadow") version "8.3.2"
 }
 
 group = "cn.dreeam.surf"
@@ -40,8 +40,6 @@ repositories {
     }
 }
 
-val adventureVersion = "4.17.0"
-
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
     implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.2") {
@@ -52,10 +50,6 @@ dependencies {
     implementation("com.github.cryptomorin:XSeries:11.2.1")
     implementation("de.tr7zw:item-nbt-api:2.13.2")
     compileOnly(files("libs/RoseStacker-1.5.22.jar"))
-
-    implementation("net.kyori:adventure-platform-bukkit:4.3.4")
-    implementation("net.kyori:adventure-api:$adventureVersion")
-    implementation("net.kyori:adventure-text-serializer-legacy:$adventureVersion")
 }
 
 tasks {
@@ -75,7 +69,6 @@ tasks {
     shadowJar {
         archiveFileName = "${project.name}-${project.version}.${archiveExtension.get()}"
         exclude("META-INF/**") // Dreeam - Avoid to include META-INF/maven in Jar
-        relocate("net.kyori", "cn.dreeam.surf.libs.kyori")
         relocate("io.github.thatsmusic99.configurationmaster", "cn.dreeam.surf.libs.configurationmaster")
         relocate("org.bstats", "cn.dreeam.surf.libs.bstats")
         relocate("com.tcoded.folialib", "cn.dreeam.surf.libs.folialib")

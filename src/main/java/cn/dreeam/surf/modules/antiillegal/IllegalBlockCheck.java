@@ -2,6 +2,7 @@ package cn.dreeam.surf.modules.antiillegal;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.ItemUtil;
+import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.Util;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,7 +27,7 @@ public class IllegalBlockCheck implements Listener {
                 player.getInventory().setItemInOffHand(null);
             }
 
-            Util.sendMessage(player, Config.antiIllegalCheckIllegalBlockMessage);
+            MessageUtil.sendMessage(player, Config.antiIllegalCheckIllegalBlockMessage);
         }
     }
 }

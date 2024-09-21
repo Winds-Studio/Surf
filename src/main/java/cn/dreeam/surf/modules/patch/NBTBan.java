@@ -1,6 +1,7 @@
 package cn.dreeam.surf.modules.patch;
 
 import cn.dreeam.surf.config.Config;
+import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.Util;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,7 +26,7 @@ public class NBTBan implements Listener {
 
                     if (itemSize > Config.preventNBTBanLimit) {
                         inv.remove(i);
-                        Util.sendMessage(event.getPlayer(), Config.preventNBTBanMessage);
+                        MessageUtil.sendMessage(event.getPlayer(), Config.preventNBTBanMessage);
                     }
                 }
             }
@@ -38,7 +39,7 @@ public class NBTBan implements Listener {
 
                     if (itemSize > Config.preventNBTBanLimit) {
                         inv.remove(i);
-                        Util.sendMessage(event.getPlayer(), Config.preventNBTBanMessage);
+                        MessageUtil.sendMessage(event.getPlayer(), Config.preventNBTBanMessage);
                     }
                 }
             }

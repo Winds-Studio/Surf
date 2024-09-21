@@ -1,6 +1,7 @@
 package cn.dreeam.surf.modules.patch;
 
 import cn.dreeam.surf.config.Config;
+import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.Util;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.block.Block;
@@ -21,7 +22,7 @@ public class BucketEvent implements Listener {
         // Fix monkey code
         if (checkEndPortal(event.getBlockClicked())) {
             event.setCancelled(true);
-            Util.sendMessage(event.getPlayer(), Config.preventBuketPortalMessage);
+            MessageUtil.sendMessage(event.getPlayer(), Config.preventBuketPortalMessage);
         }
     }
 
@@ -31,7 +32,7 @@ public class BucketEvent implements Listener {
 
         if (checkEndPortal(event.getBlock())) {
             event.setCancelled(true);
-            Util.println(Config.preventBuketPortalMessage + " | " + event.getBlock().getLocation());
+            MessageUtil.println(Config.preventBuketPortalMessage + " | " + event.getBlock().getLocation());
         }
     }
 

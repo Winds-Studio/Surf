@@ -1,6 +1,7 @@
 package cn.dreeam.surf.modules.patch;
 
 import cn.dreeam.surf.config.Config;
+import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.Util;
 import com.cryptomorin.xseries.XMaterial;
 import com.destroystokyo.paper.event.entity.EntityTeleportEndGatewayEvent;
@@ -39,7 +40,7 @@ public class GateWay implements Listener {
                     nearby.getLocation().getBlockY() + 5, nearby.getLocation().getBlockZ() + 30));
             entity.setVelocity(vector);
             event.setCancelled(true);
-            Util.sendMessage(nearby, "Going through ENDGATEWAY while riding " + entity.getName() + " is currently patched");
+            MessageUtil.sendMessage(nearby, "Going through ENDGATEWAY while riding " + entity.getName() + " is currently patched");
         }
     }
 
@@ -57,7 +58,7 @@ public class GateWay implements Listener {
         if (entity instanceof ChestedHorse) {
             entity.eject();
             event.setCancelled(true);
-            Util.println("&1Prevented a entity enter portal crash at" + entity.getLocation());
+            MessageUtil.println("&1Prevented a entity enter portal crash at" + entity.getLocation());
         }
     }
 
@@ -76,7 +77,7 @@ public class GateWay implements Listener {
                 vehicle.eject();
                 vehicle.remove();
                 Util.kickPlayer(player, "Sorry this exploit got patched :(");
-                Util.println("&1Prevented&r&e " + player.getName() + "&r&1 at &r&e" + vehicle.getLocation() + " &r&1from crashing the server");
+                MessageUtil.println("&1Prevented&r&e " + player.getName() + "&r&1 at &r&e" + vehicle.getLocation() + " &r&1from crashing the server");
             }
         }
     }

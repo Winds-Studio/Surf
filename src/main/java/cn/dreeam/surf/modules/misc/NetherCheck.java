@@ -1,6 +1,7 @@
 package cn.dreeam.surf.modules.misc;
 
 import cn.dreeam.surf.config.Config;
+import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.Util;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
@@ -29,14 +30,14 @@ public class NetherCheck implements Listener {
             if (Config.netherTopBottomDoDamage) {
                 player.damage(20);
             }
-            Util.sendMessage(player, Config.netherTopMessage);
+            MessageUtil.sendMessage(player, Config.netherTopMessage);
         // is in nether bottom
         } else if (event.getTo().getBlockY() < Config.netherBottomLayer) {
             event.setCancelled(true);
             if (Config.netherTopBottomDoDamage) {
                 player.damage(20);
             }
-            Util.sendMessage(player, Config.netherBottomMessage);
+            MessageUtil.sendMessage(player, Config.netherBottomMessage);
         }
     }
 }

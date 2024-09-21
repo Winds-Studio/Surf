@@ -190,7 +190,7 @@ public class ItemUtil {
                     item.setAmount(0);
                 }
 
-                Util.println("&6Detected illegals " + original.getI18NDisplayName());
+                MessageUtil.println("&6Detected illegals " + original.getI18NDisplayName());
             }
         }
     }
