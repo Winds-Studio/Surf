@@ -4,6 +4,7 @@ import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.Util;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -50,8 +51,16 @@ public class ConnectionEvent implements Listener {
     }
 
     private Component getConnectionMessage(Player player, String message) {
-        message = message.replace("%player%", player.getName());
+        Component connecntionComponent;
 
-        return LegacyComponentSerializer.legacyAmpersand().deserialize(message);
+        if (Config.connectionMessageUseDisplayName && !player.displayName().equals(Component.empty())) {
+            connecntionComponent = LegacyComponentSerializer.legacyAmpersand().deserialize(message)
+                    .replaceText(TextReplacementConfig.builder().matchLiteral("%player%").replacement(player.displayName()).build());
+        } else {
+            message = message.replace("%player%", player.getName());
+            connecntionComponent = LegacyComponentSerializer.legacyAmpersand().deserialize(message);
+        }
+
+        return connecntionComponent;
     }
 }

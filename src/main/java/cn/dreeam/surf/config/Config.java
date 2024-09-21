@@ -22,7 +22,7 @@ public class Config {
     public static String limitOffhandSwapMessage;
 
     // Misc / Connection / Nether
-    public static boolean connectionMessageEnabled, connectionFirstJoinEnabled, connectionPreventKickEnabled, netherEnabled, netherTopBottomDoDamage;
+    public static boolean connectionMessageEnabled, connectionMessageUseDisplayName, connectionFirstJoinEnabled, connectionPreventKickEnabled, netherEnabled, netherTopBottomDoDamage;
     public static int netherTopLayer, netherBottomLayer;
     public static String connectionPlayerJoin, connectionPlayerLeave, connectionFirstJoinMessage, netherTopMessage, netherBottomMessage;
     public static List<String> connectionKickReasons;
@@ -94,6 +94,8 @@ public class Config {
         connectionMessageEnabled = Surf.configManager().getBoolean("connection-meesage.enabled", false, """
                 These are the connection messages for when a player joins / leaves
                 Use & for colours and %player% as a placeholder for the players name""");
+        connectionMessageUseDisplayName = Surf.configManager().getBoolean("connection-meesage.use-display-name", true, """
+                Whether use display name in connection messages.""");
 
         connectionPlayerJoin = Surf.configManager().getString("connection-meesage.player-join", "&7[&a+&7] &8%player%");
         connectionPlayerLeave = Surf.configManager().getString("connection-meesage.player-leave", "&7[&c-&7] &8%player%");
