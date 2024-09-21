@@ -37,11 +37,11 @@ public class ConnectionEvent implements Listener {
     public void onKick(PlayerKickEvent event) {
         if (!Config.connectionPreventKickEnabled) return;
 
-        Config.connectionKickReasons.forEach(reason -> {
-            if (event.getReason().equalsIgnoreCase(reason)) {
-                event.setCancelled(true);
-                Util.println("Cancelled a kick for " + event.getPlayer().getName() + ", Reason: " + reason);
-            }
-        });
+        String reason = event.getReason();
+
+        if (Config.connectionKickReasons.contains(reason)) {
+            event.setCancelled(true);
+            Util.println("Cancelled a kick for " + event.getPlayer().getName() + ", Reason: " + reason);
+        }
     }
 }
