@@ -69,8 +69,8 @@ public class ItemUtil {
         return i.getType().equals(XMaterial.TOTEM_OF_UNDYING.parseMaterial()) && i.getAmount() > i.getMaxStackSize();
     }
 
-    public static boolean isIllegalBlock(ItemStack i) {
-        return i.getType().isBlock() && Config.antiIllegalIllegalBlockList.contains(i.getType().toString());
+    public static boolean isIllegalItem(ItemStack i) {
+        return Config.antiIllegalIllegalBlockList.contains(i.getType().toString());
     }
 
     public static boolean isEnchantedBlock(ItemStack i) {
@@ -168,7 +168,7 @@ public class ItemUtil {
     }
 
     public static boolean isIllegal(ItemStack i) {
-        return isIllegalBlock(i) || isEnchantedBlock(i) || isIllegalPotion(i) || hasIllegalDurability(i)
+        return isIllegalItem(i) || isEnchantedBlock(i) || isIllegalPotion(i) || hasIllegalDurability(i)
                 || isUnbreakable(i) || hasIllegalEnchants(i) || hasIllegalItemFlag(i) || hasIllegalAttributes(i);
     }
 
@@ -197,7 +197,7 @@ public class ItemUtil {
 
     private static ItemStack cleanIllegals(ItemStack i) {
         if (i == null || isAir(i)) return ItemStack.empty();
-        if (isIllegalBlock(i) || isIllegalPotion(i)) return ItemStack.empty();
+        if (isIllegalItem(i) || isIllegalPotion(i)) return ItemStack.empty();
 
         if (Config.antiIllegalDeleteIllegalsWhenFoundEnabled && isIllegal(i)) {
             return ItemStack.empty();
