@@ -3,7 +3,6 @@ package cn.dreeam.surf.modules.antiillegal;
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.ItemUtil;
 import cn.dreeam.surf.util.MessageUtil;
-import cn.dreeam.surf.util.Util;
 import dev.rosewood.rosestacker.event.ItemPickupEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

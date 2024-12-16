@@ -3,8 +3,6 @@ package cn.dreeam.surf.modules.antiillegal;
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.ItemUtil;
 import cn.dreeam.surf.util.MessageUtil;
-import cn.dreeam.surf.util.Util;
-import org.bukkit.Material;
 import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;

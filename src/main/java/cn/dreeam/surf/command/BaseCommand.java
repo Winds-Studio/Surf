@@ -2,7 +2,6 @@ package cn.dreeam.surf.command;
 
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.util.MessageUtil;
-import cn.dreeam.surf.util.Util;
 import org.bukkit.command.CommandSender;
 
 public abstract class BaseCommand {

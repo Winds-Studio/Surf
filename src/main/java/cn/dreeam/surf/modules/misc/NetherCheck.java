@@ -2,7 +2,6 @@ package cn.dreeam.surf.modules.misc;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.MessageUtil;
-import cn.dreeam.surf.util.Util;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.entity.Player;

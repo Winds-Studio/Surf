@@ -3,7 +3,6 @@ package cn.dreeam.surf.modules.patch;
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.ItemUtil;
 import cn.dreeam.surf.util.MessageUtil;
-import cn.dreeam.surf.util.Util;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Material;
 import org.bukkit.block.ShulkerBox;
