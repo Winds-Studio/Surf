@@ -304,13 +304,6 @@ public class ItemUtil {
                 "REINFORCED_DEEPSLATE"
         ));
 
-        // <= 1.12.2
-        if (Util.isNewerAndEqual(12, 0)) {
-            list.addAll(Arrays.asList(
-
-            ));
-        }
-
         return list;
     }
 
@@ -392,5 +385,8 @@ public class ItemUtil {
 
         return map;
     }
+
     public static String getItemDisplayName(ItemStack itemStack) {
+        return PlainTextComponentSerializer.plainText().serialize(itemStack.displayName());
+    }
 }
