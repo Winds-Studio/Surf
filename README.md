@@ -10,7 +10,7 @@ Recommended use as a addition with AnarchyExploitFixes and Panilla to become 100
 ## Compatibility
 
 - Support Java 21 and higher
-- Support 1.12.2 ~ Latest Minecraft version (1.21.1)
+- Support 1.12.2 ~ Latest Minecraft version (1.21.4)
 - Compatible with Paper / Paper Forks
 - Folia Support
 
