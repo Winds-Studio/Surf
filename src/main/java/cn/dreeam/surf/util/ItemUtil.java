@@ -309,8 +309,6 @@ public class ItemUtil {
                 "REINFORCED_DEEPSLATE"
         ));
 
-        // <= 1.12.2
-        if (Util.isNewerAndEqual(12, 0)) {
         return list;
     }
 
