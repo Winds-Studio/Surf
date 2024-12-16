@@ -3,8 +3,9 @@ package cn.dreeam.surf.util;
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.config.Config;
 import com.cryptomorin.xseries.XMaterial;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-import org.jetbrains.annotations.NotNull;
+import org.bukkit.Registry;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
@@ -35,6 +36,9 @@ public class ItemUtil {
     public static final List<String> illegalAttributes = initIllegalAttribute();
     public static final List<String> illegalEnchants = initIllegalEnchants();
     public static final Map<String, Integer> illegalEnchantsMap = initIllegalEnchantsMap();
+
+    private static Method attributeValueOf;
+    private static Method attributeValues;
 
     /*
     public static boolean isContainer(ItemStack i) {
@@ -157,7 +161,7 @@ public class ItemUtil {
     public static boolean hasIllegalAttributes(ItemStack i) {
         if (i.hasItemMeta()) {
             for (String attribute : Config.antiIllegalIllegalAttributeModifierList) {
-                if (i.getItemMeta().getAttributeModifiers(Attribute.valueOf(attribute)) != null) {
+                if (i.getItemMeta().getAttributeModifiers(getAttributeByName(attribute)) != null) {
                     return true;
                 }
             }
@@ -272,8 +276,8 @@ public class ItemUtil {
 
             // Clean illegal AttributeModifier
             for (String attribute : Config.antiIllegalIllegalAttributeModifierList) {
-                if (meta.getAttributeModifiers(Attribute.valueOf(attribute)) != null) {
-                    meta.removeAttributeModifier(Attribute.valueOf(attribute));
+                if (meta.getAttributeModifiers(getAttributeByName(attribute)) != null) {
+                    meta.removeAttributeModifier(getAttributeByName(attribute));
                 }
             }
 
@@ -305,6 +309,8 @@ public class ItemUtil {
                 "REINFORCED_DEEPSLATE"
         ));
 
+        // <= 1.12.2
+        if (Util.isNewerAndEqual(12, 0)) {
         return list;
     }
 
@@ -321,7 +327,7 @@ public class ItemUtil {
     private static List<String> initIllegalAttribute() {
         List<String> list = new ArrayList<>();
 
-        for (Attribute attribute : Attribute.values()) {
+        for (Attribute attribute : getAttributes()) {
             list.add(attribute.toString());
         }
 
@@ -389,5 +395,39 @@ public class ItemUtil {
 
     public static String getItemDisplayName(ItemStack itemStack) {
         return PlainTextComponentSerializer.plainText().serialize(itemStack.displayName());
+    }
+
+    private static Attribute getAttributeByName(String name) {
+        if (Util.isNewerThan(21, 1)) {
+            return Registry.ATTRIBUTE.get(Key.key(name));
+        }
+
+        try {
+            if (attributeValueOf == null) {
+                attributeValueOf = Attribute.class.getMethod("valueOf", String.class);
+            }
+
+            return (Attribute) attributeValueOf.invoke(null, name);
+        } catch (ReflectiveOperationException e) {
+            Surf.LOGGER.error(e);
+            return null;
+        }
+    }
+
+    private static Attribute[] getAttributes() {
+        if (Util.isNewerThan(21, 1)) {
+            return Registry.ATTRIBUTE.stream().toArray(Attribute[]::new);
+        }
+
+        try {
+            if (attributeValues == null) {
+                attributeValues = Attribute.class.getMethod("values");
+            }
+
+            return (Attribute[]) attributeValues.invoke(null);
+        } catch (ReflectiveOperationException e) {
+            Surf.LOGGER.error(e);
+            return null;
+        }
     }
 }
