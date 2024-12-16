@@ -47,13 +47,25 @@ public class IllegalDamageAndPotionCheck implements Listener {
                 LivingEntity damager = (LivingEntity) entity;
                 // Only check entities using illegal items
                 if (damager.getEquipment() != null && damager.getEquipment().getItemInMainHand().hasItemMeta()) {
-                    if (event.getDamage() > 30) {
+                    double damage = event.getDamage();
+
+                    if (damage > 30) {
+                        String itemName = ItemUtil.getItemDisplayName(damager.getEquipment().getItemInMainHand());
+
                         event.setCancelled(true);
                         damager.getEquipment().setItemInMainHand(null); // Seems only can use item on main hand to attack
-                        MessageUtil.println(damager.getName() + " | " + Config.checkIllegalDamageMessage + " | " + damager.getLocation());
+
+                        MessageUtil.println(String.format(
+                                "%s try to use illegal item %s with damage %s at %s",
+                                damager.getName(),
+                                itemName,
+                                damage,
+                                MessageUtil.locToString(damager.getLocation())
+                        ));
                     }
                 }
             }
+
             // Player: Projectile -> Entity
             // Dreeam TODO: this is temp fix, need to rewrite.
             if (entity instanceof Projectile) {
@@ -186,12 +198,18 @@ public class IllegalDamageAndPotionCheck implements Listener {
                     if (ItemUtil.isIllegalEffect(effect)) {
                         event.setCancelled(true);
                         disp.getInventory().remove(event.getItem());
-                        MessageUtil.println(Config.checkIllegalPotionMessage + " | " + event.getBlock().getLocation());
+
                         // One illegal potion effect appear, remove whole item
                         // then break the for loop.
                         break;
                     }
                 }
+
+                MessageUtil.println(String.format(
+                        "Detected item %s with illegal effects at %s",
+                        ItemUtil.getItemDisplayName(event.getItem()),
+                        MessageUtil.locToString(event.getBlock().getLocation())
+                ));
             }
         }
     }

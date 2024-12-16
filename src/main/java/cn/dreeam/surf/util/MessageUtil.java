@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -21,7 +22,7 @@ public class MessageUtil {
             player.sendMessage(message);
         }
 
-        println(player + " | " + message);
+        println("[" + player + "] " + message);
     }
 
     @SuppressWarnings("deprecation")
@@ -42,5 +43,10 @@ public class MessageUtil {
         message = ChatColor.translateAlternateColorCodes('&', Util.getPrefix() + message);
 
         Bukkit.getServer().getConsoleSender().sendMessage(message);
+    }
+
+    // World<x: 1, y: 2, z:3>
+    public static String locToString(Location loc) {
+        return loc.getWorld().getName() + "<x: " + loc.getBlockX() + ", y: " + loc.getBlockY() + ", z: " + loc.getBlockZ() + ">";
     }
 }

@@ -58,7 +58,11 @@ public class GateWay implements Listener {
         if (entity instanceof ChestedHorse) {
             entity.eject();
             event.setCancelled(true);
-            MessageUtil.println("&1Prevented a entity enter portal crash at" + entity.getLocation());
+
+            MessageUtil.println(String.format(
+                    "&1Prevented a entity enter portal crash at %s",
+                    MessageUtil.locToString(entity.getLocation())
+            ));
         }
     }
 
@@ -77,7 +81,12 @@ public class GateWay implements Listener {
                 vehicle.eject();
                 vehicle.remove();
                 Util.kickPlayer(player, "Sorry this exploit got patched :(");
-                MessageUtil.println("&1Prevented&r&e " + player.getName() + "&r&1 at &r&e" + vehicle.getLocation() + " &r&1from crashing the server");
+
+                MessageUtil.println(String.format(
+                        "&1Prevented&r&e %s &r&1 at &r&e %s &r&1from crashing the server",
+                        player.getName(),
+                        MessageUtil.locToString(vehicle.getLocation())
+                ));
             }
         }
     }

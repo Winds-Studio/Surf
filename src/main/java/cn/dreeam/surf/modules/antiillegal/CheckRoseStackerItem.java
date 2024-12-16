@@ -26,7 +26,11 @@ public class CheckRoseStackerItem implements Listener {
                 Player player = (Player) event.getEntity();
                 MessageUtil.sendMessage(player, "&6You can not pick up this illegal item.");
             } else {
-                MessageUtil.println(event.getEntity().getName() + " try to pick up an illegal item at " + event.getStackedItem().getLocation());
+                MessageUtil.println(String.format(
+                        "%s try to pick up an illegal item at %s",
+                        event.getEntity().getName().toLowerCase(),
+                        MessageUtil.locToString(event.getStackedItem().getLocation())
+                ));
             }
         }
     }

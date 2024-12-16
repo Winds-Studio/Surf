@@ -28,7 +28,7 @@ public class CheckIllegal implements Listener {
 
         Inventory inv = event.getPlayer().getInventory();
 
-        ItemUtil.cleanIllegals(inv);
+        ItemUtil.cleanIllegals(inv, event.getPlayer().getName());
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -40,7 +40,7 @@ public class CheckIllegal implements Listener {
 
         if (!inv.getType().equals(InventoryType.CRAFTING)) return;
 
-        ItemUtil.cleanIllegals(inv);
+        ItemUtil.cleanIllegals(inv, inv.getType().name());
     }
 
     @EventHandler
@@ -52,7 +52,7 @@ public class CheckIllegal implements Listener {
 
         if (!inv.getType().equals(InventoryType.PLAYER)) return;
 
-        ItemUtil.cleanIllegals(inv);
+        ItemUtil.cleanIllegals(inv, event.getPlayer().getName());
     }
 
     @EventHandler
@@ -64,7 +64,7 @@ public class CheckIllegal implements Listener {
 
         if (!inv.getType().equals(InventoryType.PLAYER)) return;
 
-        ItemUtil.cleanIllegals(inv);
+        ItemUtil.cleanIllegals(inv, event.getPlayer().getName());
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -95,7 +95,11 @@ public class CheckIllegal implements Listener {
                 Player player = (Player) event.getEntity();
                 MessageUtil.sendMessage(player, "&6You can not pick up this illegal item.");
             } else {
-                MessageUtil.println(event.getEntity().getName() + " try to pick up an illegal item at " + event.getItem().getLocation());
+                MessageUtil.println(String.format(
+                        "%s try to pick up an illegal item at %s",
+                        event.getEntity().getName().toLowerCase(),
+                        MessageUtil.locToString(event.getItem().getLocation())
+                ));
             }
         }
     }

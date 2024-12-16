@@ -31,11 +31,13 @@ public class MinecartLag implements Listener {
 
             if (amount >= max) {
                 event.setCancelled(true);
+
                 for (Entity ent : event.getVehicle().getChunk().getEntities()) {
                     if (ent instanceof Vehicle) {
                         ent.remove();
                     }
                 }
+
                 MessageUtil.sendMessage(player, Util.getPrefix() + "&6Please limit " + formattedName + " to &r&c" + max + "&r&6 per chunk");
             }
         }

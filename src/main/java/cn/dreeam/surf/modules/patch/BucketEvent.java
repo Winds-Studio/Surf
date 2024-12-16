@@ -32,7 +32,11 @@ public class BucketEvent implements Listener {
 
         if (checkEndPortal(event.getBlock())) {
             event.setCancelled(true);
-            MessageUtil.println(Config.preventBuketPortalMessage + " | " + event.getBlock().getLocation());
+
+            MessageUtil.println(String.format(
+                    "Prevent a bucket on portal crash at %s.",
+                    MessageUtil.locToString(event.getBlock().getLocation())
+            ));
         }
     }
 

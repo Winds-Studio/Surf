@@ -2,13 +2,16 @@ package cn.dreeam.surf.util;
 
 import cn.dreeam.surf.config.Config;
 import com.cryptomorin.xseries.XMaterial;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -172,7 +175,7 @@ public class ItemUtil {
                 || isUnbreakable(i) || hasIllegalEnchants(i) || hasIllegalItemFlag(i) || hasIllegalAttributes(i);
     }
 
-    public static void cleanIllegals(Inventory inventory) {
+    public static void cleanIllegals(Inventory inventory, String name) {
         ItemStack[] contents = inventory.getContents();
 
         // if inventory is empty, skip
@@ -190,7 +193,11 @@ public class ItemUtil {
                     item.setAmount(0);
                 }
 
-                MessageUtil.println("&6Detected illegals " + original.getI18NDisplayName());
+                MessageUtil.println(String.format(
+                        "&6Detected illegals %s on %s",
+                        ItemUtil.getItemDisplayName(original),
+                        name
+                ) );
             }
         }
     }
@@ -297,7 +304,11 @@ public class ItemUtil {
                 "REINFORCED_DEEPSLATE"
         ));
 
+        // <= 1.12.2
         if (Util.isNewerAndEqual(12, 0)) {
+            list.addAll(Arrays.asList(
+
+            ));
         }
 
         return list;
@@ -381,4 +392,5 @@ public class ItemUtil {
 
         return map;
     }
+    public static String getItemDisplayName(ItemStack itemStack) {
 }

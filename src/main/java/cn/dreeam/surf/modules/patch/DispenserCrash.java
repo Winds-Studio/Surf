@@ -28,7 +28,11 @@ public class DispenserCrash implements Listener {
             boolean isYMaxFacingUp = block.getY() == block.getWorld().getMaxHeight() - 1 && face == BlockFace.UP;
             if (isY0FacingDown || isYMaxFacingUp) {
                 event.setCancelled(true);
-                MessageUtil.println("Prevent a dispenser crash at " + block.getLocation() +".");
+
+                MessageUtil.println(String.format(
+                        "Prevent a dispenser crash at %s.",
+                        MessageUtil.locToString(block.getLocation())
+                ));
             }
         }
     }
