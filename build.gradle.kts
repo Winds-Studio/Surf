@@ -69,18 +69,19 @@ tasks {
     shadowJar {
         archiveFileName = "${project.name}-${project.version}.${archiveExtension.get()}"
         exclude("META-INF/**") // Dreeam - Avoid to include META-INF/maven in Jar
-        relocate("io.github.thatsmusic99.configurationmaster", "cn.dreeam.surf.libs.configurationmaster")
-        relocate("org.bstats", "cn.dreeam.surf.libs.bstats")
-        relocate("com.tcoded.folialib", "cn.dreeam.surf.libs.folialib")
-        relocate("com.cryptomorin.xseries", "cn.dreeam.surf.libs.xseries")
-        relocate("de.tr7zw.changeme.nbtapi", "cn.dreeam.surf.libs.nbtapi")
+        relocate("io.github.thatsmusic99.configurationmaster", "$group.libs.configurationmaster")
+        relocate("org.bstats", "$group.libs.bstats")
+        relocate("com.tcoded.folialib", "$group.libs.folialib")
+        relocate("com.cryptomorin.xseries", "$group.libs.xseries")
+        relocate("de.tr7zw.changeme.nbtapi", "$group.libs.nbtapi")
     }
 
     processResources {
         filesMatching("**/plugin.yml") {
             expand(
-                "version" to project.version,
-                "description" to project.description
+                "name" to rootProject.name,
+                "version" to version,
+                "description" to description
             )
         }
     }
