@@ -5,6 +5,7 @@ import cn.dreeam.surf.config.Config;
 import com.cryptomorin.xseries.XMaterial;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.Keyed;
 import org.bukkit.Registry;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
@@ -325,7 +326,7 @@ public class ItemUtil {
     private static List<String> initIllegalAttribute() {
         List<String> list = new ArrayList<>();
 
-        for (Attribute attribute : getAttributes()) {
+        for (Object attribute : getAttributes()) {
             list.add(attribute.toString());
         }
 
@@ -412,9 +413,9 @@ public class ItemUtil {
         }
     }
 
-    private static Attribute[] getAttributes() {
+    private static Object[] getAttributes() {
         if (Util.isNewerThan(21, 1)) {
-            return Registry.ATTRIBUTE.stream().toArray(Attribute[]::new);
+            return Registry.ATTRIBUTE.stream().map(Keyed::getKey).toArray(Key[]::new);
         }
 
         try {
@@ -422,7 +423,7 @@ public class ItemUtil {
                 attributeValues = Attribute.class.getMethod("values");
             }
 
-            return (Attribute[]) attributeValues.invoke(null);
+            return (Object[]) attributeValues.invoke(null);
         } catch (ReflectiveOperationException e) {
             Surf.LOGGER.error(e);
             return null;
