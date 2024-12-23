@@ -33,10 +33,10 @@ repositories {
         url = uri("https://ci.pluginwiki.us/plugin/repository/everything/")
     }
 
-    // FoliaLib
+    // JitPack
     maven {
-        name = "devmart-other"
-        url = uri("https://nexuslite.gcnt.net/repos/other/")
+        name = "jitpack.io"
+        url = uri("https://jitpack.io/")
     }
 }
 
@@ -46,9 +46,9 @@ dependencies {
         exclude(group = "org.yaml", module = "snakeyaml")
     }
     implementation("org.bstats:bstats-bukkit:3.1.0")
-    implementation("com.tcoded:FoliaLib:0.4.2")
-    implementation("com.github.cryptomorin:XSeries:12.0.0")
-    implementation("de.tr7zw:item-nbt-api:2.14.0")
+    implementation("com.github.technicallycoded:FoliaLib:0.4.3")
+    implementation("com.github.cryptomorin:XSeries:12.1.0")
+    implementation("de.tr7zw:item-nbt-api:2.14.1")
     compileOnly(files("libs/RoseStacker-1.5.22.jar"))
 }
 
@@ -69,19 +69,19 @@ tasks {
     shadowJar {
         archiveFileName = "${project.name}-${project.version}.${archiveExtension.get()}"
         exclude("META-INF/**") // Dreeam - Avoid to include META-INF/maven in Jar
-        relocate("io.github.thatsmusic99.configurationmaster", "$group.libs.configurationmaster")
-        relocate("org.bstats", "$group.libs.bstats")
-        relocate("com.tcoded.folialib", "$group.libs.folialib")
-        relocate("com.cryptomorin.xseries", "$group.libs.xseries")
-        relocate("de.tr7zw.changeme.nbtapi", "$group.libs.nbtapi")
+        relocate("io.github.thatsmusic99.configurationmaster", "${project.group}.libs.configurationmaster")
+        relocate("org.bstats", "${project.group}.libs.bstats")
+        relocate("com.tcoded.folialib", "${project.group}.libs.folialib")
+        relocate("com.cryptomorin.xseries", "${project.group}.libs.xseries")
+        relocate("de.tr7zw.changeme.nbtapi", "${project.group}.libs.nbtapi")
     }
 
     processResources {
         filesMatching("**/plugin.yml") {
             expand(
-                "name" to rootProject.name,
-                "version" to version,
-                "description" to description
+                "name" to project.name,
+                "version" to project.version,
+                "description" to project.description
             )
         }
     }
