@@ -66,11 +66,17 @@ public class Config {
         antiIllegalCheckWhenItemPickupEnabled = Surf.configManager().getBoolean("anti-illegal.check-when.ItemPickup", false);
 
         antiIllegalIllegalBlockList = Surf.configManager().getList("anti-illegal.checks.illegal-block-list", ItemUtil.illegalBlocks);
-        antiIllegalIllegalItemFlagList = Surf.configManager().getList("anti-illegal.checks.illegal-item-flag-list", ItemUtil.illegalItemFlags);
+        antiIllegalIllegalItemFlagList = Surf.configManager().getList("anti-illegal.checks.illegal-item-flag-list", ItemUtil.illegalItemFlags, """
+                Illegal item flags on itemstack for checking.
+                In vanilla environment item would not has item flag.
+                Note: delete this config section to let auto-regenerate if you change the server version.""");
         antiIllegalIllegalEnchantList = Surf.configManager().getList("anti-illegal.checks.illegal-enchant-list", ItemUtil.illegalEnchants, """
                 Set the value to -1 or remove the entire enchant from the list
                 to disable check to that illegal enchant""");
-        antiIllegalIllegalAttributeModifierList = Surf.configManager().getList("anti-illegal.checks.illegal-attribute-modifier-list", ItemUtil.illegalAttributes);
+        antiIllegalIllegalAttributeModifierList = Surf.configManager().getList("anti-illegal.checks.illegal-attribute-modifier-list", ItemUtil.illegalAttributes, """
+                Illegal attribute modifiers on itemstack for checking.
+                In vanilla environment item would not has attribute modifier.
+                Note: delete this config section to let auto-regenerate if you change the server version.""");
 
         // Anti Lag
         limitLiquidSpreadEnabled = Surf.configManager().getBoolean("limit.liquid-spread.enabled", false, """
