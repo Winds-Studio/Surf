@@ -20,9 +20,10 @@ import org.bukkit.potion.PotionEffectType;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class ItemUtil {
 
@@ -276,9 +277,11 @@ public class ItemUtil {
             }
 
             // Clean illegal AttributeModifier
-            for (String attribute : Config.antiIllegalIllegalAttributeModifierList) {
-                if (meta.getAttributeModifiers(getAttributeByName(attribute)) != null) {
-                    meta.removeAttributeModifier(getAttributeByName(attribute));
+            for (String attributeStr : Config.antiIllegalIllegalAttributeModifierList) {
+                Attribute attribute = getAttributeByName(attributeStr);
+
+                if (attribute != null && meta.getAttributeModifiers(attribute) != null) {
+                    meta.removeAttributeModifier(attribute);
                 }
             }
 
@@ -290,7 +293,7 @@ public class ItemUtil {
 
     // TODO
     private static List<String> initIllegalBlocks() {
-        List<String> list = new ArrayList<>(Arrays.asList(
+        final List<String> list = new ArrayList<>(Arrays.asList(
                 "BARRIER",
                 "BEDROCK",
                 "COMMAND_BLOCK",
@@ -314,20 +317,24 @@ public class ItemUtil {
     }
 
     private static List<String> initIllegalItemFlags() {
-        List<String> list = new ArrayList<>();
+        final List<String> list = new ArrayList<>();
 
         for (ItemFlag itemFlag : ItemFlag.values()) {
-            list.add(itemFlag.toString());
+            final String itemFlagStr = itemFlag.toString();
+
+            list.add(itemFlagStr);
         }
 
         return list;
     }
 
     private static List<String> initIllegalAttribute() {
-        List<String> list = new ArrayList<>();
+        final List<String> list = new ArrayList<>();
 
         for (Object attribute : getAttributes()) {
-            list.add(attribute.toString());
+            final String attributeStr = attribute.toString().toLowerCase(Locale.ROOT);
+
+            list.add(attributeStr);
         }
 
         return list;
@@ -382,10 +389,11 @@ public class ItemUtil {
     }
 
     private static Map<String, Integer> initIllegalEnchantsMap() {
-        Map<String, Integer> map = new ConcurrentHashMap<>();
+        final Map<String, Integer> map = new HashMap<>();
 
         for (String ench : illegalEnchants) {
-            String[] list = ench.split(":");
+            final String[] list = ench.split(":");
+
             map.put(list[0], Integer.valueOf(list[1]));
         }
 
