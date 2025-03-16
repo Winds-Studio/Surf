@@ -30,7 +30,7 @@ repositories {
     // ConfigurationMaster
     maven {
         name = "cm-repo"
-        url = uri("https://ci.pluginwiki.us/plugin/repository/everything/")
+        url = uri("https://repo.bsdevelopment.org/releases/")
     }
 
     // JitPack
