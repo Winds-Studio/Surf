@@ -42,7 +42,7 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
-    implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.2") {
+    implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.3") {
         exclude(group = "org.yaml", module = "snakeyaml")
     }
     implementation("org.bstats:bstats-bukkit:3.1.0")
