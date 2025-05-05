@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public class StackedTotem implements Listener {
 
     @EventHandler
-    public void onDamage(EntityDamageEvent event) {
+    private void onDamage(EntityDamageEvent event) {
         if (!Config.stackedTotemRevertAsOneEnabled) return;
 
         // Check when player gets damage or make damage to others

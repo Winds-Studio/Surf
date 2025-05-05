@@ -17,6 +17,7 @@ import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -26,7 +27,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
 
     // Entity gets damage
     @EventHandler(ignoreCancelled = true)
-    public void onDamage(EntityDamageByEntityEvent event) {
+    private void onDamage(EntityDamageByEntityEvent event) {
         if (!Config.checkIllegalDamageEnabled) return;
 
         // Player => Entity
@@ -81,7 +82,22 @@ public class IllegalDamageAndPotionCheck implements Listener {
     }
 
     @EventHandler
-    public void onLeave(PlayerQuitEvent event) {
+    private void onJoin(PlayerJoinEvent event) {
+        if (!Config.checkIllegalPotionEnabled) return;
+
+        Player player = event.getPlayer();
+
+        if (!player.getActivePotionEffects().isEmpty()) {
+            for (PotionEffect effect : player.getActivePotionEffects()) {
+                if (ItemUtil.isIllegalEffect(effect)) {
+                    player.removePotionEffect(effect.getType());
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    private void onLeave(PlayerQuitEvent event) {
         if (!Config.checkIllegalPotionEnabled) return;
 
         Player player = event.getPlayer();
@@ -97,7 +113,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
 
     // Check Entity gets illegal potion effects
     @EventHandler(ignoreCancelled = true)
-    public void onPotion(EntityPotionEffectEvent event) {
+    private void onPotion(EntityPotionEffectEvent event) {
         if (!Config.checkIllegalPotionEnabled) return;
 
         PotionEffect effect = event.getNewEffect();
@@ -115,7 +131,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
 
     // Arrow shoot by player
     @EventHandler(ignoreCancelled = true)
-    public void onHit(ProjectileHitEvent event) {
+    private void onHit(ProjectileHitEvent event) {
         if (!Config.checkIllegalPotionEnabled) return;
 
         if (!(event.getEntity() instanceof Arrow) || !(event.getEntity().getShooter() instanceof Player)
@@ -136,7 +152,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onThrow(PotionSplashEvent event) {
+    private void onThrow(PotionSplashEvent event) {
         if (!Config.checkIllegalPotionEnabled) return;
 
         if (!(event.getPotion().getShooter() instanceof Player)) {
@@ -159,7 +175,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
     // Check Player consume Potion with illegal potion effects
     // Dreeam TODO: Check wheter need add foods with illegal effects
     @EventHandler(ignoreCancelled = true)
-    public void PlayerInteractEvent(PlayerItemConsumeEvent e) {
+    private void PlayerInteractEvent(PlayerItemConsumeEvent e) {
         if (!Config.checkIllegalPotionEnabled) return;
 
         if (!e.getItem().getType().toString().contains("POTION") || !e.getItem().hasItemMeta()) {
@@ -180,7 +196,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
 
     // Check Potion/Arrow/Trident with illegal potion effects dispense from dispenser
     @EventHandler(ignoreCancelled = true)
-    public void onDispense(BlockDispenseEvent event) {
+    private void onDispense(BlockDispenseEvent event) {
         if (!Config.checkIllegalPotionEnabled) return;
 
         String material = event.getItem().getType().name();

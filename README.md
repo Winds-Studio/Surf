@@ -38,3 +38,9 @@ prefix
 modules
     ChunkBan
     NBTBAN
+Refactor notes;
+Move checks in item util into checks package
+split to general and various checks related to specific item.
+in the main check method under each listener, add checks for specific item type
+then in a for loop to loop all checks to snalitize the item.
+Add add credit for panilla

@@ -13,7 +13,7 @@ public class CheckRoseStackerItem implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     @AntiIllegal(EventName = "ItemPickupEvent")
-    public void onPickup(ItemPickupEvent event) {
+    private void onPickup(ItemPickupEvent event) {
         if (!Config.antiIllegalCheckWhenItemPickupEnabled) return;
 
         ItemStack i = event.getStackedItem().getItem().getItemStack();

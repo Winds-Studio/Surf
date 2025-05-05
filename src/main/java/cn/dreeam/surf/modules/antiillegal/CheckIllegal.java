@@ -22,7 +22,7 @@ public class CheckIllegal implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     @AntiIllegal(EventName = "PlayerJoinEvent")
-    public void onJoin(PlayerJoinEvent event) {
+    private void onJoin(PlayerJoinEvent event) {
         if (!Config.antiIllegalCheckWhenPlayerJoinEnabled) return;
 
         Inventory inv = event.getPlayer().getInventory();
@@ -32,7 +32,7 @@ public class CheckIllegal implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     @AntiIllegal(EventName = "InventoryMoveItemEvent")
-    public void onInventoryMove(InventoryMoveItemEvent event) {
+    private void onInventoryMove(InventoryMoveItemEvent event) {
         if (!Config.antiIllegalCheckWhenHopperTransferEnabled) return;
 
         Inventory inv = event.getSource();
@@ -44,7 +44,7 @@ public class CheckIllegal implements Listener {
 
     @EventHandler
     @AntiIllegal(EventName = "InventoryCloseEvent")
-    public void onInventoryClose(InventoryCloseEvent event) {
+    private void onInventoryClose(InventoryCloseEvent event) {
         if (!Config.antiIllegalCheckWhenInventoryCloseEnabled) return;
 
         Inventory inv = event.getPlayer().getInventory();
@@ -56,7 +56,7 @@ public class CheckIllegal implements Listener {
 
     @EventHandler
     @AntiIllegal(EventName = "InventoryOpenEvent")
-    public void onInventoryOpen(InventoryOpenEvent event) {
+    private void onInventoryOpen(InventoryOpenEvent event) {
         if (!Config.antiIllegalCheckWhenInventoryOpenEnabled) return;
 
         Inventory inv = event.getPlayer().getInventory();
@@ -68,7 +68,7 @@ public class CheckIllegal implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     @AntiIllegal(EventName = "BlockDispenseArmorEvent")
-    public void onDispenseEquip(BlockDispenseArmorEvent event) {
+    private void onDispenseEquip(BlockDispenseArmorEvent event) {
         if (!Config.antiIllegalCheckWhenItemPickupEnabled) return;
 
         ItemStack i = event.getItem();
@@ -80,7 +80,7 @@ public class CheckIllegal implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     @AntiIllegal(EventName = "EntityPickupItemEvent")
-    public void onPickup(EntityPickupItemEvent event) {
+    private void onPickup(EntityPickupItemEvent event) {
         if (Surf.getInstance().isRoseStackerEnabled) return;
 
         if (!Config.antiIllegalCheckWhenItemPickupEnabled) return;

@@ -12,7 +12,7 @@ import org.bukkit.inventory.EquipmentSlot;
 public class IllegalBlockCheck implements Listener {
 
     @EventHandler(ignoreCancelled = true)
-    public void onBlockPlace(BlockPlaceEvent event) {
+    private void onBlockPlace(BlockPlaceEvent event) {
         if (!Config.antiIllegalCheckIllegalBlockEnabled) return;
 
         if (ItemUtil.isIllegalItem(event.getItemInHand())) {
