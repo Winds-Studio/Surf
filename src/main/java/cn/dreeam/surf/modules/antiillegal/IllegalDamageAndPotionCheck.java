@@ -3,7 +3,7 @@ package cn.dreeam.surf.modules.antiillegal;
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.ItemUtil;
 import cn.dreeam.surf.util.MessageUtil;
-import org.bukkit.block.Dispenser;
+import org.bukkit.block.Container;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -204,14 +204,13 @@ public class IllegalDamageAndPotionCheck implements Listener {
         // Needs to add more items if they are added in newer MC version,
         // or remove material check
         if (material.contains("POTION") || material.contains("ARROW") || material.contains("TRIDENT")) {
-            if (event.getItem().hasItemMeta() && event.getItem().getItemMeta() instanceof PotionMeta) {
-                PotionMeta pot = (PotionMeta) event.getItem().getItemMeta();
-                Dispenser disp = (Dispenser) event.getBlock().getState();
+            if (event.getItem().hasItemMeta() && event.getItem().getItemMeta() instanceof PotionMeta pot) {
+                Container container = (Container) event.getBlock().getState();
 
                 for (PotionEffect effect : pot.getCustomEffects()) {
                     if (ItemUtil.isIllegalEffect(effect)) {
                         event.setCancelled(true);
-                        disp.getInventory().remove(event.getItem());
+                        container.getInventory().remove(event.getItem());
 
                         // One illegal potion effect appear, remove whole item
                         // then break the for loop.
