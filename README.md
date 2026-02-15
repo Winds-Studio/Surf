@@ -28,9 +28,10 @@ ___
 * Remove falling block server crashers
 * Active development
 
-## Contact
+## 📫 Contact
 
-- 📫 Discord: `dreeam___` | QQ: `2682173972`
+- Discord: [`https://discord.gg/pUYdgX8cQM`](https://discord.gg/pUYdgX8cQM)
+- QQ: `2682173972`
 
 ## TODOS
 
