@@ -18,19 +18,19 @@ ___
 
 ## Features
 
-* Prevent all crash exploits that I know of
-* Prevent ChunkBan
-* Patch BookBan without disabling shulker peek
-* Prevent EndPortal greifing
-* Patch players using the OffHand crash module in certan hacked clients to crash the server with books
-* Prevent players from using illegal items
-* Remove illegal potion effects from players
-* Remove falling block server crashers
-* Active development
+- Prevent all crash exploits that I know of
+- Prevent ChunkBan
+- Patch BookBan without disabling shulker peek
+- Prevent EndPortal greifing
+- Patch players using the OffHand crash module in certan hacked clients to crash the server with books
+- Prevent players from using illegal items
+- Remove illegal potion effects from players
+- Remove falling block server crashers
+- Active development
 
 ## 📫 Contact
 
-- Discord: [`https://discord.gg/pUYdgX8cQM`](https://discord.gg/pUYdgX8cQM)
+- Discord: [`https://discord.gg/8Bv5MTXFj5`](https://discord.gg/8Bv5MTXFj5)
 - QQ: `2682173972`
 
 ## TODOS
