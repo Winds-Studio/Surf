@@ -21,8 +21,8 @@ ___
 - Prevent all crash exploits that I know of
 - Prevent ChunkBan
 - Patch BookBan without disabling shulker peek
-- Prevent EndPortal greifing
-- Patch players using the OffHand crash module in certan hacked clients to crash the server with books
+- Prevent EndPortal griefing
+- Patch players using the OffHand crash module in certain hacked clients to crash the server with books
 - Prevent players from using illegal items
 - Remove illegal potion effects from players
 - Remove falling block server crashers
