@@ -38,6 +38,7 @@ public class Config {
 
     public static void initConfig() {
         ConfigManager manager = Surf.configManager();
+
         // Prefix
         prefix = manager.getString("Prefix", "&6&l[&b&lSurf&6&l]&6 ", "Message prefix");
 
@@ -83,78 +84,84 @@ public class Config {
                 In vanilla environment item would not has attribute modifier.
                 Note: delete this config section to let auto-regenerate if you change the server version.""");
 
-        /* New */
-        checkItemAmount = manager.getBoolean("item-amount", true);
+        // Item checks
+        final String itemChecksPrefix = "item-checks.";
+        checkItemAmount = manager.getBoolean(itemChecksPrefix + "item-amount", true);
 
         // Anti Lag
-        limitLiquidSpreadEnabled = manager.getBoolean("limit.liquid-spread.enabled", false, """
+        final String limitPrefix = "limit.";
+        limitLiquidSpreadEnabled = manager.getBoolean(limitPrefix + limitPrefix + "liquid-spread.enabled", false, """
                 water / lava flowing disable tps this is useful on new servers with lots of block physics updates that cause lag
                 Set -1 to disable""");
-        limitLiquidSpreadDisableTPS = manager.getInt("limit.liquid-spread.disable-tps", 18);
+        limitLiquidSpreadDisableTPS = manager.getInt(limitPrefix + "liquid-spread.disable-tps", 18);
 
-        limitVehicleEnabled = manager.getBoolean("limit.vehicle.enabled", false);
-        limitVehicleDisableTPS = manager.getInt("limit.vehicle.disable-tps", 18);
+        limitVehicleEnabled = manager.getBoolean(limitPrefix + "vehicle.enabled", false);
+        limitVehicleDisableTPS = manager.getInt(limitPrefix + "vehicle.disable-tps", 18);
 
-        limitVehicleMinecartPerChunkLimit = manager.getInt("limit.vehicle.minecart-per-chunk", 500, "Amount of vehicles allowed per chunk");
+        limitVehicleMinecartPerChunkLimit = manager.getInt(limitPrefix + "vehicle.minecart-per-chunk", 500, "Amount of vehicles allowed per chunk");
 
-        limitOffhandSwapEnabled = manager.getBoolean("limit.offhand-swap.enabled", false);
-        limitOffhandSwapMessage = manager.getString("limit.offhand-swap.message", "&6You swap offhand too quick!");
+        limitOffhandSwapEnabled = manager.getBoolean(limitPrefix + "offhand-swap.enabled", false);
+        limitOffhandSwapMessage = manager.getString(limitPrefix + "offhand-swap.message", "&6You swap offhand too quick!");
 
-        limitWitherSpawnOnLagEnabled = manager.getBoolean("limit.wither-spawn.enabled", false);
+        limitWitherSpawnOnLagEnabled = manager.getBoolean(limitPrefix + "wither-spawn.enabled", false);
 
-        limitWitherSpawnOnLagDisableTPS = manager.getInt("limit.wither-spawn.disable-tps", 18);
+        limitWitherSpawnOnLagDisableTPS = manager.getInt(limitPrefix + "wither-spawn.disable-tps", 18);
 
         // Misc / Connection / Nether
-        connectionMessageEnabled = manager.getBoolean("connection-meesage.enabled", false, """
+        final String miscPrefix = "misc.";
+        final String connectionMsgPrefix = miscPrefix + "connection-message.";
+        connectionMessageEnabled = manager.getBoolean(connectionMsgPrefix + "enabled", false, """
                 These are the connection messages for when a player joins / leaves
                 Use & for colours and %player% as a placeholder for the players name""");
-        connectionMessageUseDisplayName = manager.getBoolean("connection-meesage.use-display-name", true, """
+        connectionMessageUseDisplayName = manager.getBoolean(connectionMsgPrefix + "use-display-name", true, """
                 Whether use display name in connection messages.""");
 
-        connectionPlayerJoin = manager.getString("connection-meesage.player-join", "&7[&a+&7] &8%player%");
-        connectionPlayerLeave = manager.getString("connection-meesage.player-leave", "&7[&c-&7] &8%player%");
+        connectionPlayerJoin = manager.getString(connectionMsgPrefix + "player-join", "&7[&a+&7] &8%player%");
+        connectionPlayerLeave = manager.getString(connectionMsgPrefix + "player-leave", "&7[&c-&7] &8%player%");
 
-        connectionFirstJoinEnabled = manager.getBoolean("connection-meesage.player-first-join.enabled", false);
-        connectionFirstJoinMessage = manager.getString("connection-meesage.player-first-join.message", "&c%player%&6 has joined the &bYour&3Server &6for the first time");
+        connectionFirstJoinEnabled = manager.getBoolean(connectionMsgPrefix + "player-first-join.enabled", false);
+        connectionFirstJoinMessage = manager.getString(connectionMsgPrefix + "player-first-join.message", "&c%player%&6 has joined the &bYour&3Server &6for the first time");
 
-        connectionPreventKickEnabled = manager.getBoolean("connection-prevent-kick.enabled", true);
+        connectionPreventKickEnabled = manager.getBoolean(miscPrefix + "connection-prevent-kick.enabled", true);
 
-        connectionKickReasons = manager.getList("connection-prevent-kick.reasons", Arrays.asList(
+        connectionKickReasons = manager.getList(miscPrefix + "connection-prevent-kick.reasons", Arrays.asList(
                 "Kicked for spamming",
                 "Invalid hotbar selection (Hacking?)",
                 "You released use item too quickly (Hacking?)",
                 "You dropped your items too quickly (Hacking?)"
         ));
 
-        netherEnabled = manager.getBoolean("nether.enabled", false, "Enable to prevent player go to Nether top or bottom layer");
-        netherTopLayer = manager.getInt("nether.top-layer", 127);
-        netherBottomLayer = manager.getInt("nether.bottom-layer", 0);
-        netherTopMessage = manager.getString("nether.top-message", "&6The nether top has been disabled due to lag");
-        netherBottomMessage = manager.getString("nether.bottom-message", "&6The nether bottom has been disabled due to lag");
-        netherTopBottomDoDamage = manager.getBoolean("nether.top-bottom-do-damage", false);
+        final String netherPrefix = miscPrefix + "nether.";
+        netherEnabled = manager.getBoolean(netherPrefix + "enabled", false, "Enable to prevent player go to Nether top or bottom layer");
+        netherTopLayer = manager.getInt(netherPrefix + "top-layer", 127);
+        netherBottomLayer = manager.getInt(netherPrefix + "bottom-layer", 0);
+        netherTopMessage = manager.getString(netherPrefix + "top-message", "&6The nether top has been disabled due to lag");
+        netherBottomMessage = manager.getString(netherPrefix + "bottom-message", "&6The nether bottom has been disabled due to lag");
+        netherTopBottomDoDamage = manager.getBoolean(netherPrefix + "top-bottom-do-damage", false);
 
         // Patch
-        preventBookBanEnabled = manager.getBoolean("prevent-book-ban.enabled", false);
-        preventBookBanMessage = manager.getString("prevent-book-ban.message", "&6Detected a book ban, successfully cancelled.");
+        final String patchPathPrefix = "patch.";
+        preventBookBanEnabled = manager.getBoolean(patchPathPrefix + "prevent-book-ban.enabled", false);
+        preventBookBanMessage = manager.getString(patchPathPrefix + "prevent-book-ban.message", "&6Detected a book ban, successfully cancelled.");
 
-        preventBuketPortalEnabled = manager.getBoolean("prevent-buket-on-portal.enabled", false);
-        preventBuketPortalMessage = manager.getString("prevent-buket-on-portal.message", "&6You can not do this");
+        preventBuketPortalEnabled = manager.getBoolean(patchPathPrefix + "prevent-buket-on-portal.enabled", false);
+        preventBuketPortalMessage = manager.getString(patchPathPrefix + "prevent-buket-on-portal.message", "&6You can not do this");
 
-        perChunkLimitEnabled = manager.getBoolean("per-chunk-limit.enabled", false, "ChunkBan skull limit tile entity limit and prevent message");
-        perChunkLimitMessage = manager.getString("per-chunk-limit.message", "&6Detected a chunk ban, successfully cancelled.");
-        perChunkLimitTitleEntityMax = manager.getInt("per-chunk-limit.tile-entity-max", 500);
-        perChunkLimitSkullMax = manager.getInt("per-chunk-limit.skull-max", 100);
+        perChunkLimitEnabled = manager.getBoolean(patchPathPrefix + "per-chunk-limit.enabled", false, "ChunkBan skull limit tile entity limit and prevent message");
+        perChunkLimitMessage = manager.getString(patchPathPrefix + "per-chunk-limit.message", "&6Detected a chunk ban, successfully cancelled.");
+        perChunkLimitTitleEntityMax = manager.getInt(patchPathPrefix + "per-chunk-limit.tile-entity-max", 500);
+        perChunkLimitSkullMax = manager.getInt(patchPathPrefix + "per-chunk-limit.skull-max", 100);
 
-        preventDispenserCrash = manager.getBoolean("prevent-dispenser-crash.enabled", true);
+        preventDispenserCrash = manager.getBoolean(patchPathPrefix + "prevent-dispenser-crash.enabled", true);
 
-        gateWayPreventCrashExploit = manager.getBoolean("gate-way.prevent-crash-exploit", false);
-        gateWayPreventEntityEnterPortal = manager.getBoolean("gate-way.prevent-entity-enter-portal", false);
+        gateWayPreventCrashExploit = manager.getBoolean(patchPathPrefix + "gate-way.prevent-crash-exploit", false);
+        gateWayPreventEntityEnterPortal = manager.getBoolean(patchPathPrefix + "gate-way.prevent-entity-enter-portal", false);
 
-        preventNBTBanEnabled = manager.getBoolean("prevent-nbt-ban.enabled", true);
-        preventNBTBanLimit = manager.getInt("prevent-nbt-ban.nbt-limit", 100000);
-        preventNBTBanMessage = manager.getString("prevent-nbt-ban.message", "&6Detected a nbt ban, successfully cancelled.");
+        preventNBTBanEnabled = manager.getBoolean(patchPathPrefix + "prevent-nbt-ban.enabled", true);
+        preventNBTBanLimit = manager.getInt(patchPathPrefix + "prevent-nbt-ban.nbt-limit", 100000);
+        preventNBTBanMessage = manager.getString(patchPathPrefix + "prevent-nbt-ban.message", "&6Detected a nbt ban, successfully cancelled.");
 
-        preventTeleportToBlock = manager.getBoolean("prevent-teleport-to-block.enabled", true, """
+        preventTeleportToBlock = manager.getBoolean(patchPathPrefix + "prevent-teleport-to-block.enabled", true, """
                 Prevent player uses ender pearl to teleport to inside of block,
                 Enable this to let PVP more friendly.""");
 
