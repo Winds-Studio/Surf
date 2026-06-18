@@ -47,7 +47,7 @@ dependencies {
     }
     implementation("org.bstats:bstats-bukkit:3.2.1")
     implementation("com.github.technicallycoded:FoliaLib:0.4.4")
-    implementation("com.github.cryptomorin:XSeries:v13.6.0")
+    implementation("com.github.cryptomorin:XSeries:13.6.0")
     implementation("de.tr7zw:item-nbt-api:2.15.7")
     compileOnly(files("libs/RoseStacker-1.5.22.jar"))
 }
@@ -62,12 +62,12 @@ tasks {
         targetCompatibility = JavaVersion.VERSION_21
     }
 
-    build.configure {
+    build {
         dependsOn(shadowJar)
     }
 
     shadowJar {
-        archiveFileName = "${project.name}-${project.version}.${archiveExtension.get()}"
+        archiveFileName.set("${project.name}-${project.version}.${archiveExtension.get()}")
         exclude("META-INF/**") // Dreeam - Avoid to include META-INF/maven in Jar
         relocate("io.github.thatsmusic99.configurationmaster", "${project.group}.libs.configurationmaster")
         relocate("org.bstats", "${project.group}.libs.bstats")
@@ -79,9 +79,11 @@ tasks {
     processResources {
         filesMatching("**/plugin.yml") {
             expand(
-                "name" to project.name,
-                "version" to project.version,
-                "description" to project.description
+                mapOf(
+                    "name" to project.name,
+                    "version" to project.version,
+                    "description" to description
+                )
             )
         }
     }

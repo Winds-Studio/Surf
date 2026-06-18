@@ -1,7 +1,7 @@
-package cn.dreeam.surf.modules.antiillegal;
+package cn.dreeam.surf.modules.checks.listener;
 
 import cn.dreeam.surf.config.Config;
-import cn.dreeam.surf.util.ItemUtil;
+import cn.dreeam.surf.util.item.ItemUtil;
 import cn.dreeam.surf.util.MessageUtil;
 import org.bukkit.block.Container;
 import org.bukkit.entity.Arrow;
@@ -23,7 +23,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 
-public class IllegalDamageAndPotionCheck implements Listener {
+public class ActionsDamageAndPotion implements Listener {
 
     // Entity gets damage
     @EventHandler(ignoreCancelled = true)
@@ -97,7 +97,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
     }
 
     @EventHandler
-    private void onLeave(PlayerQuitEvent event) {
+    private void onQuit(PlayerQuitEvent event) {
         if (!Config.checkIllegalPotionEnabled) return;
 
         Player player = event.getPlayer();
@@ -175,7 +175,7 @@ public class IllegalDamageAndPotionCheck implements Listener {
     // Check Player consume Potion with illegal potion effects
     // Dreeam TODO: Check wheter need add foods with illegal effects
     @EventHandler(ignoreCancelled = true)
-    private void PlayerInteractEvent(PlayerItemConsumeEvent e) {
+    private void onPotionConsume(PlayerItemConsumeEvent e) {
         if (!Config.checkIllegalPotionEnabled) return;
 
         if (!e.getItem().getType().toString().contains("POTION") || !e.getItem().hasItemMeta()) {

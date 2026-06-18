@@ -1,13 +1,13 @@
-package cn.dreeam.surf.modules.antiillegal;
+package cn.dreeam.surf.modules.checks.listener;
 
 import cn.dreeam.surf.config.Config;
-import cn.dreeam.surf.util.ItemUtil;
+import cn.dreeam.surf.util.item.ItemUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public class StackedTotem implements Listener {
+public class ActionsStackedTotem implements Listener {
 
     @EventHandler
     private void onDamage(EntityDamageEvent event) {

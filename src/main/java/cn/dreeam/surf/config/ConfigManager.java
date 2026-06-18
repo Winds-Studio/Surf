@@ -34,6 +34,7 @@ public class ConfigManager {
         config.save();
     }
 
+    // TODO
     private void structureConfig() {
         createTitledSection("Language", "language");
         createTitledSection("General", "general");

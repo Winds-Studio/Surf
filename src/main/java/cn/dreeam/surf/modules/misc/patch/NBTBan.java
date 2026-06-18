@@ -1,7 +1,8 @@
-package cn.dreeam.surf.modules.patch;
+package cn.dreeam.surf.modules.misc.patch;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.MessageUtil;
+import cn.dreeam.surf.util.PlatformUtil;
 import cn.dreeam.surf.util.Util;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,7 +18,7 @@ public class NBTBan implements Listener {
 
         Inventory inv = event.getPlayer().getInventory();
 
-        if (Util.isNewerAndEqual(20, 5)) {
+        if (PlatformUtil.isNewerAndEqual(20, 5)) {
             for (ItemStack i : inv) {
                 if (i != null && i.getType().name().contains("SHULKER_BOX")) {
                     if (!i.hasItemMeta()) continue;

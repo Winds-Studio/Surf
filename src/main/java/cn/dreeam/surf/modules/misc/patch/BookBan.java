@@ -1,7 +1,7 @@
-package cn.dreeam.surf.modules.patch;
+package cn.dreeam.surf.modules.misc.patch;
 
 import cn.dreeam.surf.config.Config;
-import cn.dreeam.surf.util.ItemUtil;
+import cn.dreeam.surf.util.item.ItemUtil;
 import cn.dreeam.surf.util.MessageUtil;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Material;

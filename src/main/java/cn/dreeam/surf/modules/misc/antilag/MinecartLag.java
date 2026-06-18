@@ -1,4 +1,4 @@
-package cn.dreeam.surf.modules.antilag;
+package cn.dreeam.surf.modules.misc.antilag;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.MessageUtil;

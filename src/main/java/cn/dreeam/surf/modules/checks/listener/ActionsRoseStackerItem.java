@@ -1,7 +1,7 @@
-package cn.dreeam.surf.modules.antiillegal;
+package cn.dreeam.surf.modules.checks.listener;
 
 import cn.dreeam.surf.config.Config;
-import cn.dreeam.surf.util.ItemUtil;
+import cn.dreeam.surf.util.item.ItemUtil;
 import cn.dreeam.surf.util.MessageUtil;
 import dev.rosewood.rosestacker.event.ItemPickupEvent;
 import org.bukkit.entity.Player;
@@ -9,10 +9,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
-public class CheckRoseStackerItem implements Listener {
+public class ActionsRoseStackerItem implements Listener {
 
     @EventHandler(ignoreCancelled = true)
-    @AntiIllegal(EventName = "ItemPickupEvent")
     private void onPickup(ItemPickupEvent event) {
         if (!Config.antiIllegalCheckWhenItemPickupEnabled) return;
 

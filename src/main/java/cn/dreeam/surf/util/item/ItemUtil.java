@@ -1,7 +1,9 @@
-package cn.dreeam.surf.util;
+package cn.dreeam.surf.util.item;
 
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.config.Config;
+import cn.dreeam.surf.util.MessageUtil;
+import cn.dreeam.surf.util.PlatformUtil;
 import com.cryptomorin.xseries.XMaterial;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
@@ -31,7 +33,7 @@ public class ItemUtil {
     private static final int HERO_OF_THE_VILLAGE_EFFECT_DURATION = 40 * 60 * 20; // Duration: 0:40:00
     private static final int BAD_OMEN_EFFECT_DURATION = (60 + 40) * 60 * 20; // Duration: 1:40:00
     private static final int RAID_OMEN_EFFECT_DURATION = 30 * 20; // Duration: 0:0:30
-    private static final int TRIAL_OMEN_EFFECT_DURATION = (15 * 60 * 20) * (Util.isNewerAndEqual(14, 0) ? 5 : 3); // Duration: 15mins * 3 or 5 (max Bad Omen amplifier)
+    private static final int TRIAL_OMEN_EFFECT_DURATION = (15 * 60 * 20) * (PlatformUtil.isNewerAndEqual(14, 0) ? 5 : 3); // Duration: 15mins * 3 or 5 (max Bad Omen amplifier)
 
     public static final List<String> illegalBlocks = initIllegalBlocks();
     public static final List<String> illegalItemFlags = initIllegalItemFlags();
@@ -52,7 +54,7 @@ public class ItemUtil {
      */
 
     public static boolean isAir(ItemStack i) {
-        if (Util.isOlderAndEqual(13, 2)) {
+        if (PlatformUtil.isOlderAndEqual(13, 2)) {
             // From >=1.14 org.bukkit.Material.isAir()
             switch (i.getType()) {
                 //<editor-fold defaultstate="collapsed" desc="isAir">
@@ -108,13 +110,13 @@ public class ItemUtil {
     public static boolean isIllegalEffect(PotionEffect effect) {
         int duration;
 
-        if (Util.isNewerAndEqual(20, 5) && effect.getType() == PotionEffectType.TRIAL_OMEN) { // Trial Omen Effect >=1.20.5
+        if (PlatformUtil.isNewerAndEqual(20, 5) && effect.getType() == PotionEffectType.TRIAL_OMEN) { // Trial Omen Effect >=1.20.5
             duration = TRIAL_OMEN_EFFECT_DURATION;
-        } else if (Util.isNewerAndEqual(20, 5) && effect.getType() == PotionEffectType.RAID_OMEN) { // Raid Omen Effect >=1.20.5
+        } else if (PlatformUtil.isNewerAndEqual(20, 5) && effect.getType() == PotionEffectType.RAID_OMEN) { // Raid Omen Effect >=1.20.5
             duration = RAID_OMEN_EFFECT_DURATION;
-        } else if (Util.isNewerAndEqual(14, 0) && effect.getType() == PotionEffectType.BAD_OMEN) { // Bad Omen Effect >=1.14
+        } else if (PlatformUtil.isNewerAndEqual(14, 0) && effect.getType() == PotionEffectType.BAD_OMEN) { // Bad Omen Effect >=1.14
             duration = BAD_OMEN_EFFECT_DURATION;
-        } else if (Util.isNewerAndEqual(14, 0) && effect.getType() == PotionEffectType.HERO_OF_THE_VILLAGE) { // Hero of the Village Effect >=1.14
+        } else if (PlatformUtil.isNewerAndEqual(14, 0) && effect.getType() == PotionEffectType.HERO_OF_THE_VILLAGE) { // Hero of the Village Effect >=1.14
             duration = HERO_OF_THE_VILLAGE_EFFECT_DURATION;
         } else {
             duration = COMMON_EFFECT_DURATION;
@@ -204,7 +206,7 @@ public class ItemUtil {
                         "&6Detected illegals %s on %s",
                         ItemUtil.getItemDisplayName(original),
                         name
-                ) );
+                ));
             }
         }
     }
@@ -405,7 +407,7 @@ public class ItemUtil {
     }
 
     private static Attribute getAttributeByName(String name) {
-        if (Util.isNewerThan(21, 1)) {
+        if (PlatformUtil.isNewerThan(21, 1)) {
             return Registry.ATTRIBUTE.get(Key.key(name));
         }
 
@@ -422,7 +424,7 @@ public class ItemUtil {
     }
 
     private static Object[] getAttributes() {
-        if (Util.isNewerThan(21, 1)) {
+        if (PlatformUtil.isNewerThan(21, 1)) {
             return Registry.ATTRIBUTE.stream().map(Keyed::getKey).toArray(Key[]::new);
         }
 

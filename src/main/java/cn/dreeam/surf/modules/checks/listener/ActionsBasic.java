@@ -1,8 +1,8 @@
-package cn.dreeam.surf.modules.antiillegal;
+package cn.dreeam.surf.modules.checks.listener;
 
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.config.Config;
-import cn.dreeam.surf.util.ItemUtil;
+import cn.dreeam.surf.util.item.ItemUtil;
 import cn.dreeam.surf.util.MessageUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,11 +17,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class CheckIllegal implements Listener {
-
+public class ActionsBasic implements Listener {
 
     @EventHandler(ignoreCancelled = true)
-    @AntiIllegal(EventName = "PlayerJoinEvent")
     private void onJoin(PlayerJoinEvent event) {
         if (!Config.antiIllegalCheckWhenPlayerJoinEnabled) return;
 
@@ -31,43 +29,42 @@ public class CheckIllegal implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    @AntiIllegal(EventName = "InventoryMoveItemEvent")
-    private void onInventoryMove(InventoryMoveItemEvent event) {
+    private void onInvMove(InventoryMoveItemEvent event) {
         if (!Config.antiIllegalCheckWhenHopperTransferEnabled) return;
 
         Inventory inv = event.getSource();
 
+        // Only check current player inventory
         if (!inv.getType().equals(InventoryType.CRAFTING)) return;
 
         ItemUtil.cleanIllegals(inv, inv.getType().name());
     }
 
     @EventHandler
-    @AntiIllegal(EventName = "InventoryCloseEvent")
-    private void onInventoryClose(InventoryCloseEvent event) {
+    private void onInvClose(InventoryCloseEvent event) {
         if (!Config.antiIllegalCheckWhenInventoryCloseEnabled) return;
 
         Inventory inv = event.getPlayer().getInventory();
 
+        // Only check current player inventory
         if (!inv.getType().equals(InventoryType.PLAYER)) return;
 
         ItemUtil.cleanIllegals(inv, event.getPlayer().getName());
     }
 
     @EventHandler
-    @AntiIllegal(EventName = "InventoryOpenEvent")
-    private void onInventoryOpen(InventoryOpenEvent event) {
+    private void onInvOpen(InventoryOpenEvent event) {
         if (!Config.antiIllegalCheckWhenInventoryOpenEnabled) return;
 
         Inventory inv = event.getPlayer().getInventory();
 
+        // Only check current player inventory
         if (!inv.getType().equals(InventoryType.PLAYER)) return;
 
         ItemUtil.cleanIllegals(inv, event.getPlayer().getName());
     }
 
     @EventHandler(ignoreCancelled = true)
-    @AntiIllegal(EventName = "BlockDispenseArmorEvent")
     private void onDispenseEquip(BlockDispenseArmorEvent event) {
         if (!Config.antiIllegalCheckWhenItemPickupEnabled) return;
 
@@ -79,7 +76,6 @@ public class CheckIllegal implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    @AntiIllegal(EventName = "EntityPickupItemEvent")
     private void onPickup(EntityPickupItemEvent event) {
         if (Surf.getInstance().isRoseStackerEnabled) return;
 

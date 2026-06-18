@@ -2,6 +2,7 @@ package cn.dreeam.surf.modules.misc;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.MessageUtil;
+import cn.dreeam.surf.util.PlatformUtil;
 import cn.dreeam.surf.util.Util;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
@@ -23,7 +24,7 @@ public class ConnectionEvent implements Listener {
 
         Player player = event.getPlayer();
 
-        if (Util.isNewerAndEqual(16, 0)) {
+        if (PlatformUtil.isNewerAndEqual(16, 0)) {
             Component message = Config.connectionFirstJoinEnabled && !player.hasPlayedBefore()
                     ? getConnectionMessageModern(player, Config.connectionFirstJoinMessage)
                     : getConnectionMessageModern(player, Config.connectionPlayerJoin);
@@ -43,7 +44,7 @@ public class ConnectionEvent implements Listener {
     public void onLeave(PlayerQuitEvent event) {
         if (!Config.connectionMessageEnabled) return;
 
-        if (Util.isNewerAndEqual(16, 0)) {
+        if (PlatformUtil.isNewerAndEqual(16, 0)) {
             Component message = getConnectionMessageModern(event.getPlayer(), Config.connectionPlayerLeave);
 
             event.setQuitMessage(null);

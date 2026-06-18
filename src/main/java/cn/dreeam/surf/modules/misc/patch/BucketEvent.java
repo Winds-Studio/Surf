@@ -1,4 +1,4 @@
-package cn.dreeam.surf.modules.patch;
+package cn.dreeam.surf.modules.misc.patch;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.MessageUtil;

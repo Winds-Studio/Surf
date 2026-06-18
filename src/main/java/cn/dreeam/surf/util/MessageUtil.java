@@ -12,7 +12,7 @@ public class MessageUtil {
 
     @SuppressWarnings("deprecation")
     public static void sendMessage(Player player, String message) {
-        if (Util.isNewerAndEqual(16, 0)) {
+        if (PlatformUtil.isNewerAndEqual(16, 0)) {
             Component component = LegacyComponentSerializer.legacyAmpersand().deserialize(Util.getPrefix() + message);
 
             player.sendMessage(component);
@@ -27,7 +27,7 @@ public class MessageUtil {
 
     @SuppressWarnings("deprecation")
     public static void sendMessage(CommandSender sender, String message) {
-        if (Util.isNewerAndEqual(16, 0)) {
+        if (PlatformUtil.isNewerAndEqual(16, 0)) {
             Component component = LegacyComponentSerializer.legacyAmpersand().deserialize(message);
 
             sender.sendMessage(component);

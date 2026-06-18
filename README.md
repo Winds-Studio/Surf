@@ -16,7 +16,7 @@ Recommended use as a addition with AnarchyExploitFixes and Panilla to become 100
 
 ___
 
-## Features
+## Features (WIP - Redo this)
 
 - Prevent all crash exploits that I know of
 - Prevent ChunkBan
@@ -33,7 +33,11 @@ ___
 - Discord: [`https://discord.gg/8Bv5MTXFj5`](https://discord.gg/8Bv5MTXFj5)
 - QQ: `2682173972`
 
-## TODOS
+## Credit
+
+- Panilla
+
+## TODOS (WIP - Move to projects)
 
 prefix
 modules

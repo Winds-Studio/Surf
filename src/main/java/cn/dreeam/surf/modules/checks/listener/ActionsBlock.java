@@ -1,7 +1,7 @@
-package cn.dreeam.surf.modules.antiillegal;
+package cn.dreeam.surf.modules.checks.listener;
 
 import cn.dreeam.surf.config.Config;
-import cn.dreeam.surf.util.ItemUtil;
+import cn.dreeam.surf.util.item.ItemUtil;
 import cn.dreeam.surf.util.MessageUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,10 +9,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
-public class IllegalBlockCheck implements Listener {
+public class ActionsBlock implements Listener {
 
     @EventHandler(ignoreCancelled = true)
-    private void onBlockPlace(BlockPlaceEvent event) {
+    private void onPlace(BlockPlaceEvent event) {
         if (!Config.antiIllegalCheckIllegalBlockEnabled) return;
 
         if (ItemUtil.isIllegalItem(event.getItemInHand())) {
