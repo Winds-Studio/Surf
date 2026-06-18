@@ -46,9 +46,9 @@ dependencies {
         exclude(group = "org.yaml", module = "snakeyaml")
     }
     implementation("org.bstats:bstats-bukkit:3.2.1")
-    implementation("com.github.technicallycoded:FoliaLib:0.4.4")
-    implementation("com.github.cryptomorin:XSeries:13.6.0")
-    implementation("de.tr7zw:item-nbt-api:2.15.7")
+    implementation("com.github.technicallycoded:FoliaLib:0.5.2")
+    implementation("com.github.cryptomorin:XSeries:v13.7.0")
+    implementation("de.tr7zw:item-nbt-api:2.15.8-SNAPSHOT")
     compileOnly(files("libs/RoseStacker-1.5.22.jar"))
 }
 
