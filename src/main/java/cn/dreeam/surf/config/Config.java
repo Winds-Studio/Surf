@@ -164,7 +164,5 @@ public class Config {
         preventTeleportToBlock = manager.getBoolean(patchPathPrefix + "prevent-teleport-to-block.enabled", true, """
                 Prevent player uses ender pearl to teleport to inside of block,
                 Enable this to let PVP more friendly.""");
-
-        ItemCheckRegistry.loadChecks();
     }
 }
