@@ -13,4 +13,6 @@ public interface ItemCheck {
     boolean canBypass();
 
     boolean doCheck(ItemStack i);
+
+    void doSanitize(ItemStack i);
 }

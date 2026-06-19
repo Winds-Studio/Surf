@@ -1,6 +1,7 @@
 package cn.dreeam.surf.modules.checks;
 
-import cn.dreeam.surf.modules.checks.impl.CheckStackAmount;
+import cn.dreeam.surf.modules.checks.impl.*;
+import cn.dreeam.surf.modules.checks.impl.speific.*;
 
 public class ItemCheckRegistry {
 
@@ -23,7 +24,14 @@ public class ItemCheckRegistry {
 
     private static ItemCheck[] allChecks() {
         return new ItemCheck[]{
-                new CheckStackAmount()
+                new CheckAmount(),
+                new CheckDurability(),
+                new CheckEnchantments(),
+                new CheckItemAttributes(),
+                new CheckItemFlags(),
+                new CheckUnbreakable(),
+
+                new CheckPotion()
         };
     }
 }

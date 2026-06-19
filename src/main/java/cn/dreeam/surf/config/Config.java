@@ -1,7 +1,6 @@
 package cn.dreeam.surf.config;
 
 import cn.dreeam.surf.Surf;
-import cn.dreeam.surf.modules.checks.ItemCheckRegistry;
 import cn.dreeam.surf.util.item.ItemUtil;
 
 import java.util.Arrays;
@@ -17,22 +16,31 @@ public class Config {
     public static String antiIllegalCheckIllegalBlockMessage, checkIllegalDamageMessage, checkIllegalPotionMessage;
     public static List<String> antiIllegalIllegalBlockList, antiIllegalIllegalItemFlagList, antiIllegalIllegalEnchantList, antiIllegalIllegalAttributeModifierList;
 
-    // Item checks
-    public static boolean checkItemAmount;
+    // Item checks - general
+    public static boolean checkItemAmount, checkItemDurability, checkItemEnchantments, checkItemAttributes,
+            checkItemFlags, checkItemUnbreakable;
+
+    // Item checks - specific
+    public static boolean checkItemPotion;
 
     // Anti lag
-    public static boolean limitLiquidSpreadEnabled, limitVehicleEnabled, limitOffhandSwapEnabled, limitWitherSpawnOnLagEnabled;
-    public static int limitLiquidSpreadDisableTPS, limitVehicleDisableTPS, limitVehicleMinecartPerChunkLimit, limitWitherSpawnOnLagDisableTPS;
+    public static boolean limitLiquidSpreadEnabled, limitVehicleEnabled, limitOffhandSwapEnabled,
+            limitWitherSpawnOnLagEnabled;
+    public static int limitLiquidSpreadDisableTPS, limitVehicleDisableTPS, limitVehicleMinecartPerChunkLimit,
+            limitWitherSpawnOnLagDisableTPS;
     public static String limitOffhandSwapMessage;
 
     // Misc / connection / nether
-    public static boolean connectionMessageEnabled, connectionMessageUseDisplayName, connectionFirstJoinEnabled, connectionPreventKickEnabled, netherEnabled, netherTopBottomDoDamage;
+    public static boolean connectionMessageEnabled, connectionMessageUseDisplayName, connectionFirstJoinEnabled,
+            connectionPreventKickEnabled, netherEnabled, netherTopBottomDoDamage;
     public static int netherTopLayer, netherBottomLayer;
-    public static String connectionPlayerJoin, connectionPlayerLeave, connectionFirstJoinMessage, netherTopMessage, netherBottomMessage;
+    public static String connectionPlayerJoin, connectionPlayerLeave, connectionFirstJoinMessage, netherTopMessage,
+            netherBottomMessage;
     public static List<String> connectionKickReasons;
 
     // Patch
-    public static boolean preventBookBanEnabled, preventBuketPortalEnabled, perChunkLimitEnabled, preventDispenserCrash, gateWayPreventCrashExploit, gateWayPreventEntityEnterPortal, preventNBTBanEnabled, preventTeleportToBlock;
+    public static boolean preventBookBanEnabled, preventBuketPortalEnabled, perChunkLimitEnabled, preventDispenserCrash,
+            gateWayPreventCrashExploit, gateWayPreventEntityEnterPortal, preventNBTBanEnabled, preventTeleportToBlock;
     public static int perChunkLimitTitleEntityMax, perChunkLimitSkullMax, preventNBTBanLimit;
     public static String preventBookBanMessage, preventBuketPortalMessage, perChunkLimitMessage, preventNBTBanMessage;
 
@@ -86,7 +94,13 @@ public class Config {
 
         // Item checks
         final String itemChecksPrefix = "item-checks.";
-        checkItemAmount = manager.getBoolean(itemChecksPrefix + "item-amount", true);
+        checkItemAmount = manager.getBoolean(itemChecksPrefix + "amount", true);
+        checkItemDurability = manager.getBoolean(itemChecksPrefix + "durability", true);
+        checkItemEnchantments  = manager.getBoolean(itemChecksPrefix + "enchantments", true);
+        checkItemAttributes = manager.getBoolean(itemChecksPrefix + "attributes", true);
+        checkItemFlags =  manager.getBoolean(itemChecksPrefix + "item-flags", true);
+        checkItemPotion = manager.getBoolean(itemChecksPrefix + "potion", true);
+        checkItemUnbreakable =  manager.getBoolean(itemChecksPrefix + "unbreakable", false);
 
         // Anti Lag
         final String limitPrefix = "limit.";

@@ -10,11 +10,9 @@ import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Keyed;
 import org.bukkit.Registry;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -89,24 +87,6 @@ public class ItemUtil {
         return i.getType().isBlock() && Config.antiIllegalRemoveBlockEnchant && i.hasItemMeta() && i.getItemMeta().hasEnchants();
     }
 
-    public static boolean isIllegalPotion(ItemStack i) {
-        if (i.getType().toString().contains("POTION") && i.hasItemMeta()) {
-            PotionMeta pot = (PotionMeta) i.getItemMeta();
-
-            for (PotionEffect effect : pot.getCustomEffects()) {
-                if (isIllegalEffect(effect)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    public static boolean isUnbreakable(ItemStack i) {
-        return i.hasItemMeta() && i.getItemMeta().isUnbreakable();
-    }
-
     public static boolean isIllegalEffect(PotionEffect effect) {
         int duration;
 
@@ -125,63 +105,8 @@ public class ItemUtil {
         return effect.getAmplifier() > 5 || effect.getDuration() < 0 || effect.getDuration() > duration;
     }
 
-    public static boolean hasIllegalDurability(ItemStack i) {
-        return i.getDurability() > i.getType().getMaxDurability() || i.getDurability() < 0;
-    }
-
-    public static boolean hasIllegalEnchants(ItemStack i) {
-        Map<Enchantment, Integer> enchants = i.getEnchantments();
-        for (Enchantment ench : enchants.keySet()) {
-            String key = ench.getKey().getKey();
-            int level = enchants.get(ench);
-            if (illegalEnchantsMap.containsKey(key)
-                    && illegalEnchantsMap.get(key) > 0
-                    && level > illegalEnchantsMap.get(key)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public static boolean hasIllegalItemFlag(ItemStack i) {
-        if (i.hasItemMeta()) {
-            final boolean isBanner = i.getType().toString().contains("BANNER");
-
-            for (String flag : Config.antiIllegalIllegalItemFlagList) {
-                if (isBanner && flag.equalsIgnoreCase("HIDE_ADDITIONAL_TOOLTIP")) {
-                    continue;
-                }
-
-                if (i.getItemMeta().hasItemFlag(ItemFlag.valueOf(flag))) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    public static boolean hasIllegalAttributes(ItemStack i) {
-        if (i.hasItemMeta()) {
-            for (String attribute : Config.antiIllegalIllegalAttributeModifierList) {
-                if (i.getItemMeta().getAttributeModifiers(getAttributeByName(attribute)) != null) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    // TODO
-    public static boolean hasIllegalTag(ItemStack i) {
-        return false;
-    }
-
     public static boolean isIllegal(ItemStack i) {
-        return isIllegalItem(i) || isEnchantedBlock(i) || isIllegalPotion(i) || hasIllegalDurability(i)
-                || isUnbreakable(i) || hasIllegalEnchants(i) || hasIllegalItemFlag(i) || hasIllegalAttributes(i);
+        return isIllegalItem(i) || isEnchantedBlock(i);
     }
 
     public static void cleanIllegals(Inventory inventory, String name) {
@@ -212,84 +137,11 @@ public class ItemUtil {
     }
 
     private static ItemStack cleanIllegals(ItemStack i) {
-        if (i == null || isAir(i)) return ItemStack.empty();
-        if (isIllegalItem(i) || isIllegalPotion(i)) return ItemStack.empty();
+        if (isIllegalItem(i)) return ItemStack.empty();
 
         if (Config.antiIllegalDeleteIllegalsWhenFoundEnabled && isIllegal(i)) {
             return ItemStack.empty();
         }
-
-        // Clean oversize durability
-        if (i.getDurability() > i.getType().getMaxDurability()) {
-            i.setDurability(i.getType().getMaxDurability());
-        }
-
-        // Clean negative durability
-        if (i.getDurability() < 0) {
-            i.setDurability((short) 1);
-        }
-
-        // Clean illegal Enchantment
-        Map<Enchantment, Integer> enchants = i.getEnchantments();
-        if (i.getType().isBlock()) {
-            if (Config.antiIllegalRemoveBlockEnchant) {
-                // Directly remove enchs
-                enchants.keySet().forEach(i::removeEnchantment);
-            } else {
-                // Correct enchs
-                enchants.keySet().forEach(ench -> {
-                    String key = ench.getKey().getKey();
-                    int level = enchants.get(ench);
-                    if (illegalEnchantsMap.containsKey(key) && illegalEnchantsMap.get(key) > 0 && level > illegalEnchantsMap.get(key)) {
-                        i.addUnsafeEnchantment(ench, ench.getMaxLevel());
-                    }
-                });
-            }
-        } else {
-            enchants.keySet().forEach(ench -> {
-                if (Config.antiIllegalAllowInapplicableEnchant || ench.canEnchantItem(i)) {
-                    String key = ench.getKey().getKey();
-                    int level = enchants.get(ench);
-                    if (illegalEnchantsMap.containsKey(key) && illegalEnchantsMap.get(key) > 0 && level > illegalEnchantsMap.get(key)) {
-                        i.addUnsafeEnchantment(ench, ench.getMaxLevel());
-                    }
-                } else {
-                    // Should remove conflict/incompatible ench, since the item is illegal.
-                    i.removeEnchantment(ench);
-                }
-            });
-        }
-
-        if (i.hasItemMeta()) {
-            ItemMeta meta = i.getItemMeta();
-            final boolean isBanner = i.getType().toString().contains("BANNER");
-
-            // Clear unbreakable flag
-            meta.setUnbreakable(false);
-
-            // Clean illegal itemFlag
-            for (String flag : Config.antiIllegalIllegalItemFlagList) {
-                if (isBanner && flag.equalsIgnoreCase("HIDE_ADDITIONAL_TOOLTIP")) {
-                    continue;
-                }
-
-                if (meta.hasItemFlag(ItemFlag.valueOf(flag))) {
-                    meta.removeItemFlags(ItemFlag.valueOf(flag));
-                }
-            }
-
-            // Clean illegal AttributeModifier
-            for (String attributeStr : Config.antiIllegalIllegalAttributeModifierList) {
-                Attribute attribute = getAttributeByName(attributeStr);
-
-                if (attribute != null && meta.getAttributeModifiers(attribute) != null) {
-                    meta.removeAttributeModifier(attribute);
-                }
-            }
-
-            i.setItemMeta(meta); // Remember to set cleaned meta back
-        }
-
         return i;
     }
 
@@ -406,7 +258,7 @@ public class ItemUtil {
         return PlainTextComponentSerializer.plainText().serialize(itemStack.displayName());
     }
 
-    private static Attribute getAttributeByName(String name) {
+    public static Attribute getAttributeByName(String name) {
         if (PlatformUtil.isNewerThan(21, 1)) {
             return Registry.ATTRIBUTE.get(Key.key(name));
         }
