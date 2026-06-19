@@ -72,11 +72,11 @@ public class ItemUtil {
     }
 
     public static boolean isWritableBook(ItemStack i) {
-        return i.getType() == XMaterial.WRITABLE_BOOK.parseMaterial();
+        return i.getType() == XMaterial.WRITABLE_BOOK.get();
     }
 
     public static boolean isIllegalTotem(ItemStack i) {
-        return i.getType().equals(XMaterial.TOTEM_OF_UNDYING.parseMaterial()) && i.getAmount() > i.getMaxStackSize();
+        return i.getType().equals(XMaterial.TOTEM_OF_UNDYING.get()) && i.getAmount() > i.getMaxStackSize();
     }
 
     public static boolean isIllegalItem(ItemStack i) {
@@ -107,42 +107,6 @@ public class ItemUtil {
 
     public static boolean isIllegal(ItemStack i) {
         return isIllegalItem(i) || isEnchantedBlock(i);
-    }
-
-    public static void cleanIllegals(Inventory inventory, String name) {
-        ItemStack[] contents = inventory.getContents();
-
-        // if inventory is empty, skip
-        if (contents.length == 0) return;
-
-        for (ItemStack item : contents) {
-            // if item is null, skip
-            if (item == null) continue;
-
-            ItemStack original = item.clone();
-            ItemStack newItem = cleanIllegals(item);
-
-            if (!original.equals(newItem)) {
-                if (newItem.equals(ItemStack.empty())) {
-                    item.setAmount(0);
-                }
-
-                MessageUtil.println(String.format(
-                        "&6Detected illegals %s on %s",
-                        ItemUtil.getItemDisplayName(original),
-                        name
-                ));
-            }
-        }
-    }
-
-    private static ItemStack cleanIllegals(ItemStack i) {
-        if (isIllegalItem(i)) return ItemStack.empty();
-
-        if (Config.antiIllegalDeleteIllegalsWhenFoundEnabled && isIllegal(i)) {
-            return ItemStack.empty();
-        }
-        return i;
     }
 
     // TODO

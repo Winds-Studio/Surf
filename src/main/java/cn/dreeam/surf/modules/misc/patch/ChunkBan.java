@@ -52,7 +52,7 @@ public class ChunkBan implements Listener {
         if (player.hasPermission("surf.bypass.chunkban")) return;
 
         Chunk chunk = event.getClickedBlock().getChunk();
-        if (event.getItem().getType().equals(XMaterial.ITEM_FRAME.parseMaterial())) {
+        if (event.getItem().getType().equals(XMaterial.ITEM_FRAME.get())) {
             long amount = Arrays.stream(chunk.getEntities()).filter(entity -> entity instanceof ItemFrame).count();
             if (amount + chunk.getTileEntities().length > Config.perChunkLimitTitleEntityMax) {
                 event.setCancelled(true);
@@ -88,7 +88,7 @@ public class ChunkBan implements Listener {
     }
 
     private boolean isSkull(Material material) {
-        return material.equals(XMaterial.PLAYER_HEAD.parseMaterial())
-                || material.equals(XMaterial.PLAYER_WALL_HEAD.parseMaterial());
+        return material.equals(XMaterial.PLAYER_HEAD.get())
+                || material.equals(XMaterial.PLAYER_WALL_HEAD.get());
     }
 }

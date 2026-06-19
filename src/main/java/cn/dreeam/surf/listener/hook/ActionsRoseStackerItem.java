@@ -1,4 +1,4 @@
-package cn.dreeam.surf.modules.checks.listener;
+package cn.dreeam.surf.listener.hook;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.item.ItemUtil;
@@ -20,8 +20,7 @@ public class ActionsRoseStackerItem implements Listener {
         if (ItemUtil.isIllegal(i)) {
             event.setCancelled(true);
             event.getStackedItem().getItem().remove();
-            if (event.getEntity() instanceof Player) {
-                Player player = (Player) event.getEntity();
+            if (event.getEntity() instanceof Player player) {
                 MessageUtil.sendMessage(player, "&6You can not pick up this illegal item.");
             } else {
                 MessageUtil.println(String.format(

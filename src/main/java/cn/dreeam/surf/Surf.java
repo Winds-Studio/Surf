@@ -2,11 +2,8 @@ package cn.dreeam.surf;
 
 import cn.dreeam.surf.command.CommandHandler;
 import cn.dreeam.surf.config.ConfigManager;
-import cn.dreeam.surf.modules.checks.listener.ActionsBasic;
-import cn.dreeam.surf.modules.checks.listener.ActionsRoseStackerItem;
-import cn.dreeam.surf.modules.checks.listener.ActionsBlock;
-import cn.dreeam.surf.modules.checks.listener.ActionsDamageAndPotion;
-import cn.dreeam.surf.modules.checks.listener.ActionsStackedTotem;
+import cn.dreeam.surf.listener.*;
+import cn.dreeam.surf.listener.hook.*;
 import cn.dreeam.surf.modules.misc.antilag.BlockPhysics;
 import cn.dreeam.surf.modules.misc.antilag.MinecartLag;
 import cn.dreeam.surf.modules.misc.antilag.Offhand;
@@ -71,7 +68,8 @@ public class Surf extends JavaPlugin {
                 // CheckIllegal
                 new ActionsBasic(),
                 new ActionsBlock(),
-                new ActionsDamageAndPotion(),
+                new ActionsDamage(),
+                new ActionsPotion(),
                 new ActionsStackedTotem(),
 
                 // AntiLag

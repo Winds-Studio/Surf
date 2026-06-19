@@ -40,7 +40,7 @@ public class BookBan implements Listener {
 
             for (ItemStack shulkerItem : shulkerBox.getInventory().getContents()) {
                 if (shulkerItem == null || ItemUtil.isAir(shulkerItem)) continue;
-                if (shulkerItem.getType().equals(XMaterial.WRITTEN_BOOK.parseMaterial())) {
+                if (shulkerItem.getType().equals(XMaterial.WRITTEN_BOOK.get())) {
                     BookMeta book = (BookMeta) shulkerItem.getItemMeta();
                     if (isBanBook(book)) {
                         player.getWorld().dropItem(player.getLocation(), shulkerItem);

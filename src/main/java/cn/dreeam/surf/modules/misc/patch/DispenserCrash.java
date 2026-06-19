@@ -21,7 +21,7 @@ public class DispenserCrash implements Listener {
         if (!Config.preventDispenserCrash) return;
 
         Block block = event.getBlock();
-        if (block.getType().equals(XMaterial.DISPENSER.parseMaterial())) {
+        if (block.getType().equals(XMaterial.DISPENSER.get())) {
             BlockFace face = ((Directional) block.getBlockData()).getFacing();
             boolean isY0FacingDown = block.getY() == 0 && face == BlockFace.DOWN;
             boolean isYMaxFacingUp = block.getY() == block.getWorld().getMaxHeight() - 1 && face == BlockFace.UP;

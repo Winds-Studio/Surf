@@ -1,4 +1,4 @@
-package cn.dreeam.surf.modules.checks.listener;
+package cn.dreeam.surf.listener;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.item.ItemUtil;

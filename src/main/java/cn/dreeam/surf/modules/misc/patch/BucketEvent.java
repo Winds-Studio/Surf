@@ -40,13 +40,13 @@ public class BucketEvent implements Listener {
     }
 
     private boolean checkEndPortal(Block block) {
-        if (!block.getType().equals(XMaterial.END_PORTAL_FRAME.parseMaterial())) {
+        if (!block.getType().equals(XMaterial.END_PORTAL_FRAME.get())) {
             return false;
         }
 
         for (BlockFace face : POSSIBLE_FACES) {
             Block relative = block.getRelative(face);
-            if (relative.getType().equals(XMaterial.END_PORTAL.parseMaterial())) {
+            if (relative.getType().equals(XMaterial.END_PORTAL.get())) {
                 return true;
             }
         }

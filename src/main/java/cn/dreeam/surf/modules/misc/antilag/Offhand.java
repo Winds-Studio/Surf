@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Offhand implements Listener {
 
     private final Map<UUID, Integer> offhandMap = new ConcurrentHashMap<>();
-    private final List<Material> MATERIALS = Lists.newArrayList(XMaterial.BOOK.parseMaterial(), XMaterial.WRITTEN_BOOK.parseMaterial(), XMaterial.WRITABLE_BOOK.parseMaterial());
+    private final List<Material> MATERIALS = Lists.newArrayList(XMaterial.BOOK.get(), XMaterial.WRITTEN_BOOK.get(), XMaterial.WRITABLE_BOOK.get());
 
     public Offhand() {
         // add all shulkers

@@ -1,7 +1,8 @@
-package cn.dreeam.surf.modules.checks.listener;
+package cn.dreeam.surf.listener;
 
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.config.Config;
+import cn.dreeam.surf.modules.checks.ItemCheckHandler;
 import cn.dreeam.surf.util.item.ItemUtil;
 import cn.dreeam.surf.util.MessageUtil;
 import org.bukkit.entity.Player;
@@ -25,7 +26,7 @@ public class ActionsBasic implements Listener {
 
         Inventory inv = event.getPlayer().getInventory();
 
-        ItemUtil.cleanIllegals(inv, event.getPlayer().getName());
+        ItemCheckHandler.scanInv(inv, event.getPlayer().getName());
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -37,7 +38,7 @@ public class ActionsBasic implements Listener {
         // Only check current player inventory
         if (!inv.getType().equals(InventoryType.CRAFTING)) return;
 
-        ItemUtil.cleanIllegals(inv, inv.getType().name());
+        ItemCheckHandler.scanInv(inv, inv.getType().name());
     }
 
     @EventHandler
@@ -49,7 +50,7 @@ public class ActionsBasic implements Listener {
         // Only check current player inventory
         if (!inv.getType().equals(InventoryType.PLAYER)) return;
 
-        ItemUtil.cleanIllegals(inv, event.getPlayer().getName());
+        ItemCheckHandler.scanInv(inv, event.getPlayer().getName());
     }
 
     @EventHandler
@@ -61,7 +62,7 @@ public class ActionsBasic implements Listener {
         // Only check current player inventory
         if (!inv.getType().equals(InventoryType.PLAYER)) return;
 
-        ItemUtil.cleanIllegals(inv, event.getPlayer().getName());
+        ItemCheckHandler.scanInv(inv, event.getPlayer().getName());
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -70,7 +71,7 @@ public class ActionsBasic implements Listener {
 
         ItemStack i = event.getItem();
 
-        if (ItemUtil.isIllegal(i)) {
+        if (ItemCheckHandler.scanItem(i)) {
             event.setCancelled(true);
         }
     }
@@ -83,11 +84,11 @@ public class ActionsBasic implements Listener {
 
         ItemStack i = event.getItem().getItemStack();
 
-        if (ItemUtil.isIllegal(i)) {
+        if (ItemCheckHandler.scanItem(i)) {
             event.setCancelled(true);
             event.getItem().remove();
-            if (event.getEntity() instanceof Player) {
-                Player player = (Player) event.getEntity();
+
+            if (event.getEntity() instanceof Player player) {
                 MessageUtil.sendMessage(player, "&6You can not pick up this illegal item.");
             } else {
                 MessageUtil.println(String.format(

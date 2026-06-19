@@ -1,4 +1,4 @@
-package cn.dreeam.surf.modules.checks.listener;
+package cn.dreeam.surf.listener;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.item.ItemUtil;
@@ -14,9 +14,8 @@ public class ActionsStackedTotem implements Listener {
         if (!Config.stackedTotemRevertAsOneEnabled) return;
 
         // Check when player gets damage or make damage to others
-        if (event.getEntity() instanceof Player) {
-            Player entity = (Player) event.getEntity();
-
+        if (event.getEntity() instanceof Player entity) {
+            // TODO, move to as an option
             entity.getInventory().forEach(i -> {
                         if (i != null && ItemUtil.isIllegalTotem(i)) {
                             i.setAmount(1);
