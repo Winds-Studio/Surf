@@ -2,7 +2,6 @@ package cn.dreeam.surf.util.item;
 
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.config.Config;
-import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.PlatformUtil;
 import com.cryptomorin.xseries.XMaterial;
 import net.kyori.adventure.key.Key;
@@ -10,10 +9,8 @@ import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Keyed;
 import org.bukkit.Registry;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -83,10 +80,6 @@ public class ItemUtil {
         return Config.antiIllegalIllegalBlockList.contains(i.getType().toString());
     }
 
-    public static boolean isEnchantedBlock(ItemStack i) {
-        return i.getType().isBlock() && Config.antiIllegalRemoveBlockEnchant && i.hasItemMeta() && i.getItemMeta().hasEnchants();
-    }
-
     public static boolean isIllegalEffect(PotionEffect effect) {
         int duration;
 
@@ -103,10 +96,6 @@ public class ItemUtil {
         }
 
         return effect.getAmplifier() > 5 || effect.getDuration() < 0 || effect.getDuration() > duration;
-    }
-
-    public static boolean isIllegal(ItemStack i) {
-        return isIllegalItem(i) || isEnchantedBlock(i);
     }
 
     // TODO

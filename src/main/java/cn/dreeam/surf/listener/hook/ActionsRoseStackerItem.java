@@ -1,6 +1,7 @@
 package cn.dreeam.surf.listener.hook;
 
 import cn.dreeam.surf.config.Config;
+import cn.dreeam.surf.modules.checks.ItemCheckHandler;
 import cn.dreeam.surf.util.item.ItemUtil;
 import cn.dreeam.surf.util.MessageUtil;
 import dev.rosewood.rosestacker.event.ItemPickupEvent;
@@ -17,7 +18,7 @@ public class ActionsRoseStackerItem implements Listener {
 
         ItemStack i = event.getStackedItem().getItem().getItemStack();
 
-        if (ItemUtil.isIllegal(i)) {
+        if (ItemCheckHandler.scanItem(i)) {
             event.setCancelled(true);
             event.getStackedItem().getItem().remove();
             if (event.getEntity() instanceof Player player) {
