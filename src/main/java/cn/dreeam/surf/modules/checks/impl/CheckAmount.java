@@ -13,7 +13,7 @@ public class CheckAmount implements ItemCheck {
 
     @Override
     public boolean appliesTo(ItemStack i) {
-        return true;
+        return !Config.checkItemAmountWhitelistMaterials.isEmpty() && Config.checkItemAmountWhitelistMaterials.contains(i.getType());
     }
 
     @Override
