@@ -11,7 +11,7 @@ public class CheckItemAttributes implements ItemCheck {
 
     @Override
     public boolean enabled() {
-        return Config.checkItemAttributes;
+        return Config.checkRuleAttributes;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class CheckItemAttributes implements ItemCheck {
         // TODO check
         final ItemMeta meta = i.getItemMeta();
 
-        for (String attribute : Config.antiIllegalIllegalAttributeModifierList) {
+        for (String attribute : Config.checkDefinitionIllegalAttributes) {
             if (meta.getAttributeModifiers(ItemUtil.getAttributeByName(attribute)) != null) {
                 return true;
             }
@@ -44,7 +44,7 @@ public class CheckItemAttributes implements ItemCheck {
         // TODO check
         final ItemMeta meta = i.getItemMeta();
 
-        for (String attributeStr : Config.antiIllegalIllegalAttributeModifierList) {
+        for (String attributeStr : Config.checkDefinitionIllegalAttributes) {
             Attribute attribute = ItemUtil.getAttributeByName(attributeStr);
 
             if (attribute != null && meta.getAttributeModifiers(attribute) != null) {

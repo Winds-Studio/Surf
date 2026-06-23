@@ -8,7 +8,7 @@ public class CheckDurability implements ItemCheck {
 
     @Override
     public boolean enabled() {
-        return Config.checkItemDurability;
+        return Config.checkRuleDurability;
     }
 
     @Override

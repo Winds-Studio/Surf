@@ -10,7 +10,7 @@ public class CheckItemFlags implements ItemCheck {
 
     @Override
     public boolean enabled() {
-        return Config.checkItemFlags;
+        return Config.checkRuleFlags;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class CheckItemFlags implements ItemCheck {
         // TODO check
         final boolean isBanner = i.getType().toString().contains("BANNER");
 
-        for (String flag : Config.antiIllegalIllegalItemFlagList) {
+        for (String flag : Config.checkDefinitionIllegalItemFlags) {
             // Skip ominous banner
             if (isBanner && flag.equalsIgnoreCase("HIDE_ADDITIONAL_TOOLTIP")) {
                 continue;
@@ -48,7 +48,7 @@ public class CheckItemFlags implements ItemCheck {
         final ItemMeta meta = i.getItemMeta();
         final boolean isBanner = i.getType().toString().contains("BANNER");
 
-        for (String flag : Config.antiIllegalIllegalItemFlagList) {
+        for (String flag : Config.checkDefinitionIllegalItemFlags) {
             // Skip ominous banner
             if (isBanner && flag.equalsIgnoreCase("HIDE_ADDITIONAL_TOOLTIP")) {
                 continue;

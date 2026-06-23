@@ -8,12 +8,12 @@ public class CheckAmount implements ItemCheck {
 
     @Override
     public boolean enabled() {
-        return Config.checkItemAmount;
+        return Config.checkRuleAmount;
     }
 
     @Override
     public boolean appliesTo(ItemStack i) {
-        return !Config.checkItemAmountWhitelistMaterials.isEmpty() && Config.checkItemAmountWhitelistMaterials.contains(i.getType());
+        return !Config.checkRuleAmountWhitelistMaterials.isEmpty() && Config.checkRuleAmountWhitelistMaterials.contains(i.getType());
     }
 
     @Override

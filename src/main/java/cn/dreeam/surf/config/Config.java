@@ -17,23 +17,25 @@ public class Config {
     // Anti illegal
     public static boolean antiIllegalCheckIllegalBlockEnabled, antiIllegalRemoveBlockEnchant, antiIllegalAllowInapplicableEnchant, checkIllegalDamageEnabled, checkIllegalPotionEnabled, stackedTotemRevertAsOneEnabled, antiIllegalDeleteIllegalsWhenFoundEnabled;
     public static String antiIllegalCheckIllegalBlockMessage, checkIllegalDamageMessage, checkIllegalPotionMessage;
-    public static List<String> antiIllegalIllegalBlockList, antiIllegalIllegalItemFlagList, antiIllegalIllegalEnchantList, antiIllegalIllegalAttributeModifierList;
 
     // Item checks - triggers
     public static boolean checkTriggerOnJoin, checkTriggerOnPickup, checkTriggerOnInvOpen, checkTriggerOnInvClose,
             checkTriggerOnHopperTransfer;
 
     // Item checks - general rules
-    public static boolean checkItemAmount, checkItemDurability, checkItemEnchantments, checkItemAttributes,
-            checkItemFlags, checkItemUnbreakable;
+    public static boolean checkRuleAmount, checkRuleDurability, checkRuleEnchantments, checkRuleAttributes,
+            checkRuleFlags, checkRuleUnbreakable;
 
     // Item checks - definitions
-    public static List<String> checkItemAmountWhitelist;
+    public static List<String> checkRuleAmountWhitelist;
 
-    public static List<Material> checkItemAmountWhitelistMaterials = new ArrayList<>();
+    public static List<Material> checkRuleAmountWhitelistMaterials = new ArrayList<>();
 
     // Item checks - specific rules
-    public static boolean checkItemPotion;
+    public static boolean checkRulePotion;
+
+    // Item checks - definitions
+    public static List<String> checkDefinitionIllegalBlocks, checkDefinitionIllegalItemFlags, checkDefinitionIllegalEnchants, checkDefinitionIllegalAttributes;
 
     // Anti lag
     public static boolean limitLiquidSpreadEnabled, limitVehicleEnabled, limitOffhandSwapEnabled,
@@ -85,38 +87,46 @@ public class Config {
                 Enable to delete illegals when found
                 Disable to only clean illegal attributes""");
 
-        antiIllegalIllegalBlockList = manager.getList("anti-illegal.checks.illegal-block-list", ItemUtil.illegalBlocks);
-        antiIllegalIllegalItemFlagList = manager.getList("anti-illegal.checks.illegal-item-flag-list", ItemUtil.illegalItemFlags, """
-                Illegal item flags on itemstack for checking.
+        // Item checks
+        final String checkPrefix = "item-checks.";
+        final String checkTriggerPrefix = checkPrefix + "triggers.";
+        final String checkGeneralRulePrefix = checkPrefix + "rules.general.";
+        final String checkSpecificRulePrefix = checkPrefix + "rules.specific.";
+        final String checkDefinitionPrefix = checkPrefix + "definitions.";
+
+        // Item checks - triggers
+        checkTriggerOnJoin = manager.getBoolean(checkTriggerPrefix + "on-player-join", false);
+        checkTriggerOnPickup = manager.getBoolean(checkTriggerPrefix + "on-item-pickup", false);
+        checkTriggerOnInvOpen = manager.getBoolean(checkTriggerPrefix + "on-inventory-open", false);
+        checkTriggerOnInvClose = manager.getBoolean(checkTriggerPrefix + "on-inventory-close", false);
+        checkTriggerOnHopperTransfer = manager.getBoolean(checkTriggerPrefix + "on-hopper-transfer", false);
+
+        // Item checks - general rules
+        checkRuleAmount = manager.getBoolean(checkGeneralRulePrefix + "amount.enabled", true);
+        checkRuleAmountWhitelist = manager.getList(checkGeneralRulePrefix + "amount.witelist", new ArrayList<>());
+        checkRuleDurability = manager.getBoolean(checkGeneralRulePrefix + "durability", true);
+        checkRuleEnchantments  = manager.getBoolean(checkGeneralRulePrefix + "enchantments", true);
+        checkRuleAttributes = manager.getBoolean(checkGeneralRulePrefix + "attributes", true);
+        checkRuleFlags =  manager.getBoolean(checkGeneralRulePrefix + "item-flags", true);
+        checkRuleUnbreakable =  manager.getBoolean(checkGeneralRulePrefix + "unbreakable", false);
+
+        // Item checks - specific rules
+        checkRulePotion = manager.getBoolean(checkSpecificRulePrefix + "potion", true);
+
+        // Item checks - definitions
+        checkDefinitionIllegalBlocks = manager.getList(checkDefinitionPrefix + "illegal-blocks", ItemUtil.illegalBlocks);
+        checkDefinitionIllegalItemFlags = manager.getList(checkDefinitionPrefix + "anti-illegal.checks.illegal-item-flags", ItemUtil.illegalItemFlags, """
+                Illegal item flags for item checking.
                 In vanilla environment item would not has item flag.
                 Note: delete this config section to let auto-regenerate if you change the server version.""");
-        antiIllegalIllegalEnchantList = manager.getList("anti-illegal.checks.illegal-enchant-list", ItemUtil.illegalEnchants, """
+        checkDefinitionIllegalEnchants = manager.getList(checkDefinitionPrefix + "illegal-enchantments", ItemUtil.illegalEnchants, """
+                Illegal enchantments for item checking.
                 Set the value to -1 or remove the entire enchant from the list
                 to disable check to that illegal enchant""");
-        antiIllegalIllegalAttributeModifierList = manager.getList("anti-illegal.checks.illegal-attribute-modifier-list", ItemUtil.illegalAttributes, """
-                Illegal attribute modifiers on itemstack for checking.
+        checkDefinitionIllegalAttributes = manager.getList(checkDefinitionPrefix + "illegal-attribute-modifiers", ItemUtil.illegalAttributes, """
+                Illegal attribute modifiers for item checking.
                 In vanilla environment item would not has attribute modifier.
                 Note: delete this config section to let auto-regenerate if you change the server version.""");
-
-        // Item checks
-        final String itemCheckPrefix = "item-checks.";
-        final String itemCheckTriggerPrefix = itemCheckPrefix + "triggers.";
-        final String itemCheckRulePrefix = itemCheckPrefix + "rules.";
-        final String itemCheckDefinitionPrefix = itemCheckPrefix + "definitions.";
-        checkTriggerOnJoin = manager.getBoolean(itemCheckTriggerPrefix + "on-player-join", false);
-        checkTriggerOnPickup = manager.getBoolean(itemCheckTriggerPrefix + "on-item-pickup", false);
-        checkTriggerOnInvOpen = manager.getBoolean(itemCheckTriggerPrefix + "on-inventory-open", false);
-        checkTriggerOnInvClose = manager.getBoolean(itemCheckTriggerPrefix + "on-inventory-close", false);
-        checkTriggerOnHopperTransfer = manager.getBoolean(itemCheckTriggerPrefix + "on-hopper-transfer", false);
-
-        checkItemAmount = manager.getBoolean(itemCheckPrefix + "amount.enabled", true);
-        checkItemAmountWhitelist = manager.getList(itemCheckPrefix + "amount.witelist", new ArrayList<>());
-        checkItemDurability = manager.getBoolean(itemCheckPrefix + "durability", true);
-        checkItemEnchantments  = manager.getBoolean(itemCheckPrefix + "enchantments", true);
-        checkItemAttributes = manager.getBoolean(itemCheckPrefix + "attributes", true);
-        checkItemFlags =  manager.getBoolean(itemCheckPrefix + "item-flags", true);
-        checkItemPotion = manager.getBoolean(itemCheckPrefix + "potion", true);
-        checkItemUnbreakable =  manager.getBoolean(itemCheckPrefix + "unbreakable", false);
 
         initIllegalItemData();
 
@@ -199,12 +209,12 @@ public class Config {
     }
 
     private static void initIllegalItemData() {
-        checkItemAmountWhitelistMaterials.clear();
+        checkRuleAmountWhitelistMaterials.clear();
 
-        for (String typeStr : checkItemAmountWhitelist) {
+        for (String typeStr : checkRuleAmountWhitelist) {
             final Material material = Material.matchMaterial(typeStr);
             if (material != null) {
-                checkItemAmountWhitelistMaterials.add(material);
+                checkRuleAmountWhitelistMaterials.add(material);
             }
         }
     }

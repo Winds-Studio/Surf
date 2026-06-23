@@ -11,7 +11,7 @@ public class CheckPotion implements ItemCheck {
 
     @Override
     public boolean enabled() {
-        return Config.checkItemPotion;
+        return Config.checkRulePotion;
     }
 
     @Override

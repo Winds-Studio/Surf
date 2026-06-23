@@ -9,7 +9,7 @@ public class CheckUnbreakable implements ItemCheck {
 
     @Override
     public boolean enabled() {
-        return Config.checkItemUnbreakable;
+        return Config.checkRuleUnbreakable;
     }
 
     @Override

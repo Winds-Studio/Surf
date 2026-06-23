@@ -83,7 +83,7 @@ public class ItemUtil {
     }
 
     public static boolean isIllegalItem(ItemStack i) {
-        return Config.antiIllegalIllegalBlockList.contains(i.getType().toString());
+        return Config.checkDefinitionIllegalBlocks.contains(i.getType().toString());
     }
 
     public static boolean isIllegalEffect(PotionEffect effect) {
