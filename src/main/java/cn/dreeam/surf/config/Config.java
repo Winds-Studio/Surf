@@ -174,7 +174,15 @@ public class Config {
         final String miscPrefix = "misc.";
         final String connectionMsgPrefix = miscPrefix + "connection-message.";
 
-        prefix = manager.getString("prefix", "&6&l[&b&lSurf&6&l]&6 ", "Message prefix");
+        prefix = manager.getString(miscPrefix + "prefix", "&6&l[&b&lSurf&6&l]&6 ", "Message prefix");
+        connectionPreventKickEnabled = manager.getBoolean(miscPrefix + "connection-prevent-kick.enabled", true);
+
+        connectionKickReasons = manager.getList(miscPrefix + "connection-prevent-kick.reasons", Arrays.asList(
+                "Kicked for spamming",
+                "Invalid hotbar selection (Hacking?)",
+                "You released use item too quickly (Hacking?)",
+                "You dropped your items too quickly (Hacking?)"
+        ));
 
         connectionMessageEnabled = manager.getBoolean(connectionMsgPrefix + "enabled", false, """
                 These are the connection messages for when a player joins / leaves
@@ -187,15 +195,6 @@ public class Config {
 
         connectionFirstJoinEnabled = manager.getBoolean(connectionMsgPrefix + "player-first-join.enabled", false);
         connectionFirstJoinMessage = manager.getString(connectionMsgPrefix + "player-first-join.message", "&c%player%&6 has joined the &bYour&3Server &6for the first time");
-
-        connectionPreventKickEnabled = manager.getBoolean(miscPrefix + "connection-prevent-kick.enabled", true);
-
-        connectionKickReasons = manager.getList(miscPrefix + "connection-prevent-kick.reasons", Arrays.asList(
-                "Kicked for spamming",
-                "Invalid hotbar selection (Hacking?)",
-                "You released use item too quickly (Hacking?)",
-                "You dropped your items too quickly (Hacking?)"
-        ));
 
         final String netherPrefix = miscPrefix + "nether.";
         netherEnabled = manager.getBoolean(netherPrefix + "enabled", false, "Enable to prevent player go to Nether top or bottom layer");
