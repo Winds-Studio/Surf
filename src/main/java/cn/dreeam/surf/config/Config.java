@@ -11,9 +11,6 @@ import java.util.List;
 
 public class Config {
 
-    // Prefix
-    public static String prefix;
-
     // Anti illegal
     public static boolean antiIllegalCheckIllegalBlockEnabled, antiIllegalRemoveBlockEnchant, antiIllegalAllowInapplicableEnchant, checkIllegalDamageEnabled, checkIllegalPotionEnabled, stackedTotemRevertAsOneEnabled, antiIllegalDeleteIllegalsWhenFoundEnabled;
     public static String antiIllegalCheckIllegalBlockMessage, checkIllegalDamageMessage, checkIllegalPotionMessage;
@@ -44,7 +41,14 @@ public class Config {
             limitWitherSpawnOnLagDisableTPS;
     public static String limitOffhandSwapMessage;
 
+    // Patch
+    public static boolean preventBookBanEnabled, preventBuketPortalEnabled, perChunkLimitEnabled, preventDispenserCrash,
+            gateWayPreventCrashExploit, gateWayPreventEntityEnterPortal, preventNBTBanEnabled, preventTeleportToBlock;
+    public static int perChunkLimitTitleEntityMax, perChunkLimitSkullMax, preventNBTBanLimit;
+    public static String preventBookBanMessage, preventBuketPortalMessage, perChunkLimitMessage, preventNBTBanMessage;
+
     // Misc / connection / nether
+    public static String prefix;
     public static boolean connectionMessageEnabled, connectionMessageUseDisplayName, connectionFirstJoinEnabled,
             connectionPreventKickEnabled, netherEnabled, netherTopBottomDoDamage;
     public static int netherTopLayer, netherBottomLayer;
@@ -52,17 +56,8 @@ public class Config {
             netherBottomMessage;
     public static List<String> connectionKickReasons;
 
-    // Patch
-    public static boolean preventBookBanEnabled, preventBuketPortalEnabled, perChunkLimitEnabled, preventDispenserCrash,
-            gateWayPreventCrashExploit, gateWayPreventEntityEnterPortal, preventNBTBanEnabled, preventTeleportToBlock;
-    public static int perChunkLimitTitleEntityMax, perChunkLimitSkullMax, preventNBTBanLimit;
-    public static String preventBookBanMessage, preventBuketPortalMessage, perChunkLimitMessage, preventNBTBanMessage;
-
     public static void initConfig() {
         ConfigManager manager = Surf.configManager();
-
-        // Prefix
-        prefix = manager.getString("Prefix", "&6&l[&b&lSurf&6&l]&6 ", "Message prefix");
 
         // Anti Illegal
         antiIllegalCheckIllegalBlockEnabled = manager.getBoolean("anti-illegal.check-illegal-block.enabled", true, """
@@ -104,18 +99,18 @@ public class Config {
         // Item checks - general rules
         checkRuleAmount = manager.getBoolean(checkGeneralRulePrefix + "amount.enabled", true);
         checkRuleAmountWhitelist = manager.getList(checkGeneralRulePrefix + "amount.witelist", new ArrayList<>());
-        checkRuleDurability = manager.getBoolean(checkGeneralRulePrefix + "durability", true);
-        checkRuleEnchantments  = manager.getBoolean(checkGeneralRulePrefix + "enchantments", true);
-        checkRuleAttributes = manager.getBoolean(checkGeneralRulePrefix + "attributes", true);
-        checkRuleFlags =  manager.getBoolean(checkGeneralRulePrefix + "item-flags", true);
-        checkRuleUnbreakable =  manager.getBoolean(checkGeneralRulePrefix + "unbreakable", false);
+        checkRuleDurability = manager.getBoolean(checkGeneralRulePrefix + "durability.enabled", true);
+        checkRuleEnchantments  = manager.getBoolean(checkGeneralRulePrefix + "enchantments.enabled", true);
+        checkRuleAttributes = manager.getBoolean(checkGeneralRulePrefix + "attributes.enabled", true);
+        checkRuleFlags =  manager.getBoolean(checkGeneralRulePrefix + "item-flags.enabled", true);
+        checkRuleUnbreakable =  manager.getBoolean(checkGeneralRulePrefix + "unbreakable.enabled", false);
 
         // Item checks - specific rules
-        checkRulePotion = manager.getBoolean(checkSpecificRulePrefix + "potion", true);
+        checkRulePotion = manager.getBoolean(checkSpecificRulePrefix + "potion.enabled", true);
 
         // Item checks - definitions
         checkDefinitionIllegalBlocks = manager.getList(checkDefinitionPrefix + "illegal-blocks", ItemUtil.illegalBlocks);
-        checkDefinitionIllegalItemFlags = manager.getList(checkDefinitionPrefix + "anti-illegal.checks.illegal-item-flags", ItemUtil.illegalItemFlags, """
+        checkDefinitionIllegalItemFlags = manager.getList(checkDefinitionPrefix + "illegal-item-flags", ItemUtil.illegalItemFlags, """
                 Illegal item flags for item checking.
                 In vanilla environment item would not has item flag.
                 Note: delete this config section to let auto-regenerate if you change the server version.""");
@@ -149,9 +144,38 @@ public class Config {
 
         limitWitherSpawnOnLagDisableTPS = manager.getInt(limitPrefix + "wither-spawn.disable-tps", 18);
 
+        // Patch
+        final String patchPathPrefix = "patch.";
+        preventBookBanEnabled = manager.getBoolean(patchPathPrefix + "prevent-book-ban.enabled", false);
+        preventBookBanMessage = manager.getString(patchPathPrefix + "prevent-book-ban.message", "&6Detected a book ban, successfully cancelled.");
+
+        preventBuketPortalEnabled = manager.getBoolean(patchPathPrefix + "prevent-buket-on-portal.enabled", false);
+        preventBuketPortalMessage = manager.getString(patchPathPrefix + "prevent-buket-on-portal.message", "&6You can not do this");
+
+        perChunkLimitEnabled = manager.getBoolean(patchPathPrefix + "per-chunk-limit.enabled", false, "ChunkBan skull limit tile entity limit and prevent message");
+        perChunkLimitMessage = manager.getString(patchPathPrefix + "per-chunk-limit.message", "&6Detected a chunk ban, successfully cancelled.");
+        perChunkLimitTitleEntityMax = manager.getInt(patchPathPrefix + "per-chunk-limit.tile-entity-max", 500);
+        perChunkLimitSkullMax = manager.getInt(patchPathPrefix + "per-chunk-limit.skull-max", 100);
+
+        preventDispenserCrash = manager.getBoolean(patchPathPrefix + "prevent-dispenser-crash.enabled", true);
+
+        gateWayPreventCrashExploit = manager.getBoolean(patchPathPrefix + "gate-way.prevent-crash-exploit", false);
+        gateWayPreventEntityEnterPortal = manager.getBoolean(patchPathPrefix + "gate-way.prevent-entity-enter-portal", false);
+
+        preventNBTBanEnabled = manager.getBoolean(patchPathPrefix + "prevent-nbt-ban.enabled", true);
+        preventNBTBanLimit = manager.getInt(patchPathPrefix + "prevent-nbt-ban.nbt-limit", 100000);
+        preventNBTBanMessage = manager.getString(patchPathPrefix + "prevent-nbt-ban.message", "&6Detected a nbt ban, successfully cancelled.");
+
+        preventTeleportToBlock = manager.getBoolean(patchPathPrefix + "prevent-teleport-to-block.enabled", true, """
+                Prevent player uses ender pearl to teleport to inside of block,
+                Enable this to let PVP more friendly.""");
+
         // Misc / Connection / Nether
         final String miscPrefix = "misc.";
         final String connectionMsgPrefix = miscPrefix + "connection-message.";
+
+        prefix = manager.getString("prefix", "&6&l[&b&lSurf&6&l]&6 ", "Message prefix");
+
         connectionMessageEnabled = manager.getBoolean(connectionMsgPrefix + "enabled", false, """
                 These are the connection messages for when a player joins / leaves
                 Use & for colours and %player% as a placeholder for the players name""");
@@ -180,32 +204,6 @@ public class Config {
         netherTopMessage = manager.getString(netherPrefix + "top-message", "&6The nether top has been disabled due to lag");
         netherBottomMessage = manager.getString(netherPrefix + "bottom-message", "&6The nether bottom has been disabled due to lag");
         netherTopBottomDoDamage = manager.getBoolean(netherPrefix + "top-bottom-do-damage", false);
-
-        // Patch
-        final String patchPathPrefix = "patch.";
-        preventBookBanEnabled = manager.getBoolean(patchPathPrefix + "prevent-book-ban.enabled", false);
-        preventBookBanMessage = manager.getString(patchPathPrefix + "prevent-book-ban.message", "&6Detected a book ban, successfully cancelled.");
-
-        preventBuketPortalEnabled = manager.getBoolean(patchPathPrefix + "prevent-buket-on-portal.enabled", false);
-        preventBuketPortalMessage = manager.getString(patchPathPrefix + "prevent-buket-on-portal.message", "&6You can not do this");
-
-        perChunkLimitEnabled = manager.getBoolean(patchPathPrefix + "per-chunk-limit.enabled", false, "ChunkBan skull limit tile entity limit and prevent message");
-        perChunkLimitMessage = manager.getString(patchPathPrefix + "per-chunk-limit.message", "&6Detected a chunk ban, successfully cancelled.");
-        perChunkLimitTitleEntityMax = manager.getInt(patchPathPrefix + "per-chunk-limit.tile-entity-max", 500);
-        perChunkLimitSkullMax = manager.getInt(patchPathPrefix + "per-chunk-limit.skull-max", 100);
-
-        preventDispenserCrash = manager.getBoolean(patchPathPrefix + "prevent-dispenser-crash.enabled", true);
-
-        gateWayPreventCrashExploit = manager.getBoolean(patchPathPrefix + "gate-way.prevent-crash-exploit", false);
-        gateWayPreventEntityEnterPortal = manager.getBoolean(patchPathPrefix + "gate-way.prevent-entity-enter-portal", false);
-
-        preventNBTBanEnabled = manager.getBoolean(patchPathPrefix + "prevent-nbt-ban.enabled", true);
-        preventNBTBanLimit = manager.getInt(patchPathPrefix + "prevent-nbt-ban.nbt-limit", 100000);
-        preventNBTBanMessage = manager.getString(patchPathPrefix + "prevent-nbt-ban.message", "&6Detected a nbt ban, successfully cancelled.");
-
-        preventTeleportToBlock = manager.getBoolean(patchPathPrefix + "prevent-teleport-to-block.enabled", true, """
-                Prevent player uses ender pearl to teleport to inside of block,
-                Enable this to let PVP more friendly.""");
     }
 
     private static void initIllegalItemData() {
