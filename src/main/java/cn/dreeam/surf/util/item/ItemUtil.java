@@ -7,6 +7,7 @@ import com.cryptomorin.xseries.XMaterial;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Keyed;
+import org.bukkit.Material;
 import org.bukkit.Registry;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.inventory.ItemFlag;
@@ -70,6 +71,11 @@ public class ItemUtil {
 
     public static boolean isWritableBook(ItemStack i) {
         return i.getType() == XMaterial.WRITABLE_BOOK.get();
+    }
+
+    public static boolean isPotion(ItemStack i) {
+        Material material = i.getType();
+        return material == Material.POTION || material == Material.SPLASH_POTION || material == Material.LINGERING_POTION;
     }
 
     public static boolean isIllegalTotem(ItemStack i) {

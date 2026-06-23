@@ -16,8 +16,7 @@ public class CheckPotion implements ItemCheck {
 
     @Override
     public boolean appliesTo(ItemStack i) {
-        // TODO, use == potion
-        return i.getType().toString().contains("POTION") && i.hasItemMeta();
+        return ItemUtil.isPotion(i) && i.hasItemMeta();
     }
 
     @Override

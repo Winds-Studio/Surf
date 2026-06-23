@@ -115,16 +115,18 @@ public class ActionsPotion implements Listener {
     private void onPotionConsume(PlayerItemConsumeEvent e) {
         if (!Config.checkIllegalPotionEnabled) return;
 
-        if (!e.getItem().getType().toString().contains("POTION") || !e.getItem().hasItemMeta()) {
+        final ItemStack item = e.getItem();
+
+        if (!ItemUtil.isPotion(item) || !item.hasItemMeta()) {
             return;
         }
 
-        PotionMeta potion = (PotionMeta) e.getItem().getItemMeta();
+        PotionMeta potion = (PotionMeta) item.getItemMeta();
 
         for (PotionEffect effect : potion.getCustomEffects()) {
             if (ItemUtil.isIllegalEffect(effect)) {
                 e.setCancelled(true);
-                e.getPlayer().getInventory().remove(e.getItem());
+                e.getPlayer().getInventory().remove(item);
                 MessageUtil.sendMessage(e.getPlayer(), Config.checkIllegalPotionMessage);
                 break;
             }
