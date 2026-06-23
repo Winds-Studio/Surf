@@ -3,7 +3,6 @@ package cn.dreeam.surf.listener;
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.modules.checks.ItemCheckHandler;
-import cn.dreeam.surf.util.item.ItemUtil;
 import cn.dreeam.surf.util.MessageUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +21,7 @@ public class ActionsBasic implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     private void onJoin(PlayerJoinEvent event) {
-        if (!Config.antiIllegalCheckWhenPlayerJoinEnabled) return;
+        if (!Config.checkTriggerOnJoin) return;
 
         Inventory inv = event.getPlayer().getInventory();
 
@@ -31,7 +30,7 @@ public class ActionsBasic implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     private void onInvMove(InventoryMoveItemEvent event) {
-        if (!Config.antiIllegalCheckWhenHopperTransferEnabled) return;
+        if (!Config.checkTriggerOnHopperTransfer) return;
 
         Inventory inv = event.getSource();
 
@@ -43,7 +42,7 @@ public class ActionsBasic implements Listener {
 
     @EventHandler
     private void onInvClose(InventoryCloseEvent event) {
-        if (!Config.antiIllegalCheckWhenInventoryCloseEnabled) return;
+        if (!Config.checkTriggerOnInvClose) return;
 
         Inventory inv = event.getPlayer().getInventory();
 
@@ -55,7 +54,7 @@ public class ActionsBasic implements Listener {
 
     @EventHandler
     private void onInvOpen(InventoryOpenEvent event) {
-        if (!Config.antiIllegalCheckWhenInventoryOpenEnabled) return;
+        if (!Config.checkTriggerOnInvOpen) return;
 
         Inventory inv = event.getPlayer().getInventory();
 
@@ -67,7 +66,7 @@ public class ActionsBasic implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     private void onDispenseEquip(BlockDispenseArmorEvent event) {
-        if (!Config.antiIllegalCheckWhenItemPickupEnabled) return;
+        if (!Config.checkTriggerOnPickup) return;
 
         ItemStack i = event.getItem();
 
@@ -80,7 +79,7 @@ public class ActionsBasic implements Listener {
     private void onPickup(EntityPickupItemEvent event) {
         if (Surf.getInstance().isRoseStackerEnabled) return;
 
-        if (!Config.antiIllegalCheckWhenItemPickupEnabled) return;
+        if (!Config.checkTriggerOnPickup) return;
 
         ItemStack i = event.getItem().getItemStack();
 

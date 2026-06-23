@@ -2,7 +2,6 @@ package cn.dreeam.surf.listener.hook;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.modules.checks.ItemCheckHandler;
-import cn.dreeam.surf.util.item.ItemUtil;
 import cn.dreeam.surf.util.MessageUtil;
 import dev.rosewood.rosestacker.event.ItemPickupEvent;
 import org.bukkit.entity.Player;
@@ -14,7 +13,7 @@ public class ActionsRoseStackerItem implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     private void onPickup(ItemPickupEvent event) {
-        if (!Config.antiIllegalCheckWhenItemPickupEnabled) return;
+        if (!Config.checkTriggerOnPickup) return;
 
         ItemStack i = event.getStackedItem().getItem().getItemStack();
 

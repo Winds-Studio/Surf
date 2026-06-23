@@ -3,6 +3,9 @@ package cn.dreeam.surf.config;
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.util.item.ItemUtil;
 
+import org.bukkit.Material;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,15 +15,24 @@ public class Config {
     public static String prefix;
 
     // Anti illegal
-    public static boolean antiIllegalCheckIllegalBlockEnabled, antiIllegalRemoveBlockEnchant, antiIllegalAllowInapplicableEnchant, checkIllegalDamageEnabled, checkIllegalPotionEnabled, stackedTotemRevertAsOneEnabled, antiIllegalDeleteIllegalsWhenFoundEnabled, antiIllegalCheckWhenPlayerJoinEnabled, antiIllegalCheckWhenHopperTransferEnabled, antiIllegalCheckWhenInventoryCloseEnabled, antiIllegalCheckWhenInventoryOpenEnabled, antiIllegalCheckWhenItemPickupEnabled;
+    public static boolean antiIllegalCheckIllegalBlockEnabled, antiIllegalRemoveBlockEnchant, antiIllegalAllowInapplicableEnchant, checkIllegalDamageEnabled, checkIllegalPotionEnabled, stackedTotemRevertAsOneEnabled, antiIllegalDeleteIllegalsWhenFoundEnabled;
     public static String antiIllegalCheckIllegalBlockMessage, checkIllegalDamageMessage, checkIllegalPotionMessage;
     public static List<String> antiIllegalIllegalBlockList, antiIllegalIllegalItemFlagList, antiIllegalIllegalEnchantList, antiIllegalIllegalAttributeModifierList;
 
-    // Item checks - general
+    // Item checks - triggers
+    public static boolean checkTriggerOnJoin, checkTriggerOnPickup, checkTriggerOnInvOpen, checkTriggerOnInvClose,
+            checkTriggerOnHopperTransfer;
+
+    // Item checks - general rules
     public static boolean checkItemAmount, checkItemDurability, checkItemEnchantments, checkItemAttributes,
             checkItemFlags, checkItemUnbreakable;
 
-    // Item checks - specific
+    // Item checks - definitions
+    public static List<String> checkItemAmountWhitelist;
+
+    public static List<Material> checkItemAmountWhitelistMaterials = new ArrayList<>();
+
+    // Item checks - specific rules
     public static boolean checkItemPotion;
 
     // Anti lag
@@ -73,12 +85,6 @@ public class Config {
                 Enable to delete illegals when found
                 Disable to only clean illegal attributes""");
 
-        antiIllegalCheckWhenPlayerJoinEnabled = manager.getBoolean("anti-illegal.check-when.PlayerJoin", false);
-        antiIllegalCheckWhenHopperTransferEnabled = manager.getBoolean("anti-illegal.check-when.HopperTransfer", false);
-        antiIllegalCheckWhenInventoryCloseEnabled = manager.getBoolean("anti-illegal.check-when.InventoryClose", false);
-        antiIllegalCheckWhenInventoryOpenEnabled = manager.getBoolean("anti-illegal.check-when.InventoryOpen", false);
-        antiIllegalCheckWhenItemPickupEnabled = manager.getBoolean("anti-illegal.check-when.ItemPickup", false);
-
         antiIllegalIllegalBlockList = manager.getList("anti-illegal.checks.illegal-block-list", ItemUtil.illegalBlocks);
         antiIllegalIllegalItemFlagList = manager.getList("anti-illegal.checks.illegal-item-flag-list", ItemUtil.illegalItemFlags, """
                 Illegal item flags on itemstack for checking.
@@ -93,18 +99,30 @@ public class Config {
                 Note: delete this config section to let auto-regenerate if you change the server version.""");
 
         // Item checks
-        final String itemChecksPrefix = "item-checks.";
-        checkItemAmount = manager.getBoolean(itemChecksPrefix + "amount", true);
-        checkItemDurability = manager.getBoolean(itemChecksPrefix + "durability", true);
-        checkItemEnchantments  = manager.getBoolean(itemChecksPrefix + "enchantments", true);
-        checkItemAttributes = manager.getBoolean(itemChecksPrefix + "attributes", true);
-        checkItemFlags =  manager.getBoolean(itemChecksPrefix + "item-flags", true);
-        checkItemPotion = manager.getBoolean(itemChecksPrefix + "potion", true);
-        checkItemUnbreakable =  manager.getBoolean(itemChecksPrefix + "unbreakable", false);
+        final String itemCheckPrefix = "item-checks.";
+        final String itemCheckTriggerPrefix = itemCheckPrefix + "triggers.";
+        final String itemCheckRulePrefix = itemCheckPrefix + "rules.";
+        final String itemCheckDefinitionPrefix = itemCheckPrefix + "definitions.";
+        checkTriggerOnJoin = manager.getBoolean(itemCheckTriggerPrefix + "on-player-join", false);
+        checkTriggerOnPickup = manager.getBoolean(itemCheckTriggerPrefix + "on-item-pickup", false);
+        checkTriggerOnInvOpen = manager.getBoolean(itemCheckTriggerPrefix + "on-inventory-open", false);
+        checkTriggerOnInvClose = manager.getBoolean(itemCheckTriggerPrefix + "on-inventory-close", false);
+        checkTriggerOnHopperTransfer = manager.getBoolean(itemCheckTriggerPrefix + "on-hopper-transfer", false);
+
+        checkItemAmount = manager.getBoolean(itemCheckPrefix + "amount.enabled", true);
+        checkItemAmountWhitelist = manager.getList(itemCheckPrefix + "amount.witelist", new ArrayList<>());
+        checkItemDurability = manager.getBoolean(itemCheckPrefix + "durability", true);
+        checkItemEnchantments  = manager.getBoolean(itemCheckPrefix + "enchantments", true);
+        checkItemAttributes = manager.getBoolean(itemCheckPrefix + "attributes", true);
+        checkItemFlags =  manager.getBoolean(itemCheckPrefix + "item-flags", true);
+        checkItemPotion = manager.getBoolean(itemCheckPrefix + "potion", true);
+        checkItemUnbreakable =  manager.getBoolean(itemCheckPrefix + "unbreakable", false);
+
+        initIllegalItemData();
 
         // Anti Lag
         final String limitPrefix = "limit.";
-        limitLiquidSpreadEnabled = manager.getBoolean(limitPrefix + limitPrefix + "liquid-spread.enabled", false, """
+        limitLiquidSpreadEnabled = manager.getBoolean(limitPrefix + "liquid-spread.enabled", false, """
                 water / lava flowing disable tps this is useful on new servers with lots of block physics updates that cause lag
                 Set -1 to disable""");
         limitLiquidSpreadDisableTPS = manager.getInt(limitPrefix + "liquid-spread.disable-tps", 18);
@@ -178,5 +196,16 @@ public class Config {
         preventTeleportToBlock = manager.getBoolean(patchPathPrefix + "prevent-teleport-to-block.enabled", true, """
                 Prevent player uses ender pearl to teleport to inside of block,
                 Enable this to let PVP more friendly.""");
+    }
+
+    private static void initIllegalItemData() {
+        checkItemAmountWhitelistMaterials.clear();
+
+        for (String typeStr : checkItemAmountWhitelist) {
+            final Material material = Material.matchMaterial(typeStr);
+            if (material != null) {
+                checkItemAmountWhitelistMaterials.add(material);
+            }
+        }
     }
 }
