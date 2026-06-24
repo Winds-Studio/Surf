@@ -11,6 +11,7 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.jspecify.annotations.Nullable;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
@@ -288,24 +289,42 @@ public class ItemUtil {
 
         for (String enchantmentData : defaultMaxEnchantLevels) {
             final String[] data = enchantmentData.split(":");
+            final String enchantmentName = data[0];
+            final String levelStr = data[1];
 
-            final Enchantment enchantment = Enchantment.getByName(data[0]);
+            final Enchantment enchantment = getEnchantmentName(enchantmentName);
 
             if (enchantment == null) {
-                Surf.LOGGER.warn("Invalid enchantment name: {}", enchantmentData);
+                Surf.LOGGER.warn("Invalid enchantment name: {}", enchantmentName);
                 continue;
             }
 
             final int maxLevel;
 
             try {
-                maxLevel = Integer.parseInt(data[1]);
+                maxLevel = Integer.parseInt(levelStr);
             } catch (NumberFormatException e) {
-                Surf.LOGGER.warn("Invalid enchantment max level: {}", data[1]);
+                Surf.LOGGER.warn("Invalid enchantment max level: {}", levelStr);
                 continue;
             }
 
             maxEnchantLevels.put(enchantment, maxLevel);
+        }
+    }
+
+    private static @Nullable Enchantment getEnchantmentName(String name) {
+        if (PlatformUtil.isNewerThan(20, 6)) {
+            final Key key = Key.key(name.toLowerCase(Locale.ROOT));
+
+            return RegistryAccess.registryAccess().getRegistry(RegistryKey.ENCHANTMENT).get(key);
+        } else if (PlatformUtil.isNewerAndEqual(13, 0)) {
+            final NamespacedKey key = NamespacedKey.minecraft(name.toLowerCase(Locale.ROOT));
+
+            return Enchantment.getByKey(key);
+        } else {
+            final String normalizedName = name.toUpperCase(Locale.ROOT);
+
+            return Enchantment.getByName(normalizedName);
         }
     }
 
