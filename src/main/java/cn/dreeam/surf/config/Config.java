@@ -25,7 +25,7 @@ public class Config {
     public static List<String> checkRuleAmountWhitelist;
 
     // Item checks - specific rules
-    public static boolean checkRulePotion;
+    public static boolean checkRulePotion, checkRuleRemoveLegacyEnchantedGoldenApple;
 
     // Item checks - definitions
     public static List<String> checkDefinitionIllegalBlocks, checkDefinitionIllegalItemFlags, checkDefinitionIllegalAttributes, checkDefinitionMaxEnchantLevels;
@@ -103,6 +103,7 @@ public class Config {
 
         // Item checks - specific rules
         checkRulePotion = manager.getBoolean(checkSpecificRulePrefix + "potion.enabled", true);
+        checkRuleRemoveLegacyEnchantedGoldenApple = manager.getBoolean(checkSpecificRulePrefix + "remove-legacy-enchanted-golden-apple.enabled", false);
 
         // Item checks - definitions
         checkDefinitionIllegalBlocks = manager.getList(checkDefinitionPrefix + "illegal-blocks", ItemUtil.defaultIllegalBlocks);

@@ -2,6 +2,7 @@ package cn.dreeam.surf.modules.misc.patch;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.MessageUtil;
+import cn.dreeam.surf.util.item.ItemUtil;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -11,8 +12,6 @@ import org.bukkit.event.block.BlockDispenseEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 
 public class BucketEvent implements Listener {
-
-    private static final BlockFace[] POSSIBLE_FACES = {BlockFace.DOWN, BlockFace.UP, BlockFace.NORTH, BlockFace.SOUTH, BlockFace.WEST, BlockFace.EAST};
 
     @EventHandler(ignoreCancelled = true)
     public void onBucket(PlayerBucketEmptyEvent event) {
@@ -44,7 +43,7 @@ public class BucketEvent implements Listener {
             return false;
         }
 
-        for (BlockFace face : POSSIBLE_FACES) {
+        for (BlockFace face : ItemUtil.FACES) {
             Block relative = block.getRelative(face);
             if (relative.getType().equals(XMaterial.END_PORTAL.get())) {
                 return true;

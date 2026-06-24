@@ -2,9 +2,9 @@ package cn.dreeam.surf.modules.misc.patch;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.MessageUtil;
+import cn.dreeam.surf.util.item.ItemUtil;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Chunk;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
@@ -28,15 +28,15 @@ public class ChunkBan implements Listener {
 
         if (player.hasPermission("surf.bypass.chunkban")) return;
 
-        if (isTileEntity(block.getType()) && chunk.getTileEntities().length > Config.perChunkLimitTitleEntityMax) {
+        if (ItemUtil.isTileEntity(block) && chunk.getTileEntities().length > Config.perChunkLimitTitleEntityMax) {
             event.setCancelled(true);
             MessageUtil.sendMessage(player, Config.perChunkLimitMessage);
             return;
         }
 
-        if (isSkull(block.getType())) {
+        if (ItemUtil.isSkull(block.getType())) {
             // get chunk skull count
-            long skullCount = Arrays.stream(chunk.getTileEntities()).filter(tileEntity -> isSkull(tileEntity.getType())).count();
+            long skullCount = Arrays.stream(chunk.getTileEntities()).filter(tileEntity -> ItemUtil.isSkull(tileEntity.getType())).count();
             if (skullCount > Config.perChunkLimitSkullMax) {
                 event.setCancelled(true);
                 MessageUtil.sendMessage(player, Config.perChunkLimitMessage);
@@ -59,36 +59,5 @@ public class ChunkBan implements Listener {
                 MessageUtil.sendMessage(event.getPlayer(), Config.perChunkLimitMessage);
             }
         }
-    }
-
-    private boolean isTileEntity(Material m) {
-        switch (m) {
-            //TODO
-            //case ENCHANTMENT_TABLE:
-            //case WALL_BANNER:
-            //case SIGN_POST:
-            case FURNACE:
-            case TRAPPED_CHEST:
-            case ACACIA_SIGN:
-            case ACACIA_WALL_SIGN:
-            case HOPPER:
-            case DROPPER:
-            case DISPENSER:
-            case BREWING_STAND:
-            case BEACON:
-            case ENDER_CHEST:
-            case FLOWER_POT:
-            case BLACK_BANNER:
-            case PLAYER_HEAD:
-            case PLAYER_WALL_HEAD:
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    private boolean isSkull(Material material) {
-        return material.equals(XMaterial.PLAYER_HEAD.get())
-                || material.equals(XMaterial.PLAYER_WALL_HEAD.get());
     }
 }

@@ -2,6 +2,7 @@ package cn.dreeam.surf.modules.checks.impl;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.modules.checks.ItemCheck;
+import cn.dreeam.surf.util.PlatformUtil;
 import cn.dreeam.surf.util.item.ItemUtil;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.inventory.ItemStack;
@@ -11,7 +12,7 @@ public class CheckItemAttributes implements ItemCheck {
 
     @Override
     public boolean enabled() {
-        return Config.checkRuleAttributes;
+        return Config.checkRuleAttributes && PlatformUtil.isNewerAndEqual(13, 0);
     }
 
     @Override

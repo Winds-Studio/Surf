@@ -12,6 +12,9 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.TileState;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -31,6 +34,8 @@ public class ItemUtil {
     private static final int BAD_OMEN_EFFECT_DURATION = (60 + 40) * 60 * 20; // Duration: 1:40:00
     private static final int RAID_OMEN_EFFECT_DURATION = 30 * 20; // Duration: 0:0:30
     private static final int TRIAL_OMEN_EFFECT_DURATION = (15 * 60 * 20) * (PlatformUtil.isNewerAndEqual(14, 0) ? 5 : 3); // Duration: 15mins * 3 or 5 (max Bad Omen amplifier)
+
+    public static final BlockFace[] FACES = {BlockFace.DOWN, BlockFace.UP, BlockFace.NORTH, BlockFace.SOUTH, BlockFace.WEST, BlockFace.EAST};
 
     // For config-gen
     public static final List<String> defaultIllegalBlocks = initDefaultIllegalBlocks();
@@ -75,6 +80,15 @@ public class ItemUtil {
         }
 
         return i.getType().isAir();
+    }
+
+    public static boolean isTileEntity(Block block) {
+        return block.getState() instanceof TileState;
+    }
+
+    public static boolean isSkull(Material material) {
+        return material.equals(XMaterial.PLAYER_HEAD.get())
+                || material.equals(XMaterial.PLAYER_WALL_HEAD.get());
     }
 
     public static boolean isWritableBook(ItemStack i) {

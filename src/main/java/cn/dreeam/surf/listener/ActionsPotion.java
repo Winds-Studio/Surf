@@ -2,7 +2,9 @@ package cn.dreeam.surf.listener;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.MessageUtil;
+import cn.dreeam.surf.util.PlatformUtil;
 import cn.dreeam.surf.util.item.ItemUtil;
+import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.block.Container;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -73,16 +75,20 @@ public class ActionsPotion implements Listener {
     private void onHit(ProjectileHitEvent event) {
         if (!Config.checkIllegalPotionEnabled) return;
 
-        if (!(event.getEntity() instanceof Arrow arrow) || !(event.getEntity().getShooter() instanceof Player)
+        if (!(event.getEntity() instanceof Arrow arrow) || !(arrow.getShooter() instanceof Player shooter)
                 || !(event.getHitEntity() instanceof Player)) {
             return;
         }
 
-        Player shooter = (Player) arrow.getShooter();
+        final boolean cancellable = PlatformUtil.isNewerAndEqual(16, 5);
 
         for (PotionEffect effect : arrow.getCustomEffects()) {
             if (ItemUtil.isIllegalEffect(effect)) {
-                event.setCancelled(true);
+                if (cancellable) {
+                    event.setCancelled(true);
+                } else {
+                    shooter.getInventory().remove(XMaterial.TIPPED_ARROW.get());
+                }
                 MessageUtil.sendMessage(shooter, Config.checkIllegalPotionMessage);
                 break;
             }
