@@ -3,7 +3,6 @@ package cn.dreeam.surf.modules.misc.patch;
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.PlatformUtil;
-import cn.dreeam.surf.util.Util;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;

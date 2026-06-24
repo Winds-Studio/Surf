@@ -1,8 +1,8 @@
 package cn.dreeam.surf.listener;
 
 import cn.dreeam.surf.config.Config;
-import cn.dreeam.surf.util.item.ItemUtil;
 import cn.dreeam.surf.util.MessageUtil;
+import cn.dreeam.surf.util.item.ItemUtil;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;

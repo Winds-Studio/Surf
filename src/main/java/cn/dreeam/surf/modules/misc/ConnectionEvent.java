@@ -3,7 +3,6 @@ package cn.dreeam.surf.modules.misc;
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.PlatformUtil;
-import cn.dreeam.surf.util.Util;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;

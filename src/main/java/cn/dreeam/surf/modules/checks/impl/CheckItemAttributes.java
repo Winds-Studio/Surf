@@ -30,8 +30,8 @@ public class CheckItemAttributes implements ItemCheck {
         // TODO check
         final ItemMeta meta = i.getItemMeta();
 
-        for (String attribute : Config.checkDefinitionIllegalAttributes) {
-            if (meta.getAttributeModifiers(ItemUtil.getAttributeByName(attribute)) != null) {
+        for (Attribute attribute : ItemUtil.illegalAttributes) {
+            if (meta.getAttributeModifiers(attribute) != null) {
                 return true;
             }
         }
@@ -44,10 +44,8 @@ public class CheckItemAttributes implements ItemCheck {
         // TODO check
         final ItemMeta meta = i.getItemMeta();
 
-        for (String attributeStr : Config.checkDefinitionIllegalAttributes) {
-            Attribute attribute = ItemUtil.getAttributeByName(attributeStr);
-
-            if (attribute != null && meta.getAttributeModifiers(attribute) != null) {
+        for (Attribute attribute : ItemUtil.illegalAttributes) {
+            if (meta.getAttributeModifiers(attribute) != null) {
                 meta.removeAttributeModifier(attribute);
             }
         }

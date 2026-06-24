@@ -4,12 +4,16 @@ import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.PlatformUtil;
 import com.cryptomorin.xseries.XMaterial;
+import io.papermc.paper.registry.RegistryAccess;
+import io.papermc.paper.registry.RegistryKey;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-import org.bukkit.Keyed;
+import org.jspecify.annotations.Nullable;
 import org.bukkit.Material;
 import org.bukkit.Registry;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -18,10 +22,8 @@ import org.bukkit.potion.PotionEffectType;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 public class ItemUtil {
 
@@ -31,14 +33,21 @@ public class ItemUtil {
     private static final int RAID_OMEN_EFFECT_DURATION = 30 * 20; // Duration: 0:0:30
     private static final int TRIAL_OMEN_EFFECT_DURATION = (15 * 60 * 20) * (PlatformUtil.isNewerAndEqual(14, 0) ? 5 : 3); // Duration: 15mins * 3 or 5 (max Bad Omen amplifier)
 
-    public static final List<String> illegalBlocks = initIllegalBlocks();
-    public static final List<String> illegalItemFlags = initIllegalItemFlags();
-    public static final List<String> illegalAttributes = initIllegalAttribute();
-    public static final List<String> illegalEnchants = initIllegalEnchants();
-    public static final Map<String, Integer> illegalEnchantsMap = initIllegalEnchantsMap();
+    // For config-gen
+    public static final List<String> defaultIllegalBlocks = initDefaultIllegalBlocks();
+    public static final List<String> defaultIllegalItemFlags = initDefaultIllegalItemFlags();
+    public static final List<String> defaultIllegalAttributes = initDefaultIllegalAttribute();
+    public static final List<String> defaultMaxEnchantLevels = initDefaultMaxEnchantLevels();
 
-    private static Method attributeValueOf;
+    public static List<Material> illegalBlocks = new ArrayList<>();
+    public static List<ItemFlag> illegalItemFlags = new ArrayList<>();
+    public static List<Attribute> illegalAttributes = new ArrayList<>();
+    public static Object2IntOpenHashMap<Enchantment> maxEnchantLevels = new Object2IntOpenHashMap<>();
+    public static List<Material> checkRuleAmountWhitelistMaterials = new ArrayList<>();
+
     private static Method attributeValues;
+    private static Method attributeValueOf;
+    private static Method attributeName;
 
     /*
     public static boolean isContainer(ItemStack i) {
@@ -83,7 +92,7 @@ public class ItemUtil {
     }
 
     public static boolean isIllegalItem(ItemStack i) {
-        return Config.checkDefinitionIllegalBlocks.contains(i.getType().toString());
+        return ItemUtil.illegalBlocks.contains(i.getType());
     }
 
     public static boolean isIllegalEffect(PotionEffect effect) {
@@ -104,8 +113,24 @@ public class ItemUtil {
         return effect.getAmplifier() > 5 || effect.getDuration() < 0 || effect.getDuration() > duration;
     }
 
-    // TODO
-    private static List<String> initIllegalBlocks() {
+    public static void initIllegalItemData() {
+        initIllegalBlocks();
+        initIllegalItemFlags();
+        initIllegalAttributes();
+        initMaxEnchantLevels();
+
+        checkRuleAmountWhitelistMaterials.clear();
+
+        for (String materialName : Config.checkRuleAmountWhitelist) {
+            final Material material = Material.matchMaterial(materialName);
+            if (material != null) {
+                checkRuleAmountWhitelistMaterials.add(material);
+            }
+        }
+    }
+
+    // TODO - multi-version support
+    private static List<String> initDefaultIllegalBlocks() {
         final List<String> list = new ArrayList<>(Arrays.asList(
                 "BARRIER",
                 "BEDROCK",
@@ -126,107 +151,170 @@ public class ItemUtil {
                 "REINFORCED_DEEPSLATE"
         ));
 
+        list.sort(String.CASE_INSENSITIVE_ORDER);
+
         return list;
     }
 
-    private static List<String> initIllegalItemFlags() {
+    private static List<String> initDefaultIllegalItemFlags() {
         final List<String> list = new ArrayList<>();
 
-        for (ItemFlag itemFlag : ItemFlag.values()) {
-            final String itemFlagStr = itemFlag.toString();
-
-            list.add(itemFlagStr);
+        for (ItemFlag flag : ItemFlag.values()) {
+            list.add(flag.toString());
         }
+
+        list.sort(String.CASE_INSENSITIVE_ORDER);
 
         return list;
     }
 
-    private static List<String> initIllegalAttribute() {
+    private static List<String> initDefaultIllegalAttribute() {
         final List<String> list = new ArrayList<>();
 
-        for (Object attribute : getAttributes()) {
-            final String attributeStr = attribute.toString().toLowerCase(Locale.ROOT);
-
-            list.add(attributeStr);
-        }
-
-        return list;
-    }
-
-    // TODO - multi version compatibility
-    private static List<String> initIllegalEnchants() {
-        return Arrays.asList(
-                "protection:4",
-                "fire_protection:4",
-                "feather_falling:4",
-                "blast_protection:4",
-                "projectile_protection:4",
-                "respiration:3",
-                "aqua_affinity:1",
-                "thorns:3",
-                "depth_strider:3",
-                "frost_walker:2",
-                "binding_curse:1",
-                "sharpness:5",
-                "smite:5",
-                "bane_of_arthropods:5",
-                "knockback:2",
-                "fire_aspect:2",
-                "looting:3",
-                "efficiency:5",
-                "silk_touch:1",
-                "unbreaking:3",
-                "fortune:3",
-                "power:5",
-                "punch:2",
-                "flame:1",
-                "infinity:1",
-                "luck_of_the_sea:3",
-                "lure:3",
-                "loyalty:3",
-                "impaling:5",
-                "riptide:3",
-                "channeling:1",
-                "multishot:1",
-                "quick_charge:3",
-                "piercing:4",
-                "mending:1",
-                "vanishing_curse:1",
-                "soul_speed:3",
-                "sweeping_edge:3",
-                "swift_sneak:3",
-                "density:5",
-                "breach:4",
-                "wind_burst:3"
-        );
-    }
-
-    private static Map<String, Integer> initIllegalEnchantsMap() {
-        final Map<String, Integer> map = new HashMap<>();
-
-        for (String ench : illegalEnchants) {
-            final String[] list = ench.split(":");
-
-            map.put(list[0], Integer.valueOf(list[1]));
-        }
-
-        return map;
-    }
-
-    public static String getItemDisplayName(ItemStack itemStack) {
-        return PlainTextComponentSerializer.plainText().serialize(itemStack.displayName());
-    }
-
-    public static Attribute getAttributeByName(String name) {
         if (PlatformUtil.isNewerThan(21, 1)) {
-            return Registry.ATTRIBUTE.get(Key.key(name));
+            for (Attribute attribute : Registry.ATTRIBUTE) {
+                final String name = attribute.key().value();
+
+                list.add(name);
+            }
+        } else {
+            Attribute[] attributes = getAttributeValues();
+
+            if (attributes != null) {
+                for (Attribute attribute : attributes) {
+                    // For legacy versions, use the enum name,
+                    // instead of enum key name in the config
+                    final String rawName = getAttributeName(attribute);
+                    if (rawName != null) {
+                        list.add(rawName.toLowerCase(Locale.ROOT));
+                    }
+                }
+            }
         }
 
+        list.sort(String.CASE_INSENSITIVE_ORDER);
+
+        return list;
+    }
+
+    private static List<String> initDefaultMaxEnchantLevels() {
+        final List<String> list = new ArrayList<>();
+
+        if (PlatformUtil.isNewerAndEqual(20, 6)) {
+            final Registry<Enchantment> registryAccess = RegistryAccess.registryAccess().getRegistry(RegistryKey.ENCHANTMENT);
+            for (Enchantment enchantment : registryAccess) {
+                final String name = enchantment.key().value();
+                final String maxLevel = String.valueOf(enchantment.getMaxLevel());
+
+                list.add(name + ":" + maxLevel);
+            }
+        } else if (PlatformUtil.isNewerAndEqual(13, 0)) {
+            for (Enchantment enchantment : Enchantment.values()) {
+                final String name = enchantment.getKey().getKey();
+                final String maxLevel = String.valueOf(enchantment.getMaxLevel());
+
+                list.add(name + ":" + maxLevel);
+            }
+        } else {
+            for (Enchantment enchantment : Enchantment.values()) {
+                final String name = enchantment.getName();
+                final String normalizedName = name.toLowerCase(Locale.ROOT);
+                final String maxLevel = String.valueOf(enchantment.getMaxLevel());
+
+                list.add(normalizedName + ":" + maxLevel);
+            }
+        }
+
+        list.sort(String.CASE_INSENSITIVE_ORDER);
+
+        return list;
+    }
+
+    private static void initIllegalBlocks() {
+        illegalBlocks.clear();
+
+        for (String materialName : defaultIllegalBlocks) {
+            Material material = Material.matchMaterial(materialName);
+            if (material == null) {
+                Surf.LOGGER.warn("Invalid material name: {}", materialName);
+                continue;
+            }
+            illegalBlocks.add(material);
+        }
+    }
+
+    private static void initIllegalItemFlags() {
+        illegalItemFlags.clear();
+
+        for (String flagName : defaultIllegalItemFlags) {
+            ItemFlag flag;
+
+            try {
+                flag = ItemFlag.valueOf(flagName);
+
+                illegalItemFlags.add(flag);
+            } catch (IllegalArgumentException e) {
+                Surf.LOGGER.warn("Invalid item flag name: {}", flagName);
+            }
+        }
+    }
+
+    private static void initIllegalAttributes() {
+        illegalAttributes.clear();
+
+        for (String attributeName : defaultIllegalAttributes) {
+            Attribute attribute;
+            if (PlatformUtil.isNewerThan(21, 1)) {
+                final Key key = Key.key(attributeName);
+
+                attribute = Registry.ATTRIBUTE.get(key);
+            } else {
+                attributeName = attributeName.toUpperCase(Locale.ROOT);
+
+                attribute = getAttributeValueOf(attributeName);
+            }
+
+            if (attribute == null) {
+                Surf.LOGGER.warn("Invalid attribute name: {}", attributeName);
+                continue;
+            }
+
+            illegalAttributes.add(attribute);
+        }
+    }
+
+    private static void initMaxEnchantLevels() {
+        maxEnchantLevels.clear();
+
+        for (String enchantmentData : defaultMaxEnchantLevels) {
+            final String[] data = enchantmentData.split(":");
+
+            final Enchantment enchantment = Enchantment.getByName(data[0]);
+
+            if (enchantment == null) {
+                Surf.LOGGER.warn("Invalid enchantment name: {}", enchantmentData);
+                continue;
+            }
+
+            final int maxLevel;
+
+            try {
+                maxLevel = Integer.parseInt(data[1]);
+            } catch (NumberFormatException e) {
+                Surf.LOGGER.warn("Invalid enchantment max level: {}", data[1]);
+                continue;
+            }
+
+            maxEnchantLevels.put(enchantment, maxLevel);
+        }
+    }
+
+    // <= 1.21.1
+    public static @Nullable Attribute getAttributeValueOf(String name) {
         try {
             if (attributeValueOf == null) {
                 attributeValueOf = Attribute.class.getMethod("valueOf", String.class);
             }
-
             return (Attribute) attributeValueOf.invoke(null, name);
         } catch (ReflectiveOperationException e) {
             Surf.LOGGER.error(e);
@@ -234,20 +322,34 @@ public class ItemUtil {
         }
     }
 
-    private static Object[] getAttributes() {
-        if (PlatformUtil.isNewerThan(21, 1)) {
-            return Registry.ATTRIBUTE.stream().map(Keyed::getKey).toArray(Key[]::new);
-        }
-
+    // <= 1.21.1
+    public static @Nullable String getAttributeName(Attribute attribute) {
         try {
-            if (attributeValues == null) {
-                attributeValues = Attribute.class.getMethod("values");
+            if (attributeName == null) {
+                attributeName = Attribute.class.getMethod("name");
             }
-
-            return (Object[]) attributeValues.invoke(null);
+            return (String) attributeName.invoke(attribute);
         } catch (ReflectiveOperationException e) {
             Surf.LOGGER.error(e);
             return null;
         }
+    }
+
+    // <= 1.21.1
+    private static @Nullable Attribute[] getAttributeValues() {
+        Attribute[] attributes = null;
+        try {
+            if (attributeValues == null) {
+                attributeValues = Attribute.class.getMethod("values");
+            }
+            attributes = (Attribute[]) attributeValues.invoke(null);
+        } catch (ReflectiveOperationException e) {
+            Surf.LOGGER.error(e);
+        }
+        return attributes;
+    }
+
+    public static String getItemDisplayName(ItemStack itemStack) {
+        return PlainTextComponentSerializer.plainText().serialize(itemStack.displayName());
     }
 }

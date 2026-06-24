@@ -3,8 +3,6 @@ package cn.dreeam.surf.config;
 import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.util.item.ItemUtil;
 
-import org.bukkit.Material;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,13 +24,11 @@ public class Config {
     // Item checks - definitions
     public static List<String> checkRuleAmountWhitelist;
 
-    public static List<Material> checkRuleAmountWhitelistMaterials = new ArrayList<>();
-
     // Item checks - specific rules
     public static boolean checkRulePotion;
 
     // Item checks - definitions
-    public static List<String> checkDefinitionIllegalBlocks, checkDefinitionIllegalItemFlags, checkDefinitionIllegalEnchants, checkDefinitionIllegalAttributes;
+    public static List<String> checkDefinitionIllegalBlocks, checkDefinitionIllegalItemFlags, checkDefinitionIllegalAttributes, checkDefinitionMaxEnchantLevels;
 
     // Anti lag
     public static boolean limitLiquidSpreadEnabled, limitVehicleEnabled, limitOffhandSwapEnabled,
@@ -109,21 +105,21 @@ public class Config {
         checkRulePotion = manager.getBoolean(checkSpecificRulePrefix + "potion.enabled", true);
 
         // Item checks - definitions
-        checkDefinitionIllegalBlocks = manager.getList(checkDefinitionPrefix + "illegal-blocks", ItemUtil.illegalBlocks);
-        checkDefinitionIllegalItemFlags = manager.getList(checkDefinitionPrefix + "illegal-item-flags", ItemUtil.illegalItemFlags, """
+        checkDefinitionIllegalBlocks = manager.getList(checkDefinitionPrefix + "illegal-blocks", ItemUtil.defaultIllegalBlocks);
+        checkDefinitionIllegalItemFlags = manager.getList(checkDefinitionPrefix + "illegal-item-flags", ItemUtil.defaultIllegalItemFlags, """
                 Illegal item flags for item checking.
                 In vanilla environment item would not has item flag.
                 Note: delete this config section to let auto-regenerate if you change the server version.""");
-        checkDefinitionIllegalEnchants = manager.getList(checkDefinitionPrefix + "illegal-enchantments", ItemUtil.illegalEnchants, """
-                Illegal enchantments for item checking.
-                Set the value to -1 or remove the entire enchant from the list
-                to disable check to that illegal enchant""");
-        checkDefinitionIllegalAttributes = manager.getList(checkDefinitionPrefix + "illegal-attribute-modifiers", ItemUtil.illegalAttributes, """
+        checkDefinitionIllegalAttributes = manager.getList(checkDefinitionPrefix + "illegal-attribute-modifiers", ItemUtil.defaultIllegalAttributes, """
                 Illegal attribute modifiers for item checking.
                 In vanilla environment item would not has attribute modifier.
                 Note: delete this config section to let auto-regenerate if you change the server version.""");
+        checkDefinitionMaxEnchantLevels = manager.getList(checkDefinitionPrefix + "max-enchantment-levels", ItemUtil.defaultMaxEnchantLevels, """
+                Max allowed enchantment levels for item checking.
+                Set the value to -1 or remove the entire enchant from the list
+                to disable check to that illegal enchant""");
 
-        initIllegalItemData();
+        ItemUtil.initIllegalItemData();
 
         // Anti Lag
         final String limitPrefix = "limit.";
@@ -203,16 +199,5 @@ public class Config {
         netherTopMessage = manager.getString(netherPrefix + "top-message", "&6The nether top has been disabled due to lag");
         netherBottomMessage = manager.getString(netherPrefix + "bottom-message", "&6The nether bottom has been disabled due to lag");
         netherTopBottomDoDamage = manager.getBoolean(netherPrefix + "top-bottom-do-damage", false);
-    }
-
-    private static void initIllegalItemData() {
-        checkRuleAmountWhitelistMaterials.clear();
-
-        for (String typeStr : checkRuleAmountWhitelist) {
-            final Material material = Material.matchMaterial(typeStr);
-            if (material != null) {
-                checkRuleAmountWhitelistMaterials.add(material);
-            }
-        }
     }
 }

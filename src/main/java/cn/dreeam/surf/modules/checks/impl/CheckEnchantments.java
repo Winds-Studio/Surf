@@ -3,6 +3,7 @@ package cn.dreeam.surf.modules.checks.impl;
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.modules.checks.ItemCheck;
 import cn.dreeam.surf.util.item.ItemUtil;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
@@ -30,14 +31,13 @@ public class CheckEnchantments implements ItemCheck {
     public boolean doCheck(ItemStack i) {
         // TODO check
         final Map<Enchantment, Integer> enchants = i.getEnchantments();
-        final Map<String, Integer> illegalEnchants = ItemUtil.illegalEnchantsMap;
+        final Object2IntOpenHashMap<Enchantment> illegalEnchants = ItemUtil.maxEnchantLevels;
 
-        for (Enchantment ench : enchants.keySet()) {
-            String key = ench.getKey().getKey();
-            int level = enchants.get(ench);
-            if (illegalEnchants.containsKey(key)
-                    && illegalEnchants.get(key) > 0
-                    && level > illegalEnchants.get(key)) {
+        for (Enchantment enchantment : enchants.keySet()) {
+            int level = enchants.get(enchantment);
+            int maxLevel = illegalEnchants.getInt(enchantment);
+
+            if (maxLevel > 0 && level > maxLevel) {
                 return true;
             }
         }
@@ -49,33 +49,34 @@ public class CheckEnchantments implements ItemCheck {
     public void doSanitize(ItemStack i) {
         // TODO check
         final Map<Enchantment, Integer> enchants = i.getEnchantments();
-        final Map<String, Integer> illegalEnchants = ItemUtil.illegalEnchantsMap;
+        final Object2IntOpenHashMap<Enchantment> illegalEnchants = ItemUtil.maxEnchantLevels;
 
         if (i.getType().isBlock()) {
             if (Config.antiIllegalRemoveBlockEnchant) {
-                // Directly remove enchs
+                // Directly remove enchantments
                 enchants.keySet().forEach(i::removeEnchantment);
             } else {
-                // Correct enchs
-                enchants.keySet().forEach(ench -> {
-                    String key = ench.getKey().getKey();
-                    int level = enchants.get(ench);
-                    if (illegalEnchants.containsKey(key) && illegalEnchants.get(key) > 0 && level > illegalEnchants.get(key)) {
-                        i.addUnsafeEnchantment(ench, ench.getMaxLevel());
+                // Correct enchantments
+                enchants.keySet().forEach(enchant -> {
+                    final int level = enchants.get(enchant);
+                    final int maxLevel = illegalEnchants.getInt(enchant);
+
+                    if (maxLevel > 0 && level > maxLevel) {
+                        i.addUnsafeEnchantment(enchant, enchant.getMaxLevel());
                     }
                 });
             }
         } else {
-            enchants.keySet().forEach(ench -> {
-                if (Config.antiIllegalAllowInapplicableEnchant || ench.canEnchantItem(i)) {
-                    String key = ench.getKey().getKey();
-                    int level = enchants.get(ench);
-                    if (illegalEnchants.containsKey(key) && illegalEnchants.get(key) > 0 && level > illegalEnchants.get(key)) {
-                        i.addUnsafeEnchantment(ench, ench.getMaxLevel());
+            enchants.keySet().forEach(enchant -> {
+                if (Config.antiIllegalAllowInapplicableEnchant || enchant.canEnchantItem(i)) {
+                    final int level = enchants.get(enchant);
+                    final int maxLevel = illegalEnchants.getInt(enchant);
+                    if (maxLevel > 0 && level > maxLevel) {
+                        i.addUnsafeEnchantment(enchant, enchant.getMaxLevel());
                     }
                 } else {
                     // Should remove conflict/incompatible ench, since the item is illegal.
-                    i.removeEnchantment(ench);
+                    i.removeEnchantment(enchant);
                 }
             });
         }
