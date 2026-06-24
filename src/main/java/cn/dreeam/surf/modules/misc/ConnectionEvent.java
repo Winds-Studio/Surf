@@ -2,11 +2,6 @@ package cn.dreeam.surf.modules.misc;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.MessageUtil;
-import cn.dreeam.surf.util.PlatformUtil;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextReplacementConfig;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,37 +17,20 @@ public class ConnectionEvent implements Listener {
         if (!Config.connectionMessageEnabled) return;
 
         Player player = event.getPlayer();
+        String message = Config.connectionFirstJoinEnabled && !player.hasPlayedBefore()
+                ? getConnectionMessageLegacy(player, Config.connectionFirstJoinMessage)
+                : getConnectionMessageLegacy(player, Config.connectionPlayerJoin);
 
-        if (PlatformUtil.isNewerAndEqual(16, 0)) {
-            Component message = Config.connectionFirstJoinEnabled && !player.hasPlayedBefore()
-                    ? getConnectionMessageModern(player, Config.connectionFirstJoinMessage)
-                    : getConnectionMessageModern(player, Config.connectionPlayerJoin);
-
-            event.setJoinMessage(null);
-            broadcastConnectionMessage(message);
-        } else {
-            String message = Config.connectionFirstJoinEnabled && !player.hasPlayedBefore()
-                    ? getConnectionMessageLegacy(player, Config.connectionFirstJoinMessage)
-                    : getConnectionMessageLegacy(player, Config.connectionPlayerJoin);
-
-            event.setJoinMessage(message);
-        }
+        event.setJoinMessage(message);
     }
 
     @EventHandler
     public void onLeave(PlayerQuitEvent event) {
         if (!Config.connectionMessageEnabled) return;
 
-        if (PlatformUtil.isNewerAndEqual(16, 0)) {
-            Component message = getConnectionMessageModern(event.getPlayer(), Config.connectionPlayerLeave);
+        String message = getConnectionMessageLegacy(event.getPlayer(), Config.connectionPlayerLeave);
 
-            event.setQuitMessage(null);
-            broadcastConnectionMessage(message);
-        } else {
-            String message = getConnectionMessageLegacy(event.getPlayer(), Config.connectionPlayerLeave);
-
-            event.setQuitMessage(message);
-        }
+        event.setQuitMessage(message);
     }
 
     @EventHandler
@@ -67,20 +45,6 @@ public class ConnectionEvent implements Listener {
         }
     }
 
-    private Component getConnectionMessageModern(Player player, String message) {
-        Component connecntionComponent;
-
-        if (Config.connectionMessageUseDisplayName && !player.displayName().equals(Component.empty())) {
-            connecntionComponent = LegacyComponentSerializer.legacyAmpersand().deserialize(message)
-                    .replaceText(TextReplacementConfig.builder().matchLiteral("%player%").replacement(player.displayName()).build());
-        } else {
-            message = message.replace("%player%", player.getName());
-            connecntionComponent = LegacyComponentSerializer.legacyAmpersand().deserialize(message);
-        }
-
-        return connecntionComponent;
-    }
-
     private String getConnectionMessageLegacy(Player player, String message) {
         String displayName = player.getDisplayName();
         message = ChatColor.translateAlternateColorCodes('&', message);
@@ -92,13 +56,5 @@ public class ConnectionEvent implements Listener {
         }
 
         return message;
-    }
-
-    private static void broadcastConnectionMessage(Component message) {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player == null) continue;
-
-            player.sendMessage(message);
-        }
     }
 }

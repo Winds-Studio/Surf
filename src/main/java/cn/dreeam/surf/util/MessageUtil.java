@@ -1,7 +1,5 @@
 package cn.dreeam.surf.util;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -12,30 +10,18 @@ public class MessageUtil {
 
     @SuppressWarnings("deprecation")
     public static void sendMessage(Player player, String message) {
-        if (PlatformUtil.isNewerAndEqual(16, 0)) {
-            Component component = LegacyComponentSerializer.legacyAmpersand().deserialize(Util.getPrefix() + message);
+        message = ChatColor.translateAlternateColorCodes('&', Util.getPrefix() + message);
 
-            player.sendMessage(component);
-        } else {
-            message = ChatColor.translateAlternateColorCodes('&', Util.getPrefix() + message);
-
-            player.sendMessage(message);
-        }
+        player.sendMessage(message);
 
         println("[" + player + "] " + message);
     }
 
     @SuppressWarnings("deprecation")
     public static void sendMessage(CommandSender sender, String message) {
-        if (PlatformUtil.isNewerAndEqual(16, 0)) {
-            Component component = LegacyComponentSerializer.legacyAmpersand().deserialize(message);
+        message = ChatColor.translateAlternateColorCodes('&', message);
 
-            sender.sendMessage(component);
-        } else {
-            message = ChatColor.translateAlternateColorCodes('&', message);
-
-            sender.sendMessage(message);
-        }
+        sender.sendMessage(message);
     }
 
     @SuppressWarnings("deprecation")

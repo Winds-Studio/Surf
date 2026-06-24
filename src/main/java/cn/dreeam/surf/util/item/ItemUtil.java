@@ -7,8 +7,6 @@ import com.cryptomorin.xseries.XMaterial;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.kyori.adventure.key.Key;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.jspecify.annotations.Nullable;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -266,7 +264,7 @@ public class ItemUtil {
         for (String attributeName : defaultIllegalAttributes) {
             Attribute attribute;
             if (PlatformUtil.isNewerThan(21, 1)) {
-                final Key key = Key.key(attributeName);
+                final NamespacedKey key = NamespacedKey.minecraft(attributeName);
 
                 attribute = Registry.ATTRIBUTE.get(key);
             } else {
@@ -314,7 +312,7 @@ public class ItemUtil {
 
     private static @Nullable Enchantment getEnchantmentName(String name) {
         if (PlatformUtil.isNewerThan(20, 6)) {
-            final Key key = Key.key(name.toLowerCase(Locale.ROOT));
+            final NamespacedKey key = NamespacedKey.minecraft(name.toLowerCase(Locale.ROOT));
 
             return RegistryAccess.registryAccess().getRegistry(RegistryKey.ENCHANTMENT).get(key);
         } else if (PlatformUtil.isNewerAndEqual(13, 0)) {
@@ -368,7 +366,7 @@ public class ItemUtil {
         return attributes;
     }
 
-    public static String getItemDisplayName(ItemStack itemStack) {
-        return PlainTextComponentSerializer.plainText().serialize(itemStack.displayName());
+    public static String getItemDisplayName(ItemStack i) {
+        return i.getItemMeta().getDisplayName();
     }
 }
