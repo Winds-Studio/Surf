@@ -2,6 +2,7 @@ package cn.dreeam.surf.modules.checks.impl;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.modules.checks.ItemCheck;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class CheckDurability implements ItemCheck {
@@ -17,7 +18,7 @@ public class CheckDurability implements ItemCheck {
     }
 
     @Override
-    public boolean canBypass() {
+    public boolean canBypass(Player player) {
         // TODO
         throw new UnsupportedOperationException();
     }

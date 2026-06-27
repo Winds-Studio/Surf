@@ -3,6 +3,7 @@ package cn.dreeam.surf.modules.checks.impl.speific;
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.modules.checks.ItemCheck;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class CheckLegacyEnchantedGoldenApple implements ItemCheck {
@@ -18,7 +19,7 @@ public class CheckLegacyEnchantedGoldenApple implements ItemCheck {
     }
 
     @Override
-    public boolean canBypass() {
+    public boolean canBypass(Player player) {
         // TODO
         throw new UnsupportedOperationException();
     }

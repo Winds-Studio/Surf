@@ -4,6 +4,8 @@ import cn.dreeam.surf.Surf;
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.modules.checks.ItemCheckHandler;
 import cn.dreeam.surf.util.MessageUtil;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,45 +25,48 @@ public class ListenerBasic implements Listener {
     private void onJoin(PlayerJoinEvent event) {
         if (!Config.ItemChecks.checkTriggerOnJoin) return;
 
-        Inventory inv = event.getPlayer().getInventory();
+        final Player player = event.getPlayer();
+        final Inventory inv = player.getInventory();
 
-        ItemCheckHandler.scanInv(inv, event.getPlayer().getName());
+        ItemCheckHandler.scanInv(inv, player, player.getName());
     }
 
     @EventHandler(ignoreCancelled = true)
     private void onInvMove(InventoryMoveItemEvent event) {
         if (!Config.ItemChecks.checkTriggerOnHopperTransfer) return;
 
-        Inventory inv = event.getSource();
+        final Inventory inv = event.getSource();
 
         // Only check current player inventory
         if (!inv.getType().equals(InventoryType.CRAFTING)) return;
 
-        ItemCheckHandler.scanInv(inv, inv.getType().name());
+        ItemCheckHandler.scanInv(inv, null, inv.getType().name());
     }
 
     @EventHandler
     private void onInvClose(InventoryCloseEvent event) {
         if (!Config.ItemChecks.checkTriggerOnInvClose) return;
 
-        Inventory inv = event.getPlayer().getInventory();
+        final HumanEntity player = event.getPlayer();
+        final Inventory inv = player.getInventory();
 
         // Only check current player inventory
         if (!inv.getType().equals(InventoryType.PLAYER)) return;
 
-        ItemCheckHandler.scanInv(inv, event.getPlayer().getName());
+        ItemCheckHandler.scanInv(inv, player, player.getName());
     }
 
     @EventHandler
     private void onInvOpen(InventoryOpenEvent event) {
         if (!Config.ItemChecks.checkTriggerOnInvOpen) return;
 
-        Inventory inv = event.getPlayer().getInventory();
+        final HumanEntity player = event.getPlayer();
+        final Inventory inv = event.getPlayer().getInventory();
 
         // Only check current player inventory
         if (!inv.getType().equals(InventoryType.PLAYER)) return;
 
-        ItemCheckHandler.scanInv(inv, event.getPlayer().getName());
+        ItemCheckHandler.scanInv(inv, player, player.getName());
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -70,7 +75,7 @@ public class ListenerBasic implements Listener {
 
         ItemStack i = event.getItem();
 
-        if (ItemCheckHandler.scanItemOrReact(i)) {
+        if (ItemCheckHandler.scanItemOrReact(i, null)) {
             event.setCancelled(true);
         }
     }
@@ -82,17 +87,18 @@ public class ListenerBasic implements Listener {
         if (!Config.ItemChecks.checkTriggerOnPickup) return;
 
         ItemStack i = event.getItem().getItemStack();
+        Entity entity = event.getEntity();
 
-        if (ItemCheckHandler.scanItemOrReact(i)) {
+        if (ItemCheckHandler.scanItemOrReact(i, entity)) {
             event.setCancelled(true);
             event.getItem().remove();
 
-            if (event.getEntity() instanceof Player player) {
+            if (entity instanceof Player player) {
                 MessageUtil.sendMessage(player, "&6You can not pick up this illegal item.");
             } else {
                 MessageUtil.println(String.format(
                         "%s try to pick up an illegal item at %s",
-                        event.getEntity().getName().toLowerCase(),
+                        entity.getName().toLowerCase(),
                         MessageUtil.locToString(event.getItem().getLocation())
                 ));
             }

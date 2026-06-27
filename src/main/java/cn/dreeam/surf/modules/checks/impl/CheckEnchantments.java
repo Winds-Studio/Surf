@@ -5,6 +5,7 @@ import cn.dreeam.surf.modules.checks.ItemCheck;
 import cn.dreeam.surf.util.item.ItemUtil;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Map;
@@ -22,7 +23,7 @@ public class CheckEnchantments implements ItemCheck {
     }
 
     @Override
-    public boolean canBypass() {
+    public boolean canBypass(Player player) {
         // TODO
         throw new UnsupportedOperationException();
     }

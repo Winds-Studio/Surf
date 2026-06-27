@@ -4,6 +4,7 @@ import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.modules.checks.ItemCheckHandler;
 import cn.dreeam.surf.util.MessageUtil;
 import dev.rosewood.rosestacker.event.ItemPickupEvent;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,11 +17,12 @@ public class ListenerRoseStackerItem implements Listener {
         if (!Config.ItemChecks.checkTriggerOnPickup) return;
 
         ItemStack i = event.getStackedItem().getItem().getItemStack();
+        Entity entity = event.getEntity();
 
-        if (ItemCheckHandler.scanItemOrReact(i)) {
+        if (ItemCheckHandler.scanItemOrReact(i, entity)) {
             event.setCancelled(true);
             event.getStackedItem().getItem().remove();
-            if (event.getEntity() instanceof Player player) {
+            if (entity instanceof Player player) {
                 MessageUtil.sendMessage(player, "&6You can not pick up this illegal item.");
             } else {
                 MessageUtil.println(String.format(

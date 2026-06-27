@@ -1,5 +1,6 @@
 package cn.dreeam.surf.modules.checks;
 
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public interface ItemCheck {
@@ -10,7 +11,7 @@ public interface ItemCheck {
     // Enabled for specific item
     boolean appliesTo(ItemStack i);
 
-    boolean canBypass();
+    boolean canBypass(Player player);
 
     boolean doCheck(ItemStack i);
 

@@ -5,6 +5,7 @@ import cn.dreeam.surf.modules.checks.ItemCheck;
 import cn.dreeam.surf.util.PlatformUtil;
 import cn.dreeam.surf.util.item.ItemUtil;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -21,7 +22,7 @@ public class CheckItemAttributes implements ItemCheck {
     }
 
     @Override
-    public boolean canBypass() {
+    public boolean canBypass(Player player) {
         // TODO
         throw new UnsupportedOperationException();
     }
