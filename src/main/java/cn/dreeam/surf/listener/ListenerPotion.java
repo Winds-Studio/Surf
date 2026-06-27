@@ -5,8 +5,10 @@ import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.PlatformUtil;
 import cn.dreeam.surf.util.item.ItemUtil;
 import com.cryptomorin.xseries.XMaterial;
+import org.bukkit.Material;
 import org.bukkit.block.Container;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -128,10 +130,10 @@ public class ListenerPotion implements Listener {
     private void onDispense(BlockDispenseEvent event) {
         if (!Config.GeneralChecks.checkIllegalPotion) return;
 
-        String material = event.getItem().getType().name();
+        final Material material = event.getItem().getType();
 
-        // TODO (Check this): Needs to add more items if they are added in newer MC version, or remove material check
-        if (material.contains("POTION") || material.contains("ARROW") || material.contains("TRIDENT")) {
+        // Needs to add more projectiles if they are added in newer MC version
+        if (ItemUtil.isPotion(material) || ItemUtil.isBowWeapon(material) || material == XMaterial.TRIDENT.get()) {
             if (event.getItem().hasItemMeta() && event.getItem().getItemMeta() instanceof PotionMeta pot) {
                 Container container = (Container) event.getBlock().getState();
 

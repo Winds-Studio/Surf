@@ -16,7 +16,7 @@ public class ListenerBlock implements Listener {
         if (!Config.antiIllegalCheckIllegalBlockEnabled) return;
 
         if (ItemUtil.isIllegalItem(event.getItemInHand())) {
-            Player player = event.getPlayer();
+            final Player player = event.getPlayer();
 
             event.setCancelled(true);
 

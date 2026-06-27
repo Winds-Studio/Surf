@@ -89,8 +89,15 @@ public class ItemUtil {
         return material == XMaterial.BOW.get() || material == XMaterial.CROSSBOW.get();
     }
 
+    public static boolean isBowWeapon(Material material) {
+        return material == XMaterial.BOW.get() || material == XMaterial.CROSSBOW.get();
+    }
     public static boolean isPotion(ItemStack i) {
         final Material material = i.getType();
+        return material == Material.POTION || material == Material.SPLASH_POTION || material == Material.LINGERING_POTION;
+    }
+
+    public static boolean isPotion(Material material) {
         return material == Material.POTION || material == Material.SPLASH_POTION || material == Material.LINGERING_POTION;
     }
 
@@ -99,7 +106,7 @@ public class ItemUtil {
     }
 
     public static boolean isIllegalItem(ItemStack i) {
-        return ItemUtil.illegalMaterials.contains(i.getType());
+        return illegalMaterials.contains(i.getType());
     }
 
     public static boolean isIllegalEffect(PotionEffect effect) {
@@ -227,7 +234,7 @@ public class ItemUtil {
                 list.add(name);
             }
         } else {
-            Attribute[] attributes = getAttributeValues();
+            final Attribute[] attributes = getAttributeValues();
 
             if (attributes != null) {
                 for (Attribute attribute : attributes) {
@@ -283,7 +290,7 @@ public class ItemUtil {
         illegalMaterials.clear();
 
         for (String materialName : defaultIllegalMaterials) {
-            Material material = Material.matchMaterial(materialName);
+            final Material material = Material.matchMaterial(materialName);
             if (material == null) {
                 Surf.LOGGER.warn("Invalid material name: {}", materialName);
                 continue;
@@ -296,7 +303,7 @@ public class ItemUtil {
         illegalItemFlags.clear();
 
         for (String flagName : defaultIllegalItemFlags) {
-            ItemFlag flag;
+            final ItemFlag flag;
 
             try {
                 flag = ItemFlag.valueOf(flagName);
@@ -312,7 +319,7 @@ public class ItemUtil {
         illegalAttributes.clear();
 
         for (String attributeName : defaultIllegalAttributes) {
-            Attribute attribute;
+            final Attribute attribute;
             if (PlatformUtil.isNewerThan(21, 1)) {
                 final NamespacedKey key = NamespacedKey.minecraft(attributeName);
 

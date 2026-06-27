@@ -73,7 +73,7 @@ public class ListenerBasic implements Listener {
     private void onDispenseEquip(BlockDispenseArmorEvent event) {
         if (!Config.ItemChecks.checkTriggerOnPickup) return;
 
-        ItemStack i = event.getItem();
+        final ItemStack i = event.getItem();
 
         if (ItemCheckHandler.scanItemOrReact(i, null)) {
             event.setCancelled(true);
@@ -86,8 +86,8 @@ public class ListenerBasic implements Listener {
 
         if (!Config.ItemChecks.checkTriggerOnPickup) return;
 
-        ItemStack i = event.getItem().getItemStack();
-        Entity entity = event.getEntity();
+        final ItemStack i = event.getItem().getItemStack();
+        final Entity entity = event.getEntity();
 
         if (ItemCheckHandler.scanItemOrReact(i, entity)) {
             event.setCancelled(true);

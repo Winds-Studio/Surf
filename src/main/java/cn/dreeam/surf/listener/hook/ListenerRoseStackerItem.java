@@ -16,8 +16,8 @@ public class ListenerRoseStackerItem implements Listener {
     private void onPickup(ItemPickupEvent event) {
         if (!Config.ItemChecks.checkTriggerOnPickup) return;
 
-        ItemStack i = event.getStackedItem().getItem().getItemStack();
-        Entity entity = event.getEntity();
+        final ItemStack i = event.getStackedItem().getItem().getItemStack();
+        final Entity entity = event.getEntity();
 
         if (ItemCheckHandler.scanItemOrReact(i, entity)) {
             event.setCancelled(true);

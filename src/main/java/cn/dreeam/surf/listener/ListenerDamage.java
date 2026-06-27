@@ -36,7 +36,7 @@ public class ListenerDamage implements Listener {
             }
         } else {
             // Entity => Entity
-            Entity entity = event.getDamager();
+            final Entity entity = event.getDamager();
 
             if (entity instanceof LivingEntity damager) {
                 // Only check entities using illegal items
