@@ -1,6 +1,7 @@
 package cn.dreeam.surf.config;
 
 import cn.dreeam.surf.Surf;
+import cn.dreeam.surf.modules.checks.CheckResultAction;
 import cn.dreeam.surf.util.item.ItemUtil;
 
 import java.util.ArrayList;
@@ -23,8 +24,9 @@ public class Config {
             checkTriggerOnHopperTransfer;
 
     // Item checks - actions
-    public static String checkActionMode;
-    public static boolean shouldLog;
+    private static String checkResultActionMode;
+    public static CheckResultAction checkResultAction;
+    public static boolean checkResultLog;
 
     // Item checks - general rules
     public static boolean checkRuleAmount, checkRuleDurability, checkRuleEnchantments, checkRuleAttributes,
@@ -105,6 +107,14 @@ public class Config {
         checkTriggerOnInvOpen = manager.getBoolean(checkTriggerPrefix + "on-inventory-open", false);
         checkTriggerOnInvClose = manager.getBoolean(checkTriggerPrefix + "on-inventory-close", false);
         checkTriggerOnHopperTransfer = manager.getBoolean(checkTriggerPrefix + "on-hopper-transfer", false);
+
+        // Item checks - actions
+        final String checkActionPrefix = checkPrefix + "actions.";
+
+        checkResultActionMode = manager.getString(checkActionPrefix + "check-result-mode", "none");
+        checkResultLog = manager.getBoolean(checkActionPrefix + "should-log", false);
+
+        checkResultAction = CheckResultAction.fromString(checkResultActionMode);
 
         // Item checks - general rules
         checkRuleAmount = manager.getBoolean(checkGeneralRulePrefix + "amount.enabled", true);

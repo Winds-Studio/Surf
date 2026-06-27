@@ -70,7 +70,7 @@ public class ActionsBasic implements Listener {
 
         ItemStack i = event.getItem();
 
-        if (ItemCheckHandler.scanItem(i)) {
+        if (ItemCheckHandler.scanItemOrReact(i)) {
             event.setCancelled(true);
         }
     }
@@ -83,7 +83,7 @@ public class ActionsBasic implements Listener {
 
         ItemStack i = event.getItem().getItemStack();
 
-        if (ItemCheckHandler.scanItem(i)) {
+        if (ItemCheckHandler.scanItemOrReact(i)) {
             event.setCancelled(true);
             event.getItem().remove();
 

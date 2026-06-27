@@ -1,5 +1,6 @@
 package cn.dreeam.surf.modules.checks;
 
+import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.item.ItemUtil;
 import org.bukkit.inventory.Inventory;
@@ -34,29 +35,26 @@ public class ItemCheckHandler {
     // TODO: every item check.
     // TODO: However, the design also needs to consider the direct NBT modifications (done by NBT API) in future item checks later
 
-    public static boolean scanItem(ItemStack i) {
+    public static boolean scanItemOrReact(ItemStack i) {
+        final CheckResultAction action = Config.checkResultAction;
+
+        boolean isIllegal = false;
+
         for (ItemCheck itemCheck : ItemCheckRegistry.activeChecks()) {
             if (itemCheck.canBypass() || !itemCheck.appliesTo(i)) continue;
 
-            final boolean ret = itemCheck.doCheck(i);
+            isIllegal = itemCheck.doCheck(i);
 
-            if (ret) {
-                return true;
+            if (isIllegal) {
+               if (action == CheckResultAction.REMOVE) {
+                   i.setAmount(0);
+                   return true;
+               } else if (action == CheckResultAction.SANITIZE) {
+                   itemCheck.doSanitize(i);
+               }
             }
         }
-        return false;
-    }
 
-    private static void scanItemOrReact(ItemStack i) {
-        for (ItemCheck itemCheck : ItemCheckRegistry.activeChecks()) {
-            if (itemCheck.canBypass() || !itemCheck.appliesTo(i)) continue;
-
-            final boolean ret = itemCheck.doCheck(i);
-
-            // TODO: choose method defined in the config, remove entire item / sanitize illegal data / whether log
-            if (ret) {
-                i.setAmount(0);
-            }
-        }
+        return isIllegal;
     }
 }
