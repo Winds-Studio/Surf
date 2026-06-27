@@ -10,25 +10,34 @@ import java.util.List;
 public class Config {
 
     // Anti illegal
-    public static boolean antiIllegalCheckIllegalBlockEnabled, antiIllegalRemoveBlockEnchant, antiIllegalAllowInapplicableEnchant, checkIllegalDamageEnabled, checkIllegalPotionEnabled, stackedTotemRevertAsOneEnabled, antiIllegalDeleteIllegalsWhenFoundEnabled;
-    public static String antiIllegalCheckIllegalBlockMessage, checkIllegalDamageMessage, checkIllegalPotionMessage;
+    public static boolean antiIllegalCheckIllegalBlockEnabled, antiIllegalRemoveBlockEnchant, antiIllegalAllowInapplicableEnchant, stackedTotemRevertAsOneEnabled, antiIllegalDeleteIllegalsWhenFoundEnabled;
+    public static String antiIllegalCheckIllegalBlockMessage;
+
+    // General checks
+    public static boolean checkIllegalDamage, checkIllegalPotion;
+    public static int checkIllegalDamageMaxGeneral, checkIllegalDamageMaxMace;
+    public static String checkIllegalDamageMessage, checkIllegalPotionMessage;
 
     // Item checks - triggers
     public static boolean checkTriggerOnJoin, checkTriggerOnPickup, checkTriggerOnInvOpen, checkTriggerOnInvClose,
             checkTriggerOnHopperTransfer;
 
+    // Item checks - actions
+    public static String checkActionMode;
+    public static boolean shouldLog;
+
     // Item checks - general rules
     public static boolean checkRuleAmount, checkRuleDurability, checkRuleEnchantments, checkRuleAttributes,
             checkRuleFlags, checkRuleUnbreakable;
 
-    // Item checks - definitions
     public static List<String> checkRuleAmountWhitelist;
 
     // Item checks - specific rules
     public static boolean checkRulePotion, checkRuleRemoveLegacyEnchantedGoldenApple;
 
     // Item checks - definitions
-    public static List<String> checkDefinitionIllegalBlocks, checkDefinitionIllegalItemFlags, checkDefinitionIllegalAttributes, checkDefinitionMaxEnchantLevels;
+    public static List<String> checkDefinitionIllegalBlocks, checkDefinitionIllegalItemFlags,
+            checkDefinitionIllegalAttributes, checkDefinitionMaxEnchantLevels;
 
     // Anti lag
     public static boolean limitLiquidSpreadEnabled, limitVehicleEnabled, limitOffhandSwapEnabled,
@@ -66,17 +75,22 @@ public class Config {
                 Disable it to check illegal enchants for block like other normal items.""");
         antiIllegalAllowInapplicableEnchant = manager.getBoolean("anti-illegal.allow-inapplicable-enchants-on-items", true, "Whether allow inapplicable enchants on items.");
 
-        checkIllegalDamageEnabled = manager.getBoolean("check-illegal-damage.enabled", false);
-        checkIllegalDamageMessage = manager.getString("check-illegal-damage.message", "&6You can not use this illegal item.");
-
-        checkIllegalPotionEnabled = manager.getBoolean("check-illegal-potion.enabled", false);
-        checkIllegalPotionMessage = manager.getString("check-illegal-potion.message", "&6You can not use this illegal potion.");
-
         stackedTotemRevertAsOneEnabled = manager.getBoolean("anti-illegal.revert-stacked-totem-as-one.enabled", false);
 
         antiIllegalDeleteIllegalsWhenFoundEnabled = manager.getBoolean("anti-illegal.delete-illegals-when-found.enabled", false, """
                 Enable to delete illegals when found
                 Disable to only clean illegal attributes""");
+
+        // General checks
+        final String generalCheckPrefix = "general-checks.";
+
+        checkIllegalDamage = manager.getBoolean(generalCheckPrefix + "illegal-damage.enabled", false);
+        checkIllegalDamageMaxGeneral = manager.getInt(generalCheckPrefix + "illegal-damage.max-general-damage", 20);
+        checkIllegalDamageMaxMace = manager.getInt(generalCheckPrefix + "illegal-damage.max-mace-damage", 30);
+        checkIllegalDamageMessage = manager.getString(generalCheckPrefix + "illegal-damage.message", "&6You can not use this illegal item.");
+
+        checkIllegalPotion = manager.getBoolean(generalCheckPrefix + "illegal-potion.enabled", false);
+        checkIllegalPotionMessage = manager.getString(generalCheckPrefix + "illegal-potion.message", "&6You can not use this illegal potion.");
 
         // Item checks
         final String checkPrefix = "item-checks.";
@@ -96,10 +110,10 @@ public class Config {
         checkRuleAmount = manager.getBoolean(checkGeneralRulePrefix + "amount.enabled", true);
         checkRuleAmountWhitelist = manager.getList(checkGeneralRulePrefix + "amount.witelist", new ArrayList<>());
         checkRuleDurability = manager.getBoolean(checkGeneralRulePrefix + "durability.enabled", true);
-        checkRuleEnchantments  = manager.getBoolean(checkGeneralRulePrefix + "enchantments.enabled", true);
+        checkRuleEnchantments = manager.getBoolean(checkGeneralRulePrefix + "enchantments.enabled", true);
         checkRuleAttributes = manager.getBoolean(checkGeneralRulePrefix + "attributes.enabled", true);
-        checkRuleFlags =  manager.getBoolean(checkGeneralRulePrefix + "item-flags.enabled", true);
-        checkRuleUnbreakable =  manager.getBoolean(checkGeneralRulePrefix + "unbreakable.enabled", false);
+        checkRuleFlags = manager.getBoolean(checkGeneralRulePrefix + "item-flags.enabled", true);
+        checkRuleUnbreakable = manager.getBoolean(checkGeneralRulePrefix + "unbreakable.enabled", false);
 
         // Item checks - specific rules
         checkRulePotion = manager.getBoolean(checkSpecificRulePrefix + "potion.enabled", true);

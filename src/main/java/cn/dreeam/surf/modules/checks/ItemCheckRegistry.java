@@ -31,6 +31,7 @@ public class ItemCheckRegistry {
                 new CheckItemFlags(),
                 new CheckUnbreakable(),
 
+                new CheckLegacyEnchantedGoldenApple(),
                 new CheckPotion()
         };
     }

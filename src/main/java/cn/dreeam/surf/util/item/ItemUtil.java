@@ -87,12 +87,17 @@ public class ItemUtil {
     }
 
     public static boolean isSkull(Material material) {
-        return material.equals(XMaterial.PLAYER_HEAD.get())
-                || material.equals(XMaterial.PLAYER_WALL_HEAD.get());
+        return material == XMaterial.PLAYER_HEAD.get()
+                || material == XMaterial.PLAYER_WALL_HEAD.get();
     }
 
     public static boolean isWritableBook(ItemStack i) {
         return i.getType() == XMaterial.WRITABLE_BOOK.get();
+    }
+
+    public static boolean isBowWeapon(ItemStack i) {
+        final Material material = i.getType();
+        return material == XMaterial.BOW.get() || material == XMaterial.CROSSBOW.get();
     }
 
     public static boolean isPotion(ItemStack i) {

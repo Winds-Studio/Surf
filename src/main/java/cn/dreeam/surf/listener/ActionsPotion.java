@@ -25,22 +25,7 @@ public class ActionsPotion implements Listener {
 
     @EventHandler
     private void onJoin(PlayerJoinEvent event) {
-        if (!Config.checkIllegalPotionEnabled) return;
-
-        Player player = event.getPlayer();
-
-        if (!player.getActivePotionEffects().isEmpty()) {
-            for (PotionEffect effect : player.getActivePotionEffects()) {
-                if (ItemUtil.isIllegalEffect(effect)) {
-                    player.removePotionEffect(effect.getType());
-                }
-            }
-        }
-    }
-
-    @EventHandler
-    private void onQuit(PlayerQuitEvent event) {
-        if (!Config.checkIllegalPotionEnabled) return;
+        if (!Config.checkIllegalPotion) return;
 
         Player player = event.getPlayer();
 
@@ -56,7 +41,7 @@ public class ActionsPotion implements Listener {
     // Check Entity gets illegal potion effects
     @EventHandler(ignoreCancelled = true)
     private void onPotion(EntityPotionEffectEvent event) {
-        if (!Config.checkIllegalPotionEnabled) return;
+        if (!Config.checkIllegalPotion) return;
 
         PotionEffect effect = event.getNewEffect();
 
@@ -73,7 +58,7 @@ public class ActionsPotion implements Listener {
     // Arrow shoot by player
     @EventHandler(ignoreCancelled = true)
     private void onHit(ProjectileHitEvent event) {
-        if (!Config.checkIllegalPotionEnabled) return;
+        if (!Config.checkIllegalPotion) return;
 
         if (!(event.getEntity() instanceof Arrow arrow) || !(arrow.getShooter() instanceof Player shooter)
                 || !(event.getHitEntity() instanceof Player)) {
@@ -97,7 +82,7 @@ public class ActionsPotion implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     private void onThrow(PotionSplashEvent event) {
-        if (!Config.checkIllegalPotionEnabled) return;
+        if (!Config.checkIllegalPotion) return;
 
         if (!(event.getPotion().getShooter() instanceof Player player)) {
             return;
@@ -119,7 +104,7 @@ public class ActionsPotion implements Listener {
     // Dreeam TODO: Check wheter need add foods with illegal effects
     @EventHandler(ignoreCancelled = true)
     private void onPotionConsume(PlayerItemConsumeEvent e) {
-        if (!Config.checkIllegalPotionEnabled) return;
+        if (!Config.checkIllegalPotion) return;
 
         final ItemStack item = e.getItem();
 
@@ -142,12 +127,11 @@ public class ActionsPotion implements Listener {
     // Check Potion/Arrow/Trident with illegal potion effects dispense from dispenser
     @EventHandler(ignoreCancelled = true)
     private void onDispense(BlockDispenseEvent event) {
-        if (!Config.checkIllegalPotionEnabled) return;
+        if (!Config.checkIllegalPotion) return;
 
         String material = event.getItem().getType().name();
 
-        // Needs to add more items if they are added in newer MC version,
-        // or remove material check
+        // TODO (Check this): Needs to add more items if they are added in newer MC version, or remove material check
         if (material.contains("POTION") || material.contains("ARROW") || material.contains("TRIDENT")) {
             if (event.getItem().hasItemMeta() && event.getItem().getItemMeta() instanceof PotionMeta pot) {
                 Container container = (Container) event.getBlock().getState();

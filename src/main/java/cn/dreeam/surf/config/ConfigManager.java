@@ -35,7 +35,8 @@ public class ConfigManager {
     }
 
     private void structureConfig() {
-        createTitledSection("Item checks", "item-checks");
+        createTitledSection("General Checks", "general-checks");
+        createTitledSection("Item Checks", "item-checks");
         createTitledSection("Limitation", "limit");
         createTitledSection("Patch", "patch");
         createTitledSection("Miscellaneous", "misc");

@@ -29,8 +29,15 @@ public class ItemCheckHandler {
         }
     }
 
+    // TODO: We can re-use the item meta and pass it to the `doSanitize` of next item check module
+    // TODO: And setItemMeta back at the end of the iteration, so that prevent redunctant getItemMeta & setItemMeta in
+    // TODO: every item check.
+    // TODO: However, the design also needs to consider the direct NBT modifications (done by NBT API) in future item checks later
+
     public static boolean scanItem(ItemStack i) {
         for (ItemCheck itemCheck : ItemCheckRegistry.activeChecks()) {
+            if (itemCheck.canBypass() || !itemCheck.appliesTo(i)) continue;
+
             final boolean ret = itemCheck.doCheck(i);
 
             if (ret) {
@@ -42,6 +49,8 @@ public class ItemCheckHandler {
 
     private static void scanItemOrReact(ItemStack i) {
         for (ItemCheck itemCheck : ItemCheckRegistry.activeChecks()) {
+            if (itemCheck.canBypass() || !itemCheck.appliesTo(i)) continue;
+
             final boolean ret = itemCheck.doCheck(i);
 
             // TODO: choose method defined in the config, remove entire item / sanitize illegal data / whether log
