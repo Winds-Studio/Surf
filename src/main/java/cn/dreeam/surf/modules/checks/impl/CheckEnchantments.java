@@ -13,7 +13,7 @@ public class CheckEnchantments implements ItemCheck {
 
     @Override
     public boolean enabled() {
-        return Config.checkRuleEnchantments;
+        return Config.ItemChecks.checkRuleEnchantments;
     }
 
     @Override

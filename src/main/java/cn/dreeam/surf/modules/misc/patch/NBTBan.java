@@ -1,5 +1,4 @@
 package cn.dreeam.surf.modules.misc.patch;
-
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.PlatformUtil;
@@ -13,7 +12,7 @@ public class NBTBan implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        if (!Config.preventNBTBanEnabled) return;
+        if (!Config.Patch.preventNBTBanEnabled) return;
 
         Inventory inv = event.getPlayer().getInventory();
 
@@ -24,9 +23,9 @@ public class NBTBan implements Listener {
 
                     int itemSize = i.getItemMeta().getAsComponentString().length();
 
-                    if (itemSize > Config.preventNBTBanLimit) {
+                    if (itemSize > Config.Patch.preventNBTBanLimit) {
                         inv.remove(i);
-                        MessageUtil.sendMessage(event.getPlayer(), Config.preventNBTBanMessage);
+                        MessageUtil.sendMessage(event.getPlayer(), Config.Patch.preventNBTBanMessage);
                     }
                 }
             }
@@ -37,9 +36,9 @@ public class NBTBan implements Listener {
 
                     int itemSize = i.getItemMeta().getAsString().length();
 
-                    if (itemSize > Config.preventNBTBanLimit) {
+                    if (itemSize > Config.Patch.preventNBTBanLimit) {
                         inv.remove(i);
-                        MessageUtil.sendMessage(event.getPlayer(), Config.preventNBTBanMessage);
+                        MessageUtil.sendMessage(event.getPlayer(), Config.Patch.preventNBTBanMessage);
                     }
                 }
             }

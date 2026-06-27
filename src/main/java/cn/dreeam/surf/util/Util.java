@@ -27,7 +27,7 @@ public class Util {
     }
 
     public static String getPrefix() {
-        return (Config.prefix != null && !Config.prefix.isEmpty()) ? Config.prefix : "";
+        return (Config.Misc.prefix != null && !Config.Misc.prefix.isEmpty()) ? Config.Misc.prefix : "";
     }
 
     public static boolean doesClassExists(String clazz) {

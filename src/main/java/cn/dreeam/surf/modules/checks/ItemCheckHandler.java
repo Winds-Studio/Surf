@@ -36,7 +36,7 @@ public class ItemCheckHandler {
     // TODO: However, the design also needs to consider the direct NBT modifications (done by NBT API) in future item checks later
 
     public static boolean scanItemOrReact(ItemStack i) {
-        final CheckResultAction action = Config.checkResultAction;
+        final CheckResultAction action = Config.ItemChecks.checkResultAction;
 
         boolean isIllegal = false;
 

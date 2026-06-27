@@ -17,7 +17,7 @@ public class DispenserCrash implements Listener {
      */
     @EventHandler(ignoreCancelled = true)
     public void dispense(BlockDispenseEvent event) {
-        if (!Config.preventDispenserCrash) return;
+        if (!Config.Patch.preventDispenserCrash) return;
 
         Block block = event.getBlock();
         if (block instanceof Dispenser dispenser) {

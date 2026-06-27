@@ -21,7 +21,7 @@ public class ActionsBasic implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     private void onJoin(PlayerJoinEvent event) {
-        if (!Config.checkTriggerOnJoin) return;
+        if (!Config.ItemChecks.checkTriggerOnJoin) return;
 
         Inventory inv = event.getPlayer().getInventory();
 
@@ -30,7 +30,7 @@ public class ActionsBasic implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     private void onInvMove(InventoryMoveItemEvent event) {
-        if (!Config.checkTriggerOnHopperTransfer) return;
+        if (!Config.ItemChecks.checkTriggerOnHopperTransfer) return;
 
         Inventory inv = event.getSource();
 
@@ -42,7 +42,7 @@ public class ActionsBasic implements Listener {
 
     @EventHandler
     private void onInvClose(InventoryCloseEvent event) {
-        if (!Config.checkTriggerOnInvClose) return;
+        if (!Config.ItemChecks.checkTriggerOnInvClose) return;
 
         Inventory inv = event.getPlayer().getInventory();
 
@@ -54,7 +54,7 @@ public class ActionsBasic implements Listener {
 
     @EventHandler
     private void onInvOpen(InventoryOpenEvent event) {
-        if (!Config.checkTriggerOnInvOpen) return;
+        if (!Config.ItemChecks.checkTriggerOnInvOpen) return;
 
         Inventory inv = event.getPlayer().getInventory();
 
@@ -66,7 +66,7 @@ public class ActionsBasic implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     private void onDispenseEquip(BlockDispenseArmorEvent event) {
-        if (!Config.checkTriggerOnPickup) return;
+        if (!Config.ItemChecks.checkTriggerOnPickup) return;
 
         ItemStack i = event.getItem();
 
@@ -79,7 +79,7 @@ public class ActionsBasic implements Listener {
     private void onPickup(EntityPickupItemEvent event) {
         if (Surf.getInstance().isRoseStackerEnabled) return;
 
-        if (!Config.checkTriggerOnPickup) return;
+        if (!Config.ItemChecks.checkTriggerOnPickup) return;
 
         ItemStack i = event.getItem().getItemStack();
 

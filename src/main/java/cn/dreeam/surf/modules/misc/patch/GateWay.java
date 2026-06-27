@@ -25,7 +25,7 @@ public class GateWay implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onCrashAttempt(EntityTeleportEndGatewayEvent event) {
-        if (!Config.gateWayPreventCrashExploit) return;
+        if (!Config.Patch.gateWayPreventCrashExploit) return;
 
         double randomX = (Math.random() * ((50) + 1)) + 0;
         double randomY = (Math.random() * ((50) + 1)) + 0;
@@ -46,7 +46,7 @@ public class GateWay implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onEntityPortal(EntityPortalEvent event) {
-        if (!Config.gateWayPreventEntityEnterPortal) return;
+        if (!Config.Patch.gateWayPreventEntityEnterPortal) return;
 
         Entity entity = event.getEntity();
 
@@ -68,7 +68,7 @@ public class GateWay implements Listener {
 
     @EventHandler
     public void EndGatewayTeleportProtection(VehicleMoveEvent event) {
-        if (!Config.gateWayPreventEntityEnterPortal) return;
+        if (!Config.Patch.gateWayPreventEntityEnterPortal) return;
 
         Vehicle vehicle = event.getVehicle();
 

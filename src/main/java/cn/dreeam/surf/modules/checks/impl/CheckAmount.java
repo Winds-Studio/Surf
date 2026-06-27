@@ -9,7 +9,7 @@ public class CheckAmount implements ItemCheck {
 
     @Override
     public boolean enabled() {
-        return Config.checkRuleAmount;
+        return Config.ItemChecks.checkRuleAmount;
     }
 
     @Override

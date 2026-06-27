@@ -18,9 +18,9 @@ public class ActionsDamage implements Listener {
     // Entity gets damage
     @EventHandler(ignoreCancelled = true)
     private void onDamage(EntityDamageByEntityEvent event) {
-        if (!Config.checkIllegalDamage) return;
+        if (!Config.GeneralChecks.checkIllegalDamage) return;
 
-        final int maxGeneralDamage = Config.checkIllegalDamageMaxGeneral;
+        final int maxGeneralDamage = Config.GeneralChecks.checkIllegalDamageMaxGeneral;
 
         // Player => Entity
         if (event.getDamager() instanceof Player damager) {
@@ -32,7 +32,7 @@ public class ActionsDamage implements Listener {
                 // Seems only can use item on main hand to attack
                 damager.getInventory().remove(damager.getInventory().getItemInMainHand());
 
-                MessageUtil.sendMessage(damager, Config.checkIllegalDamageMessage);
+                MessageUtil.sendMessage(damager, Config.GeneralChecks.checkIllegalDamageMessage);
             }
         } else {
             // Entity => Entity
@@ -76,7 +76,7 @@ public class ActionsDamage implements Listener {
                         // Seems only can use item on main hand to attack
                         if (ItemUtil.isBowWeapon(shooter.getInventory().getItemInMainHand()))
                             shooter.getInventory().setItemInMainHand(null);
-                        MessageUtil.sendMessage(shooter, Config.checkIllegalDamageMessage);
+                        MessageUtil.sendMessage(shooter, Config.GeneralChecks.checkIllegalDamageMessage);
                     }
                 }
             }
@@ -84,6 +84,6 @@ public class ActionsDamage implements Listener {
     }
 
     private static int getMaxAllowedDamage(ItemStack i) {
-        return i.getType() == XMaterial.MACE.get() ? Config.checkIllegalDamageMaxMace : Config.checkIllegalDamageMaxGeneral;
+        return i.getType() == XMaterial.MACE.get() ? Config.GeneralChecks.checkIllegalDamageMaxMace : Config.GeneralChecks.checkIllegalDamageMaxGeneral;
     }
 }

@@ -139,7 +139,7 @@ public class ItemUtil {
 
         checkRuleAmountWhitelistMaterials.clear();
 
-        for (String materialName : Config.checkRuleAmountWhitelist) {
+        for (String materialName : Config.ItemChecks.checkRuleAmountWhitelist) {
             final Material material = Material.matchMaterial(materialName);
             if (material != null) {
                 checkRuleAmountWhitelistMaterials.add(material);

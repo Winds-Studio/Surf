@@ -32,7 +32,7 @@ public class Offhand implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void PlayerSwapHandItemsEvent(PlayerSwapHandItemsEvent event) {
-        if (!Config.limitOffhandSwapEnabled) return;
+        if (!Config.AntiLag.limitOffhandSwapEnabled) return;
 
         Player player = event.getPlayer();
         ItemStack mainHand = event.getMainHandItem();

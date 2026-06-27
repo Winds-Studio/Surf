@@ -13,7 +13,7 @@ public class NetherCheck implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onMove(PlayerMoveEvent event) {
-        if (!Config.netherEnabled) return;
+        if (!Config.Misc.netherEnabled) return;
 
         Player player = event.getPlayer();
         World world = event.getTo().getWorld();
@@ -24,19 +24,19 @@ public class NetherCheck implements Listener {
         }
 
         // is in nether roof
-        if (event.getTo().getBlockY() > Config.netherTopLayer) {
+        if (event.getTo().getBlockY() > Config.Misc.netherTopLayer) {
             event.setCancelled(true);
-            if (Config.netherTopBottomDoDamage) {
+            if (Config.Misc.netherTopBottomDoDamage) {
                 player.damage(20);
             }
-            MessageUtil.sendMessage(player, Config.netherTopMessage);
+            MessageUtil.sendMessage(player, Config.Misc.netherTopMessage);
         // is in nether bottom
-        } else if (event.getTo().getBlockY() < Config.netherBottomLayer) {
+        } else if (event.getTo().getBlockY() < Config.Misc.netherBottomLayer) {
             event.setCancelled(true);
-            if (Config.netherTopBottomDoDamage) {
+            if (Config.Misc.netherTopBottomDoDamage) {
                 player.damage(20);
             }
-            MessageUtil.sendMessage(player, Config.netherBottomMessage);
+            MessageUtil.sendMessage(player, Config.Misc.netherBottomMessage);
         }
     }
 }

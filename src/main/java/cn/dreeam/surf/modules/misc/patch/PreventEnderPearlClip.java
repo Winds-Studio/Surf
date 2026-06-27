@@ -10,7 +10,7 @@ public class PreventEnderPearlClip implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onTeleport(PlayerTeleportEvent event) {
-        if (!Config.preventTeleportToBlock) return;
+        if (!Config.Patch.preventTeleportToBlock) return;
 
         // Only check for ender pearl teleportation
         if (event.getCause() != PlayerTeleportEvent.TeleportCause.ENDER_PEARL) return;

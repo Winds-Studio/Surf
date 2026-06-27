@@ -10,9 +10,9 @@ public class BlockPhysics implements Listener {
 
     @EventHandler
     public void onLiquidSpread(BlockFromToEvent event) {
-        if (!Config.limitLiquidSpreadEnabled) return;
+        if (!Config.AntiLag.limitLiquidSpreadEnabled) return;
 
-        if (Util.getTps() <= Config.limitLiquidSpreadDisableTPS) {
+        if (Util.getTps() <= Config.AntiLag.limitLiquidSpreadDisableTPS) {
             if (event.getBlock().isLiquid()) {
                 event.setCancelled(true);
             }

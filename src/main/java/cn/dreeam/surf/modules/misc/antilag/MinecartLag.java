@@ -16,13 +16,13 @@ import java.util.Arrays;
 
 public class MinecartLag implements Listener {
 
-    private final int max = Config.limitVehicleMinecartPerChunkLimit;
+    private final int max = Config.AntiLag.limitVehicleMinecartPerChunkLimit;
 
     @EventHandler(ignoreCancelled = true)
     public void onSpawn(VehicleCreateEvent event) {
-        if (!Config.limitVehicleEnabled) return;
+        if (!Config.AntiLag.limitVehicleEnabled) return;
 
-        if (Util.getTps() <= Config.limitVehicleDisableTPS) {
+        if (Util.getTps() <= Config.AntiLag.limitVehicleDisableTPS) {
             Vehicle vehicle = event.getVehicle();
             Chunk chunk = vehicle.getChunk();
             Player player = Util.getNearbyPlayer(20, vehicle.getLocation());
@@ -45,16 +45,16 @@ public class MinecartLag implements Listener {
 
     @EventHandler
     public void onVehicleMove(VehicleMoveEvent event) {
-        if (!Config.limitVehicleEnabled) return;
+        if (!Config.AntiLag.limitVehicleEnabled) return;
 
-        if (Util.getTps() <= Config.limitVehicleDisableTPS) {
+        if (Util.getTps() <= Config.AntiLag.limitVehicleDisableTPS) {
             Vehicle vehicle = event.getVehicle();
             Chunk chunk = vehicle.getChunk();
             String formattedName = vehicle.getType().toString().toLowerCase().concat("s").replace("_", " ");
             Player player = Util.getNearbyPlayer(20, vehicle.getLocation());
 
             if (!event.getFrom().getChunk().equals(event.getTo().getChunk())) {
-                if (chunk.getEntities().length >= Config.limitVehicleMinecartPerChunkLimit) {
+                if (chunk.getEntities().length >= Config.AntiLag.limitVehicleMinecartPerChunkLimit) {
                     vehicle.remove();
                     MessageUtil.sendMessage(player, Util.getPrefix() + "&6Please limit " + formattedName + " to &r&c" + max + "&r&6 per chunk");
                 }

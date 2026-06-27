@@ -11,7 +11,7 @@ public class CheckItemFlags implements ItemCheck {
 
     @Override
     public boolean enabled() {
-        return Config.checkRuleFlags;
+        return Config.ItemChecks.checkRuleFlags;
     }
 
     @Override

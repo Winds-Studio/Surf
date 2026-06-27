@@ -9,7 +9,7 @@ public class CheckLegacyEnchantedGoldenApple implements ItemCheck {
 
     @Override
     public boolean enabled() {
-        return Config.checkRuleRemoveLegacyEnchantedGoldenApple;
+        return Config.ItemChecks.checkRuleRemoveLegacyEnchantedGoldenApple;
     }
 
     @Override

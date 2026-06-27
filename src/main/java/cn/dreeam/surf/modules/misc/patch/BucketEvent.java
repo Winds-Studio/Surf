@@ -15,18 +15,18 @@ public class BucketEvent implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onBucket(PlayerBucketEmptyEvent event) {
-        if (!Config.preventBuketPortalEnabled) return;
+        if (!Config.Patch.preventBuketPortalEnabled) return;
 
         // Fix monkey code
         if (checkEndPortal(event.getBlockClicked())) {
             event.setCancelled(true);
-            MessageUtil.sendMessage(event.getPlayer(), Config.preventBuketPortalMessage);
+            MessageUtil.sendMessage(event.getPlayer(), Config.Patch.preventBuketPortalMessage);
         }
     }
 
     @EventHandler(ignoreCancelled = true)
     public void onDispense(BlockDispenseEvent event) {
-        if (!Config.preventBuketPortalEnabled) return;
+        if (!Config.Patch.preventBuketPortalEnabled) return;
 
         if (checkEndPortal(event.getBlock())) {
             event.setCancelled(true);

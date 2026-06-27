@@ -25,7 +25,7 @@ public class ActionsPotion implements Listener {
 
     @EventHandler
     private void onJoin(PlayerJoinEvent event) {
-        if (!Config.checkIllegalPotion) return;
+        if (!Config.GeneralChecks.checkIllegalPotion) return;
 
         Player player = event.getPlayer();
 
@@ -41,7 +41,7 @@ public class ActionsPotion implements Listener {
     // Check Entity gets illegal potion effects
     @EventHandler(ignoreCancelled = true)
     private void onPotion(EntityPotionEffectEvent event) {
-        if (!Config.checkIllegalPotion) return;
+        if (!Config.GeneralChecks.checkIllegalPotion) return;
 
         PotionEffect effect = event.getNewEffect();
 
@@ -49,7 +49,7 @@ public class ActionsPotion implements Listener {
             if (ItemUtil.isIllegalEffect(effect)) {
                 event.setCancelled(true);
                 if (event.getEntity() instanceof Player player) {
-                    MessageUtil.sendMessage(player, Config.checkIllegalPotionMessage);
+                    MessageUtil.sendMessage(player, Config.GeneralChecks.checkIllegalPotionMessage);
                 }
             }
         }
@@ -58,7 +58,7 @@ public class ActionsPotion implements Listener {
     // Arrow shoot by player
     @EventHandler(ignoreCancelled = true)
     private void onHit(ProjectileHitEvent event) {
-        if (!Config.checkIllegalPotion) return;
+        if (!Config.GeneralChecks.checkIllegalPotion) return;
 
         if (!(event.getEntity() instanceof Arrow arrow) || !(arrow.getShooter() instanceof Player shooter)
                 || !(event.getHitEntity() instanceof Player)) {
@@ -74,7 +74,7 @@ public class ActionsPotion implements Listener {
                 } else {
                     shooter.getInventory().remove(XMaterial.TIPPED_ARROW.get());
                 }
-                MessageUtil.sendMessage(shooter, Config.checkIllegalPotionMessage);
+                MessageUtil.sendMessage(shooter, Config.GeneralChecks.checkIllegalPotionMessage);
                 break;
             }
         }
@@ -82,7 +82,7 @@ public class ActionsPotion implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     private void onThrow(PotionSplashEvent event) {
-        if (!Config.checkIllegalPotion) return;
+        if (!Config.GeneralChecks.checkIllegalPotion) return;
 
         if (!(event.getPotion().getShooter() instanceof Player player)) {
             return;
@@ -94,7 +94,7 @@ public class ActionsPotion implements Listener {
             if (ItemUtil.isIllegalEffect(effect)) {
                 event.setCancelled(true);
                 player.getInventory().remove(pot);
-                MessageUtil.sendMessage(player, Config.checkIllegalPotionMessage);
+                MessageUtil.sendMessage(player, Config.GeneralChecks.checkIllegalPotionMessage);
                 break;
             }
         }
@@ -104,7 +104,7 @@ public class ActionsPotion implements Listener {
     // Dreeam TODO: Check wheter need add foods with illegal effects
     @EventHandler(ignoreCancelled = true)
     private void onPotionConsume(PlayerItemConsumeEvent e) {
-        if (!Config.checkIllegalPotion) return;
+        if (!Config.GeneralChecks.checkIllegalPotion) return;
 
         final ItemStack item = e.getItem();
 
@@ -118,7 +118,7 @@ public class ActionsPotion implements Listener {
             if (ItemUtil.isIllegalEffect(effect)) {
                 e.setCancelled(true);
                 e.getPlayer().getInventory().remove(item);
-                MessageUtil.sendMessage(e.getPlayer(), Config.checkIllegalPotionMessage);
+                MessageUtil.sendMessage(e.getPlayer(), Config.GeneralChecks.checkIllegalPotionMessage);
                 break;
             }
         }
@@ -127,7 +127,7 @@ public class ActionsPotion implements Listener {
     // Check Potion/Arrow/Trident with illegal potion effects dispense from dispenser
     @EventHandler(ignoreCancelled = true)
     private void onDispense(BlockDispenseEvent event) {
-        if (!Config.checkIllegalPotion) return;
+        if (!Config.GeneralChecks.checkIllegalPotion) return;
 
         String material = event.getItem().getType().name();
 

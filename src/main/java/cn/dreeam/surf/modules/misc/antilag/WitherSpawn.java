@@ -10,9 +10,9 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 public class WitherSpawn implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onWitherSpawn(EntitySpawnEvent event) {
-        if (!Config.limitWitherSpawnOnLagEnabled) return;
+        if (!Config.AntiLag.limitWitherSpawnOnLagEnabled) return;
 
-        if (Util.getTps() <= Config.limitWitherSpawnOnLagDisableTPS && event.getEntity() instanceof Wither) {
+        if (Util.getTps() <= Config.AntiLag.limitWitherSpawnOnLagDisableTPS && event.getEntity() instanceof Wither) {
             event.setCancelled(true);
         }
     }

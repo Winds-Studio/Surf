@@ -12,7 +12,7 @@ public class CheckItemAttributes implements ItemCheck {
 
     @Override
     public boolean enabled() {
-        return Config.checkRuleAttributes && PlatformUtil.isNewerAndEqual(13, 0);
+        return Config.ItemChecks.checkRuleAttributes && PlatformUtil.isNewerAndEqual(13, 0);
     }
 
     @Override

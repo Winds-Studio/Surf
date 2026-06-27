@@ -20,7 +20,7 @@ public class BookBan implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        if (!Config.preventBookBanEnabled) return;
+        if (!Config.Patch.preventBookBanEnabled) return;
 
         Player player = event.getPlayer();
         PlayerInventory inv = player.getInventory();
@@ -50,14 +50,14 @@ public class BookBan implements Listener {
             }
             meta.setBlockState(shulkerBox);
             item.setItemMeta(meta);
-            MessageUtil.sendMessage(player, Config.preventBookBanMessage);
+            MessageUtil.sendMessage(player, Config.Patch.preventBookBanMessage);
         }
     }
 
     // Fix https://github.com/PaperMC/Paper/issues/7866
     @EventHandler
     public void onOpenBook(PlayerInteractEvent event) {
-        if (!Config.preventBookBanEnabled) return;
+        if (!Config.Patch.preventBookBanEnabled) return;
 
         ItemStack i = event.getItem();
 
@@ -69,7 +69,7 @@ public class BookBan implements Listener {
             Player player = event.getPlayer();
             event.setCancelled(true);
             player.getWorld().dropItem(player.getLocation(), i);
-            MessageUtil.sendMessage(player, Config.preventBookBanMessage);
+            MessageUtil.sendMessage(player, Config.Patch.preventBookBanMessage);
         }
     }
 

@@ -13,7 +13,7 @@ public class ActionsRoseStackerItem implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     private void onPickup(ItemPickupEvent event) {
-        if (!Config.checkTriggerOnPickup) return;
+        if (!Config.ItemChecks.checkTriggerOnPickup) return;
 
         ItemStack i = event.getStackedItem().getItem().getItemStack();
 
