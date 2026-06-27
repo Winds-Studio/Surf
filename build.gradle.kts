@@ -49,7 +49,7 @@ dependencies {
     implementation("com.tcoded:FoliaLib:0.5.2")
     implementation("com.github.cryptomorin:XSeries:13.7.0")
     implementation("de.tr7zw:item-nbt-api:2.15.8")
-    compileOnly(files("libs/RoseStacker-1.5.22.jar"))
+    compileOnly(files("libs/RoseStacker-1.5.41.jar"))
 }
 
 tasks {

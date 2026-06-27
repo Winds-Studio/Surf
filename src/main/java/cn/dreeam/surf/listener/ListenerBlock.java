@@ -9,7 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
-public class ActionsBlock implements Listener {
+public class ListenerBlock implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     private void onPlace(BlockPlaceEvent event) {

@@ -17,7 +17,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class ActionsBasic implements Listener {
+public class ListenerBasic implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     private void onJoin(PlayerJoinEvent event) {

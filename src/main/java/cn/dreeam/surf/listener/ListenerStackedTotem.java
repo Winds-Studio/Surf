@@ -7,7 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public class ActionsStackedTotem implements Listener {
+public class ListenerStackedTotem implements Listener {
 
     @EventHandler
     private void onDamage(EntityDamageEvent event) {

@@ -9,7 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
-public class ActionsRoseStackerItem implements Listener {
+public class ListenerRoseStackerItem implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     private void onPickup(ItemPickupEvent event) {

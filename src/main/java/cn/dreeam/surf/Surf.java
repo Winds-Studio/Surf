@@ -66,11 +66,11 @@ public class Surf extends JavaPlugin {
     public void registerEvents() {
         List<Listener> listeners = Arrays.asList(
                 // CheckIllegal
-                new ActionsBasic(),
-                new ActionsBlock(),
-                new ActionsDamage(),
-                new ActionsPotion(),
-                new ActionsStackedTotem(),
+                new ListenerBasic(),
+                new ListenerBlock(),
+                new ListenerDamage(),
+                new ListenerPotion(),
+                new ListenerStackedTotem(),
 
                 // AntiLag
                 new BlockPhysics(),
@@ -98,7 +98,7 @@ public class Surf extends JavaPlugin {
 
         if (getServer().getPluginManager().getPlugin("RoseStacker") != null) {
             isRoseStackerEnabled = true;
-            pluginManager.registerEvents(new ActionsRoseStackerItem(), instance);
+            pluginManager.registerEvents(new ListenerRoseStackerItem(), instance);
         }
     }
 

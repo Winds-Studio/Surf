@@ -13,7 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class ActionsDamage implements Listener {
+public class ListenerDamage implements Listener {
 
     // Entity gets damage
     @EventHandler(ignoreCancelled = true)

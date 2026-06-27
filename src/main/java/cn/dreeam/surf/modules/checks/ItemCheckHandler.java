@@ -41,7 +41,8 @@ public class ItemCheckHandler {
         boolean isIllegal = false;
 
         for (ItemCheck itemCheck : ItemCheckRegistry.activeChecks()) {
-            if (itemCheck.canBypass() || !itemCheck.appliesTo(i)) continue;
+            // TODO: implement permission bypass later
+            if (/*itemCheck.canBypass() || */!itemCheck.appliesTo(i)) continue;
 
             isIllegal = itemCheck.doCheck(i);
 
