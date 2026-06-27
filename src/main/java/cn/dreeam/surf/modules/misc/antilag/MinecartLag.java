@@ -25,7 +25,7 @@ public class MinecartLag implements Listener {
         if (Util.getTps() <= Config.AntiLag.limitVehicleDisableTPS) {
             Vehicle vehicle = event.getVehicle();
             Chunk chunk = vehicle.getChunk();
-            Player player = Util.getNearbyPlayer(20, vehicle.getLocation());
+            Player player = Util.getNearestPlayer(20, vehicle.getLocation());
             String formattedName = vehicle.getType().toString().toLowerCase().concat("s");
             long amount = Arrays.stream(chunk.getEntities()).filter(entity -> entity instanceof Vehicle).count();
 
@@ -51,7 +51,7 @@ public class MinecartLag implements Listener {
             Vehicle vehicle = event.getVehicle();
             Chunk chunk = vehicle.getChunk();
             String formattedName = vehicle.getType().toString().toLowerCase().concat("s").replace("_", " ");
-            Player player = Util.getNearbyPlayer(20, vehicle.getLocation());
+            Player player = Util.getNearestPlayer(20, vehicle.getLocation());
 
             if (!event.getFrom().getChunk().equals(event.getTo().getChunk())) {
                 if (chunk.getEntities().length >= Config.AntiLag.limitVehicleMinecartPerChunkLimit) {

@@ -16,7 +16,7 @@ public class Util {
         player.kickPlayer(getPrefix() + message);
     }
 
-    public static Player getNearbyPlayer(int radius, Location loc) {
+    public static Player getNearestPlayer(int radius, Location loc) {
         Player p = null;
 
         for (Player nearby : loc.getNearbyPlayers(radius)) {

@@ -83,7 +83,7 @@ public class Config {
         public static boolean checkRulePotion, checkRuleRemoveLegacyEnchantedGoldenApple;
 
         // Item checks - definitions
-        public static List<String> checkDefinitionIllegalBlocks, checkDefinitionIllegalItemFlags,
+        public static List<String> checkDefinitionIllegalMaterials, checkDefinitionIllegalItemFlags,
                 checkDefinitionIllegalAttributes, checkDefinitionMaxEnchantLevels;
 
         private static void init(ConfigManager manager) {
@@ -123,7 +123,7 @@ public class Config {
             checkRuleRemoveLegacyEnchantedGoldenApple = manager.getBoolean(checkSpecificRulePrefix + "remove-legacy-enchanted-golden-apple.enabled", false);
 
             // Item checks - definitions
-            checkDefinitionIllegalBlocks = manager.getList(checkDefinitionPrefix + "illegal-blocks", ItemUtil.defaultIllegalBlocks);
+            checkDefinitionIllegalMaterials = manager.getList(checkDefinitionPrefix + "illegal-materials", ItemUtil.defaultIllegalMaterials);
             checkDefinitionIllegalItemFlags = manager.getList(checkDefinitionPrefix + "illegal-item-flags", ItemUtil.defaultIllegalItemFlags, """
                     Illegal item flags for item checking.
                     In vanilla environment item would not has item flag.

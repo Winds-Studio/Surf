@@ -23,7 +23,6 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -38,12 +37,12 @@ public class ItemUtil {
     public static final BlockFace[] FACES = {BlockFace.DOWN, BlockFace.UP, BlockFace.NORTH, BlockFace.SOUTH, BlockFace.WEST, BlockFace.EAST};
 
     // For config-gen
-    public static final List<String> defaultIllegalBlocks = initDefaultIllegalBlocks();
+    public static final List<String> defaultIllegalMaterials = initDefaultIllegalMaterials();
     public static final List<String> defaultIllegalItemFlags = initDefaultIllegalItemFlags();
     public static final List<String> defaultIllegalAttributes = initDefaultIllegalAttribute();
     public static final List<String> defaultMaxEnchantLevels = initDefaultMaxEnchantLevels();
 
-    public static List<Material> illegalBlocks = new ArrayList<>();
+    public static List<Material> illegalMaterials = new ArrayList<>();
     public static List<ItemFlag> illegalItemFlags = new ArrayList<>();
     public static List<Attribute> illegalAttributes = new ArrayList<>();
     public static Object2IntOpenHashMap<Enchantment> maxEnchantLevels = new Object2IntOpenHashMap<>();
@@ -52,15 +51,6 @@ public class ItemUtil {
     private static Method attributeValues;
     private static Method attributeValueOf;
     private static Method attributeName;
-
-    /*
-    public static boolean isContainer(ItemStack i) {
-        switch (i.getType()) {
-            case
-        }
-        return ;
-    }
-     */
 
     public static boolean isAir(ItemStack i) {
         if (PlatformUtil.isOlderAndEqual(13, 2)) {
@@ -87,8 +77,7 @@ public class ItemUtil {
     }
 
     public static boolean isSkull(Material material) {
-        return material == XMaterial.PLAYER_HEAD.get()
-                || material == XMaterial.PLAYER_WALL_HEAD.get();
+        return material == XMaterial.PLAYER_HEAD.get() || material == XMaterial.PLAYER_WALL_HEAD.get();
     }
 
     public static boolean isWritableBook(ItemStack i) {
@@ -101,7 +90,7 @@ public class ItemUtil {
     }
 
     public static boolean isPotion(ItemStack i) {
-        Material material = i.getType();
+        final Material material = i.getType();
         return material == Material.POTION || material == Material.SPLASH_POTION || material == Material.LINGERING_POTION;
     }
 
@@ -110,11 +99,11 @@ public class ItemUtil {
     }
 
     public static boolean isIllegalItem(ItemStack i) {
-        return ItemUtil.illegalBlocks.contains(i.getType());
+        return ItemUtil.illegalMaterials.contains(i.getType());
     }
 
     public static boolean isIllegalEffect(PotionEffect effect) {
-        int duration;
+        final int duration;
 
         if (PlatformUtil.isNewerAndEqual(20, 5) && effect.getType() == PotionEffectType.TRIAL_OMEN) { // Trial Omen Effect >=1.20.5
             duration = TRIAL_OMEN_EFFECT_DURATION;
@@ -132,7 +121,7 @@ public class ItemUtil {
     }
 
     public static void initIllegalItemData() {
-        initIllegalBlocks();
+        initIllegalMaterials();
         initIllegalItemFlags();
         initIllegalAttributes();
         initMaxEnchantLevels();
@@ -147,9 +136,58 @@ public class ItemUtil {
         }
     }
 
-    // TODO - multi-version support
-    private static List<String> initDefaultIllegalBlocks() {
-        final List<String> list = new ArrayList<>(Arrays.asList(
+    private static List<String> initDefaultIllegalMaterials() {
+        final List<String> list = new ArrayList<>();
+
+        if (PlatformUtil.isNewerAndEqual(13, 0)) {
+            // 1.13+
+            list.addAll(initDefaultFlattenedIllegalMaterials());
+        } else {
+            // <= 1.12.2
+            list.addAll(initDefaultLegacyIllegalMaterials());
+        }
+
+        // 1.14+
+        if (PlatformUtil.isNewerAndEqual(14, 0)) {
+            list.add("JIGSAW");
+        }
+
+        // 1.17+
+        if (PlatformUtil.isNewerAndEqual(17, 0)) {
+            list.add("LIGHT");
+        }
+
+        // 1.19+
+        if (PlatformUtil.isNewerAndEqual(19, 0)) {
+            list.add("REINFORCED_DEEPSLATE");
+        }
+
+        list.sort(String.CASE_INSENSITIVE_ORDER);
+
+        return list;
+    }
+
+    private static List<String> initDefaultLegacyIllegalMaterials() {
+        return List.of(
+                "BARRIER",
+                "BEDROCK",
+                "COMMAND",
+                "COMMAND_CHAIN",
+                "COMMAND_MINECART",
+                "COMMAND_REPEATING",
+                "KNOWLEDGE_BOOK",
+                "MOB_SPAWNER",
+                "ENDER_PORTAL",
+                "ENDER_PORTAL_FRAME",
+                "END_GATEWAY",
+                "PORTAL",
+                "STRUCTURE_BLOCK",
+                "STRUCTURE_VOID"
+        );
+    }
+
+    private static List<String> initDefaultFlattenedIllegalMaterials() {
+        return List.of(
                 "BARRIER",
                 "BEDROCK",
                 "COMMAND_BLOCK",
@@ -163,15 +201,8 @@ public class ItemUtil {
                 "END_GATEWAY",
                 "NETHER_PORTAL",
                 "STRUCTURE_BLOCK",
-                "STRUCTURE_VOID",
-                "JIGSAW",
-                "LIGHT",
-                "REINFORCED_DEEPSLATE"
-        ));
-
-        list.sort(String.CASE_INSENSITIVE_ORDER);
-
-        return list;
+                "STRUCTURE_VOID"
+        );
     }
 
     private static List<String> initDefaultIllegalItemFlags() {
@@ -248,16 +279,16 @@ public class ItemUtil {
         return list;
     }
 
-    private static void initIllegalBlocks() {
-        illegalBlocks.clear();
+    private static void initIllegalMaterials() {
+        illegalMaterials.clear();
 
-        for (String materialName : defaultIllegalBlocks) {
+        for (String materialName : defaultIllegalMaterials) {
             Material material = Material.matchMaterial(materialName);
             if (material == null) {
                 Surf.LOGGER.warn("Invalid material name: {}", materialName);
                 continue;
             }
-            illegalBlocks.add(material);
+            illegalMaterials.add(material);
         }
     }
 
