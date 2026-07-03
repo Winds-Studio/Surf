@@ -176,8 +176,9 @@ public class Config {
     public static class Patch {
 
         // Patch
-        public static boolean preventBookBanEnabled, preventBuketPortalEnabled, perChunkLimitEnabled, preventDispenserCrash,
-                gateWayPreventCrashExploit, gateWayPreventEntityEnterPortal, preventNBTBanEnabled, preventTeleportToBlock;
+        public static boolean preventBookBanEnabled, preventBuketPortalEnabled, perChunkLimitEnabled,
+                preventDispenserCrash, gateWayPreventCrashExploit, gateWayPreventEntityEnterPortal, preventNBTBanEnabled,
+                preventTeleportToBlock;
         public static int perChunkLimitTitleEntityMax, perChunkLimitSkullMax, preventNBTBanLimit;
         public static String preventBookBanMessage, preventBuketPortalMessage, perChunkLimitMessage, preventNBTBanMessage;
 

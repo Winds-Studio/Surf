@@ -28,15 +28,8 @@ public class BookBan implements Listener {
         for (ItemStack item : inv.getContents()) {
             // if item is null, skip
             if (item == null || item.getType() == Material.AIR) continue;
-            if (!(item.getItemMeta() instanceof BlockStateMeta)) continue;
-
-            BlockStateMeta meta = (BlockStateMeta) item.getItemMeta();
-
-            if (!(meta.getBlockState() instanceof ShulkerBox)) {
-                continue;
-            }
-
-            ShulkerBox shulkerBox = (ShulkerBox) meta.getBlockState();
+            if (!(item.getItemMeta() instanceof BlockStateMeta meta)
+                    || !(meta.getBlockState() instanceof ShulkerBox shulkerBox)) continue;
 
             for (ItemStack shulkerItem : shulkerBox.getInventory().getContents()) {
                 if (shulkerItem == null || ItemUtil.isAir(shulkerItem)) continue;

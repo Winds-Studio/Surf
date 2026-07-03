@@ -1,6 +1,7 @@
 package cn.dreeam.surf.listener;
 
 import cn.dreeam.surf.config.Config;
+import cn.dreeam.surf.modules.checks.CheckResultAction;
 import cn.dreeam.surf.util.MessageUtil;
 import cn.dreeam.surf.util.item.ItemUtil;
 import org.bukkit.entity.Player;
@@ -17,13 +18,17 @@ public class ListenerBlock implements Listener {
 
         if (ItemUtil.isIllegalItem(event.getItemInHand())) {
             final Player player = event.getPlayer();
+            final CheckResultAction action = Config.ItemChecks.checkResultAction;
 
             event.setCancelled(true);
 
-            if (event.getHand() == EquipmentSlot.HAND) {
-                player.getInventory().setItemInMainHand(null);
-            } else {
-                player.getInventory().setItemInOffHand(null);
+            // Treat SANITIZE as canceling event (above)
+            if (action == CheckResultAction.REMOVE) {
+                if (event.getHand() == EquipmentSlot.HAND) {
+                    player.getInventory().setItemInMainHand(null);
+                } else {
+                    player.getInventory().setItemInOffHand(null);
+                }
             }
 
             MessageUtil.sendMessage(player, Config.antiIllegalCheckIllegalBlockMessage);
