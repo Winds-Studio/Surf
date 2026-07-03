@@ -1,8 +1,5 @@
 # Surf
 
-Surf is a fork of [LeeesExploitFixer](https://github.com/XeraPlugins/LeeesExploitFixer-3.0) of a fork of
-254nm's [L2X9Core](https://github.com/254nm/L2X9Core)
-
 A plugin for anarchy servers that aim to fix exploits, detect and remove illegal/NBT items.
 
 Recommended use as a addition with AnarchyExploitFixes and Panilla to become 100% functional.
@@ -10,7 +7,7 @@ Recommended use as a addition with AnarchyExploitFixes and Panilla to become 100
 ## Compatibility
 
 - Support Java 21+
-- Support 1.12.2 ~ Latest Minecraft version (1.21.4)
+- Support 1.12.2 ~ Latest Minecraft version (26.2)
 - Compatible with Paper / Paper Forks
 - Folia Support
 
@@ -35,4 +32,5 @@ ___
 
 ## Credit
 
-- Panilla
+- [Panilla](https://github.com/ds58/Panilla) - Part of item check methods
+- [LeeesExploitFixer](https://github.com/XeraPlugins/LeeesExploitFixer-3.0) & [L2X9Core](https://github.com/254nm/L2X9Core) - Original Surf base
