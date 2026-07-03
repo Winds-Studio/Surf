@@ -1,7 +1,7 @@
 package cn.dreeam.surf.modules.checks;
 
 import cn.dreeam.surf.modules.checks.impl.*;
-import cn.dreeam.surf.modules.checks.impl.speific.*;
+import cn.dreeam.surf.modules.checks.impl.specific.*;
 
 public class ItemCheckRegistry {
 

@@ -75,7 +75,7 @@ public class ListenerBasic implements Listener {
 
         final ItemStack i = event.getItem();
 
-        if (ItemCheckHandler.scanItemOrReact(i, null)) {
+        if (ItemCheckHandler.scanSingleItemOrReact(i, null)) {
             event.setCancelled(true);
         }
     }
@@ -89,7 +89,7 @@ public class ListenerBasic implements Listener {
         final ItemStack i = event.getItem().getItemStack();
         final Entity entity = event.getEntity();
 
-        if (ItemCheckHandler.scanItemOrReact(i, entity)) {
+        if (ItemCheckHandler.scanSingleItemOrReact(i, entity)) {
             event.setCancelled(true);
             event.getItem().remove();
 

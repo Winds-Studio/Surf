@@ -11,7 +11,9 @@ public interface ItemCheck {
     // Enabled for specific item
     boolean appliesTo(ItemStack i);
 
-    boolean canBypass(Player player);
+    boolean canBypass();
+
+    void updateBypassableState(Player player);
 
     boolean doCheck(ItemStack i);
 

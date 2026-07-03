@@ -19,7 +19,7 @@ public class ListenerRoseStackerItem implements Listener {
         final ItemStack i = event.getStackedItem().getItem().getItemStack();
         final Entity entity = event.getEntity();
 
-        if (ItemCheckHandler.scanItemOrReact(i, entity)) {
+        if (ItemCheckHandler.scanSingleItemOrReact(i, entity)) {
             event.setCancelled(true);
             event.getStackedItem().getItem().remove();
             if (entity instanceof Player player) {

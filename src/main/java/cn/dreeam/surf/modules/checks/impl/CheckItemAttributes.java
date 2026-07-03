@@ -2,6 +2,7 @@ package cn.dreeam.surf.modules.checks.impl;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.modules.checks.ItemCheck;
+import cn.dreeam.surf.perm.PermissionNodes;
 import cn.dreeam.surf.util.PlatformUtil;
 import cn.dreeam.surf.util.item.ItemUtil;
 import org.bukkit.attribute.Attribute;
@@ -10,6 +11,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class CheckItemAttributes implements ItemCheck {
+
+    public static final String PERM = PermissionNodes.BYPASS_ITEM + "attributes";
+
+    private boolean canBypass;
 
     @Override
     public boolean enabled() {
@@ -22,9 +27,13 @@ public class CheckItemAttributes implements ItemCheck {
     }
 
     @Override
-    public boolean canBypass(Player player) {
-        // TODO
-        throw new UnsupportedOperationException();
+    public boolean canBypass() {
+        return canBypass;
+    }
+
+    @Override
+    public void updateBypassableState(Player player) {
+        canBypass = player.hasPermission(PERM);
     }
 
     @Override
