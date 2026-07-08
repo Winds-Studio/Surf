@@ -39,7 +39,6 @@ public class CheckEnchantments implements ItemCheck {
 
     @Override
     public boolean doCheck(ItemStack i) {
-        // TODO check
         final Map<Enchantment, Integer> enchants = i.getEnchantments();
         final Object2IntOpenHashMap<Enchantment> illegalEnchants = ItemUtil.maxEnchantLevels;
 
@@ -57,18 +56,16 @@ public class CheckEnchantments implements ItemCheck {
 
     @Override
     public void doSanitize(ItemStack i) {
-        // TODO check
         final Map<Enchantment, Integer> enchants = i.getEnchantments();
         final Object2IntOpenHashMap<Enchantment> illegalEnchants = ItemUtil.maxEnchantLevels;
 
         if (i.getType().isBlock()) {
-            if (Config.antiIllegalRemoveBlockEnchant) {
-                // Directly remove enchantments
+            if (Config.ItemChecks.checkRuleEnchantmentsNoEnchantOnBlock) {
                 enchants.keySet().forEach(i::removeEnchantment);
             } else {
                 // Correct enchantments
-                enchants.keySet().forEach(enchant -> {
-                    final int level = enchants.get(enchant);
+                // We don't need check canEnchantItem since we allow enchants on block here
+                enchants.forEach((enchant, level) -> {
                     final int maxLevel = illegalEnchants.getInt(enchant);
 
                     if (maxLevel > 0 && level > maxLevel) {
@@ -77,9 +74,10 @@ public class CheckEnchantments implements ItemCheck {
                 });
             }
         } else {
-            enchants.keySet().forEach(enchant -> {
-                if (Config.antiIllegalAllowInapplicableEnchant || enchant.canEnchantItem(i)) {
-                    final int level = enchants.get(enchant);
+            final boolean allowInapplicable = Config.ItemChecks.checkRuleEnchantmentsAllowInapplicableEnchant;
+
+            enchants.forEach((enchant, level) -> {
+                if (allowInapplicable || enchant.canEnchantItem(i)) {
                     final int maxLevel = illegalEnchants.getInt(enchant);
                     if (maxLevel > 0 && level > maxLevel) {
                         i.addUnsafeEnchantment(enchant, enchant.getMaxLevel());

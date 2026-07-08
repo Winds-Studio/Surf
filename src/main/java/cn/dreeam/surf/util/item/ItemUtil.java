@@ -102,7 +102,7 @@ public class ItemUtil {
     }
 
     public static boolean isIllegalTotem(ItemStack i) {
-        return i.getType().equals(XMaterial.TOTEM_OF_UNDYING.get()) && i.getAmount() > i.getMaxStackSize();
+        return i.getType() == XMaterial.TOTEM_OF_UNDYING.get() && i.getAmount() > i.getMaxStackSize();
     }
 
     public static boolean isIllegalItem(ItemStack i) {

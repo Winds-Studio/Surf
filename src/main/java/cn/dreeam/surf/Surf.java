@@ -64,13 +64,13 @@ public class Surf extends JavaPlugin {
     }
 
     public void registerEvents() {
-        List<Listener> listeners = Arrays.asList(
-                // CheckIllegal
+        Listener[] listeners = new Listener[]{
+                // Listeners
                 new ListenerBasic(),
                 new ListenerBlock(),
                 new ListenerDamage(),
+                new ListenerEntityDamage(),
                 new ListenerPotion(),
-                new ListenerStackedTotem(),
 
                 // AntiLag
                 new BlockPhysics(),
@@ -90,7 +90,7 @@ public class Surf extends JavaPlugin {
                 new GateWay(),
                 new NBTBan(),
                 new PreventEnderPearlClip()
-        );
+        };
 
         for (Listener listener : listeners) {
             pluginManager.registerEvents(listener, instance);

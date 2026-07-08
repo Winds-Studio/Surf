@@ -10,29 +10,8 @@ import java.util.List;
 
 public class Config {
 
-    // Anti illegal
-    public static boolean antiIllegalCheckIllegalBlockEnabled, antiIllegalRemoveBlockEnchant, antiIllegalAllowInapplicableEnchant, stackedTotemRevertAsOneEnabled, antiIllegalDeleteIllegalsWhenFoundEnabled;
-    public static String antiIllegalCheckIllegalBlockMessage;
-
     public static void initConfig() {
         ConfigManager manager = Surf.configManager();
-
-        // Anti Illegal
-        antiIllegalCheckIllegalBlockEnabled = manager.getBoolean("anti-illegal.check-illegal-block.enabled", true, """
-                Should remove illegal blocks when placed
-                You can define illegal blocks in anti-illegal.checks.illegal-block-list""");
-        antiIllegalCheckIllegalBlockMessage = manager.getString("anti-illegal.check-illegal-block.message", "&6You can not use this illegal block.");
-
-        antiIllegalRemoveBlockEnchant = manager.getBoolean("anti-illegal.remove-block-enchants", true, """
-                Whether remove all enchantments on blocks directly
-                Disable it to check illegal enchants for block like other normal items.""");
-        antiIllegalAllowInapplicableEnchant = manager.getBoolean("anti-illegal.allow-inapplicable-enchants-on-items", true, "Whether allow inapplicable enchants on items.");
-
-        stackedTotemRevertAsOneEnabled = manager.getBoolean("anti-illegal.revert-stacked-totem-as-one.enabled", false);
-
-        antiIllegalDeleteIllegalsWhenFoundEnabled = manager.getBoolean("anti-illegal.delete-illegals-when-found.enabled", false, """
-                Enable to delete illegals when found
-                Disable to only clean illegal attributes""");
 
         GeneralChecks.init(manager);
         ItemChecks.init(manager);
@@ -44,13 +23,16 @@ public class Config {
     public static class GeneralChecks {
 
         // General checks
-        public static boolean checkIllegalDamage, checkIllegalPotion;
+        public static boolean checkIllegalBlockPlacing, checkIllegalDamage, checkIllegalPotion;
         public static int checkIllegalDamageMaxGeneral, checkIllegalDamageMaxMace;
-        public static String checkIllegalDamageMessage, checkIllegalPotionMessage;
+        public static String checkIllegalBlockPlacingMessage, checkIllegalDamageMessage, checkIllegalPotionMessage;
 
         private static void init(ConfigManager manager) {
             // General checks
             final String generalCheckPrefix = "general-checks.";
+
+            checkIllegalBlockPlacing = manager.getBoolean(generalCheckPrefix + "illegal-block-placing.enabled", false);
+            checkIllegalBlockPlacingMessage = manager.getString(generalCheckPrefix + "illegal-block-placing.message", "&6You can not use this illegal block.");
 
             checkIllegalDamage = manager.getBoolean(generalCheckPrefix + "illegal-damage.enabled", false);
             checkIllegalDamageMaxGeneral = manager.getInt(generalCheckPrefix + "illegal-damage.max-general-damage", 20);
@@ -72,10 +54,14 @@ public class Config {
         private static String checkResultActionMode;
         public static CheckResultAction checkResultAction;
         public static boolean checkResultLog;
+        // TODO - logging system (For 1. player 2. console)
 
         // Item checks - general rules
         public static boolean checkRuleAmount, checkRuleDurability, checkRuleEnchantments, checkRuleAttributes,
                 checkRuleFlags, checkRuleUnbreakable;
+
+        public static boolean checkRuleAmountCheckTotemSizeOnDamage;
+        public static boolean checkRuleEnchantmentsNoEnchantOnBlock, checkRuleEnchantmentsAllowInapplicableEnchant;
 
         public static List<String> checkRuleAmountWhitelist;
 
@@ -111,9 +97,12 @@ public class Config {
 
             // Item checks - general rules
             checkRuleAmount = manager.getBoolean(checkGeneralRulePrefix + "amount.enabled", true);
+            checkRuleAmountCheckTotemSizeOnDamage = manager.getBoolean(checkGeneralRulePrefix + "amount.check-totem-size-on-damage", true);
             checkRuleAmountWhitelist = manager.getList(checkGeneralRulePrefix + "amount.witelist", new ArrayList<>());
             checkRuleDurability = manager.getBoolean(checkGeneralRulePrefix + "durability.enabled", true);
             checkRuleEnchantments = manager.getBoolean(checkGeneralRulePrefix + "enchantments.enabled", true);
+            checkRuleEnchantmentsNoEnchantOnBlock = manager.getBoolean(checkGeneralRulePrefix + "enchantments.no-enchant-on-block", true);
+            checkRuleEnchantmentsAllowInapplicableEnchant = manager.getBoolean(checkGeneralRulePrefix + "enchantments.allow-inapplicable-enchantment", false);
             checkRuleAttributes = manager.getBoolean(checkGeneralRulePrefix + "attributes.enabled", true);
             checkRuleFlags = manager.getBoolean(checkGeneralRulePrefix + "item-flags.enabled", true);
             checkRuleUnbreakable = manager.getBoolean(checkGeneralRulePrefix + "unbreakable.enabled", false);

@@ -14,7 +14,7 @@ public class ListenerBlock implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     private void onPlace(BlockPlaceEvent event) {
-        if (!Config.antiIllegalCheckIllegalBlockEnabled) return;
+        if (!Config.GeneralChecks.checkIllegalBlockPlacing) return;
 
         if (ItemUtil.isIllegalItem(event.getItemInHand())) {
             final Player player = event.getPlayer();
@@ -31,7 +31,7 @@ public class ListenerBlock implements Listener {
                 }
             }
 
-            MessageUtil.sendMessage(player, Config.antiIllegalCheckIllegalBlockMessage);
+            MessageUtil.sendMessage(player, Config.GeneralChecks.checkIllegalBlockPlacingMessage);
         }
     }
 }
