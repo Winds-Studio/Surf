@@ -1,15 +1,15 @@
-# Surf
+# 🌊 Surf
 
 Surf is a policy-driven illegal item validation and enforcement plugin mainly designed for anarchy-type servers.
 It detects illegal items, blocks invalid item usage, checks abnormal damage, potion effects etc, ensure the fair-play game experience.
 
 ---
 
-## Features
+## ✨ Features
 
-- Comprehensive item validation — item type, stack size, enchantments, attributes, NBT/components, and more
-- Clear configuration — Structured, self-describing, and easy to get started
-- Lightweight — Minimal overhead with optimized design for the large network
+- Comprehensive item validation checks
+- Self-describing configuration
+- Lightweight and minimal overhead
 
 ### Additional Features
 
@@ -22,7 +22,7 @@ If you require the features below, we recommend using AnarchyExploitFixes as the
 - Patched offhand crasher
 - Patched falling block crasher
 
-## Compatibility
+## 🔧 Compatibility
 
 |                       |       Support       |
 |-----------------------|:-------------------:|
@@ -36,7 +36,7 @@ If you require the features below, we recommend using AnarchyExploitFixes as the
 - Discord: [`https://discord.gg/8Bv5MTXFj5`](https://discord.gg/8Bv5MTXFj5)
 - QQ: `2682173972`
 
-## Credit
+## ❤️ Credit
 
 - [Panilla](https://github.com/ds58/Panilla) - Part of item check methods
 - [LeeesExploitFixer](https://github.com/XeraPlugins/LeeesExploitFixer-3.0) & [L2X9Core](https://github.com/254nm/L2X9Core) - Original Surf base
