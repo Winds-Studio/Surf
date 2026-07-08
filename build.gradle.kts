@@ -6,7 +6,7 @@ plugins {
 
 group = "cn.dreeam.surf"
 version = "5.0.0"
-description = "Fix exploits and remove illegal/NBT items for anarchy servers"
+description = "Policy-driven item integrity validation plugin for Paper servers."
 
 repositories {
     mavenCentral()
@@ -48,7 +48,7 @@ dependencies {
     implementation("org.bstats:bstats-bukkit:3.2.1")
     implementation("com.tcoded:FoliaLib:0.5.2")
     implementation("com.github.cryptomorin:XSeries:13.7.0")
-    implementation("de.tr7zw:item-nbt-api:2.15.8")
+    implementation("de.tr7zw:item-nbt-api:2.15.8") // TODO - evaluate with rtag
     compileOnly(files("libs/RoseStacker-1.5.41.jar"))
 }
 

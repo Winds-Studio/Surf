@@ -1,29 +1,35 @@
 # Surf
 
-A plugin for anarchy servers that aim to fix exploits, detect and remove illegal/NBT items.
+Surf is a policy-driven illegal item validation and enforcement plugin mainly designed for anarchy-type servers.
+It detects illegal items, blocks invalid item usage, checks abnormal damage, potion effects etc, ensure the fair-play game experience.
 
-Recommended use as a addition with AnarchyExploitFixes and Panilla to become 100% functional.
+---
+
+## Features
+
+- Comprehensive item validation — item type, stack size, enchantments, attributes, NBT/components, and more
+- Clear configuration — Structured, self-describing, and easy to get started
+- Lightweight — Minimal overhead with optimized design for the large network
+
+### Additional Features
+
+These are miscellaneous features left for legacy reasons. They may be removed in future versions.
+If you require the features below, we recommend using AnarchyExploitFixes as the alternative solution.
+
+- Patched chunk ban
+- Patched book ban without disabling shulker box peek
+- Patched end portal griefing
+- Patched offhand crasher
+- Patched falling block crasher
 
 ## Compatibility
 
-- Support Java 21+
-- Support 1.12.2 ~ Latest Minecraft version (26.2)
-- Compatible with Paper / Paper Forks
-- Folia Support
-
-___
-
-## Features (WIP - Redo this)
-
-- Prevent all crash exploits that I know of
-- Prevent ChunkBan
-- Patch BookBan without disabling shulker peek
-- Prevent EndPortal griefing
-- Patch players using the OffHand crash module in certain hacked clients to crash the server with books
-- Prevent players from using illegal items
-- Remove illegal potion effects from players
-- Remove falling block server crashers
-- Active development
+|                       |       Support       |
+|-----------------------|:-------------------:|
+| Java Version          |       `>= 21`       |  
+| Minecraft Version     |    1.12.2 ~ 26.2    |
+| Compatibility         | Paper / Paper forks |
+| Folia Support         |         Yes         |
 
 ## 📫 Contact
 
