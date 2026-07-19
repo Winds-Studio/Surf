@@ -1,47 +1,42 @@
-# Surf
+# 🌊 Surf
 
-Surf is a fork of [LeeesExploitFixer](https://github.com/XeraPlugins/LeeesExploitFixer-3.0) of a fork of
-254nm's [L2X9Core](https://github.com/254nm/L2X9Core)
+Surf is a policy-driven illegal item validation and enforcement plugin mainly designed for anarchy-type servers.
+It detects illegal items, blocks invalid item usage, checks abnormal damage, potion effects etc, ensure the fair-play game experience.
 
-A plugin for anarchy servers that aim to fix exploits, detect and remove illegal/NBT items.
+---
 
-Recommended use as a addition with AnarchyExploitFixes and Panilla to become 100% functional.
+## ✨ Features
 
-## Compatibility
+- Comprehensive item validation checks
+- Self-describing configuration
+- Lightweight and minimal overhead
 
-- Support Java 21+
-- Support 1.12.2 ~ Latest Minecraft version (1.21.4)
-- Compatible with Paper / Paper Forks
-- Folia Support
+### Additional Features
 
-___
+These are miscellaneous features left for legacy reasons. They may be removed in future versions.
+If you require the features below, we recommend using AnarchyExploitFixes as the alternative solution.
 
-## Features
+- Patched chunk ban
+- Patched book ban without disabling shulker box peek
+- Patched end portal griefing
+- Patched offhand crasher
+- Patched falling block crasher
 
-- Prevent all crash exploits that I know of
-- Prevent ChunkBan
-- Patch BookBan without disabling shulker peek
-- Prevent EndPortal griefing
-- Patch players using the OffHand crash module in certain hacked clients to crash the server with books
-- Prevent players from using illegal items
-- Remove illegal potion effects from players
-- Remove falling block server crashers
-- Active development
+## 🔧 Compatibility
+
+|                       |       Support       |
+|-----------------------|:-------------------:|
+| Java Version          |       `>= 21`       |  
+| Minecraft Version     |    1.12.2 ~ 26.2    |
+| Compatibility         | Paper / Paper forks |
+| Folia Support         |         Yes         |
 
 ## 📫 Contact
 
 - Discord: [`https://discord.gg/8Bv5MTXFj5`](https://discord.gg/8Bv5MTXFj5)
 - QQ: `2682173972`
 
-## TODOS
+## ❤️ Credit
 
-prefix
-modules
-    ChunkBan
-    NBTBAN
-Refactor notes;
-Move checks in item util into checks package
-split to general and various checks related to specific item.
-in the main check method under each listener, add checks for specific item type
-then in a for loop to loop all checks to snalitize the item.
-Add add credit for panilla
+- [Panilla](https://github.com/ds58/Panilla) - Part of item check methods
+- [LeeesExploitFixer](https://github.com/XeraPlugins/LeeesExploitFixer-3.0) & [L2X9Core](https://github.com/254nm/L2X9Core) - Original Surf base

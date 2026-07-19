@@ -1,12 +1,12 @@
 plugins {
     `java-library`
     `maven-publish`
-    id("com.gradleup.shadow") version "9.4.2"
+    id("com.gradleup.shadow") version "9.4.3"
 }
 
 group = "cn.dreeam.surf"
 version = "5.0.0"
-description = "Fix exploits and remove illegal/NBT items for anarchy servers"
+description = "Policy-driven item integrity validation plugin for Paper servers."
 
 repositories {
     mavenCentral()
@@ -33,10 +33,10 @@ repositories {
         url = uri("https://repo.bsdevelopment.org/releases/")
     }
 
-    // JitPack
+    // FoliaLib
     maven {
-        name = "jitpack.io"
-        url = uri("https://jitpack.io/")
+        name = "tcoded-releases"
+        url = uri("https://repo.tcoded.com/releases")
     }
 }
 
@@ -46,10 +46,10 @@ dependencies {
         exclude(group = "org.yaml", module = "snakeyaml")
     }
     implementation("org.bstats:bstats-bukkit:3.2.1")
-    implementation("com.github.technicallycoded:FoliaLib:0.4.4")
-    implementation("com.github.cryptomorin:XSeries:v13.6.0")
-    implementation("de.tr7zw:item-nbt-api:2.15.7")
-    compileOnly(files("libs/RoseStacker-1.5.22.jar"))
+    implementation("com.tcoded:FoliaLib:0.5.2")
+    implementation("com.github.cryptomorin:XSeries:13.7.0")
+    implementation("de.tr7zw:item-nbt-api:2.15.8") // TODO - evaluate with rtag
+    compileOnly(files("libs/RoseStacker-1.5.41.jar"))
 }
 
 tasks {
@@ -62,12 +62,12 @@ tasks {
         targetCompatibility = JavaVersion.VERSION_21
     }
 
-    build.configure {
+    build {
         dependsOn(shadowJar)
     }
 
     shadowJar {
-        archiveFileName = "${project.name}-${project.version}.${archiveExtension.get()}"
+        archiveFileName.set("${project.name}-${project.version}.${archiveExtension.get()}")
         exclude("META-INF/**") // Dreeam - Avoid to include META-INF/maven in Jar
         relocate("io.github.thatsmusic99.configurationmaster", "${project.group}.libs.configurationmaster")
         relocate("org.bstats", "${project.group}.libs.bstats")
@@ -79,9 +79,11 @@ tasks {
     processResources {
         filesMatching("**/plugin.yml") {
             expand(
-                "name" to project.name,
-                "version" to project.version,
-                "description" to project.description
+                mapOf(
+                    "name" to project.name,
+                    "version" to project.version,
+                    "description" to description
+                )
             )
         }
     }

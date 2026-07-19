@@ -2,24 +2,21 @@ package cn.dreeam.surf;
 
 import cn.dreeam.surf.command.CommandHandler;
 import cn.dreeam.surf.config.ConfigManager;
-import cn.dreeam.surf.modules.antiillegal.CheckIllegal;
-import cn.dreeam.surf.modules.antiillegal.CheckRoseStackerItem;
-import cn.dreeam.surf.modules.antiillegal.IllegalBlockCheck;
-import cn.dreeam.surf.modules.antiillegal.IllegalDamageAndPotionCheck;
-import cn.dreeam.surf.modules.antiillegal.StackedTotem;
-import cn.dreeam.surf.modules.antilag.BlockPhysics;
-import cn.dreeam.surf.modules.antilag.MinecartLag;
-import cn.dreeam.surf.modules.antilag.Offhand;
-import cn.dreeam.surf.modules.antilag.WitherSpawn;
+import cn.dreeam.surf.listener.*;
+import cn.dreeam.surf.listener.hook.*;
 import cn.dreeam.surf.modules.misc.ConnectionEvent;
 import cn.dreeam.surf.modules.misc.NetherCheck;
-import cn.dreeam.surf.modules.patch.BookBan;
-import cn.dreeam.surf.modules.patch.BucketEvent;
-import cn.dreeam.surf.modules.patch.ChunkBan;
-import cn.dreeam.surf.modules.patch.DispenserCrash;
-import cn.dreeam.surf.modules.patch.GateWay;
-import cn.dreeam.surf.modules.patch.NBTBan;
-import cn.dreeam.surf.modules.patch.PreventEnderPearlClip;
+import cn.dreeam.surf.modules.misc.antilag.BlockPhysics;
+import cn.dreeam.surf.modules.misc.antilag.MinecartLag;
+import cn.dreeam.surf.modules.misc.antilag.Offhand;
+import cn.dreeam.surf.modules.misc.antilag.WitherSpawn;
+import cn.dreeam.surf.modules.misc.patch.BookBan;
+import cn.dreeam.surf.modules.misc.patch.BucketEvent;
+import cn.dreeam.surf.modules.misc.patch.ChunkBan;
+import cn.dreeam.surf.modules.misc.patch.DispenserCrash;
+import cn.dreeam.surf.modules.misc.patch.GateWay;
+import cn.dreeam.surf.modules.misc.patch.NBTBan;
+import cn.dreeam.surf.modules.misc.patch.PreventEnderPearlClip;
 import com.tcoded.folialib.FoliaLib;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -67,12 +64,13 @@ public class Surf extends JavaPlugin {
     }
 
     public void registerEvents() {
-        List<Listener> listeners = Arrays.asList(
-                // CheckIllegal
-                new CheckIllegal(),
-                new IllegalBlockCheck(),
-                new IllegalDamageAndPotionCheck(),
-                new StackedTotem(),
+        Listener[] listeners = new Listener[]{
+                // Listeners
+                new ListenerBasic(),
+                new ListenerBlock(),
+                new ListenerDamage(),
+                new ListenerEntityDamage(),
+                new ListenerPotion(),
 
                 // AntiLag
                 new BlockPhysics(),
@@ -92,7 +90,7 @@ public class Surf extends JavaPlugin {
                 new GateWay(),
                 new NBTBan(),
                 new PreventEnderPearlClip()
-        );
+        };
 
         for (Listener listener : listeners) {
             pluginManager.registerEvents(listener, instance);
@@ -100,7 +98,7 @@ public class Surf extends JavaPlugin {
 
         if (getServer().getPluginManager().getPlugin("RoseStacker") != null) {
             isRoseStackerEnabled = true;
-            pluginManager.registerEvents(new CheckRoseStackerItem(), instance);
+            pluginManager.registerEvents(new ListenerRoseStackerItem(), instance);
         }
     }
 

@@ -14,11 +14,25 @@ authors:
   - Loyisa
 commands:
   surf:
-    description: The main command of Surf.
+    description: "The main command of Surf."
 permissions:
   surf.command.main:
-    description: The main command of Surf.
+    description: "The main command of Surf."
     default: op
+  surf.bypass.check.item:
+    default: op
+    children:
+      surf.bypass.check.item.amount: true
+      surf.bypass.check.item.durability: true
+      surf.bypass.check.item.enchantments: true
+      surf.bypass.check.item.attributes: true
+      surf.bypass.check.item.itemflags: true
+      surf.bypass.check.item.unbreakable: true
+  surf.bypass.check.specific:
+    default: op
+    children:
+      surf.bypass.check.specific.legacyenchantedgoldenapple: true
+      surf.bypass.check.specific.potion: true
   surf.bypass.chunkban:
     default: op
   surf.bypass.netherroof:

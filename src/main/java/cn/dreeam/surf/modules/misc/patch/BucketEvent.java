@@ -1,0 +1,55 @@
+package cn.dreeam.surf.modules.misc.patch;
+
+import cn.dreeam.surf.config.Config;
+import cn.dreeam.surf.util.MessageUtil;
+import cn.dreeam.surf.util.item.ItemUtil;
+import com.cryptomorin.xseries.XMaterial;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockDispenseEvent;
+import org.bukkit.event.player.PlayerBucketEmptyEvent;
+
+public class BucketEvent implements Listener {
+
+    @EventHandler(ignoreCancelled = true)
+    public void onBucket(PlayerBucketEmptyEvent event) {
+        if (!Config.Patch.preventBuketPortalEnabled) return;
+
+        // Fix monkey code
+        if (checkEndPortal(event.getBlockClicked())) {
+            event.setCancelled(true);
+            MessageUtil.sendMessage(event.getPlayer(), Config.Patch.preventBuketPortalMessage);
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onDispense(BlockDispenseEvent event) {
+        if (!Config.Patch.preventBuketPortalEnabled) return;
+
+        if (checkEndPortal(event.getBlock())) {
+            event.setCancelled(true);
+
+            MessageUtil.println(String.format(
+                    "Prevent a bucket on portal crash at %s.",
+                    MessageUtil.locToString(event.getBlock().getLocation())
+            ));
+        }
+    }
+
+    private boolean checkEndPortal(Block block) {
+        if (!block.getType().equals(XMaterial.END_PORTAL_FRAME.get())) {
+            return false;
+        }
+
+        for (BlockFace face : ItemUtil.FACES) {
+            Block relative = block.getRelative(face);
+            if (relative.getType().equals(XMaterial.END_PORTAL.get())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}

@@ -22,11 +22,11 @@ public class ConfigManager {
         config.set("config-version", 1.0);
         config.addComments("config-version", """
                 Surf 5.0.0
-                Contact me on QQ:2682173972 or Discord: dreeam___
+                Discord: https://discord.gg/8Bv5MTXFj5
                 For help with this plugin""");
 
         // Pre-structure to force order
-        //structureConfig();
+        structureConfig();
     }
 
     public void saveConfig() throws Exception {
@@ -35,8 +35,10 @@ public class ConfigManager {
     }
 
     private void structureConfig() {
-        createTitledSection("Language", "language");
-        createTitledSection("General", "general");
+        createTitledSection("General Checks", "general-checks");
+        createTitledSection("Item Checks", "item-checks");
+        createTitledSection("Limitation", "limit");
+        createTitledSection("Patch", "patch");
         createTitledSection("Miscellaneous", "misc");
     }
 
