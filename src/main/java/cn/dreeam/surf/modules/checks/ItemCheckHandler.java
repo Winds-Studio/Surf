@@ -30,11 +30,12 @@ public class ItemCheckHandler {
 
             scanItemOrReact(item, player);
 
-            MessageUtil.println(String.format(
-                    "&6Detected illegals %s on %s",
-                    originalItemName,
-                    name
-            ));
+            // TODO: Logging system
+//            MessageUtil.println(String.format(
+//                    "&6Detected illegals %s on %s",
+//                    originalItemName,
+//                    name
+//            ));
         }
     }
 
