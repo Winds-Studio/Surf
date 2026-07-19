@@ -64,11 +64,18 @@ public class ItemCheckHandler {
             isIllegal = itemCheck.doCheck(i);
 
             if (isIllegal) {
-                if (action == CheckResultAction.REMOVE) {
-                    i.setAmount(0);
-                    return true;
-                } else if (action == CheckResultAction.SANITIZE) {
-                    itemCheck.doSanitize(i);
+                switch (action) {
+                    case REMOVE -> {
+                        i.setAmount(0);
+                        return true;
+                    }
+                    case SANITIZE -> {
+                        SanitizeAction sanitizeAction = itemCheck.doSanitize(i);
+                        if (sanitizeAction == SanitizeAction.REMOVE) {
+                            i.setAmount(0);
+                            return true;
+                        }
+                    }
                 }
             }
         }

@@ -2,6 +2,7 @@ package cn.dreeam.surf.modules.checks.impl;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.modules.checks.ItemCheck;
+import cn.dreeam.surf.modules.checks.SanitizeAction;
 import cn.dreeam.surf.perm.PermissionNodes;
 import cn.dreeam.surf.util.item.ItemUtil;
 import org.bukkit.entity.Player;
@@ -39,7 +40,8 @@ public class CheckAmount implements ItemCheck {
     }
 
     @Override
-    public void doSanitize(ItemStack i) {
+    public SanitizeAction doSanitize(ItemStack i) {
         i.setAmount(i.getMaxStackSize());
+        return SanitizeAction.SANITIZED;
     }
 }

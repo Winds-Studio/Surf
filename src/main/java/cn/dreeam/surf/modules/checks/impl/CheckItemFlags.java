@@ -2,6 +2,7 @@ package cn.dreeam.surf.modules.checks.impl;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.modules.checks.ItemCheck;
+import cn.dreeam.surf.modules.checks.SanitizeAction;
 import cn.dreeam.surf.perm.PermissionNodes;
 import cn.dreeam.surf.util.item.ItemUtil;
 import org.bukkit.entity.Player;
@@ -54,7 +55,7 @@ public class CheckItemFlags implements ItemCheck {
     }
 
     @Override
-    public void doSanitize(ItemStack i) {
+    public SanitizeAction doSanitize(ItemStack i) {
         // TODO check
         final ItemMeta meta = i.getItemMeta();
         final boolean isBanner = i.getType().toString().contains("BANNER");
@@ -71,5 +72,6 @@ public class CheckItemFlags implements ItemCheck {
         }
 
         i.setItemMeta(meta); // Remember to set cleaned meta back
+        return SanitizeAction.SANITIZED;
     }
 }

@@ -2,6 +2,7 @@ package cn.dreeam.surf.modules.checks.impl;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.modules.checks.ItemCheck;
+import cn.dreeam.surf.modules.checks.SanitizeAction;
 import cn.dreeam.surf.perm.PermissionNodes;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -40,7 +41,7 @@ public class CheckDurability implements ItemCheck {
     }
 
     @Override
-    public void doSanitize(ItemStack i) {
+    public SanitizeAction doSanitize(ItemStack i) {
         final short durability = i.getDurability();
         if (durability > i.getType().getMaxDurability()) {
             i.setDurability(i.getType().getMaxDurability());
@@ -49,5 +50,6 @@ public class CheckDurability implements ItemCheck {
         if (durability < 0) {
             i.setDurability((short) 1);
         }
+        return SanitizeAction.SANITIZED;
     }
 }

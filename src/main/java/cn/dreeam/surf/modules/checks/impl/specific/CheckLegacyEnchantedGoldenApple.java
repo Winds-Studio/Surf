@@ -2,6 +2,7 @@ package cn.dreeam.surf.modules.checks.impl.specific;
 
 import cn.dreeam.surf.config.Config;
 import cn.dreeam.surf.modules.checks.ItemCheck;
+import cn.dreeam.surf.modules.checks.SanitizeAction;
 import cn.dreeam.surf.perm.PermissionNodes;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -41,8 +42,7 @@ public class CheckLegacyEnchantedGoldenApple implements ItemCheck {
     }
 
     @Override
-    public void doSanitize(ItemStack i) {
-        // TODO delete potion directly.
-        throw new UnsupportedOperationException();
+    public SanitizeAction doSanitize(ItemStack i) {
+        return SanitizeAction.REMOVE;
     }
 }

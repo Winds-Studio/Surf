@@ -17,5 +17,5 @@ public interface ItemCheck {
 
     boolean doCheck(ItemStack i);
 
-    void doSanitize(ItemStack i);
+    SanitizeAction doSanitize(ItemStack i);
 }
