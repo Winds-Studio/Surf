@@ -47,7 +47,7 @@ dependencies {
     }
     implementation("org.bstats:bstats-bukkit:3.2.1")
     implementation("com.tcoded:FoliaLib:0.5.2")
-    implementation("com.github.cryptomorin:XSeries:13.7.0")
+    implementation("com.github.cryptomorin:XSeries:13.7.1")
     implementation("de.tr7zw:item-nbt-api:2.15.8") // TODO - evaluate with rtag
     compileOnly(files("libs/RoseStacker-1.5.41.jar"))
 }
